@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+    Thomas Athanasiou at Hippiemonkeys
+    Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
+    Hippiemonkeys_SkroutzSmartCart
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\AcceptOptions" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\AcceptOptionsRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\AcceptOptionsPickupLocationRelation" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptionsPickupLocationRelation\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsPickupLocationRelationRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\AcceptOptionsPickupLocationRelationRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\AcceptOptionsPickupWindowRelation" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptionsPickupWindowRelation\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsPickupWindowRelationRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\AcceptOptionsPickupWindowRelationRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\Address" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\AddressRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\AddressRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\Customer" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Customer\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\CustomerRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\InvoiceDetails" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\InvoiceDetails\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\InvoiceDetailsRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\LineItem" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\LineItem\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\LineItemRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\LineItemRejectionReason" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\LineItemRejectionReason\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\LineItemRejectionReasonRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\LineItemRejectionReasonRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\SizeInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\Size" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\VatExclusionRepresentativeInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\VatExclusionRepresentative" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\Order" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\OrderRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\OrderRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\PickupLocation" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\PickupLocation\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\PickupLocationRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\PickupWindow" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\PickupWindow\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\PickupWindowRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\PickupWindowRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\RejectOptions" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptions\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\RejectOptionsRepository" />
+
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\RejectOptionsLineItemRejectionReasonRelation" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelation\Collection" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\RejectOptionsLineItemRejectionReasonRelationRepository" />
+
+    <virtualType
+        name="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Db\VersionControl\OrderRelationComposite"
+        type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite"
+    >
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="lineitem" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order\LineItemRelation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order">
+        <arguments>
+            <argument name="entityRelationComposite" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Db\VersionControl\OrderRelationComposite</argument>
+        </arguments>
+    </type>
+    <virtualType
+        name="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Db\VersionControl\OrderRelationComposite"
+        type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite"
+    >
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="lineitem" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order\LineItemRelation</item>
+                <item name="acceptoptionsrelation" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order\AcceptOptionsRelation</item>
+                <item name="rejectoptionsrelation" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order\RejectOptionsRelation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType
+        name="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Db\VersionControl\AcceptOptionsRelationComposite"
+        type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite"
+    >
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="pickuplocation" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptions\PickupLocationRelation</item>
+                <item name="pickupwindow" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptions\PickupWindowRelation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptions">
+        <arguments>
+            <argument name="entityRelationComposite" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Db\VersionControl\AcceptOptionsRelationComposite</argument>
+        </arguments>
+    </type>
+
+    <virtualType
+        name="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Db\VersionControl\RejectOptionsRelationComposite"
+        type="Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationComposite"
+    >
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="lineitemrejecctionreason" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptions\LineItemRejectionReasonRelation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptions">
+        <arguments>
+            <argument name="entityRelationComposite" xsi:type="object">Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Db\VersionControl\RejectOptionsRelationComposite</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+    Thomas Athanasiou at Hippiemonkeys
+    Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
+    Hippiemonkeys_SkroutzSmartCart
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Hippiemonkeys_SkroutzSmartCart" setup_version="1.0.5" schema_version="1.0.4">
+        <sequence>
+            <module name="Hippiemonkeys_Core"/>
+            <module name="Hippiemonkeys_Skroutz" />
+            <module name="Magento_Catalog" />
+            <module name="Magento_Sales" />
+            <module name="Magento_Quote" />
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,78 @@
+<?php
+    /**
+     * @author Thomas Athanasiou at Hippiemonkeys
+     * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
+     * @package Hippiemonkeys_SkroutzSmartCart
+     */
+    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+
+    use Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzSmartCart\Api\AddressRepositoryInterface,
+        Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface,
+        Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory,
+        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address as ResourceModel;
+
+    class AddressRepository
+    implements AddressRepositoryInterface
+    {
+        protected $_idIndex = [];
+
+        public function __construct(
+            ResourceModel $resourceModel,
+            AddressInterfaceFactory $addressFactory
+        )
+        {
+            $this->_resourceModel   = $resourceModel;
+            $this->_addressFactory  = $addressFactory;
+        }
+        /**
+         * @inheritdoc
+         */
+        public function getById(int $id) : AddressInterface
+        {
+            $address = $this->_idIndex[$id] ?? null;
+            if(!$address) {
+                $address = $this->getAddressFactory()->create();
+                $this->getResourceModel()->load($address, $id, ResourceModel::FIELD_ID);
+                if (!$address->getId())
+                {
+                    throw new NoSuchEntityException(
+                        __('The Address with id "%1" that was requested doesn\'t exist. Verify the address and try again.', $id)
+                    );
+                }
+                $this->_idIndex[$id] = $address;
+            }
+            return $address;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function save(AddressInterface $address): AddressInterface
+        {
+            $this->getResourceModel()->save($address);
+            $this->_idIndex[ $address->getId() ] = $address;
+            return $address;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function delete(AddressInterface $address): bool
+        {
+            return $this->getResourceModel()->delete($address);
+        }
+
+        private $_resourceModel;
+        protected function getResourceModel(): ResourceModel
+        {
+            return $this->_resourceModel;
+        }
+
+        private $_addressFactory;
+        protected function getAddressFactory() : AddressInterfaceFactory
+        {
+            return $this->_addressFactory;
+        }
+    }
+?>

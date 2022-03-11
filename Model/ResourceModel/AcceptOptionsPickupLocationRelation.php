@@ -1,6 +1,6 @@
 <?php
     /**
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou at Hippiemonkeys | @Thomas-Athanasiou
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
@@ -30,7 +30,7 @@
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
         }
-    
+
         public function loadByAcceptOptionsIdAndPickupLocation(AbstractModel $object, int $acceptOptionsId, int $pickupLocationId)
         {
             $idField = self::FIELD_ID;

@@ -16,20 +16,27 @@
         /**
          * Gets Pickup Window instance by Local ID
          *
+         * @api
+         *
          * @param mixed $localId
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface
-         * @throws \Exception
          */
         function getByLocalId(int $localId): PickupWindowInterface;
+
         /**
          * Gets Pickup Window instance by Skroutz ID
          *
+         * @api
+         *
          * @param mixed $skroutzId
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface
-         * @throws \Exception
          */
         function getBySkroutzId(int $skroutzId): PickupWindowInterface;
+
         function delete(PickupWindowInterface $pickupWindow): bool;
+
         function save(PickupWindowInterface $pickupWindow): PickupWindowInterface;
     }
 ?>

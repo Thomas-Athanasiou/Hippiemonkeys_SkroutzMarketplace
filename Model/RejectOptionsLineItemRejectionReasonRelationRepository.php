@@ -41,7 +41,7 @@
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : RejectOptionsLineItemRejectionReasonRelationInterface
+        public function getById($id) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
             $rejectOptionsLineItemRejectionReasonRelation = $this->_idIndex[$id] ?? null;
             if(!$rejectOptionsLineItemRejectionReasonRelation) {

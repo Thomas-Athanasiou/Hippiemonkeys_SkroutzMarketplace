@@ -41,7 +41,7 @@
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : AcceptOptionsPickupWindowRelationInterface
+        public function getById($id) : AcceptOptionsPickupWindowRelationInterface
         {
             $acceptOptionsPickupWindowRelation = $this->_idIndex[$id] ?? null;
             if(!$acceptOptionsPickupWindowRelation) {

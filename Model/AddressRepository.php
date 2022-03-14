@@ -15,8 +15,17 @@
     class AddressRepository
     implements AddressRepositoryInterface
     {
+        /**
+         * Id Index property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface[]
+         */
         protected $_idIndex = [];
 
+        /**
+         * @param \Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address $resourceModel
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory $addressFactory
+         */
         public function __construct(
             ResourceModel $resourceModel,
             AddressInterfaceFactory $addressFactory
@@ -25,10 +34,11 @@
             $this->_resourceModel   = $resourceModel;
             $this->_addressFactory  = $addressFactory;
         }
+
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : AddressInterface
+        public function getById($id) : AddressInterface
         {
             $address = $this->_idIndex[$id] ?? null;
             if(!$address) {
@@ -63,13 +73,35 @@
             return $this->getResourceModel()->delete($address);
         }
 
+        /**
+         * Resource Model property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address
+         */
         private $_resourceModel;
+
+        /**
+         * Gets Resource Model
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address
+         */
         protected function getResourceModel(): ResourceModel
         {
             return $this->_resourceModel;
         }
 
+        /**
+         * Address Factory property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory
+         */
         private $_addressFactory;
+
+        /**
+         * Gets Address Factory
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory
+         */
         protected function getAddressFactory() : AddressInterfaceFactory
         {
             return $this->_addressFactory;

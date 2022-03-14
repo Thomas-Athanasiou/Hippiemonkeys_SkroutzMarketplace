@@ -32,7 +32,7 @@
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : AcceptOptionsInterface
+        public function getById($id) : AcceptOptionsInterface
         {
             $acceptOptions = $this->_idIndex[$id] ?? null;
             if(!$acceptOptions) {

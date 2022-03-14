@@ -13,8 +13,10 @@
 
     interface VatExclusionRepresentativeRepositoryInterface
     {
-        function getById(int $id): VatExclusionRepresentativeInterface;
+        function getById($id): VatExclusionRepresentativeInterface;
+
         function delete(VatExclusionRepresentativeInterface $vatExclusionRepresentative): bool;
+
         function save(VatExclusionRepresentativeInterface $vatExclusionRepresentative): VatExclusionRepresentativeInterface;
     }
 ?>

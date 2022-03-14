@@ -27,7 +27,7 @@
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : InvoiceDetailsInterface
+        public function getById($id) : InvoiceDetailsInterface
         {
             $invoiceDetails = $this->getInvoiceDetailsFactory()->create();
             $this->getResourceModel()->load($invoiceDetails, $id, ResourceModel::FIELD_ID);

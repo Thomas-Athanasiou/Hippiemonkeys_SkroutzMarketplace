@@ -16,22 +16,32 @@
         /**
          * Get Invoice Details by id
          *
+         * @api
+         *
          * @param mixed $id
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface
-         * @throws \Exception
          */
-        function getById(int $ιd): InvoiceDetailsInterface;
+        function getById($id): InvoiceDetailsInterface;
+
         /**
          * Delete Invoice Details
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface $invoicedetails
+         *
          * @return bool
          */
         function delete(InvoiceDetailsInterface $invoicedetails): bool;
+
         /**
          * Save Invoice Details
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface $invoicedetails
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface
          */
         function save(InvoiceDetailsInterface $invoicedetails): InvoiceDetailsInterface;

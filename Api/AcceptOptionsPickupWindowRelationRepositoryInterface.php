@@ -20,15 +20,22 @@
         /**
          * Gets Accept Options - Pickup Window Relation by ID
          *
-         * @param int $value
-         * @return $this
+         * @api
+         *
+         * @param mixed $id
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterface
          */
-        function getById(int $id): AcceptOptionsPickupWindowRelationInterface;
+        function getById($id): AcceptOptionsPickupWindowRelationInterface;
+
         function getByAcceptOptionsAndPickupWindow(AcceptOptionsInterface $acceptOptions, PickupWindowInterface $pickupWindow) : AcceptOptionsPickupWindowRelationInterface;
+
         function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupWindowRelationSearchResultInterface;
 
         /**
          * Deletes Accept Options - Pickup Window relation
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupLocationRelation
          *
@@ -38,6 +45,8 @@
 
         /**
          * Saves Accept Options - Pickup Window Relation
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation
          *

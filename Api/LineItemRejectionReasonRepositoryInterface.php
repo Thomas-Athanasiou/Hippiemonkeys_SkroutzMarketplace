@@ -9,22 +9,23 @@
 
     namespace Hippiemonkeys\SkroutzSmartCart\Api;
 
-    use Magento\Framework\Api\SearchCriteriaInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonSearchResultInterface;
+    use Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface;
 
     interface LineItemRejectionReasonRepositoryInterface
     {
         function getByLocalId(int $localId): LineItemRejectionReasonInterface;
+
         /**
          * Get LineItemRejectionReason skroutz id
          *
-         * @param mixed $skroutzId
+         * @param int $skroutzId
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface
-         * @throws \Exception
          */
         function getBySkroutzId(int $skroutzId): LineItemRejectionReasonInterface;
+
         function delete(LineItemRejectionReasonInterface $lineItemRejectionReason): bool;
+
         function save(LineItemRejectionReasonInterface $lineItemRejectionReason): LineItemRejectionReasonInterface;
     }
 ?>

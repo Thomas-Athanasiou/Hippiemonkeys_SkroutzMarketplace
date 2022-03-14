@@ -14,16 +14,21 @@
 
     interface RejectOptionsRepositoryInterface
     {
-        function getById(int $id): RejectOptionsInterface;
+        function getById($id): RejectOptionsInterface;
+
         /**
          * Get Reject Options by Order
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface $order
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface
-         * @throws \Exception
          */
         function getByOrder(OrderInterface $order): RejectOptionsInterface;
+
         function delete(RejectOptionsInterface $rejectOptions): bool;
+
         function save(RejectOptionsInterface $rejectOptions): RejectOptionsInterface;
     }
 ?>

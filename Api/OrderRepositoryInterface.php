@@ -14,7 +14,7 @@
 
     interface OrderRepositoryInterface
     {
-        function getById(int $id): OrderInterface;
+        function getById($id): OrderInterface;
         function getByCode(string $code): OrderInterface;
         function getByMagentoOrder(MagentoOrderInterface $magentoOrder): OrderInterface;
         function delete(OrderInterface $order): bool;

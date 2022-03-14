@@ -55,7 +55,7 @@
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : OrderInterface
+        public function getById($id) : OrderInterface
         {
             $order = $this->_idIndex[$id] ?? null;
             if(!$order)

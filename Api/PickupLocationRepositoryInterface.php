@@ -16,33 +16,44 @@
         /**
          * Gets Pickup Location by local id
          *
+         * @api
+         *
          * @param int $localId
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface
-         * @throws \Exception
          */
         function getByLocalId(int $localId): PickupLocationInterface;
+
         /**
          * Gets Pickup Location by skroutz id
          *
+         * @api
+         *
          * @param string $skroutzId
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface
-         * @throws \Exception
          */
         function getBySkroutzId(string $skroutzId): PickupLocationInterface;
+
         /**
          * Deletes the Pickup Location instance from the repository
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface $pickupLocation
+         *
          * @return bool
-         * @throws \Exception
          */
         function delete(PickupLocationInterface $pickupLocation): bool;
+
         /**
          * Saves the Pickup Location instance to the repository
          *
+         * @api
+         * 
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface $pickupLocation
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface
-         * @throws \Exception
          */
         function save(PickupLocationInterface $pickupLocation): PickupLocationInterface;
     }

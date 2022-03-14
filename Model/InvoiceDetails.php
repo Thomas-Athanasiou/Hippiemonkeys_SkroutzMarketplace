@@ -44,6 +44,10 @@
             );
             $this->_addressRepository = $addressRepository;
         }
+
+        /**
+         * @inheritdoc
+         */
         protected function _construct()
         {
             $this->_init(ResourceModel::class);

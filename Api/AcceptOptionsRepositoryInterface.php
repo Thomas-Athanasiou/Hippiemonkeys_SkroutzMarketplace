@@ -17,17 +17,19 @@
         /**
          * Get Accept Options by id
          *
-         * @param int $id
+         * @api
+         *
+         * @param mixed $id
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface
-         * @throws \Exception
          */
-        function getById(int $id): AcceptOptionsInterface;
+        function getById($id): AcceptOptionsInterface;
         /**
          * Get Accept Options by Order
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface $order
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface
-         * @throws \Exception
          */
         function getByOrder(OrderInterface $order): AcceptOptionsInterface;
         /**

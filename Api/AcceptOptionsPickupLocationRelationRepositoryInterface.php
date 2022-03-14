@@ -19,14 +19,19 @@
     {
         /**
          * Gets Accept Options and Pickup Location Relation by id
-         * @param int $id
+         *
+         * @api
+         *
+         * @param mixed $id
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface
          */
-        function getById(int $id): AcceptOptionsPickupLocationRelationInterface;
+        function getById($id): AcceptOptionsPickupLocationRelationInterface;
 
         /**
          * Gets Accept Options and Pickup Location Relation by Accept Options and Pickup Location
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface $acceptOptions
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface $pickupLocation
@@ -38,6 +43,8 @@
         /**
          * Gets list by search criteria provided
          *
+         * @api
+         *
          * @param \Magento\Framework\Api\SearchCriteriaInterface
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface
@@ -46,6 +53,8 @@
 
         /**
          * Deletes Accept Options - Pickup Location relation
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
          *
@@ -56,6 +65,8 @@
         /**
          * Saves Accept Options - Pickup Location relation
          *
+         * @api
+         * 
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface

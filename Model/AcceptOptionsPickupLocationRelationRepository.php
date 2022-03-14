@@ -41,7 +41,7 @@
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : AcceptOptionsPickupLocationRelationInterface
+        public function getById($id) : AcceptOptionsPickupLocationRelationInterface
         {
             $acceptOptionsPickupLocationRelation = $this->_idIndex[$id] ?? null;
             if(!$acceptOptionsPickupLocationRelation) {

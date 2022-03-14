@@ -17,25 +17,29 @@
          * Get Customer by local id
          *
          * @param int $localId
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface
-         * @throws \Exception
          */
         function getByLocalId(int $localId): CustomerInterface;
+
         /**
          * Get Customer skroutz id
          *
          * @param mixed $skroutzId
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface
-         * @throws \Exception
          */
         function getBySkroutzId(string $skroutzId): CustomerInterface;
+
         /**
          * Delete Customer
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface $customer
+         *
          * @return bool
          */
         function delete(CustomerInterface $customer): bool;
+
         /**
          * Save Customer
          *

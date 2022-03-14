@@ -16,22 +16,30 @@
         /**
          * Get Address by id
          *
-         * @param int $id
+         * @param mixed $id
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface
-         * @throws \Exception
          */
-        function getById(int $id): AddressInterface;
+        function getById($id): AddressInterface;
+
         /**
          * Delete Address
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface $address
+         *
          * @return bool
          */
         function delete(AddressInterface $address): bool;
+
         /**
          * Save Address
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface $address
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface
          */
         function save(AddressInterface $address): AddressInterface;

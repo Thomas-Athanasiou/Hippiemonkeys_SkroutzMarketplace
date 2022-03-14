@@ -15,9 +15,12 @@
 
     interface RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
     {
-        function getById(int $id): RejectOptionsLineItemRejectionReasonRelationInterface;
+        function getById($id): RejectOptionsLineItemRejectionReasonRelationInterface;
+
         function getByRejectOptionsAndLineItemRejectionReason(RejectOptionsInterface $rejectOptions, LineItemRejectionReasonInterface $lineItemRejectionReason) : RejectOptionsLineItemRejectionReasonRelationInterface;
+
         function delete(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): bool;
+
         function save(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): RejectOptionsLineItemRejectionReasonRelationInterface;
     }
 ?>

@@ -1,6 +1,9 @@
 <?php
     /**
-     * @author Thomas Athanasiou at Hippiemonkeys | @Thomas-Athanasiou
+     * @Thomas-Athanasiou
+     *
+     * @author Thomas Athanasiou at Hippiemonkeys
+     * @link https://github.com/Thomas-Athanasiou
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
@@ -38,6 +41,20 @@
             FIELD_REJECT_OPTIONS_ID = 'reject_options_id',
             FIELD_MAGENTO_ORDER     = 'magento_order';
 
+        /**
+         * @param \Magento\Framework\Model\Context $context
+         * @param \Magento\Framework\Registry $registry
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface $customerRepository
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface $invoiceDetailsRepository
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface $lineItemRepository
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface $rejectOptionsRepository
+         * @param \Magento\Sales\Api\OrderRepositoryInterface $magentoOrderRepository
+         * @param \Magento\Framework\Api\SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
+         * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
+         * @param \Magento\Framework\Data\Collection\AbstractDb\AbstractDb|null $resourceCollection
+         * @param array $data
+         */
         public function __construct(
             Context $context,
             Registry $registry,
@@ -294,6 +311,7 @@
         {
             return $this->getData(ResourceModel::FIELD_DISPATCH_UNTIL);
         }
+
         /**
          * @inheritdoc
          */
@@ -383,6 +401,7 @@
         {
             return (bool) $this->getData(ResourceModel::FIELD_EXPRESS);
         }
+
         /**
          * @inheritdoc
          */
@@ -391,46 +410,139 @@
             return $this->setData(ResourceModel::FIELD_EXPRESS, (string) $express);
         }
 
+        /**
+         * @inheritdoc
+         */
+        public function getCustom(): bool
+        {
+            return (bool) $this->getData(ResourceModel::FIELD_CUSTOM);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setCustom(bool $custom)
+        {
+            return $this->setData(ResourceModel::FIELD_CUSTOM, (string) $custom);
+        }
+
+        /**
+         * Customer Repository property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface $_customerRepository
+         */
         private $_customerRepository;
+
+        /**
+         * Gets Customer Repository
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface
+         */
         protected function getCustomerRepository(): CustomerRepositoryInterface
         {
             return $this->_customerRepository;
         }
 
+        /**
+         * Invoice Details property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface $_invoiceDetailsRepository
+         */
         private $_invoiceDetailsRepository;
+
+        /**
+         * Gets Invoice Details
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface
+         */
         protected function getInvoiceDetailsRepository(): InvoiceDetailsRepositoryInterface
         {
             return $this->_invoiceDetailsRepository;
         }
 
+        /**
+         * Line Item Repository property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface $_lineItemRepository
+         */
         private $_lineItemRepository;
+
+        /**
+         * Gets Line Item Repository
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface
+         */
         protected function getLineItemRepository(): LineItemRepositoryInterface
         {
             return $this->_lineItemRepository;
         }
 
+        /**
+         * Accept Options Repository property
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
+         */
         private $_acceptOptionsRepository;
+
+        /**
+         * Gets Accept Options Repository
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface
+         */
         protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
             return $this->_acceptOptionsRepository;
         }
 
+        /**
+         * Reject Options Repository property
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface $_rejectOptionsRepository
+         */
         private $_rejectOptionsRepository;
+
+        /**
+         * Gets Reject Options Repository
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface
+         */
         protected function getRejectOptionsRepository(): RejectOptionsRepositoryInterface
         {
             return $this->_rejectOptionsRepository;
         }
 
+        /**
+         * Magento Order Repository property
+         *
+         * @var \Magento\Sales\Api\OrderRepositoryInterface $_magentoOrderRepository
+         */
         private $_magentoOrderRepository;
+
+        /**
+         * Gets Magento Order Repository
+         *
+         * @return \Magento\Sales\Api\OrderRepositoryInterface
+         */
         protected function getMagentoOrderRepository(): MagentoOrderRepositoryInterface
         {
             return $this->_magentoOrderRepository;
         }
 
+        /**
+         * Search Criteria Builder Factory property
+         *
+         * @var \Magento\Framework\Api\SearchCriteriaBuilderFactory $_searchCriteriaBuilderFactory
+         */
         private $_searchCriteriaBuilderFactory;
+
+        /**
+         * Gets Search Criteria Builder Factory
+         *
+         * @return \Magento\Framework\Api\SearchCriteriaBuilderFactory
+         */
         protected function getSearchCriteriaBuilderFactory(): SearchCriteriaBuilderFactory
         {
-            return $this->_searchCriteriaBuilderFactory_searchCriteriaBuilderFactory;
+            return $this->_searchCriteriaBuilderFactory;
         }
     }
 ?>

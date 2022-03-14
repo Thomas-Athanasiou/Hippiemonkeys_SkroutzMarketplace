@@ -122,7 +122,6 @@
             <column name="id" />
         </constraint>
     </table>
-
     <table name="hippiemonkeys_skroutzsmartcart_invoicedetails" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Invoice Details">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="company" length="64" nullable="false" comment="Company" />
@@ -187,6 +186,7 @@
         <column xsi:type="datetime" name="dispatch_until" nullable="false" comment="Dispatch until" />
         <column xsi:type="int" unsigned="true" name="magento_order_id" nullable="true" comment="Magento Order Id" />
         <column xsi:type="boolean" name="express" nullable="true" comment="Express" />
+        <column xsi:type="boolean" name="custom" nullable="true" comment="Custom" />
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ORDER_ID_PK">
             <column name="id" />
         </constraint>

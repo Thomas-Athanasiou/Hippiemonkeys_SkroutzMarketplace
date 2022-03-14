@@ -1,6 +1,9 @@
 <?php
     /**
-     * @author Thomas Athanasiou at Hippiemonkeys | @Thomas-Athanasiou
+     * @Thomas-Athanasiou
+     *
+     * @author Thomas Athanasiou at Hippiemonkeys
+     * @link https://github.com/Thomas-Athanasiou
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
@@ -66,7 +69,7 @@
          * Saves Accept Options - Pickup Location relation
          *
          * @api
-         * 
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface

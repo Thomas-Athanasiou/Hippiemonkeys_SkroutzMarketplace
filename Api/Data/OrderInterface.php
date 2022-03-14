@@ -1,6 +1,9 @@
 <?php
     /**
-     * @author Thomas Athanasiou at Hippiemonkeys | @Thomas-Athanasiou
+     * @Thomas-Athanasiou
+     *
+     * @author Thomas Athanasiou at Hippiemonkeys
+     * @link https://github.com/Thomas-Athanasiou
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
@@ -34,252 +37,268 @@
          * Sets ID
          *
          * @param mixed $value
-         * @return $this
+         * @return \this
          */
         function setId($id);
 
         /**
-         * Get code
+         * Gets code
          *
          * @return string
          */
         function getCode(): string;
 
         /**
-         * Set code
+         * Sets code
          *
          * @param string $code
-         * @return $this
+         * @return \this
          */
         function setCode(string $code);
 
         /**
-         * Get state
+         * Gets state
          *
          * @return string
          */
         function getState(): string;
 
         /**
-         * Set state
+         * Sets state
          *
          * @param string $state
-         * @return $this
+         * @return \this
          */
         function setState(string $state);
 
         /**
-         * Get invoice
+         * Gets invoice
          *
          * @return bool
          */
         function getInvoice(): bool;
 
         /**
-         * Set Invoice
+         * Sets Invoice
          *
          * @param bool $invoice
-         * @return $this
+         * @return \this
          */
         function setInvoice(bool $invoice);
 
         /**
-         * Get created at
+         * Gets created at
          *
          * @return string
          */
         function getCreatedAt(): string;
         /**
-         * Get created at
+         * Gets created at
          *
          * @param string $created_at
-         * @return $this
+         * @return \this
          */
         function setCreatedAt(string $createdAt);
 
         /**
-         * Get expires at
+         * Gets expires at
          *
          * @return string
          */
         function getExpiresAt(): string;
 
         /**
-         * Get expires at
+         * Gets expires at
          *
          * @param string $expires_at
-         * @return $this
+         * @return \this
          */
         function setExpiresAt(string $expiresAt);
 
         /**
-         * Get dispatch untill
+         * Gets dispatch untill
          *
          * @return string
          */
         function getDispatchUntil(): string;
 
         /**
-         * Set dispatch untill
+         * Sets dispatch untill
          *
          * @param string $dispatch_untill
-         * @return $this
+         * @return \this
          */
         function setDispatchUntil(string $dispatchUntil);
 
         /**
-         * Get courier tracking codes
+         * Gets courier tracking codes
          *
          * @return string[]
          */
         function getCourierTrackingCodes(): array;
 
         /**
-         * Set courier tracking codes
+         * Sets courier tracking codes
          *
          * @param string[] $courierTrackingCodes
-         * @return $this
+         * @return \this
          */
         function setCourierTrackingCodes(array $courierTrackingCodes);
 
         /**
-         * Set line items
+         * Sets line items
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemInterface[]
          */
         function getLineItems(): array;
 
         /**
-         * Set courier
+         * Sets courier
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemInterface[] $lineItems
-         * @return $this
+         * @return \this
          */
         function setLineItems(array $lineItems);
 
         /**
-         * Get comments
+         * Gets comments
          * @return string
          */
         function getComments(): string;
 
         /**
-         * Set comments
+         * Sets comments
          * @param string $comment
-         * @return $this
+         * @return \this
          */
         function setComments(string $comment);
 
         /**
-         * Get customer
+         * Gets customer
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface|null
          */
         function getCustomer();
 
         /**
-         * Set customer
+         * Sets customer
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface|null
-         * @return $this
+         * @return \this
          */
         function setCustomer( $customer);
 
         /**
-         * Get invoice details
+         * Gets invoice details
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface|null
          */
         function getInvoiceDetails();
 
         /**
-         * Set invoice details
+         * Sets invoice details
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface|null $invoiceDetails
-         * @return $this
+         * @return \this
          */
         function setInvoiceDetails($invoiceDetails);
 
         /**
-         * Set courier
+         * Sets courier
          * @return string
          */
         function getCourier(): string;
 
         /**
-         * Set courier
+         * Sets courier
          * @param string $courier
-         * @return $this
+         * @return \this
          */
         function setCourier(string $courier);
 
         /**
-         * Get courier voucher
+         * Gets courier voucher
          *
          * @return string|null
          */
         function getCourierVoucher();
 
         /**
-         * Set courier voucher
+         * Sets courier voucher
          *
          * @param string|null $courierVoucher
-         * @return $this
+         * @return \this
          */
         function setCourierVoucher($courierVoucher);
 
         /**
-         * Get accept options
+         * Gets accept options
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface|null
          */
         function getAcceptOptions();
 
         /**
-         * Set accept options
+         * Sets accept options
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface|null $acceptOptions
-         * @return $this
+         * @return \this
          */
         function setAcceptOptions($acceptOptions);
 
         /**
-         * Get reject options
+         * Gets reject options
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface|null
          */
         function getRejectOptions();
 
         /**
-         * Set reject options
+         * Sets reject options
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface|null $rejectOptions
-         * @return $this
+         * @return \this
          */
         function setRejectOptions($rejectOptions);
 
         /**
-         * Get Magento Order
+         * Gets Magento Order
          *
          * @return \Magento\Sales\Api\Data\OrderInterface|null
          */
         function getMagentoOrder();
 
         /**
-         * Set Magento Order
+         * Sets Magento Order
          *
          * @param \Magento\Sales\Api\Data\OrderInterface|null $magentoOrder
-         * @return $this
+         * @return \this
          */
         function setMagentoOrder($magentoOrder);
 
         /**
-         * Get express
+         * Gets Express
          *
          * @return bool
          */
         function getExpress(): bool;
 
         /**
-         * Set express
+         * Sets Express
          *
          * @param bool $express
-         * @return $this
+         * @return \this
          */
         function setExpress(bool $express);
+
+        /**
+         * Gets Custom
+         *
+         * @return bool
+         */
+        function getCustom(): bool;
+
+        /**
+         * Sets Custom
+         *
+         * @param bool $custom
+         *
+         * @return \this
+         */
+        function setCustom(bool $custom);
     }
 ?>

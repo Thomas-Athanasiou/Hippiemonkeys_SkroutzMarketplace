@@ -1,6 +1,9 @@
 <?php
     /**
-     * @author Thomas Athanasiou at Hippiemonkeys | @Thomas-Athanasiou
+     * @Thomas-Athanasiou
+     *
+     * @author Thomas Athanasiou at Hippiemonkeys
+     * @link https://github.com/Thomas-Athanasiou
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
@@ -30,7 +33,8 @@
             FIELD_EXPIRES_AT                = 'expires_at',
             FIELD_DISPATCH_UNTIL            = 'dispatch_until',
             FIELD_MAGENTO_ORDER_ID          = 'magento_order_id',
-            FIELD_EXPRESS                   = 'express';
+            FIELD_EXPRESS                   = 'express',
+            FIELD_CUSTOM                    = 'custom';
 
         protected const
             TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_order';

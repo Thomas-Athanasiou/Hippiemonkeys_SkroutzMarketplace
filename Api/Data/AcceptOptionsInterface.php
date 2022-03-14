@@ -17,6 +17,8 @@
         /**
          * Gets ID
          *
+         * @api
+         *
          * @return mixed.
          */
         function getId();
@@ -24,13 +26,18 @@
         /**
          * Sets ID
          *
+         * @api
+         *
          * @param mixed $value
-         * @return $this
+         *
+         * @return \this
          */
         function setId($id);
 
         /**
          * Get number of parcels
+         *
+         * @api
          *
          * @return int[]
          */
@@ -39,13 +46,18 @@
         /**
          * Set number of parcels
          *
+         * @api
+         *
          * @param int[] $numberOfParcels
-         * @return $this
+         *
+         * @return \this
          */
-        function setNumberOfParcels(array $numberOfParcels);
+        function setNumberOfParcels(array $numberOfParcels): AcceptOptionsInterface;
 
         /**
          * Get pickup locations
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface[]
          */
@@ -54,13 +66,18 @@
         /**
          * Set pickup locations
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface[] $pickupLocation
-         * @return $this
+         *
+         * @return \this
          */
-        function setPickupLocation(array $pickupLocation);
+        function setPickupLocation(array $pickupLocation) : AcceptOptionsInterface;
 
         /**
          * Get pickup windows
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface[]
          */
@@ -69,13 +86,18 @@
         /**
          * Set pickup windows
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface[] $pickupLocation
-         * @return $this
+         *
+         * @return \this
          */
-        function setPickupWindow(array $pickupWindow);
+        function setPickupWindow(array $pickupWindow): AcceptOptionsInterface;
 
         /**
          * Get Order
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface
          */
@@ -84,9 +106,12 @@
         /**
          * Set Order
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface $order
-         * @return $this
+         *
+         * @return \this
          */
-        function setOrder(OrderInterface $order);
+        function setOrder(OrderInterface $order): AcceptOptionsInterface;
     }
 ?>

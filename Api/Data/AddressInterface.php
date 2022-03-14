@@ -17,6 +17,8 @@
         /**
          * Gets ID
          *
+         * @api
+         *
          * @return mixed.
          */
         function getId();
@@ -24,27 +26,38 @@
         /**
          * Sets ID
          *
+         * @api
+         *
          * @param mixed $value
-         * @return $this
+         *
+         * @return \this
          */
         function setId($id);
 
         /**
          * Gets street name
          *
+         * @api
+         *
          * @return string
          */
         function getStreetName() : string;
+
         /**
          * Sets street name
          *
+         * @api
+         *
          * @param string $streetName
-         * @return $this
+         *
+         * @return \this
          */
         function setStreetName(string $streetName);
 
         /**
          * Get street number
+         *
+         * @api
          *
          * @return string
          */
@@ -53,13 +66,18 @@
         /**
          * Set street number
          *
+         * @api
+         *
          * @param string $streetNumber
-         * @return $this
+         *
+         * @return \this
          */
         function setStreetNumber(string $streetNumber);
 
         /**
          * Gets zip
+         *
+         * @api
          *
          * @return string
          */
@@ -68,13 +86,18 @@
         /**
          * Sets zip
          *
+         * @api
+         *
          * @param string $zip
-         * @return $this
+         *
+         * @return \this
          */
         function setZip(string $zip);
 
         /**
          * Gets city
+         *
+         * @api
          *
          * @return string
          */
@@ -83,13 +106,18 @@
         /**
          * Sets city
          *
+         * @api
+         *
          * @param string $city
-         * @return $this
+         *
+         * @return \this
          */
         function setCity(string $city);
 
         /**
          * Gets region
+         *
+         * @api
          *
          * @return string
          */
@@ -98,13 +126,18 @@
         /**
          * Sets region
          *
+         * @api
+         *
          * @param string $region
-         * @return $this
+         *
+         * @return \this
          */
         function setRegion(string $region);
 
         /**
          * Gets pickup from collection point
+         *
+         * @api
          *
          * @return bool|null
          */
@@ -113,13 +146,18 @@
         /**
          * Sets pickup from collection point
          *
+         * @api
+         *
          * @param bool|null $pickupFromCollectionPoint
-         * @return $this
+         *
+         * @return \this
          */
         function setPickupFromCollectionPoint($pickupFromCollectionPoint);
 
         /**
          * Gets collection point address
+         *
+         * @api
          *
          * @return string
          */
@@ -128,8 +166,11 @@
         /**
          * Sets collection point address
          *
+         * @api
+         *
          * @param string $collectionPointAddress
-         * @return $this
+         *
+         * @return \this
          */
         function setCollectionPointAddress(string $collectionPointAddress);
     }

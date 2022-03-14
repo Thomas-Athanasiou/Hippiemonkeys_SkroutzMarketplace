@@ -17,6 +17,8 @@
         /**
          * Gets ID
          *
+         * @api
+         *
          * @return mixed.
          */
         function getId();
@@ -24,13 +26,18 @@
         /**
          * Sets ID
          *
+         * @api
+         *
          * @param mixed $value
+         *
          * @return $this
          */
         function setId($id);
 
         /**
          * Gets Local ID
+         *
+         * @api
          *
          * @return int|null.
          */
@@ -39,13 +46,18 @@
         /**
          * Sets Local ID
          *
+         * @api
+         *
          * @param int $localId
+         *
          * @return $this
          */
         function setLocalId(int $localId);
 
         /**
          * Gets Skroutz ID
+         *
+         * @api
          *
          * @return string.
          */
@@ -54,7 +66,10 @@
         /**
          * Sets Skroutz ID
          *
+         * @api
+         *
          * @param string $skroutzId
+         *
          * @return $this
          */
         function setSkroutzId(string $skroutzId);
@@ -70,12 +85,15 @@
          * Sets the first name for the customer.
          *
          * @param string $firstname
+         *
          * @return $this
          */
         function setFirstName(string $firstName);
 
         /**
-         * Gets the last name for the customer.
+         * Gets the last name for the customer
+         *
+         * @api
          *
          * @return string Last name.
          */
@@ -84,13 +102,18 @@
         /**
          * Sets the last name for the customer
          *
+         * @api
+         *
          * @param string $lastname
+         *
          * @return $this
          */
         function setLastName(string $lastName);
 
         /**
          * Get Customer's Address
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface|null
          */
@@ -99,7 +122,10 @@
         /**
          * Set Customer's Address
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface|null $address
+         * 
          * @return $this
          */
         function setAddress($address);

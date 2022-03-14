@@ -86,7 +86,7 @@
         /**
          * @inheritdoc
          */
-        public function setNumberOfParcels(array $numberOfParcels)
+        public function setNumberOfParcels(array $numberOfParcels): AcceptOptionsInterface
         {
             return $this->setData(ResourceModel::FIELD_NUMBER_OF_PARCELS, implode(';', $numberOfParcels));
         }
@@ -109,7 +109,7 @@
         /**
          * @inheritdoc
          */
-        public function setOrder(OrderInterface $order)
+        public function setOrder(OrderInterface $order): AcceptOptionsInterface
         {
             $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
             return $this->setData(self::FIELD_ORDER, $order);
@@ -143,7 +143,7 @@
         /**
          * @inheritdoc
          */
-        public function setPickupLocation(array $pickupLocation)
+        public function setPickupLocation(array $pickupLocation): AcceptOptionsInterface
         {
             return $this->setData(ResourceModel::FIELD_PICKUP_LOCATION, $pickupLocation);
         }
@@ -176,7 +176,7 @@
         /**
          * @inheritdoc
          */
-        public function setPickupWindow(array $pickupWindow)
+        public function setPickupWindow(array $pickupWindow): AcceptOptionsInterface
         {
             return $this->setData(ResourceModel::FIELD_PICKUP_WINDOW, $pickupWindow);
         }

@@ -18,17 +18,22 @@
     extends SearchResultsInterface
     {
         /**
-         * Gets collection items.
+         * Gets collection items
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface[] Array of collection address items.
          */
         public function getItems();
 
         /**
-         * Sets collection address items.
+         * Sets collection address items
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface[] $address
-         * @return $this
+         *
+         * @return \this
          */
         public function setItems(array $address);
     }

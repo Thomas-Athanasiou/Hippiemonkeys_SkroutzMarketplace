@@ -20,6 +20,8 @@
         /**
          * Gets collection items.
          *
+         * @api
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface[] Array of collection line items.
          */
         public function getItems();
@@ -27,7 +29,10 @@
         /**
          * Sets collection line items.
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface[] $acceptOptionsPickupLocationRelation
+         *
          * @return $this
          */
         public function setItems(array $acceptOptionsPickupLocationRelation);

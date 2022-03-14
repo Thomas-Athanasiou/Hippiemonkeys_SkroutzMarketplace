@@ -20,6 +20,8 @@
         /**
          * Gets ID
          *
+         * @api
+         *
          * @return mixed.
          */
         function getId();
@@ -27,13 +29,18 @@
         /**
          * Sets ID
          *
-         * @param mixed $value
+         * @api
+         *
+         * @param mixed $id
+         *
          * @return $this
          */
         function setId($id);
 
         /**
          * Gets Local ID
+         *
+         * @api
          *
          * @return int|null.
          */
@@ -42,13 +49,18 @@
         /**
          * Sets Local ID
          *
+         * @api
+         *
          * @param int $localId
+         *
          * @return $this
          */
         function setLocalId(int $localId);
 
         /**
          * Gets Skroutz ID
+         *
+         * @api
          *
          * @return string.
          */
@@ -57,184 +69,250 @@
         /**
          * Sets Skroutz ID
          *
+         * @api
+         *
          * @param string $value
+         *
          * @return $this
          */
         function setSkroutzId(string $skroutzId);
 
         /**
-         * Get shop uid
+         * Gets Shop Uid
+         *
+         * @api
          *
          * @return int
          */
         function getShopUid(): int;
 
         /**
-         * Set shop uid
+         * Sets Shop Uid
          *
-         * @param string $shop_uid
+         * @api
+         *
+         * @param string $shopUid
+         *
          * @return $this
          */
         function setShopUid(int $shopUid);
 
         /**
-         * Get size
+         * Gets size
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\SizeInterface|null
          */
         function getSize();
 
         /**
-         * Set size
+         * Sets size
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\SizeInterface $size
+         *
          * @return $this
          */
         function setSize($size);
 
         /**
-         * Get product name
+         * Gets product name
+         *
+         * @api
          *
          * @return string
          */
         function getProductName() : string;
 
         /**
-         * Set product name
+         * Sets product name
          *
-         * @param string $product_name
+         * @api
+         *
+         * @param string $productName
+         *
          * @return $this
          */
         function setProductName(string $productName);
 
         /**
-         * Get quantity
+         * Gets Quantity
+         *
+         * @api
          *
          * @return int
          */
         function getQuantity() : int;
 
         /**
-         * Set quantity
+         * Sets Quantity
+         *
+         * @api
          *
          * @param int $quantity
+         *
          * @return $this
          */
         function setQuantity(int $quantity);
 
         /**
-         * Get unit price
+         * Gets Unit Price
+         *
+         * @api
+         *
          * @return float
          */
         function getUnitPrice() : float;
 
         /**
-         * Set unit price
+         * Sets Unit Price
          *
-         * @param float $unit_price
+         * @api
+         *
+         * @param float $unitPrice
+         *
          * @return $this
          */
         function setUnitPrice(float $unitPrice);
 
         /**
-         * Get unit price
+         * Gets Total Price
+         *
+         * @api
          *
          * @return float
          */
         function getTotalPrice() : float;
 
         /**
-         * Set unit price
+         * Sets Total Price
          *
-         * @param float $total_price
+         * @api
+         *
+         * @param float $totalPrice
+         *
          * @return $this
          */
         function setTotalPrice(float $totalPrice);
 
         /**
-         * Get price includes vat
+         * Gets Price Includes Vat
+         *
+         * @api
          *
          * @return bool
          */
         function getPriceIncludesVat() : bool;
 
         /**
-         * Set price includes vat
+         * Sets Price Includes Vat
          *
-         * @param bool $price_includes_vat
+         * @api
+         *
+         * @param bool $priceIncludesVat
+         *
          * @return $this
          */
         function setPriceIncludesVat(bool $priceIncludesVat);
 
         /**
-         * Get ean
+         * Gets Ean
+         *
+         * @api
          *
          * @return string|null
          */
         function getEan();
 
         /**
-         * Set ean
+         * Sets Ean
+         *
+         * @api
          *
          * @param string|null $ean
+         *
          * @return $this
          */
         function setEan($ean);
 
         /**
-         * Get Island Vat Discount Applied
+         * Gets Island Vat Discount Applied
+         *
+         * @api
          *
          * @return bool|null
          */
         function getIslandVatDiscountApplied();
 
         /**
-         * Set Island Vat Discount Applied
+         * Sets Island Vat Discount Applied
+         *
+         * @api
          *
          * @param bool|null $ean
+         *
          * @return $this
          */
         function setIslandVatDiscountApplied($islandVatDistcountApplied);
 
         /**
-         * Get extra info
+         * Gets extra info
+         *
+         * @api
          *
          * @return string|null
          */
         function getExtraInfo();
 
         /**
-         * Set extra info
+         * Sets extra info
+         *
+         * @api
          *
          * @param string|null $extraInfo
+         *
          * @return $this
          */
         function setExtraInfo($extraInfo);
 
         /**
-         * Get order
+         * Gets Order
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface
          */
         function getOrder() : OrderInterface;
 
         /**
-         * Set order
+         * Sets order
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface $order
+         *
          * @return $this
          */
         function setOrder(OrderInterface $order);
 
         /**
-         * Get ean
+         * Gets Ean
+         *
+         * @api
+         *
          * @return \Magento\Catalog\Api\Data\ProductInterface
          */
         function getProduct(): ProductInterface;
 
         /**
-         * Set ean
+         * Sets Ean
+         *
+         * @api
+         *
          * @param \Magento\Catalog\Api\Data\ProductInterface $product
+         *
          * @return $this
          */
         function setProduct(ProductInterface $product);

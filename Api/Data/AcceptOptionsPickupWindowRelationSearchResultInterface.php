@@ -18,7 +18,9 @@
     extends SearchResultsInterface
     {
         /**
-         * Gets collection items.
+         * Gets collection items
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterface[] Array of collection line items.
          */
@@ -27,7 +29,10 @@
         /**
          * Sets collection line items.
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterface[] $acceptOptionsPickupWindowRelation
+         *
          * @return $this
          */
         public function setItems(array $acceptOptionsPickupWindowRelation);

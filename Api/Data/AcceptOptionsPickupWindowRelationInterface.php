@@ -17,6 +17,8 @@
         /**
          * Gets ID
          *
+         * @api
+         *
          * @return mixed.
          */
         function getId();
@@ -24,13 +26,18 @@
         /**
          * Sets ID
          *
+         * @api
+         *
          * @param mixed $value
+         *
          * @return $this
          */
         function setId($id);
 
         /**
          * Gets Accept Options
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface.
          */
@@ -39,13 +46,18 @@
         /**
          * Sets Accept Options
          *
+         * @api
+         *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface $value
+         *
          * @return $this
          */
         function setAcceptOptions(AcceptOptionsInterface $acceptOptions);
 
         /**
          * Gets Pickup Window
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface.
          */
@@ -54,7 +66,10 @@
         /**
          * Sets Pickup Window
          *
+         * @api
+         *
          * @param Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface $value
+         * 
          * @return $this
          */
         function setPickupWindow(PickupWindowInterface $pickupWindow);

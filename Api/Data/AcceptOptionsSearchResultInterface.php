@@ -18,14 +18,18 @@
     extends SearchResultsInterface
     {
         /**
-         * Gets collection items.
+         * Gets collection items
+         *
+         * @api
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface[] Array of collection line items.
          */
         public function getItems();
 
         /**
-         * Sets collection line items.
+         * Sets collection line items
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface[] $acceptoptions
          * @return $this

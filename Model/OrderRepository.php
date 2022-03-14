@@ -71,7 +71,7 @@
                 $magentoOrder = $order->getMagentoOrder();
                 if($magentoOrder)
                 {
-                    $this->_magentoOrderIndex[ $magentoOrder->getId() ] = $order;
+                    $this->_magentoOrderIndex[ $magentoOrder->getId() ] = $magentoOrder;
                 }
                 $this->_idIndex[$id] = $order;
             }

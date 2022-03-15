@@ -18,7 +18,7 @@
     interface AcceptOptionsRepositoryInterface
     {
         /**
-         * Get Accept Options by id
+         * Gets Accept Options from the persistent storage by its Id
          *
          * @api
          *
@@ -27,25 +27,36 @@
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface
          */
         function getById($id): AcceptOptionsInterface;
+
         /**
-         * Get Accept Options by Order
+         * Get Accept Options from the persistent storage by its Order
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface $order
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface
          */
         function getByOrder(OrderInterface $order): AcceptOptionsInterface;
+
         /**
-         * Delete Accept Options
+         * Deletes Accept Options from the persistent storage
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface $acceptOptions
+         *
          * @return bool
          */
         function delete(AcceptOptionsInterface $acceptOptions): bool;
+
         /**
-         * Save Accept Options
+         * Saves Accept Options to the persistent storage
+         *
+         * @api
          *
          * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface $acceptOptions
+         *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface
          */
         function save(AcceptOptionsInterface $acceptOptions): AcceptOptionsInterface;

@@ -16,10 +16,21 @@
 
     interface LineItemRejectionReasonRepositoryInterface
     {
+        /**
+         * Gets Line Item Rejection Reason from the persistent storage by its Local Id
+         *
+         * @api
+         *
+         * @param int $localId
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface
+         */
         function getByLocalId(int $localId): LineItemRejectionReasonInterface;
 
         /**
-         * Get LineItemRejectionReason skroutz id
+         * Gets Line Item Rejection Reason from the persistent storage by its Skroutz Id
+         *
+         * @api
          *
          * @param int $skroutzId
          *
@@ -27,8 +38,27 @@
          */
         function getBySkroutzId(int $skroutzId): LineItemRejectionReasonInterface;
 
+        /**
+         * Deletes Line Item Rejection Reason from the persistent storage
+         *
+         * @api
+         *
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface $lineItemRejectionReason
+         *
+         * @return bool
+         */
         function delete(LineItemRejectionReasonInterface $lineItemRejectionReason): bool;
 
+
+        /**
+         * Saves Line Item Rejection Reason to the persistent storage
+         *
+         * @api
+         *
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface $lineItemRejectionReason
+         *
+         * @return \\Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface
+         */
         function save(LineItemRejectionReasonInterface $lineItemRejectionReason): LineItemRejectionReasonInterface;
     }
 ?>

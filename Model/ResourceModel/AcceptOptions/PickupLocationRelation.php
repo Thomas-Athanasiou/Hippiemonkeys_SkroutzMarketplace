@@ -97,13 +97,35 @@
             return $this->_pickupLocationRepository;
         }
 
+        /**
+         * Accept Options Pickup Location Relation Factory property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory $_acceptOptionsPickupLocationRelationFactory
+         */
         private $_acceptOptionsPickupLocationRelationFactory;
+
+        /**
+         * Gets Accept Options Pickup Location Relation Factory
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory
+         */
         protected function getAcceptOptionsPickupLocationRelationFactory(): AcceptOptionsPickupLocationRelationInterfaceFactory
         {
             return $this->_acceptOptionsPickupLocationRelationFactory;
         }
 
+        /**
+         * Accept Options Pickup Location Relation Repository property
+         *
+         * @var \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $_acceptOptionsPickupLocationRelationRepository
+         */
         private $_acceptOptionsPickupLocationRelationRepository;
+
+        /**
+         * Gets Accept Options Pickup Location Relation Repository
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsPickupLocationRelationRepositoryInterface
+         */
         protected function getAcceptOptionsPickupLocationRelationRepository(): AcceptOptionsPickupLocationRelationRepositoryInterface
         {
             return $this->_acceptOptionsPickupLocationRelationRepository;

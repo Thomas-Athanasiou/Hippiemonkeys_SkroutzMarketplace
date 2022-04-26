@@ -427,6 +427,22 @@
         }
 
         /**
+         * @inheritdoc
+         */
+        public function getGiftWrap(): bool
+        {
+            return (bool) $this->getData(ResourceModel::FIELD_GIFT_WRAP); 
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setGiftWrap(bool $giftWrap)
+        {
+            return $this->setData(ResourceModel::FIELD_GIFT_WRAP, (string) $giftWrap);
+        }
+
+        /**
          * Customer Repository property
          *
          * @var \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface $_customerRepository

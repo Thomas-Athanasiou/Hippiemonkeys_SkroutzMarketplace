@@ -187,6 +187,7 @@
         <column xsi:type="int" unsigned="true" name="magento_order_id" nullable="true" comment="Magento Order Id" />
         <column xsi:type="boolean" name="express" nullable="true" comment="Express" />
         <column xsi:type="boolean" name="custom" nullable="true" comment="Custom" />
+        <column xsi:type="boolean" name="gift_wrap" nullable="true" comment="Gift Wrap" />
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ORDER_ID_PK">
             <column name="id" />
         </constraint>

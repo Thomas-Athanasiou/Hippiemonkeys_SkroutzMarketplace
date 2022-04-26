@@ -300,5 +300,20 @@
          * @return \this
          */
         function setCustom(bool $custom);
+
+        /**
+         * Gets Gift Wrap
+         *
+         * @return bool
+         */
+        function getGiftWrap(): bool;
+
+        /**
+         * Sets Gift Wrap
+         *
+         * @param bool $giftWrap
+         * @return \this
+         */
+        function setGiftWrap(bool $giftWrap);
     }
 ?>

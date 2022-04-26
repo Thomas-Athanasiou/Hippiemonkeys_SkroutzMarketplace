@@ -34,7 +34,8 @@
             FIELD_DISPATCH_UNTIL            = 'dispatch_until',
             FIELD_MAGENTO_ORDER_ID          = 'magento_order_id',
             FIELD_EXPRESS                   = 'express',
-            FIELD_CUSTOM                    = 'custom';
+            FIELD_CUSTOM                    = 'custom',
+            FIELD_GIFT_WRAP                 = 'gift_wrap';
 
         protected const
             TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_order';

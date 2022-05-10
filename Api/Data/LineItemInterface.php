@@ -298,6 +298,46 @@
         function setOrder(OrderInterface $order);
 
         /**
+         * Gets Rejection Reason
+         *
+         * @api
+         *
+         * @return string|null
+         */
+        function getRejectionReason();
+
+        /**
+         * Sets Rejection Reason
+         *
+         * @api
+         *
+         * @param string|null $rejectionReason
+         *
+         * @return $this
+         */
+        function setRejectionReason($rejectionReason);
+
+        /**
+         * Gets Return Reason
+         *
+         * @api
+         *
+         * @return string|null
+         */
+        function getReturnReason();
+
+        /**
+         * Sets Return Reason
+         *
+         * @api
+         *
+         * @param string|null $returnReason
+         *
+         * @return $this
+         */
+        function setReturnReason($returnReason);
+
+        /**
          * Gets Ean
          *
          * @api

@@ -30,7 +30,9 @@
             FIELD_EAN                           = 'ean',
             FIELD_ISLAND_VAT_DISCOUNT_APPLIED   = 'island_vat_discount_applied',
             FIELD_EXTRA_INFO                    = 'extra_info',
-            FIELD_ORDER_ID                      = 'order_id';
+            FIELD_ORDER_ID                      = 'order_id',
+            FIELD_REJECTION_REASON              = 'rejection_reason',
+            FIELD_RETURN_REASON                 = 'return_reason';
 
         protected const
             TABLE_MAIN = 'hippiemonkeys_skroutzsmartcart_lineitem';

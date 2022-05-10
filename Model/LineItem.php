@@ -257,8 +257,40 @@
          */
         public function setOrder(OrderInterface $order)
         {
-            $this->getData(ResourceModel::FIELD_ORDER_ID, $order->getId());
-            return $this->getData(self::FIELD_ORDER, $order);
+            $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
+            return $this->setData(self::FIELD_ORDER, $order);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getRejectionReason()
+        {
+            return $this->getData(self::FIELD_REJECTION_REASON);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setRejectionReason($rejectionReason)
+        {
+            return $this->setData(self::FIELD_REJECTION_REASON, $rejectionReason);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getReturnReason()
+        {
+            return $this->getData(self::FIELD_RETURN_REASON);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setReturnReason($returnReason)
+        {
+            return $this->setData(self::FIELD_RETURN_REASON, $returnReason);
         }
 
         /**

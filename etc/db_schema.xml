@@ -156,6 +156,8 @@
         <column xsi:type="smallint" name="island_vat_discount_applied" unsigned="true" nullable="true" comment="Island Vat Discount Applied" />
         <column xsi:type="varchar" name="ean" length="32" nullable="true" comment="Ean" />
         <column xsi:type="varchar" name="extra_info" length="64" nullable="true" comment="Extra Info" />
+        <column xsi:type="varchar" name="rejection_reason" length="32" nullable="true" comment="Rejection Reason" />
+        <column xsi:type="varchar" name="return_reason" length="32" nullable="true" comment="Return Reason" />
         <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_LINEITEM_SKROUTZ_ID_UN">
             <column name="skroutz_id"/>
         </constraint>

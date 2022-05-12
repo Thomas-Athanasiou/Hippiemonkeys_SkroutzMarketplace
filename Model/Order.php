@@ -32,14 +32,14 @@
     implements OrderInterface
     {
         protected const
-            FIELD_CUSTOMER          = 'customer',
-            FIELD_INVOICE_DETAILS   = 'invoice_details',
-            FIELD_LINE_ITEMS        = 'line_items',
-            FIELD_ACCEPT_OPTIONS    = 'accept_options',
-            FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
-            FIELD_REJECT_OPTIONS    = 'reject_options',
-            FIELD_REJECT_OPTIONS_ID = 'reject_options_id',
-            FIELD_MAGENTO_ORDER     = 'magento_order';
+            FIELD_CUSTOMER              = 'customer',
+            FIELD_INVOICE_DETAILS       = 'invoice_details',
+            FIELD_LINE_ITEMS            = 'line_items',
+            FIELD_ACCEPT_OPTIONS        = 'accept_options',
+            FIELD_ACCEPT_OPTIONS_ID     = 'accept_options_id',
+            FIELD_REJECT_OPTIONS        = 'reject_options',
+            FIELD_REJECT_OPTIONS_ID     = 'reject_options_id',
+            FIELD_MAGENTO_ORDER         = 'magento_order';
 
         /**
          * @param \Magento\Framework\Model\Context $context
@@ -440,6 +440,22 @@
         public function setGiftWrap(bool $giftWrap)
         {
             return $this->setData(ResourceModel::FIELD_GIFT_WRAP, (string) $giftWrap);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getFulfilledBySkroutz(): bool
+        {
+            return (bool) $this->getData(ResourceModel::FIELD_FULFILLED_BY_SKROUTZ);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setFulfilledBySkroutz(bool $fulfilledBySkroutz)
+        {
+            return $this->setData(ResourceModel::FIELD_FULFILLED_BY_SKROUTZ, $fulfilledBySkroutz);
         }
 
         /**

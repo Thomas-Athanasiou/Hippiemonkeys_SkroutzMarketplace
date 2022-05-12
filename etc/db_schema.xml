@@ -190,6 +190,7 @@
         <column xsi:type="boolean" name="express" nullable="true" comment="Express" />
         <column xsi:type="boolean" name="custom" nullable="true" comment="Custom" />
         <column xsi:type="boolean" name="gift_wrap" nullable="true" comment="Gift Wrap" />
+        <column xsi:type="boolean" name="fulfilled_by_skroutz" nullable="true" comment="Fulfilled By Skroutz" />
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ORDER_ID_PK">
             <column name="id" />
         </constraint>

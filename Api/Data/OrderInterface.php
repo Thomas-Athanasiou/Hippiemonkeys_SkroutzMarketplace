@@ -315,5 +315,21 @@
          * @return \this
          */
         function setGiftWrap(bool $giftWrap);
+
+        /**
+         * Gets Fulfilled By Skroutz
+         *
+         * @return bool
+         */
+        public function getFulfilledBySkroutz(): bool;
+
+        /**
+         * Sets Fulfilled By Skroutz
+         *
+         * @param bool $fulfilledBySkroutz
+         *
+         * @return \this
+         */
+        public function setFulfilledBySkroutz(bool $fulfilledBySkroutz);
     }
 ?>

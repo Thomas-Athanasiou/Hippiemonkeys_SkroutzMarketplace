@@ -32,7 +32,8 @@
             FIELD_EXTRA_INFO                    = 'extra_info',
             FIELD_ORDER_ID                      = 'order_id',
             FIELD_REJECTION_REASON              = 'rejection_reason',
-            FIELD_RETURN_REASON                 = 'return_reason';
+            FIELD_RETURN_REASON                 = 'return_reason',
+            FIELD_SERIAL_NUMBERS                = 'serial_numbers';
 
         protected const
             TABLE_MAIN = 'hippiemonkeys_skroutzsmartcart_lineitem';

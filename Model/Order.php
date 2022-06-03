@@ -459,6 +459,38 @@
         }
 
         /**
+         * @inheritdoc
+         */
+        public function getFbsDeliveryNote(): ?string
+        {
+            return $this->getData(ResourceModel::FIELD_FBS_DELIVERY_NOTE);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setFbsDeliveryNote(?string $fbsDeliveryNote)
+        {
+            return $this->setData(ResourceModel::FIELD_FBS_DELIVERY_NOTE, $fbsDeliveryNote);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getNumberOfParcels(): ?int
+        {
+            return (int) $this->getData(ResourceModel::FIELD_NUMBER_OF_PARCELS);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setNumberOfParcels(?int $numberOfParcels)
+        {
+            return $this->setData(ResourceModel::FIELD_NUMBER_OF_PARCELS, (string) $numberOfParcels);
+        }
+
+        /**
          * Customer Repository property
          *
          * @var \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface $_customerRepository

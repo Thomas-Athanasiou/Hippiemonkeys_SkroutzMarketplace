@@ -36,7 +36,9 @@
             FIELD_EXPRESS                   = 'express',
             FIELD_CUSTOM                    = 'custom',
             FIELD_GIFT_WRAP                 = 'gift_wrap',
-            FIELD_FULFILLED_BY_SKROUTZ      = 'fulfilled_by_skroutz';
+            FIELD_FULFILLED_BY_SKROUTZ      = 'fulfilled_by_skroutz',
+            FIELD_FBS_DELIVERY_NOTE         = 'fbs_delivery_note',
+            FIELD_NUMBER_OF_PARCELS         = 'number_of_parcels';
 
         protected const
             TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_order';

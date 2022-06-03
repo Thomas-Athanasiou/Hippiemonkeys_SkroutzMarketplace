@@ -158,6 +158,7 @@
         <column xsi:type="varchar" name="extra_info" length="64" nullable="true" comment="Extra Info" />
         <column xsi:type="varchar" name="rejection_reason" length="32" nullable="true" comment="Rejection Reason" />
         <column xsi:type="varchar" name="return_reason" length="32" nullable="true" comment="Return Reason" />
+        <column xsi:type="varchar" name="serial_numbers" length="128" nullable="true" comment="Serial Numbers" />
         <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_LINEITEM_SKROUTZ_ID_UN">
             <column name="skroutz_id"/>
         </constraint>
@@ -191,6 +192,8 @@
         <column xsi:type="boolean" name="custom" nullable="true" comment="Custom" />
         <column xsi:type="boolean" name="gift_wrap" nullable="true" comment="Gift Wrap" />
         <column xsi:type="boolean" name="fulfilled_by_skroutz" nullable="true" comment="Fulfilled By Skroutz" />
+        <column xsi:type="varchar" length="256" name="fbs_delivery_note" nullable="true" comment="Fbs Delivery Note" />
+        <column xsi:type="int" unsigned="true" name="number_of_parcels" nullable="true" comment="Number Of Parcels" />
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ORDER_ID_PK">
             <column name="id" />
         </constraint>

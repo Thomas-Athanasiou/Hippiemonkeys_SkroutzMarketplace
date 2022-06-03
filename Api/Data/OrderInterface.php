@@ -321,7 +321,7 @@
          *
          * @return bool
          */
-        public function getFulfilledBySkroutz(): bool;
+        function getFulfilledBySkroutz(): bool;
 
         /**
          * Sets Fulfilled By Skroutz
@@ -330,6 +330,38 @@
          *
          * @return \this
          */
-        public function setFulfilledBySkroutz(bool $fulfilledBySkroutz);
+        function setFulfilledBySkroutz(bool $fulfilledBySkroutz);
+
+        /**
+         * Gets Fbs Delivery Note
+         *
+         * @return string
+         */
+        function getFbsDeliveryNote(): ?string;
+
+        /**
+         * Sets Fbs Delivery Note
+         *
+         * @param string $fbsDeliveryNote
+         *
+         * @return \this
+         */
+        function setFbsDeliveryNote(?string $fbsDeliveryNote);
+
+        /**
+         * Gets Number Of Parcels
+         *
+         * @return string
+         */
+        function getNumberOfParcels(): ?int;
+
+        /**
+         * Sets Number Of Parcels
+         *
+         * @param string $numberOfParcels
+         *
+         * @return \this
+         */
+        function setNumberOfParcels(?int $numberOfParcels);
     }
 ?>

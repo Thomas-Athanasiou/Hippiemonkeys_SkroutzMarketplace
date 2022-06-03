@@ -338,6 +338,26 @@
         function setReturnReason($returnReason);
 
         /**
+         * Gets Serial Number
+         *
+         * @api
+         *
+         * @return string|null
+         */
+        function getSerialNumbers();
+
+        /**
+         * Sets Serial Number
+         *
+         * @api
+         *
+         * @param string|null $serialNumbers
+         *
+         * @return $this
+         */
+        function setSerialNumbers($serialNumbers);
+
+        /**
          * Gets Ean
          *
          * @api

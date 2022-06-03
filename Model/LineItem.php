@@ -266,7 +266,7 @@
          */
         public function getRejectionReason()
         {
-            return $this->getData(self::FIELD_REJECTION_REASON);
+            return $this->getData(ResourceModel::FIELD_REJECTION_REASON);
         }
 
         /**
@@ -274,7 +274,7 @@
          */
         public function setRejectionReason($rejectionReason)
         {
-            return $this->setData(self::FIELD_REJECTION_REASON, $rejectionReason);
+            return $this->setData(ResourceModel::FIELD_REJECTION_REASON, $rejectionReason);
         }
 
         /**
@@ -282,7 +282,7 @@
          */
         public function getReturnReason()
         {
-            return $this->getData(self::FIELD_RETURN_REASON);
+            return $this->getData(ResourceModel::FIELD_RETURN_REASON);
         }
 
         /**
@@ -290,7 +290,23 @@
          */
         public function setReturnReason($returnReason)
         {
-            return $this->setData(self::FIELD_RETURN_REASON, $returnReason);
+            return $this->setData(ResourceModel::FIELD_RETURN_REASON, $returnReason);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getSerialNumbers()
+        {
+            return $this->getData(ResourceModel::FIELD_SERIAL_NUMBERS);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setSerialNumbers($serialNumbers)
+        {
+            return $this->setData(ResourceModel::FIELD_SERIAL_NUMBERS, $serialNumbers);
         }
 
         /**

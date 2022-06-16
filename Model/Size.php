@@ -7,7 +7,6 @@
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
-    
     namespace Hippiemonkeys\SkroutzSmartCart\Model;
 
     use Magento\Framework\Model\AbstractModel,

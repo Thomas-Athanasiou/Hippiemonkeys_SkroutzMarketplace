@@ -34,8 +34,8 @@
          * Save relations for Line Item
          *
          * @param \Magento\Framework\Model\AbstractModel $object
-         *
          * @return void
+         * @throws \Exception
          */
         public function processRelation(AbstractModel $object)
         {

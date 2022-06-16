@@ -7,7 +7,6 @@
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
-    
     namespace Hippiemonkeys\SkroutzSmartCart\Model;
 
     use Magento\Framework\Model\AbstractModel,
@@ -33,7 +32,6 @@
         {
             return $this->getData(ResourceModel::FIELD_ID_TYPE);
         }
-
         /**
          * @inheritdoc
          */
@@ -49,7 +47,6 @@
         {
             return $this->getData(ResourceModel::FIELD_ID_NUMBER);
         }
-
         /**
          * @inheritdoc
          */
@@ -65,7 +62,6 @@
         {
             return $this->getData(ResourceModel::FIELD_OTP);
         }
-
         /**
          * @inheritdoc
          */

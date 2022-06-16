@@ -7,9 +7,6 @@
      * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
-
-    declare(strict_types=1);
-
     namespace Hippiemonkeys\SkroutzSmartCart\Model;
 
     use Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,

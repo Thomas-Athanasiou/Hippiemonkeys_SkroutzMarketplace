@@ -226,6 +226,21 @@
         function setCourierVoucher($courierVoucher);
 
         /**
+         * Gets Rejection Info
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectionInfoInterface|null
+         */
+        function getRejectionInfo(): ?RejectionInfoInterface;
+
+        /**
+         * Sets Rejection Info
+         *
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectionInfoInterface|null $rejectionInfo
+         * @return \this
+         */
+        function setRejectionInfo(?RejectionInfoInterface $rejectionInfo);
+
+        /**
          * Gets accept options
          *
          * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface|null
@@ -349,16 +364,48 @@
         public function setFbsDeliveryNote(?string $fbsDeliveryNote);
 
         /**
-         * Gets Number Of Parcels
+         * Gets Pickup Window
+         *
+         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderPickupWindowInterface|null
+         */
+        public function getPickupWindow(): ?OrderPickupWindowInterface;
+
+        /**
+         * Sets Pickup Window
+         *
+         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderPickupWindowInterface|null $pickupWindow
+         *
+         * @return \this
+         */
+        public function setPickupWindow(?OrderPickupWindowInterface $pickupWindow);
+
+        /**
+         * Gets Pickup Address
          *
          * @return string
+         */
+        public function getPickupAddress(): ?string;
+
+        /**
+         * Sets Pickup Address
+         *
+         * @param string $pickupAddress
+         *
+         * @return \this
+         */
+        public function setPickupAddress(?string $pickupAddress);
+
+        /**
+         * Gets Number Of Parcels
+         *
+         * @return int
          */
         function getNumberOfParcels(): ?int;
 
         /**
          * Sets Number Of Parcels
          *
-         * @param string $numberOfParcels
+         * @param int $numberOfParcels
          *
          * @return \this
          */

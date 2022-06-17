@@ -24,6 +24,10 @@
     <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Customer\Collection" />
     <preference for="Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\CustomerRepository" />
 
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectionInfoInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\RejectionInfo" />
+    <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderPickupWindowInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\OrderPickupWindow" />
+
+
     <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\InvoiceDetails" />
     <preference for="Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsSearchResultInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\InvoiceDetails\Collection" />
     <preference for="Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface" type="Hippiemonkeys\SkroutzSmartCart\Model\InvoiceDetailsRepository" />

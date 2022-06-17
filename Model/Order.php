@@ -22,6 +22,8 @@
         Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface,
         Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface,
         Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderPickupWindowInterface,
+        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectionInfoInterface,
         Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface,
         Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface,
         Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface,
@@ -39,6 +41,10 @@
             FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
             FIELD_REJECT_OPTIONS    = 'reject_options',
             FIELD_REJECT_OPTIONS_ID = 'reject_options_id',
+            FIELD_REJECTION_INFO    = 'rejection_info',
+            FIELD_REJECTION_INFO_ID = 'rejection_info_id',
+            FIELD_PICKUP_WINDOW     = 'pickup_window',
+            FIELD_PICKUP_WINDOW_ID  = 'pickup_window_id',
             FIELD_MAGENTO_ORDER     = 'magento_order';
 
         /**
@@ -323,10 +329,34 @@
         /**
          * @inheritdoc
          */
+        public function getRejectionInfo(): ?RejectionInfoInterface
+        {
+            $rejectionInfo      = $this->getData(self::FIELD_REJECTION_INFO);
+            $rejectionInfoId    = $this->getData(ResourceModel::FIELD_REJECTION_INFO_ID);
+            if (!$rejectionInfo && $rejectionInfoId)
+            {
+                /* $rejectionInfo = $this->getRejectionInfoRepository()->getById($rejectionInfoId); */
+                $this->setRejectionInfo($rejectionInfo);
+            }
+            return $rejectionInfo;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setRejectionInfo(?RejectionInfoInterface $rejectionInfo)
+        {
+            $this->setData(ResourceModel::FIELD_REJECTION_INFO_ID, $rejectionInfo ? $rejectionInfo->getId() : null);
+            return $this->setData(self::FIELD_REJECTION_INFO, $rejectionInfo);
+        }
+
+        /**
+         * @inheritdoc
+         */
         public function getAcceptOptions()
         {
             $acceptOptions      = $this->getData(self::FIELD_ACCEPT_OPTIONS);
-            $acceptOptionsId    = $this->getData(self::FIELD_ACCEPT_OPTIONS_ID);
+            $acceptOptionsId    = $this->getData(ResourceModel::FIELD_ACCEPT_OPTIONS_ID);
             if ($acceptOptionsId && !$acceptOptions)
             {
                 $acceptOptions = $this->getAcceptOptionsRepository()->getById($acceptOptionsId);
@@ -341,7 +371,7 @@
         public function setAcceptOptions($acceptOptions)
         {
             $acceptOptions->setOrder($this);
-            $this->setData(self::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
+            $this->setData(ResourceModel::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
             return $this->setData(self::FIELD_ACCEPT_OPTIONS, $acceptOptions);
         }
 
@@ -351,7 +381,7 @@
         public function getRejectOptions()
         {
             $rejectOptions      = $this->getData(self::FIELD_REJECT_OPTIONS);
-            $rejectOptionsId    = $this->getData(self::FIELD_REJECT_OPTIONS_ID);
+            $rejectOptionsId    = $this->getData(ResourceModel::FIELD_REJECT_OPTIONS_ID);
             if ($rejectOptionsId && !$rejectOptions)
             {
                 $rejectOptions = $this->getAcceptOptionsRepository()->getById($rejectOptionsId);
@@ -366,7 +396,7 @@
         public function setRejectOptions($rejectOptions)
         {
             $rejectOptions->setOrder($this);
-            $this->setData(self::FIELD_REJECT_OPTIONS_ID, $rejectOptions->getId());
+            $this->setData(ResourceModel::FIELD_REJECT_OPTIONS_ID, $rejectOptions->getId());
             return $this->setData(self::FIELD_REJECT_OPTIONS, $rejectOptions);
         }
 
@@ -472,6 +502,46 @@
         public function setFbsDeliveryNote(?string $fbsDeliveryNote)
         {
             return $this->setData(ResourceModel::FIELD_FBS_DELIVERY_NOTE, $fbsDeliveryNote);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getPickupWindow(): ?OrderPickupWindowInterface
+        {
+            $pickupWindow   = $this->getData(self::FIELD_PICKUP_WINDOW);
+            $pickupWindowId = $this->getData(ResourceModel::FIELD_PICKUP_WINDOW_ID);
+            if (!$pickupWindow && $pickupWindowId)
+            {
+                /* $pickupWindow = $this->getPickupWindowRepository()->getById($pickupWindowId); */
+                $this->setPickupWindow($pickupWindow);
+            }
+            return $pickupWindow;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setPickupWindow(?OrderPickupWindowInterface $pickupWindow)
+        {
+            $this->setData(ResourceModel::FIELD_PICKUP_WINDOW_ID, $pickupWindow ? $pickupWindow->getId() : null);
+            return $this->setData(self::FIELD_PICKUP_WINDOW, $pickupWindow);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getPickupAddress(): ?string
+        {
+            return $this->getData(ResourceModel::FIELD_PICKUP_ADDRESS);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setPickupAddress(?string $pickupAddress)
+        {
+            return $this->setData(ResourceModel::FIELD_PICKUP_ADDRESS, $pickupAddress);
         }
 
         /**

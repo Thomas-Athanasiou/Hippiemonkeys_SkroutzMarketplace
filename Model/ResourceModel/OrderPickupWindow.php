@@ -14,16 +14,16 @@
 
     use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
-    class RejectionInfo
+    class OrderPickupWindow
     extends AbstractDb
     {
         public const
-            FIELD_ID        = 'id',
-            FIELD_REASON    = 'reason',
-            FIELD_ACTOR     = 'actor';
+            FIELD_ID    = 'id',
+            FIELD_FROM  = 'from',
+            FIELD_TO    = 'to';
 
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_rejectioninfo';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_orderpickupwindow';
 
         /**
          * @inheritdoc

@@ -12,7 +12,7 @@
 
     namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
 
-    interface RejectionInfoInterface
+    interface OrderPickupWindowInterface
     {
         /**
          * Gets ID
@@ -24,39 +24,39 @@
         /**
          * Sets ID
          *
-         * @param mixed $value
+         * @param mixed $id
          * @return \this
          */
         function setId($id);
 
         /**
-         * Gets Reason
+         * Gets From
          *
-         * @return string.
+         * @return string
          */
-        function getReason(): string;
+        function getFrom(): string;
 
         /**
-         * Sets Reason
+         * Sets From
          *
-         * @param string $reason
+         * @param string $from
          * @return \this
          */
-        function setReason(string $reason);
+        function setFrom(string $from);
 
         /**
-         * Gets Actor
+         * Gets To
          *
-         * @return string.
+         * @return string
          */
-        function getActor(): string;
+        function getTo(): string;
 
         /**
-         * Sets Actor
+         * Sets To
          *
-         * @param string $actor
+         * @param string $to
          * @return \this
          */
-        function setActor(string $actor);
+        function setTo(string $to);
     }
 ?>

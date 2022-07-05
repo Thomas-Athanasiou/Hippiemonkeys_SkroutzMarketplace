@@ -4,7 +4,7 @@
      *
      * @author Thomas Athanasiou at Hippiemonkeys
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
 
@@ -133,6 +133,26 @@
          * @return \this
          */
         function setRegion(string $region);
+
+        /**
+         * Gets Country Code
+         *
+         * @api
+         *
+         * @return string
+         */
+        function getCountryCode() : string;
+
+        /**
+         * Sets Country Code
+         *
+         * @api
+         *
+         * @param string $countryCode
+         *
+         * @return \this
+         */
+        function setCountryCode(string $countryCode);
 
         /**
          * Gets pickup from collection point

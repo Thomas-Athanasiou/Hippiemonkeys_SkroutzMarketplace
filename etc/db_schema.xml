@@ -96,6 +96,7 @@
         <column xsi:type="varchar" name="region" length="64" nullable="false" comment="Region" />
         <column xsi:type="smallint" name="pickup_from_collection_point" unsigned="true" nullable="true" comment="Pickup From Collection Point" />
         <column xsi:type="varchar" name="collection_point_address" length="64" nullable="true" comment="Collection Point Address" />
+        <column xsi:type="varchar" name="country_code" length="8" nullable="true" comment="Country Code" />
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ADDRESS_ID_PK">
             <column name="id" />
         </constraint>

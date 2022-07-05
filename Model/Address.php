@@ -4,7 +4,7 @@
      *
      * @author Thomas Athanasiou at Hippiemonkeys
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
     namespace Hippiemonkeys\SkroutzSmartCart\Model;
@@ -89,12 +89,29 @@
         {
             return $this->getData(ResourceModel::FIELD_REGION);
         }
+
         /**
          * @inheritdoc
          */
         public function setRegion(string $region)
         {
             return $this->setData(ResourceModel::FIELD_REGION, $region);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getCountryCode() : string
+        {
+            return $this->getData(ResourceModel::FIELD_COUNTRY_CODE);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setCountryCode(string $countryCode)
+        {
+            return $this->setData(ResourceModel::FIELD_COUNTRY_CODE, $countryCode);
         }
 
         /**

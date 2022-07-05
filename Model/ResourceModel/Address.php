@@ -4,7 +4,7 @@
      *
      * @author Thomas Athanasiou at Hippiemonkeys
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
      * @package Hippiemonkeys_SkroutzSmartCart
      */
 
@@ -24,6 +24,7 @@
             FIELD_ZIP                           = 'zip',
             FIELD_CITY                          = 'city',
             FIELD_REGION                        = 'region',
+            FIELD_COUNTRY_CODE                  = 'country_code',
             FIELD_PICKUP_FROM_COLLECTION_POINT  = 'pickup_from_collection_point',
             FIELD_COLLECTION_POINT_ADDRESS      = 'collection_point_address';
 

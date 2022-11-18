@@ -18,10 +18,11 @@
     extends AbstractDb
     {
         public const
-            FIELD_ID            = 'id',
-            FIELD_LABEL         = 'label',
-            FIELD_VALUE         = 'value',
-            FIELD_SHOP_VALUE    = 'shop_value';
+            FIELD_ID                    = 'id',
+            FIELD_LABEL                 = 'label',
+            FIELD_VALUE                 = 'value',
+            FIELD_SHOP_VALUE            = 'shop_value',
+            FIELD_SHOP_VARIATION_UID    = 'shop_variation_uid';
 
         protected const
             TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_size';

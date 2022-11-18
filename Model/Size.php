@@ -69,5 +69,21 @@
         {
             return $this->setData(ResourceModel::FIELD_SHOP_VALUE, $shopValue);
         }
+
+        /**
+         * @inheritdoc
+         */
+        public function getShopVariationUid()
+        {
+            return $this->getData(ResourceModel::FIELD_SHOP_VARIATION_UID);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setShopVariationUid($shopVariationUid)
+        {
+            return $this->setData(ResourceModel::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
+        }
     }
 ?>

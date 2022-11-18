@@ -376,5 +376,20 @@
          * @return $this
          */
         function setProduct(ProductInterface $product);
+
+        /**
+         * Gets shop variation uid
+         *
+         * @return string.
+         */
+        function getShopVariationUid();
+
+        /**
+         * Sets shop variation uid
+         *
+         * @param string|null $shop_variation_uid
+         * @return $this
+         */
+        function setShopVariationUid($shopVariationUid);
     }
 ?>

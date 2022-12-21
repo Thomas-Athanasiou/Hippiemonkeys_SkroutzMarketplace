@@ -2,49 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface;
 
     class LineItem
-    extends AbstractDb
+    extends AbstractResource
+    implements LineItemResourceInterface
     {
-        public const
-            FIELD_LOCAL_ID                      = 'id',
-            FIELD_SKROUTZ_ID                    = 'skroutz_id',
-            FIELD_SIZE                          = 'size',
-            FIELD_SHOPUID                       = 'shopuid',
-            FIELD_PRODUCT_NAME                  = 'product_name',
-            FIELD_QUANTITY                      = 'quantity',
-            FIELD_UNIT_PRICE                    = 'unit_price',
-            FIELD_TOTAL_PRICE                   = 'total_price',
-            FIELD_PRICE_INCLUDES_VAT            = 'price_includes_vat',
-            FIELD_EAN                           = 'ean',
-            FIELD_ISLAND_VAT_DISCOUNT_APPLIED   = 'island_vat_discount_applied',
-            FIELD_EXTRA_INFO                    = 'extra_info',
-            FIELD_ORDER_ID                      = 'order_id',
-            FIELD_REJECTION_REASON              = 'rejection_reason',
-            FIELD_RETURN_REASON                 = 'return_reason',
-            FIELD_SERIAL_NUMBERS                = 'serial_numbers',
-            FIELD_SHOP_VARIATION_UID            = 'shop_variation_uid';
-
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzsmartcart_lineitem';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_lineitem';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_LOCAL_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveLineItem(LineItemInterface $lineItem): LineItemResourceInterface
+        {
+            return $this->saveModel($lineItem);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadLineItemById(LineItemInterface $lineItem, $id): LineItemResourceInterface
+        {
+            return $this->loadModelById($lineItem, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteLineItem(LineItemInterface $lineItem): bool
+        {
+            return $this->deleteModel($lineItem);
         }
     }
 ?>

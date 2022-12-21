@@ -2,42 +2,53 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
-    use Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface;
+    use Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface;
 
     interface CustomerRepositoryInterface
     {
         /**
          * Get Customer by local id
          *
+         * @api
+         * @access public
+         *
          * @param int $localId
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
         function getByLocalId(int $localId): CustomerInterface;
 
         /**
          * Get Customer skroutz id
          *
+         * @api
+         * @access public
+         *
          * @param mixed $skroutzId
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
         function getBySkroutzId(string $skroutzId): CustomerInterface;
 
         /**
          * Delete Customer
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface $customer
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer
          *
          * @return bool
          */
@@ -46,8 +57,12 @@
         /**
          * Save Customer
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface $customer
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
         function save(CustomerInterface $customer): CustomerInterface;
     }

@@ -2,26 +2,31 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
-    use Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface;
+    use Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface;
 
     interface AddressRepositoryInterface
     {
         /**
          * Get Address by id
          *
+         * @api
+         * @access public
+         *
          * @param mixed $id
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
         function getById($id): AddressInterface;
 
@@ -29,8 +34,9 @@
          * Delete Address
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface $address
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address
          *
          * @return bool
          */
@@ -40,10 +46,11 @@
          * Save Address
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface $address
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
         function save(AddressInterface $address): AddressInterface;
     }

@@ -2,35 +2,37 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
+
+    use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
     interface RejectionInfoInterface
+    extends ModelInterface
     {
-        /**
-         * Gets ID
-         *
-         * @return mixed.
-         */
-        function getId();
-
         /**
          * Sets ID
          *
          * @param mixed $value
-         * @return \this
+         *
+         * @return mixed
          */
         function setId($id);
 
         /**
          * Gets Reason
+         *
+         * @api
+         * @access public
          *
          * @return string.
          */
@@ -39,13 +41,20 @@
         /**
          * Sets Reason
          *
+         * @api
+         * @access public
+         *
          * @param string $reason
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface
          */
         function setReason(string $reason);
 
         /**
          * Gets Actor
+         *
+         * @api
+         * @access public
          *
          * @return string.
          */
@@ -54,8 +63,12 @@
         /**
          * Sets Actor
          *
+         * @api
+         * @access public
+         *
          * @param string $actor
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface
          */
         function setActor(string $actor);
     }

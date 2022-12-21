@@ -2,18 +2,20 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
-        Hippiemonkeys\SkroutzSmartCart\Api\AddressRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address as ResourceModel;
+    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address as ResourceModel;
 
     class AddressRepository
     implements AddressRepositoryInterface
@@ -21,13 +23,13 @@
         /**
          * Id Index property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface[]
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[]
          */
         protected $_idIndex = [];
 
         /**
-         * @param \Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address $resourceModel
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory $addressFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address $resourceModel
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory $addressFactory
          */
         public function __construct(
             ResourceModel $resourceModel,
@@ -79,14 +81,14 @@
         /**
          * Resource Model property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address
          */
         private $_resourceModel;
 
         /**
          * Gets Resource Model
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address
          */
         protected function getResourceModel(): ResourceModel
         {
@@ -96,14 +98,14 @@
         /**
          * Address Factory property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory
          */
         private $_addressFactory;
 
         /**
          * Gets Address Factory
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterfaceFactory
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory
          */
         protected function getAddressFactory() : AddressInterfaceFactory
         {

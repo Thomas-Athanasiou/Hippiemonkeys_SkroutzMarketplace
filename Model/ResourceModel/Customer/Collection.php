@@ -2,20 +2,22 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Customer;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer;
 
-    use Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerSearchResultInterface as SearchResultInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\Customer as Model,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Customer as ResourceModel,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Collection\AbstractCollection;
+    use Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerSearchResultInterface as SearchResultInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Customer as Model,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer as ResourceModel,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
 
     class Collection
     extends AbstractCollection

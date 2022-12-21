@@ -2,34 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractRelationResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface;
 
     class AcceptOptions
-    extends AbstractDb
+    extends AbstractRelationResource
+    implements AcceptOptionsResourceInterface
     {
-        public const
-            FIELD_ID                = 'id',
-            FIELD_ORDER_ID          = 'order_id',
-            FIELD_NUMBER_OF_PARCELS = 'number_of_parcels',
-            FIELD_PICKUP_LOCATION   = 'pickup_location',
-            FIELD_PICKUP_WINDOW     = 'pickup_window';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_acceptoptions';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_acceptoptions';
 
+        /**
+         * @inheritdoc
+         */
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function saveAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsResourceInterface
+        {
+            return $this->saveModel($acceptOptions);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function loadAcceptOptionsById(AcceptOptionsInterface $acceptOptions, $id): AcceptOptionsResourceInterface
+        {
+            return $this->loadModelById($acceptOptions, $id);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function deleteAcceptOptions(AcceptOptionsInterface $acceptOptions): bool
+        {
+            return $this->deleteModel($acceptOptions);
         }
     }
 ?>

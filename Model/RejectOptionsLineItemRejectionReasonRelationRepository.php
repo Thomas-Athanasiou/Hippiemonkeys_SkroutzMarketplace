@@ -2,26 +2,28 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
 
-        Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
 
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelation as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelation as ResourceModel;
 
     class RejectOptionsLineItemRejectionReasonRelationRepository
     implements RejectOptionsLineItemRejectionReasonRelationRepositoryInterface

@@ -2,21 +2,23 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface;
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface;
 
     interface AcceptOptionsPickupLocationRelationRepositoryInterface
     {
@@ -27,7 +29,7 @@
          *
          * @param mixed $id
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface
          */
         function getById($id): AcceptOptionsPickupLocationRelationInterface;
 
@@ -36,10 +38,10 @@
          *
          * @api
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface $acceptOptions
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface $pickupLocation
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface
          */
         function getByAcceptOptionsAndPickupLocation(AcceptOptionsInterface $acceptOptions, PickupLocationInterface $pickupLocation) : AcceptOptionsPickupLocationRelationInterface;
 
@@ -50,7 +52,7 @@
          *
          * @param \Magento\Framework\Api\SearchCriteriaInterface
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface
          */
         function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupLocationRelationSearchResultInterface;
 
@@ -59,7 +61,7 @@
          *
          * @api
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
          *
          * @return bool
          */
@@ -70,9 +72,9 @@
          *
          * @api
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface
          */
         function save(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation): AcceptOptionsPickupLocationRelationInterface;
     }

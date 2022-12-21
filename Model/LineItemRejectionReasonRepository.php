@@ -2,18 +2,20 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\LineItemRejectionReasonRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\LineItemRejectionReason as ResourceModel;
+    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItemRejectionReason as ResourceModel;
 
     class LineItemRejectionReasonRepository
     implements LineItemRejectionReasonRepositoryInterface

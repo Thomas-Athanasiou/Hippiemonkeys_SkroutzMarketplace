@@ -2,21 +2,23 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
 
-        Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\LineItem as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItem as ResourceModel;
 
     class LineItemRepository
     implements LineItemRepositoryInterface

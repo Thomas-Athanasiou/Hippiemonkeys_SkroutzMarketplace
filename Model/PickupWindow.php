@@ -2,17 +2,19 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Model\AbstractModel,
 
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\PickupWindow as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow as ResourceModel;
 
     class PickupWindow
     extends AbstractModel
@@ -21,21 +23,6 @@
         protected function _construct()
         {
             $this->_init(ResourceModel::class);
-        }
-
-        /**
-         * @inheritdoc
-         */
-        public function getLocalId(): int
-        {
-            return (int) $this->getData(ResourceModel::FIELD_LOCAL_ID);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setLocalId(int $localId)
-        {
-            return $this->setData(ResourceModel::FIELD_LOCAL_ID, (string) $localId);
         }
 
         /**

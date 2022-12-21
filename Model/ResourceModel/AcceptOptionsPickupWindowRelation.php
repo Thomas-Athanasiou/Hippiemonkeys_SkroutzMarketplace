@@ -2,29 +2,29 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface,
+        Magento\Framework\Model\AbstractModel;
 
     class AcceptOptionsPickupWindowRelation
-    extends AbstractDb
+    extends AbstractResource
+    implements AcceptOptionsPickupWindowRelationResourceInterface
     {
-        public const
-            FIELD_ID                = 'id',
-            FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
-            FIELD_PICKUP_WINDOW_ID  = 'pickup_window_id';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_acceptoptionspickupwindow_r';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_acceptoptionspickupwindow_r';
 
         /**
          * @inheritdoc
@@ -38,7 +38,7 @@
         {
             $idField = self::FIELD_ID;
 
-            $acceptOptionsIdField       = self::FIELD_ACCEPT_OPTIONS_ID;
+            $acceptOptionsIdField       = static::FIELD_ACCEPT_OPTIONS_ID;
             $acceptOptionsIdPlaceholder = ':'.$acceptOptionsIdField;
 
             $pickupWindowField          = self::FIELD_PICKUP_WINDOW_ID;
@@ -58,6 +58,30 @@
                 ),
                 $idField
             );
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveAcceptOptionsPickupWindowRelation(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation): AcceptOptionsPickupWindowRelationResourceInterface
+        {
+            return $this->saveModel($acceptOptionsPickupWindowRelation);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadAcceptOptionsPickupWindowRelationById(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation, $id): AcceptOptionsPickupWindowRelationResourceInterface
+        {
+            return $this->loadModelById($acceptOptionsPickupWindowRelation, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteAcceptOptionsPickupWindowRelation(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation): bool
+        {
+            return $this->deleteModel($acceptOptionsPickupWindowRelation);
         }
     }
 ?>

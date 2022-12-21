@@ -2,16 +2,18 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Model\AbstractModel,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Size as ResourceModel,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\SizeInterface;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Size as ResourceModel,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface;
 
     class Size
     extends AbstractModel

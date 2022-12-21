@@ -2,10 +2,10 @@
 <!--
     Thomas Athanasiou at Hippiemonkeys
     Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
-    Hippiemonkeys_SkroutzSmartCart
+    Hippiemonkeys_SkroutzMarketplace
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Hippiemonkeys_SkroutzSmartCart" setup_version="1.0.5" schema_version="1.0.4">
+    <module name="Hippiemonkeys_SkroutzMarketplace" setup_version="1.0.5" schema_version="1.0.4">
         <sequence>
             <module name="Hippiemonkeys_Core"/>
             <module name="Hippiemonkeys_Skroutz" />

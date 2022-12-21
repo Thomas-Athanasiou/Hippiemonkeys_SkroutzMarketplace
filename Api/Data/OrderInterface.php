@@ -2,47 +2,53 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
+
+    use Hippiemonkeys\Core\Api\Data\ModelInterface,
+        Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface;
 
     interface OrderInterface
+    extends ModelInterface
     {
         const
-            STATE_OPEN              = 'open',
-            STATE_ACCEPTED          = 'accepted',
-            STATE_REJECTED          = 'rejected',
-            STATE_CANCELLED         = 'cancelled',
-            STATE_EXPIRED           = 'expired',
-            STATE_DISPATCHED        = 'dispatched',
-            STATE_DELIVERED         = 'delivered',
+            STATE_OPEN = 'open',
+            STATE_ACCEPTED = 'accepted',
+            STATE_REJECTED = 'rejected',
+            STATE_CANCELLED = 'cancelled',
+            STATE_EXPIRED = 'expired',
+            STATE_DISPATCHED = 'dispatched',
+            STATE_DELIVERED = 'delivered',
             STATE_PARTIALY_RETURNED = 'partially_returned',
-            STATE_RETURNED          = 'returned',
-            STATE_FOR_RETURN        = 'for_return';
-
-        /**
-         * Gets ID
-         *
-         * @return mixed.
-         */
-        function getId();
+            STATE_RETURNED = 'returned',
+            STATE_FOR_RETURN = 'for_return';
 
         /**
          * Sets ID
          *
+         * @api
+         * @access public
+         *
          * @param mixed $value
-         * @return \this
+         *
+         * @return mixed
          */
         function setId($id);
 
         /**
          * Gets code
+         *
+         * @api
+         * @access public
          *
          * @return string
          */
@@ -51,13 +57,20 @@
         /**
          * Sets code
          *
+         * @api
+         * @access public
+         *
          * @param string $code
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setCode(string $code);
+        function setCode(string $code): OrderInterface;
 
         /**
          * Gets state
+         *
+         * @api
+         * @access public
          *
          * @return string
          */
@@ -66,13 +79,20 @@
         /**
          * Sets state
          *
+         * @api
+         * @access public
+         *
          * @param string $state
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setState(string $state);
+        function setState(string $state): OrderInterface;
 
         /**
          * Gets invoice
+         *
+         * @api
+         * @access public
          *
          * @return bool
          */
@@ -81,27 +101,42 @@
         /**
          * Sets Invoice
          *
+         * @api
+         * @access public
+         *
          * @param bool $invoice
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setInvoice(bool $invoice);
+        function setInvoice(bool $invoice): OrderInterface;
 
         /**
          * Gets created at
+         *
+         * @api
+         * @access public
          *
          * @return string
          */
         function getCreatedAt(): string;
+
         /**
          * Gets created at
          *
-         * @param string $created_at
-         * @return \this
+         * @api
+         * @access public
+         *
+         * @param string $createdAt
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setCreatedAt(string $createdAt);
+        function setCreatedAt(string $createdAt): OrderInterface;
 
         /**
          * Gets expires at
+         *
+         * @api
+         * @access public
          *
          * @return string
          */
@@ -110,13 +145,20 @@
         /**
          * Gets expires at
          *
-         * @param string $expires_at
-         * @return \this
+         * @api
+         * @access public
+         *
+         * @param string $expiresAt
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setExpiresAt(string $expiresAt);
+        function setExpiresAt(string $expiresAt): OrderInterface;
 
         /**
          * Gets dispatch untill
+         *
+         * @api
+         * @access public
          *
          * @return string
          */
@@ -125,13 +167,20 @@
         /**
          * Sets dispatch untill
          *
+         * @api
+         * @access public
+         *
          * @param string $dispatch_untill
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setDispatchUntil(string $dispatchUntil);
+        function setDispatchUntil(string $dispatchUntil): OrderInterface;
 
         /**
          * Gets courier tracking codes
+         *
+         * @api
+         * @access public
          *
          * @return string[]
          */
@@ -140,153 +189,238 @@
         /**
          * Sets courier tracking codes
          *
+         * @api
+         * @access public
+         *
          * @param string[] $courierTrackingCodes
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setCourierTrackingCodes(array $courierTrackingCodes);
+        function setCourierTrackingCodes(array $courierTrackingCodes): OrderInterface;
 
         /**
          * Sets line items
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemInterface[]
+         *
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[]
          */
         function getLineItems(): array;
 
         /**
          * Sets courier
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemInterface[] $lineItems
-         * @return \this
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $lineItems
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setLineItems(array $lineItems);
+        function setLineItems(array $lineItems): OrderInterface;
 
         /**
          * Gets comments
+         *
+         * @api
+         * @access public
+         *
          * @return string
          */
         function getComments(): string;
 
         /**
          * Sets comments
+         *
+         * @api
+         * @access public
+         *
          * @param string $comment
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setComments(string $comment);
+        function setComments(string $comment): OrderInterface;
 
         /**
          * Gets customer
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface|null
+         *
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface|null
          */
         function getCustomer();
 
         /**
          * Sets customer
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface|null
-         * @return \this
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface|null
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setCustomer( $customer);
+        function setCustomer(?CustomerInterface $customer): OrderInterface;
 
         /**
          * Gets invoice details
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface|null
+         *
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface|null
          */
-        function getInvoiceDetails();
+        function getInvoiceDetails(): ?InvoiceDetailsInterface;
 
         /**
          * Sets invoice details
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface|null $invoiceDetails
-         * @return \this
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface|null $invoiceDetails
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setInvoiceDetails($invoiceDetails);
+        function setInvoiceDetails(?InvoiceDetailsInterface $invoiceDetails): OrderInterface;
 
         /**
          * Sets courier
+         *
+         *
+         * @api
+         * @access public
+         *
          * @return string
          */
         function getCourier(): string;
 
         /**
          * Sets courier
+         *
+         * @api
+         * @access public
+         *
          * @param string $courier
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setCourier(string $courier);
+        function setCourier(string $courier): OrderInterface;
 
         /**
          * Gets courier voucher
          *
+         * @api
+         * @access public
+         *
          * @return string|null
          */
-        function getCourierVoucher();
+        function getCourierVoucher(): ?string;
 
         /**
          * Sets courier voucher
          *
+         * @api
+         * @access public
+         *
          * @param string|null $courierVoucher
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setCourierVoucher($courierVoucher);
+        function setCourierVoucher(?string $courierVoucher): OrderInterface;
 
         /**
          * Gets Rejection Info
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectionInfoInterface|null
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface|null
          */
         function getRejectionInfo(): ?RejectionInfoInterface;
 
         /**
          * Sets Rejection Info
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectionInfoInterface|null $rejectionInfo
-         * @return \this
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface|null $rejectionInfo
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
         function setRejectionInfo(?RejectionInfoInterface $rejectionInfo);
 
         /**
          * Gets accept options
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface|null
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface|null
          */
-        function getAcceptOptions();
+        function getAcceptOptions(): ?AcceptOptionsInterface;
 
         /**
          * Sets accept options
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface|null $acceptOptions
-         * @return \this
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface|null $acceptOptions
+
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setAcceptOptions($acceptOptions);
+        function setAcceptOptions(?AcceptOptionsInterface $acceptOptions): OrderInterface;
 
         /**
          * Gets reject options
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface|null
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface|null
          */
-        function getRejectOptions();
+        function getRejectOptions(): ?RejectOptionsInterface;
 
         /**
          * Sets reject options
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface|null $rejectOptions
-         * @return \this
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface|null $rejectOptions
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setRejectOptions($rejectOptions);
+        function setRejectOptions(?RejectOptionsInterface $rejectOptions): OrderInterface;
 
         /**
          * Gets Magento Order
          *
+         * @api
+         * @access public
+         *
          * @return \Magento\Sales\Api\Data\OrderInterface|null
          */
-        function getMagentoOrder();
+        function getMagentoOrder(): ?MagentoOrderInterface;
 
         /**
          * Sets Magento Order
          *
+         * @api
+         * @access public
+         *
          * @param \Magento\Sales\Api\Data\OrderInterface|null $magentoOrder
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setMagentoOrder($magentoOrder);
+        function setMagentoOrder($magentoOrder): OrderInterface;
 
         /**
          * Gets Express
+         *
+         * @api
+         * @access public
          *
          * @return bool
          */
@@ -295,13 +429,20 @@
         /**
          * Sets Express
          *
+         * @api
+         * @access public
+         *
          * @param bool $express
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setExpress(bool $express);
+        function setExpress(bool $express): OrderInterface;
 
         /**
          * Gets Custom
+         *
+         * @api
+         * @access public
          *
          * @return bool
          */
@@ -310,14 +451,20 @@
         /**
          * Sets Custom
          *
+         * @api
+         * @access public
+         *
          * @param bool $custom
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setCustom(bool $custom);
+        function setCustom(bool $custom): OrderInterface;
 
         /**
          * Gets Gift Wrap
+         *
+         * @api
+         * @access public
          *
          * @return bool
          */
@@ -326,89 +473,122 @@
         /**
          * Sets Gift Wrap
          *
+         * @api
+         * @access public
+         *
          * @param bool $giftWrap
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setGiftWrap(bool $giftWrap);
+        function setGiftWrap(bool $giftWrap): OrderInterface;
 
         /**
          * Gets Fulfilled By Skroutz
          *
+         * @api
+         * @access public
+         *
          * @return bool
          */
-        public function getFulfilledBySkroutz(): bool;
+        function getFulfilledBySkroutz(): bool;
 
         /**
          * Sets Fulfilled By Skroutz
          *
+         * @api
+         * @access public
+         *
          * @param bool $fulfilledBySkroutz
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        public function setFulfilledBySkroutz(bool $fulfilledBySkroutz);
+        function setFulfilledBySkroutz(bool $fulfilledBySkroutz): OrderInterface;
 
         /**
          * Gets Fbs Delivery Note
          *
-         * @return string
+         * @api
+         * @access public
+         *
+         * @return string|null
          */
-        public function getFbsDeliveryNote(): ?string;
+        function getFbsDeliveryNote(): ?string;
 
         /**
          * Sets Fbs Delivery Note
          *
-         * @param string $fbsDeliveryNote
+         * @api
+         * @access public
          *
-         * @return \this
+         * @param string|null $fbsDeliveryNote
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        public function setFbsDeliveryNote(?string $fbsDeliveryNote);
+        function setFbsDeliveryNote(?string $fbsDeliveryNote): OrderInterface;
 
         /**
          * Gets Pickup Window
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderPickupWindowInterface|null
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface|null
          */
-        public function getPickupWindow(): ?OrderPickupWindowInterface;
+        function getPickupWindow(): ?OrderPickupWindowInterface;
 
         /**
          * Sets Pickup Window
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderPickupWindowInterface|null $pickupWindow
+         * @api
+         * @access public
          *
-         * @return \this
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface|null $pickupWindow
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        public function setPickupWindow(?OrderPickupWindowInterface $pickupWindow);
+        function setPickupWindow(?OrderPickupWindowInterface $pickupWindow);
 
         /**
          * Gets Pickup Address
          *
-         * @return string
+         * @api
+         * @access public
+         *
+         * @return string|null
          */
-        public function getPickupAddress(): ?string;
+        function getPickupAddress(): ?string;
 
         /**
          * Sets Pickup Address
          *
-         * @param string $pickupAddress
+         * @api
+         * @access public
          *
-         * @return \this
+         * @param string|null $pickupAddress
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        public function setPickupAddress(?string $pickupAddress);
+        function setPickupAddress(?string $pickupAddress);
 
         /**
          * Gets Number Of Parcels
          *
-         * @return int
+         * @api
+         * @access public
+         *
+         * @return int|null
          */
         function getNumberOfParcels(): ?int;
 
         /**
          * Sets Number Of Parcels
          *
-         * @param int $numberOfParcels
+         * @api
+         * @access public
          *
-         * @return \this
+         * @param int|null $numberOfParcels
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setNumberOfParcels(?int $numberOfParcels);
+        function setNumberOfParcels(?int $numberOfParcels): OrderInterface;
     }
 ?>

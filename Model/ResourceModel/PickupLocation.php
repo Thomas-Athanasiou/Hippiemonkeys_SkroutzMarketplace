@@ -2,35 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface;
 
     class PickupLocation
-    extends AbstractDb
+    extends AbstractResource
+    implements PickupLocationResourceInterface
     {
-        public const
-            FIELD_LOCAL_ID      = 'id',
-            FIELD_SKROUTZ_ID    = 'skroutz_id',
-            FIELD_LABEL         = 'label';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_pickuplocation';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_pickuplocation';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
-            $this->_init(static::TABLE_MAIN, static::FIELD_LOCAL_ID);
+            $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function savePickupLocation(PickupLocationInterface $pickupLocation): PickupLocationResourceInterface
+        {
+            return $this->saveModel($pickupLocation);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadPickupLocationById(PickupLocationInterface $pickupLocation, $id): PickupLocationResourceInterface
+        {
+            return $this->loadModelById($pickupLocation, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deletePickupLocation(PickupLocationInterface $pickupLocation): bool
+        {
+            return $this->deleteModel($pickupLocation);
         }
     }
 ?>

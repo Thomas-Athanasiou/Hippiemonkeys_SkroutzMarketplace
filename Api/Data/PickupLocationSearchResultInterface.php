@@ -2,15 +2,17 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
 
     use Magento\Framework\Api\SearchResultsInterface;
 
@@ -18,17 +20,24 @@
     extends SearchResultsInterface
     {
         /**
-         * Gets collection items.
+         * Gets collection of Pickup Location items
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface[] Array of collection line items.
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] Array of collection line items.
          */
         public function getItems();
 
         /**
-         * Sets collection line items.
+         * Sets collection of Pickup Location items.
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface[] $pickupLocations
-         * @return $this
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] $pickupLocations
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterface
          */
         public function setItems(array $pickupLocations);
     }

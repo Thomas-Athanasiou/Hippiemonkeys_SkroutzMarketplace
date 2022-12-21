@@ -2,37 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface;
 
     class Customer
-    extends AbstractDb
+    extends AbstractResource
+    implements CustomerResourceInterface
     {
-        public const
-            FIELD_LOCAL_ID      = 'id',
-            FIELD_SKROUTZ_ID    = 'skroutz_id',
-            FIELD_FIRST_NAME    = 'first_name',
-            FIELD_LAST_NAME     = 'last_name',
-            FIELD_ADDRESS_ID    = 'address_id';
-
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzsmartcart_customer';
+            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_customer';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_LOCAL_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveCustomer(CustomerInterface $customer): CustomerResourceInterface
+        {
+            return $this->saveModel($customer);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadCustomerById(CustomerInterface $customer, $id): CustomerResourceInterface
+        {
+            return $this->loadModelById($customer, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteCustomer(CustomerInterface $customer): bool
+        {
+            return $this->deleteModel($customer);
         }
     }
 ?>

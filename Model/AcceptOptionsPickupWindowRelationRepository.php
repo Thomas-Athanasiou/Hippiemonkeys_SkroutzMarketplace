@@ -2,26 +2,28 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
 
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptionsPickupWindowRelation as ResourceModel,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupWindowRelation as ResourceModel,
 
-        Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsPickupWindowRelationRepositoryInterface;
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface;
 
     class AcceptOptionsPickupWindowRelationRepository
     implements AcceptOptionsPickupWindowRelationRepositoryInterface

@@ -2,17 +2,19 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
-    use Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface;
+    use Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface;
 
     interface PickupLocationRepositoryInterface
     {
@@ -20,30 +22,21 @@
          * Gets Pickup Location by local id
          *
          * @api
+         * @access public
          *
-         * @param int $localId
+         * @param mixed $id
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface
          */
-        function getByLocalId(int $localId): PickupLocationInterface;
-
-        /**
-         * Gets Pickup Location by skroutz id
-         *
-         * @api
-         *
-         * @param string $skroutzId
-         *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface
-         */
-        function getBySkroutzId(string $skroutzId): PickupLocationInterface;
+        function getById($id): PickupLocationInterface;
 
         /**
          * Deletes the Pickup Location instance from the repository
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface $pickupLocation
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
          *
          * @return bool
          */
@@ -53,10 +46,11 @@
          * Saves the Pickup Location instance to the repository
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface $pickupLocation
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface
          */
         function save(PickupLocationInterface $pickupLocation): PickupLocationInterface;
     }

@@ -2,29 +2,28 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+    Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface,
+    Hippiemonkeys\SkroutzMarketplace\Model\Spi\VatExclusionRepresentativeResourceInterface;
 
     class VatExclusionRepresentative
-    extends AbstractDb
+    extends AbstractResource
+    implements VatExclusionRepresentativeResourceInterface
     {
-        public const
-            FIELD_ID        = 'id',
-            FIELD_ID_TYPE   = 'id_type',
-            FIELD_ID_NUMBER = 'id_number',
-            FIELD_OTP       = 'otp';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_vatexlusionrepresentative';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_vatexlusionrepresentative';
 
         /**
          * @inheritdoc
@@ -32,6 +31,30 @@
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative): VatExclusionRepresentativeResourceInterface
+        {
+            return $this->saveModel($vatExclusionRepresentative);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadVatExclusionRepresentativeById(VatExclusionRepresentativeInterface $vatExclusionRepresentative, $id): VatExclusionRepresentativeResourceInterface
+        {
+            return $this->loadModelById($vatExclusionRepresentative, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative): bool
+        {
+            return $this->deleteModel($vatExclusionRepresentative);
         }
     }
 ?>

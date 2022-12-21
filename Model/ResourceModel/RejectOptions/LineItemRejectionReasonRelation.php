@@ -2,22 +2,24 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptions;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions;
 
     use Magento\Framework\Model\AbstractModel,
         Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\LineItemRejectionReasonRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException;
+        Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class LineItemRejectionReasonRelation
     implements RelationInterface
@@ -27,9 +29,9 @@
             FIELD_PICKUP_WINDOW_ID  = 'line_item_rejection_reason_id';
 
         /**
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository
          *
          */
         public function __construct(

@@ -2,35 +2,63 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface;
 
     class PickupWindow
-    extends AbstractDb
+    extends AbstractResource
+    implements PickupWindowResourceInterface
     {
         public const
-            FIELD_LOCAL_ID      = 'id',
-            FIELD_SKROUTZ_ID    = 'id',
-            FIELD_LABEL         = 'label';
+            FIELD_SKROUTZ_ID = 'id',
+            FIELD_LABEL = 'label';
 
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_pickupwindow';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_pickupwindow';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
-            $this->_init(static::TABLE_MAIN, static::FIELD_LOCAL_ID);
+            $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function savePickupWindow(PickupWindowInterface $pickupWindow): PickupWindowResourceInterface
+        {
+            return $this->saveModel($pickupWindow);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadPickupWindowById(PickupWindowInterface $pickupWindow, $id): PickupWindowResourceInterface
+        {
+            return $this->loadModelById($pickupWindow, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deletePickupWindow(PickupWindowInterface $pickupWindow): bool
+        {
+            return $this->deleteModel($pickupWindow);
         }
     }
 ?>

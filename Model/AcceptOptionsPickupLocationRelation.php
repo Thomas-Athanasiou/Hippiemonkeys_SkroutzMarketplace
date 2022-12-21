@@ -2,67 +2,54 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Registry,
         Magento\Framework\Model\Context,
-        Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\AbstractResource,
-        Magento\Framework\Data\Collection\AbstractDb,
-
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptionsPickupLocationRelation as ResourceModel;
+        Hippiemonkeys\Core\Model\AbstractModel,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupLocationRelation as ResourceModel;
 
     class AcceptOptionsPickupLocationRelation
     extends AbstractModel
     implements AcceptOptionsPickupLocationRelationInterface
     {
-        public const
-            FIELD_ACCEPT_OPTIONS        = 'accept_options',
-            FIELD_PICKUP_LOCATION       = 'pickup_location';
-
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
+        protected const
+            FIELD_ACCEPT_OPTIONS = 'accept_options',
+            FIELD_PICKUP_LOCATION = 'pickup_location';
 
         /**
+         * Constructor
+         *
+         * @access public
+         *
          * @param \Magento\Framework\Model\Context $context
          * @param \Magento\Framework\Registry $registry
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository,
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface $pickupLocationRepository,
-         * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-         * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface $pickupLocationRepository
          * @param array $data
          */
         public function __construct(
             Context $context,
             Registry $registry,
-
             AcceptOptionsRepositoryInterface $acceptOptionsRepository,
             PickupLocationRepositoryInterface $pickupLocationRepository,
-
-            AbstractResource $resource = null,
-            AbstractDb $resourceCollection = null,
             array $data = []
         )
         {
-            parent::__construct(
-                $context,
-                $registry,
-                $resource,
-                $resourceCollection,
-                $data
-            );
+            parent::__construct($context, $registry, $data);
+
             $this->_acceptOptionsRepository     = $acceptOptionsRepository;
             $this->_pickupLocationRepository    = $pickupLocationRepository;
         }
@@ -116,13 +103,20 @@
         }
 
         /**
-         * @var Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
+         * Accept Options Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
          */
         private $_acceptOptionsRepository;
+
         /**
          * Gets Accept Options Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
         protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
@@ -130,13 +124,20 @@
         }
 
         /**
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface $_acceptOptionsRepository
+         * Accept Options Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface $_acceptOptionsRepository
          */
         private $_pickupLocationRepository;
+
         /**
          * Gets Pickup Location Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface
          */
         protected function getPickupLocationRepository(): PickupLocationRepositoryInterface
         {

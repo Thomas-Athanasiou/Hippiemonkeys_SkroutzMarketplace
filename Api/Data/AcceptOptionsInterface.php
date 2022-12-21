@@ -2,35 +2,32 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
+
+    use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
     interface AcceptOptionsInterface
+    extends ModelInterface
     {
-        /**
-         * Gets ID
-         *
-         * @api
-         *
-         * @return mixed.
-         */
-        function getId();
-
         /**
          * Sets ID
          *
          * @api
+         * @access public
          *
          * @param mixed $value
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
          */
         function setId($id);
 
@@ -38,6 +35,7 @@
          * Get number of parcels
          *
          * @api
+         * @access public
          *
          * @return int[]
          */
@@ -47,10 +45,11 @@
          * Set number of parcels
          *
          * @api
+         * @access public
          *
          * @param int[] $numberOfParcels
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
          */
         function setNumberOfParcels(array $numberOfParcels): AcceptOptionsInterface;
 
@@ -58,8 +57,9 @@
          * Get pickup locations
          *
          * @api
+         * @access public
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface[]
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[]
          */
         function getPickupLocation(): array;
 
@@ -67,8 +67,9 @@
          * Set pickup locations
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupLocationInterface[] $pickupLocation
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] $pickupLocation
          *
          * @return \this
          */
@@ -78,8 +79,9 @@
          * Get pickup windows
          *
          * @api
+         * @access public
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface[]
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[]
          */
         function getPickupWindow(): array;
 
@@ -87,10 +89,11 @@
          * Set pickup windows
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\PickupWindowInterface[] $pickupLocation
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $pickupLocation
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
          */
         function setPickupWindow(array $pickupWindow): AcceptOptionsInterface;
 
@@ -98,8 +101,9 @@
          * Get Order
          *
          * @api
+         * @access public
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
         function getOrder(): OrderInterface;
 
@@ -107,10 +111,11 @@
          * Set Order
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface $order
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
          */
         function setOrder(OrderInterface $order): AcceptOptionsInterface;
     }

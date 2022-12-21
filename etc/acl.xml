@@ -2,7 +2,7 @@
 <!--
     Thomas Athanasiou at Hippiemonkeys
     Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
-    Hippiemonkeys_SkroutzSmartCart
+    Hippiemonkeys_SkroutzMarketplace
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
@@ -11,10 +11,10 @@
                 <resource id="Hippiemonkeys_Core::base" title="Hippiemonkeys" sortOrder="10">
                     <resource id="Hippiemonkeys_Core::config" title="Configuration" sortOrder="10">
                         <resource id="Hippiemonkeys_Skroutz::config" title="Skroutz" sortOrder="10">
-                            <resource id="Hippiemonkeys_SkroutzSmartCart::config" title="SkroutzSmartCart" sortOrder="10" />
+                            <resource id="Hippiemonkeys_SkroutzMarketplace::config" title="SkroutzMarketplace" sortOrder="10" />
                         </resource>
                     </resource>
-                    <resource id="Hippiemonkeys_SkroutzSmartCart::orders" title="SkroutzSmartCart" sortOrder="10" />
+                    <resource id="Hippiemonkeys_SkroutzMarketplace::orders" title="SkroutzMarketplace" sortOrder="10" />
                 </resource>
             </resource>
         </resources>

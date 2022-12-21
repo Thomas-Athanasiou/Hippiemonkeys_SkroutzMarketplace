@@ -2,16 +2,18 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Model\AbstractModel,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AddressInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Address as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address as ResourceModel;
 
     class Address
     extends AbstractModel

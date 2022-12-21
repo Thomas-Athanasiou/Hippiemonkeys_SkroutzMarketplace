@@ -2,31 +2,28 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
+
+    use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
     interface AddressInterface
+    extends ModelInterface
     {
-        /**
-         * Gets ID
-         *
-         * @api
-         *
-         * @return mixed.
-         */
-        function getId();
-
         /**
          * Sets ID
          *
          * @api
+         * @access public
          *
          * @param mixed $value
          *
@@ -38,26 +35,29 @@
          * Gets street name
          *
          * @api
+         * @access public
          *
          * @return string
          */
-        function getStreetName() : string;
+        function getStreetName(): string;
 
         /**
          * Sets street name
          *
          * @api
+         * @access public
          *
          * @param string $streetName
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setStreetName(string $streetName);
+        function setStreetName(string $streetName): AddressInterface;
 
         /**
          * Get street number
          *
          * @api
+         * @access public
          *
          * @return string
          */
@@ -67,17 +67,19 @@
          * Set street number
          *
          * @api
+         * @access public
          *
          * @param string $streetNumber
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setStreetNumber(string $streetNumber);
+        function setStreetNumber(string $streetNumber): AddressInterface;
 
         /**
          * Gets zip
          *
          * @api
+         * @access public
          *
          * @return string
          */
@@ -87,17 +89,19 @@
          * Sets zip
          *
          * @api
+         * @access public
          *
          * @param string $zip
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setZip(string $zip);
+        function setZip(string $zip): AddressInterface;
 
         /**
          * Gets city
          *
          * @api
+         * @access public
          *
          * @return string
          */
@@ -107,17 +111,19 @@
          * Sets city
          *
          * @api
+         * @access public
          *
          * @param string $city
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setCity(string $city);
+        function setCity(string $city): AddressInterface;
 
         /**
          * Gets region
          *
          * @api
+         * @access public
          *
          * @return string
          */
@@ -127,17 +133,19 @@
          * Sets region
          *
          * @api
+         * @access public
          *
          * @param string $region
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setRegion(string $region);
+        function setRegion(string $region): AddressInterface;
 
         /**
          * Gets Country Code
          *
          * @api
+         * @access public
          *
          * @return string
          */
@@ -147,17 +155,19 @@
          * Sets Country Code
          *
          * @api
+         * @access public
          *
          * @param string $countryCode
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setCountryCode(string $countryCode);
+        function setCountryCode(string $countryCode): AddressInterface;
 
         /**
          * Gets pickup from collection point
          *
          * @api
+         * @access public
          *
          * @return bool|null
          */
@@ -167,17 +177,19 @@
          * Sets pickup from collection point
          *
          * @api
+         * @access public
          *
          * @param bool|null $pickupFromCollectionPoint
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setPickupFromCollectionPoint($pickupFromCollectionPoint);
+        function setPickupFromCollectionPoint($pickupFromCollectionPoint): AddressInterface;
 
         /**
          * Gets collection point address
          *
          * @api
+         * @access public
          *
          * @return string
          */
@@ -187,11 +199,12 @@
          * Sets collection point address
          *
          * @api
+         * @access public
          *
          * @param string $collectionPointAddress
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setCollectionPointAddress(string $collectionPointAddress);
+        function setCollectionPointAddress(string $collectionPointAddress): AddressInterface;
     }
 ?>

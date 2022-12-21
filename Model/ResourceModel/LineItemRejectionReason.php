@@ -2,36 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface;
 
     class LineItemRejectionReason
-    extends AbstractDb
+    extends AbstractResource
+    implements LineItemRejectionReasonResourceInterface
     {
-        public const
-            FIELD_LOCAL_ID                          = 'id',
-            FIELD_SKROUTZ_ID                        = 'id',
-            FIELD_LABEL                             = 'label',
-            FIELD_REQUIRES_AVAILABILITY_QUANTITY    = 'requires_available_quantity';
-
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzsmartcart_lineitemrejectionreason';
+            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_lineitemrejectionreason';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
-            $this->_init(static::TABLE_MAIN, static::FIELD_LOCAL_ID);
+            $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason): LineItemRejectionReasonResourceInterface
+        {
+            return $this->saveModel($lineItemRejectionReason);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadLineItemRejectionReasonById(LineItemRejectionReasonInterface $lineItemRejectionReason, $id): LineItemRejectionReasonResourceInterface
+        {
+            return $this->loadModelById($lineItemRejectionReason, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason): bool
+        {
+            return $this->deleteModel($lineItemRejectionReason);
         }
     }
 ?>

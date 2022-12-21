@@ -2,72 +2,69 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Model\AbstractModel,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\VatExclusionRepresentative as ResourceModel,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\VatExclusionRepresentativeInterface;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\VatExclusionRepresentativeResourceInterface as ResourceInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface;
 
     class VatExclusionRepresentative
     extends AbstractModel
     implements VatExclusionRepresentativeInterface
     {
         /**
-         * @inheritdoc
-         */
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
-        /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getIdType(): string
         {
-            return $this->getData(ResourceModel::FIELD_ID_TYPE);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setIdType(string $idType)
-        {
-            return $this->setData(ResourceModel::FIELD_ID_TYPE, $idType);
+            return $this->getData(ResourceInterface::FIELD_ID_TYPE);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setIdType(string $idType): VatExclusionRepresentativeInterface
+        {
+            return $this->setData(ResourceInterface::FIELD_ID_TYPE, $idType);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         function getIdNumber(): string
         {
-            return $this->getData(ResourceModel::FIELD_ID_NUMBER);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setIdNumber(string $idNumber)
-        {
-            return $this->setData(ResourceModel::FIELD_ID_NUMBER, $idNumber);
+            return $this->getData(ResourceInterface::FIELD_ID_NUMBER);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setIdNumber(string $idNumber): VatExclusionRepresentativeInterface
+        {
+            return $this->setData(ResourceInterface::FIELD_ID_NUMBER, $idNumber);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getOtp(): string
         {
-            return $this->getData(ResourceModel::FIELD_OTP);
+            return $this->getData(ResourceInterface::FIELD_OTP);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setOtp(string $otp)
+        public function setOtp(string $otp): VatExclusionRepresentativeInterface
         {
-            return $this->setData(ResourceModel::FIELD_OTP, $otp);
+            return $this->setData(ResourceInterface::FIELD_OTP, $otp);
         }
     }
 ?>

@@ -2,12 +2,14 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Model\AbstractModel,
 
@@ -16,9 +18,9 @@
         Magento\Framework\Model\ResourceModel\AbstractResource,
         Magento\Framework\Data\Collection\AbstractDb,
 
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\CustomerInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\AddressRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Customer as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer as ResourceModel;
 
     class Customer
     extends AbstractModel
@@ -143,7 +145,7 @@
         /**
          * Gets Address Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCartWebhook\Api\AddressRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplaceWebhook\Api\AddressRepositoryInterface
          */
         protected function getAddressRepository(): AddressRepositoryInterface
         {

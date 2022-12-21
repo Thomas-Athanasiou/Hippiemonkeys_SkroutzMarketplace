@@ -2,25 +2,30 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
 
     use Magento\Catalog\Api\Data\ProductInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface;
+        Hippiemonkeys\Core\Api\Data\ModelInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface;
 
     interface LineItemInterface
+    extends ModelInterface
     {
         /**
          * Gets ID
          *
          * @api
+         * @access public
          *
          * @return mixed.
          */
@@ -30,6 +35,7 @@
          * Sets ID
          *
          * @api
+         * @access public
          *
          * @param mixed $id
          *
@@ -41,6 +47,7 @@
          * Gets Local ID
          *
          * @api
+         * @access public
          *
          * @return int|null.
          */
@@ -50,6 +57,7 @@
          * Sets Local ID
          *
          * @api
+         * @access public
          *
          * @param int $localId
          *
@@ -61,6 +69,7 @@
          * Gets Skroutz ID
          *
          * @api
+         * @access public
          *
          * @return string.
          */
@@ -70,6 +79,7 @@
          * Sets Skroutz ID
          *
          * @api
+         * @access public
          *
          * @param string $value
          *
@@ -81,6 +91,7 @@
          * Gets Shop Uid
          *
          * @api
+         * @access public
          *
          * @return int
          */
@@ -90,6 +101,7 @@
          * Sets Shop Uid
          *
          * @api
+         * @access public
          *
          * @param string $shopUid
          *
@@ -101,8 +113,9 @@
          * Gets size
          *
          * @api
+         * @access public
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\SizeInterface|null
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface|null
          */
         function getSize();
 
@@ -110,8 +123,9 @@
          * Sets size
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\SizeInterface $size
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface $size
          *
          * @return $this
          */
@@ -121,6 +135,7 @@
          * Gets product name
          *
          * @api
+         * @access public
          *
          * @return string
          */
@@ -130,6 +145,7 @@
          * Sets product name
          *
          * @api
+         * @access public
          *
          * @param string $productName
          *
@@ -141,6 +157,7 @@
          * Gets Quantity
          *
          * @api
+         * @access public
          *
          * @return int
          */
@@ -150,6 +167,7 @@
          * Sets Quantity
          *
          * @api
+         * @access public
          *
          * @param int $quantity
          *
@@ -161,6 +179,7 @@
          * Gets Unit Price
          *
          * @api
+         * @access public
          *
          * @return float
          */
@@ -170,6 +189,7 @@
          * Sets Unit Price
          *
          * @api
+         * @access public
          *
          * @param float $unitPrice
          *
@@ -181,6 +201,7 @@
          * Gets Total Price
          *
          * @api
+         * @access public
          *
          * @return float
          */
@@ -190,6 +211,7 @@
          * Sets Total Price
          *
          * @api
+         * @access public
          *
          * @param float $totalPrice
          *
@@ -201,6 +223,7 @@
          * Gets Price Includes Vat
          *
          * @api
+         * @access public
          *
          * @return bool
          */
@@ -210,6 +233,7 @@
          * Sets Price Includes Vat
          *
          * @api
+         * @access public
          *
          * @param bool $priceIncludesVat
          *
@@ -221,6 +245,7 @@
          * Gets Ean
          *
          * @api
+         * @access public
          *
          * @return string|null
          */
@@ -230,6 +255,7 @@
          * Sets Ean
          *
          * @api
+         * @access public
          *
          * @param string|null $ean
          *
@@ -241,6 +267,7 @@
          * Gets Island Vat Discount Applied
          *
          * @api
+         * @access public
          *
          * @return bool|null
          */
@@ -250,6 +277,7 @@
          * Sets Island Vat Discount Applied
          *
          * @api
+         * @access public
          *
          * @param bool|null $ean
          *
@@ -261,6 +289,7 @@
          * Gets extra info
          *
          * @api
+         * @access public
          *
          * @return string|null
          */
@@ -270,6 +299,7 @@
          * Sets extra info
          *
          * @api
+         * @access public
          *
          * @param string|null $extraInfo
          *
@@ -281,8 +311,9 @@
          * Gets Order
          *
          * @api
+         * @access public
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
         function getOrder() : OrderInterface;
 
@@ -290,8 +321,9 @@
          * Sets order
          *
          * @api
+         * @access public
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface $order
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
          *
          * @return $this
          */
@@ -301,6 +333,7 @@
          * Gets Rejection Reason
          *
          * @api
+         * @access public
          *
          * @return string|null
          */
@@ -310,6 +343,7 @@
          * Sets Rejection Reason
          *
          * @api
+         * @access public
          *
          * @param string|null $rejectionReason
          *
@@ -321,6 +355,7 @@
          * Gets Return Reason
          *
          * @api
+         * @access public
          *
          * @return string|null
          */
@@ -330,6 +365,7 @@
          * Sets Return Reason
          *
          * @api
+         * @access public
          *
          * @param string|null $returnReason
          *
@@ -341,6 +377,7 @@
          * Gets Serial Number
          *
          * @api
+         * @access public
          *
          * @return string|null
          */
@@ -350,6 +387,7 @@
          * Sets Serial Number
          *
          * @api
+         * @access public
          *
          * @param string|null $serialNumbers
          *
@@ -361,6 +399,7 @@
          * Gets Ean
          *
          * @api
+         * @access public
          *
          * @return \Magento\Catalog\Api\Data\ProductInterface
          */
@@ -370,6 +409,7 @@
          * Sets Ean
          *
          * @api
+         * @access public
          *
          * @param \Magento\Catalog\Api\Data\ProductInterface $product
          *
@@ -380,12 +420,18 @@
         /**
          * Gets shop variation uid
          *
+         * @api
+         * @access public
+         *
          * @return string.
          */
         function getShopVariationUid();
 
         /**
          * Sets shop variation uid
+         *
+         * @api
+         * @access public
          *
          * @param string|null $shop_variation_uid
          * @return $this

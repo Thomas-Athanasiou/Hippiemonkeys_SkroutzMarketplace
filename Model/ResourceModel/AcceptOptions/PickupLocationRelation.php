@@ -2,22 +2,24 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\AcceptOptions;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions;
 
     use Magento\Framework\Model\AbstractModel,
         Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsPickupLocationRelationRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException;
+        Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class PickupLocationRelation
     implements RelationInterface
@@ -83,14 +85,14 @@
         }
 
         /**
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface
          */
         private $_pickupLocationRepository;
 
         /**
          * Gets Pickup Location Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\PickupLocationRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface
          */
         protected function getPickupLocationRepository(): PickupLocationRepositoryInterface
         {

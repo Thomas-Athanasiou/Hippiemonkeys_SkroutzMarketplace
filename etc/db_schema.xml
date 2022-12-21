@@ -2,92 +2,92 @@
 <!--
     Thomas Athanasiou at Hippiemonkeys
     Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
-    Hippiemonkeys_SkroutzSmartCart
+    Hippiemonkeys_SkroutzMarketplace
 -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="hippiemonkeys_skroutzsmartcart_acceptoptions" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Accept Options">
+    <table name="hippiemonkeys_skroutzMarketplace_acceptoptions" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Accept Options">
         <column xsi:type="int" name="id" nullable="false" unsigned="true" identity="true" comment="ID" />
         <column xsi:type="int" name="order_id" nullable="false" unsigned="true" comment="Order ID" />
         <column xsi:type="int" name="number_of_parcels" nullable="false" unsigned="true" comment="Number Of Parcels" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTION_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTION_ID_PK">
             <column name="id" />
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONS_ORDER_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_acceptoptions"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONS_ORDER_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_acceptoptions"
             column="order_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_order"
+            referenceTable="hippiemonkeys_skroutzMarketplace_order"
             referenceColumn="id"
             onDelete="CASCADE"
         />
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTION_ORDER_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTION_ORDER_ID_UN">
             <column name="order_id"/>
         </constraint>
     </table>
     <!-- The name ends with "r" instead of "relation" because of an error -->
-    <table name="hippiemonkeys_skroutzsmartcart_acceptoptionspickuplocation_r" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Accept Options and Pickup Location Relation">
+    <table name="hippiemonkeys_skroutzMarketplace_acceptoptionspickuplocation_r" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Accept Options and Pickup Location Relation">
         <column xsi:type="int" name="id" nullable="false" unsigned="true" identity="true" comment="ID" />
         <column xsi:type="int" name="pickup_location_id" nullable="false" unsigned="true" comment="Pickup Location ID" />
         <column xsi:type="int" name="accept_options_id" nullable="false" unsigned="true" comment="Accept Options ID" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONPICKUPLOCATION_R_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONPICKUPLOCATION_R_ID_PK">
             <column name="id" />
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONSPICKUPLOCATIONRELATION_ACCEPTOPTIONS_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_acceptoptionspickuplocation_r"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONSPICKUPLOCATIONRELATION_ACCEPTOPTIONS_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_acceptoptionspickuplocation_r"
             column="accept_options_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_acceptoptions"
+            referenceTable="hippiemonkeys_skroutzMarketplace_acceptoptions"
             referenceColumn="id"
             onDelete="CASCADE"
         />
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONSPICKUPLOCATIONRELATION_PICKUPLOCATION_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_acceptoptionspickuplocation_r"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONSPICKUPLOCATIONRELATION_PICKUPLOCATION_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_acceptoptionspickuplocation_r"
             column="pickup_location_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_pickuplocation"
+            referenceTable="hippiemonkeys_skroutzMarketplace_pickuplocation"
             referenceColumn="id"
             onDelete="CASCADE"
         />
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONPICKUPLOCATION_R_ACCEPT_OPTIONS_ID_PICKUP_LOCATION_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONPICKUPLOCATION_R_ACCEPT_OPTIONS_ID_PICKUP_LOCATION_ID_UN">
             <column name="accept_options_id"/>
             <column name="pickup_location_id"/>
         </constraint>
     </table>
     <!-- The name ends with "r" instead of "relation" because of an error -->
-    <table name="hippiemonkeys_skroutzsmartcart_acceptoptionspickupwindow_r" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Accept Options and Pickup Window Relation">
+    <table name="hippiemonkeys_skroutzMarketplace_acceptoptionspickupwindow_r" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Accept Options and Pickup Window Relation">
         <column xsi:type="int" name="id" nullable="false" unsigned="true" identity="true" comment="ID" />
         <column xsi:type="int" name="pickup_window_id" nullable="false" unsigned="true" comment="Pickup Window ID" />
         <column xsi:type="int" name="accept_options_id" nullable="false" unsigned="true" comment="Accept Options ID" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONPICKUPWINDOW_R_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONPICKUPWINDOW_R_ID_PK">
             <column name="id" />
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONSPICKUPWINDOWRELATION_ACCEPTOPTIONS_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_acceptoptionspickupwindow_r"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONSPICKUPWINDOWRELATION_ACCEPTOPTIONS_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_acceptoptionspickupwindow_r"
             column="accept_options_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_acceptoptions"
+            referenceTable="hippiemonkeys_skroutzMarketplace_acceptoptions"
             referenceColumn="id"
             onDelete="CASCADE"
         />
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONSPICKUPLOCATIONRELATION_PICKUPLOCATION_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_acceptoptionspickupwindow_r"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONSPICKUPLOCATIONRELATION_PICKUPLOCATION_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_acceptoptionspickupwindow_r"
             column="pickup_window_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_pickupwindow"
+            referenceTable="hippiemonkeys_skroutzMarketplace_pickupwindow"
             referenceColumn="id"
             onDelete="CASCADE"
         />
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONPICKUPWINDOW_R_ACCEPT_OPTIONS_ID_PICKUP_WINDOW_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONPICKUPWINDOW_R_ACCEPT_OPTIONS_ID_PICKUP_WINDOW_ID_UN">
             <column name="accept_options_id"/>
             <column name="pickup_window_id"/>
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_address" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Address">
+    <table name="hippiemonkeys_skroutzMarketplace_address" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Address">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="street_name" length="64" nullable="false" comment="Street Name" />
         <column xsi:type="int" name="street_number" unsigned="true" nullable="false" comment="Street Number" />
@@ -97,33 +97,33 @@
         <column xsi:type="smallint" name="pickup_from_collection_point" unsigned="true" nullable="true" comment="Pickup From Collection Point" />
         <column xsi:type="varchar" name="collection_point_address" length="64" nullable="true" comment="Collection Point Address" />
         <column xsi:type="varchar" name="country_code" length="8" nullable="true" comment="Country Code" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ADDRESS_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ADDRESS_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_customer" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Customer">
+    <table name="hippiemonkeys_skroutzMarketplace_customer" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Customer">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="first_name" length="64" nullable="false" comment="First Name" />
         <column xsi:type="varchar" name="last_name" length="64" nullable="false" comment="Last Name" />
         <column xsi:type="int" name="address_id" unsigned="true" nullable="true" comment="Address ID" />
         <column xsi:type="varchar" name="skroutz_id" length="64" nullable="false" comment="Skroutz ID" />
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_CUSTOMER_SKROUTZ_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_CUSTOMER_SKROUTZ_ID_UN">
             <column name="skroutz_id"/>
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_CUSTOMER_ADDRESS_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_customer"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_CUSTOMER_ADDRESS_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_customer"
             column="address_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_address"
+            referenceTable="hippiemonkeys_skroutzMarketplace_address"
             referenceColumn="id"
             onDelete="SET NULL"
         />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_CUSTOMER_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_CUSTOMER_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_invoicedetails" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Invoice Details">
+    <table name="hippiemonkeys_skroutzMarketplace_invoicedetails" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Invoice Details">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="company" length="64" nullable="false" comment="Company" />
         <column xsi:type="varchar" name="profession" length="64" nullable="false" comment="Profession" />
@@ -134,18 +134,18 @@
         <column xsi:type="int" name="vat_exclusion_representative_id" unsigned="true" nullable="true" comment="VAT Exclusion Representative ID" />
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_INVOICEDETALS_ADDRESS_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_customer"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_INVOICEDETALS_ADDRESS_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_customer"
             column="address_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_address"
+            referenceTable="hippiemonkeys_skroutzMarketplace_address"
             referenceColumn="id"
             onDelete="SET NULL"
         />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_CUSTOMER_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_CUSTOMER_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_lineitem" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Line Item">
+    <table name="hippiemonkeys_skroutzMarketplace_lineitem" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Line Item">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="skroutz_id" length="64" nullable="false" comment="Skroutz ID" />
         <column xsi:type="int" name="shopuid" unsigned="true" nullable="false" comment="ShopUid" />
@@ -161,22 +161,22 @@
         <column xsi:type="varchar" name="return_reason" length="32" nullable="true" comment="Return Reason" />
         <column xsi:type="varchar" name="serial_numbers" length="128" nullable="true" comment="Serial Numbers" />
         <column xsi:type="varchar" name="shop_variation_uid" length="64" nullable="true" comment="Shop Variation Uid" />
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_LINEITEM_SKROUTZ_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_LINEITEM_SKROUTZ_ID_UN">
             <column name="skroutz_id"/>
         </constraint>
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_LINEITEM_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_LINEITEM_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_lineitemrejectionreason" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Line Item Rejection Reason">
+    <table name="hippiemonkeys_skroutzMarketplace_lineitemrejectionreason" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Line Item Rejection Reason">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="label" length="64" nullable="false" comment="Label" />
         <column xsi:type="smallint" name="requires_available_quantity" unsigned="true" nullable="false" comment="Requires Availability Quantity" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_LINEITEMREJECTIONREASON_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_LINEITEMREJECTIONREASON_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_order" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Order">
+    <table name="hippiemonkeys_skroutzMarketplace_order" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Order">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" length="64" name="code" nullable="false" comment="Code" />
         <column xsi:type="varchar" length="32" name="state" nullable="false" comment="State" />
@@ -197,106 +197,106 @@
         <column xsi:type="varchar" length="256" name="fbs_delivery_note" nullable="true" comment="Fbs Delivery Note" />
         <column xsi:type="varchar" length="256" name="pickup_address" nullable="true" comment="Pickup Address" />
         <column xsi:type="int" unsigned="true" name="number_of_parcels" nullable="true" comment="Number Of Parcels" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ORDER_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ORDER_ID_PK">
             <column name="id" />
         </constraint>
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART)_ORDER_CODE_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace)_ORDER_CODE_UN">
             <column name="code"/>
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_ACCEPTOPTIONSPICKUPLOCATIONRELATION_PICKUPLOCATION_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_order"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_ACCEPTOPTIONSPICKUPLOCATIONRELATION_PICKUPLOCATION_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_order"
             column="customer_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_customer"
+            referenceTable="hippiemonkeys_skroutzMarketplace_customer"
             referenceColumn="id"
             onDelete="SET NULL"
         />
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_pickuplocation" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Pickup Location">
+    <table name="hippiemonkeys_skroutzMarketplace_pickuplocation" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Pickup Location">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="label" length="64" nullable="false" comment="Label" />
         <column xsi:type="varchar" name="skroutz_id" length="64" nullable="false" comment="Skroutz ID" />
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_PICKUPLOCATION_SKROUTZ_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_PICKUPLOCATION_SKROUTZ_ID_UN">
             <column name="skroutz_id"/>
         </constraint>
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_PICKUPLOCATION_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_PICKUPLOCATION_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_pickupwindow" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Pickup Window">
+    <table name="hippiemonkeys_skroutzMarketplace_pickupwindow" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Pickup Window">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="label" length="64" nullable="false" comment="Label" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_PICKUPWINDOW_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_PICKUPWINDOW_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_rejectoptions" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Reject Options">
+    <table name="hippiemonkeys_skroutzMarketplace_rejectoptions" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Reject Options">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="int" name="order_id" nullable="false" unsigned="true" comment="Order ID" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_REJECTOPTIONS_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_REJECTOPTIONS_ID_PK">
             <column name="id" />
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_REJECTOPTIONS_ORDER_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_rejectoptions"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_REJECTOPTIONS_ORDER_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_rejectoptions"
             column="order_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_order"
+            referenceTable="hippiemonkeys_skroutzMarketplace_order"
             referenceColumn="id"
             onDelete="CASCADE"
         />
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_REJECTOPTION_ORDER_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_REJECTOPTION_ORDER_ID_UN">
             <column name="order_id"/>
         </constraint>
     </table>
     <!-- The name ends with "lirr_r" instead of "lineiemrejectionreason_r" because of an error -->
-    <table name="hippiemonkeys_skroutzsmartcart_rejectoptionslirr_r" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Reject Options">
+    <table name="hippiemonkeys_skroutzMarketplace_rejectoptionslirr_r" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Reject Options">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="int" name="reject_options_id" unsigned="true" nullable="false" comment="ID" />
         <column xsi:type="int" name="line_item_rejection_reason_id" unsigned="true" nullable="false" comment="ID" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_REJECTOPTIONSLINEITEMREJECTIONREASON_R_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_REJECTOPTIONSLINEITEMREJECTIONREASON_R_ID_PK">
             <column name="id" />
         </constraint>
-        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_REJECTOPTIONPICKUPWINDOW_R_REJECT_OPTIONS_ID_LINE_ITEM_REJECTION_REASON_ID_UN">
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_REJECTOPTIONPICKUPWINDOW_R_REJECT_OPTIONS_ID_LINE_ITEM_REJECTION_REASON_ID_UN">
             <column name="reject_options_id"/>
             <column name="line_item_rejection_reason_id"/>
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_REJECTOPTIONSLINEITEMREJECTIONREASON_R_LINEITEMREJECTIONREASON_LINE_ITEM_REJECTION_REASON_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_rejectoptionslirr_r"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_REJECTOPTIONSLINEITEMREJECTIONREASON_R_LINEITEMREJECTIONREASON_LINE_ITEM_REJECTION_REASON_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_rejectoptionslirr_r"
             column="line_item_rejection_reason_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_lineitemrejectionreason"
+            referenceTable="hippiemonkeys_skroutzMarketplace_lineitemrejectionreason"
             referenceColumn="id"
             onDelete="CASCADE"
         />
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_REJECTOPTIONSREJECTOPTIONS_R_REJECTOPTIONS_REJECT_OPTIONS_ID_FK"
-            table="hippiemonkeys_skroutzsmartcart_rejectoptionslirr_r"
+            referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_REJECTOPTIONSREJECTOPTIONS_R_REJECTOPTIONS_REJECT_OPTIONS_ID_FK"
+            table="hippiemonkeys_skroutzMarketplace_rejectoptionslirr_r"
             column="reject_options_id"
-            referenceTable="hippiemonkeys_skroutzsmartcart_rejectoptions"
+            referenceTable="hippiemonkeys_skroutzMarketplace_rejectoptions"
             referenceColumn="id"
             onDelete="CASCADE"
         />
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_size" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Size">
+    <table name="hippiemonkeys_skroutzMarketplace_size" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Size">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="label" length="64" nullable="false" comment="Label" />
         <column xsi:type="varchar" name="value" length="64" nullable="false" comment="Value" />
         <column xsi:type="varchar" name="shop_value" length="64" nullable="false" comment="Shop Value" />
         <column xsi:type="varchar" name="shop_variation_uid" length="64" nullable="false" comment="Shop Variation Uid" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_SIZE_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_SIZE_ID_PK">
             <column name="id" />
         </constraint>
     </table>
-    <table name="hippiemonkeys_skroutzsmartcart_vatexclusionrepresentative" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Vat Exclusion Representative">
+    <table name="hippiemonkeys_skroutzMarketplace_vatexclusionrepresentative" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Smart Cart - Vat Exclusion Representative">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
         <column xsi:type="varchar" name="id_type" length="64" nullable="false" comment="ID Type" />
         <column xsi:type="varchar" name="id_number" length="64" nullable="false" comment="ID Number" />
         <column xsi:type="varchar" name="otp" length="64" nullable="false" comment="Otp" />
-        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZSMARTCART_VATEXCLUSIONREPRESENTATIVE_ID_PK">
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMarketplace_VATEXCLUSIONREPRESENTATIVE_ID_PK">
             <column name="id" />
         </constraint>
     </table>

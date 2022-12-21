@@ -2,35 +2,40 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
+
+    use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
     interface OrderPickupWindowInterface
+    extends ModelInterface
     {
-        /**
-         * Gets ID
-         *
-         * @return mixed.
-         */
-        function getId();
-
         /**
          * Sets ID
          *
+         * @api
+         * @access public
+         *
          * @param mixed $id
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface
          */
         function setId($id);
 
         /**
          * Gets From
+         *
+         * @api
+         * @access public
          *
          * @return string
          */
@@ -39,13 +44,20 @@
         /**
          * Sets From
          *
+         * @api
+         * @access public
+         *
          * @param string $from
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface
          */
-        function setFrom(string $from);
+        function setFrom(string $from): OrderPickupWindowInterface;
 
         /**
          * Gets To
+         *
+         * @api
+         * @access public
          *
          * @return string
          */
@@ -54,9 +66,13 @@
         /**
          * Sets To
          *
+         * @api
+         * @access public
+         *
          * @param string $to
-         * @return \this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface
          */
-        function setTo(string $to);
+        function setTo(string $to): OrderPickupWindowInterface;
     }
 ?>

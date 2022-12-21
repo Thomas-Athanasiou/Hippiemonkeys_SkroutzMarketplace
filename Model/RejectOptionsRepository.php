@@ -2,19 +2,21 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
-        Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptions as ResourceModel;
+    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions as ResourceModel;
 
     class RejectOptionsRepository
     implements RejectOptionsRepositoryInterface

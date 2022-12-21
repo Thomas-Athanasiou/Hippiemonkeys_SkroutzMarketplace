@@ -2,12 +2,14 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Registry,
         Magento\Framework\Model\Context,
@@ -15,12 +17,12 @@
         Magento\Framework\Model\ResourceModel\AbstractResource,
         Magento\Framework\Data\Collection\AbstractDb,
 
-        Hippiemonkeys\SkroutzSmartCart\Api\LineItemRejectionReasonRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\OrderRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\RejectOptions as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions as ResourceModel;
 
     class RejectOptions
     extends AbstractModel

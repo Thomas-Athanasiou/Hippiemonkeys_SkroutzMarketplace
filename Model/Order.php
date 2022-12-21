@@ -2,15 +2,17 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Api\SearchCriteriaBuilderFactory,
         Magento\Framework\Registry,
@@ -19,15 +21,15 @@
         Magento\Framework\Model\Context,
         Magento\Framework\Model\ResourceModel\AbstractResource,
         Magento\Sales\Api\OrderRepositoryInterface as MagentoOrderRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\OrderPickupWindowInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectionInfoInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order as ResourceModel;
 
     class Order
     extends AbstractModel
@@ -50,11 +52,11 @@
         /**
          * @param \Magento\Framework\Model\Context $context
          * @param \Magento\Framework\Registry $registry
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface $customerRepository
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface $invoiceDetailsRepository
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface $lineItemRepository
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface $rejectOptionsRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface $customerRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface $invoiceDetailsRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $lineItemRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface $rejectOptionsRepository
          * @param \Magento\Sales\Api\OrderRepositoryInterface $magentoOrderRepository
          * @param \Magento\Framework\Api\SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
          * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
@@ -563,14 +565,14 @@
         /**
          * Customer Repository property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface $_customerRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface $_customerRepository
          */
         private $_customerRepository;
 
         /**
          * Gets Customer Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\CustomerRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface
          */
         protected function getCustomerRepository(): CustomerRepositoryInterface
         {
@@ -580,14 +582,14 @@
         /**
          * Invoice Details property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface $_invoiceDetailsRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface $_invoiceDetailsRepository
          */
         private $_invoiceDetailsRepository;
 
         /**
          * Gets Invoice Details
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface
          */
         protected function getInvoiceDetailsRepository(): InvoiceDetailsRepositoryInterface
         {
@@ -597,14 +599,14 @@
         /**
          * Line Item Repository property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface $_lineItemRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $_lineItemRepository
          */
         private $_lineItemRepository;
 
         /**
          * Gets Line Item Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\LineItemRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface
          */
         protected function getLineItemRepository(): LineItemRepositoryInterface
         {
@@ -614,14 +616,14 @@
         /**
          * Accept Options Repository property
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
          */
         private $_acceptOptionsRepository;
 
         /**
          * Gets Accept Options Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
         protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
@@ -631,14 +633,14 @@
         /**
          * Reject Options Repository property
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface $_rejectOptionsRepository
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface $_rejectOptionsRepository
          */
         private $_rejectOptionsRepository;
 
         /**
          * Gets Reject Options Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
         protected function getRejectOptionsRepository(): RejectOptionsRepositoryInterface
         {

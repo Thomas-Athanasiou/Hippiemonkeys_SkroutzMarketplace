@@ -2,35 +2,63 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderPickupWindowResourceInterface;
 
     class OrderPickupWindow
-    extends AbstractDb
+    extends AbstractResource
+    implements OrderPickupWindowResourceInterface
     {
         public const
-            FIELD_ID    = 'id',
             FIELD_FROM  = 'from',
             FIELD_TO    = 'to';
 
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_orderpickupwindow';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_orderpickupwindow';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveOrderPickupWindow(OrderPickupWindowInterface $orderPickupWindow): OrderPickupWindowResourceInterface
+        {
+            return $this->saveModel($orderPickupWindow);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadOrderPickupWindowById(OrderPickupWindowInterface $orderPickupWindow, $id): OrderPickupWindowResourceInterface
+        {
+            return $this->loadModelById($orderPickupWindow, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteOrderPickupWindow(OrderPickupWindowInterface $orderPickupWindow): bool
+        {
+            return $this->deleteModel($orderPickupWindow);
         }
     }
 ?>

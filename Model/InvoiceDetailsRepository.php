@@ -2,18 +2,20 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
-    namespace Hippiemonkeys\SkroutzSmartCart\Model;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException,
-        Hippiemonkeys\SkroutzSmartCart\Api\InvoiceDetailsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\Data\InvoiceDetailsInterfaceFactory,
-        Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\InvoiceDetails as ResourceModel;
+    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails as ResourceModel;
 
     class InvoiceDetailsRepository
     implements InvoiceDetailsRepositoryInterface

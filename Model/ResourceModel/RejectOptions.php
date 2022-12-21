@@ -2,34 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\VersionControl\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractRelationResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface;
 
     class RejectOptions
-    extends AbstractDb
+    extends AbstractRelationResource
+    implements RejectOptionsResourceInterface
     {
-        public const
-            FIELD_ID        = 'id',
-            FIELD_ORDER_ID  = 'order_id';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_rejectoptions';
+            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_rejectoptions';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveRejectOptions(RejectOptionsInterface $rejectOptions): RejectOptionsResourceInterface
+        {
+            return $this->saveModel($rejectOptions);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadRejectOptionsById(RejectOptionsInterface $rejectOptions, $id): RejectOptionsResourceInterface
+        {
+            return $this->loadModelById($rejectOptions, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteRejectOptions(RejectOptionsInterface $rejectOptions): bool
+        {
+            return $this->deleteModel($rejectOptions);
         }
     }
 ?>

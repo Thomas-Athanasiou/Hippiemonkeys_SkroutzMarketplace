@@ -2,26 +2,28 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order;
 
     use Magento\Framework\Model\AbstractModel,
         Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException;
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class RejectOptionsRelation
     implements RelationInterface
     {
         /**
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
         public function __construct(
             RejectOptionsRepositoryInterface $rejectOptionsRepository
@@ -69,14 +71,14 @@
         /**
          * Reject Options Repository property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
         private $_rejectOptionsRepository;
 
         /**
          * Gets Reject Options Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\RejectOptionsRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
         protected function getRejectOptionsRepository()
         {

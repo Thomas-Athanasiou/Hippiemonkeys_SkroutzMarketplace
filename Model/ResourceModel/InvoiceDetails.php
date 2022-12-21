@@ -2,40 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface;
 
     class InvoiceDetails
-    extends AbstractDb
+    extends AbstractResource
+    implements InvoiceDetailsResourceInterface
     {
-        public const
-            FIELD_ID                                = 'id',
-            FIELD_COMPANY                           = 'company',
-            FIELD_PROFESSION                        = 'profession',
-            FIELD_DOY                               = 'doy',
-            FIELD_VAT_NUMBER                        = 'vat_number',
-            FIELD_VAT_EXCLUSION_REQUESTED           = 'vat_exclusion_requested',
-            FIELD_ADDRESS_ID                        = 'address_id',
-            FIELD_VAT_EXCLUSION_REPRESENTATIVE_ID   = 'vat_exclusion_representative_id';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_invoicedetails';
+            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_invoicedetails';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveInvoiceDetails(InvoiceDetailsInterface $invoiceDetails): InvoiceDetailsResourceInterface
+        {
+            return $this->saveModel($invoiceDetails);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadInvoiceDetailsById(InvoiceDetailsInterface $invoiceDetails, $id): InvoiceDetailsResourceInterface
+        {
+            return $this->loadModelById($invoiceDetails, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteInvoiceDetails(InvoiceDetailsInterface $invoiceDetails): bool
+        {
+            return $this->deleteModel($invoiceDetails);
         }
     }
 ?>

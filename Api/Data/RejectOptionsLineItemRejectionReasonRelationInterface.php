@@ -2,60 +2,76 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
+
+    use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
     interface RejectOptionsLineItemRejectionReasonRelationInterface
+    extends ModelInterface
     {
-        /**
-         * Gets ID
-         *
-         * @return mixed.
-         */
-        function getId();
-
         /**
          * Sets ID
          *
+         * @api
+         * @access public
+         *
          * @param mixed $value
-         * @return $this
+         *
+         * @return mixed
          */
         function setId($id);
 
         /**
          * Gets Reject Options
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface.
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface.
          */
         function getRejectOptions(): RejectOptionsInterface;
 
         /**
          * Sets Reject Options
          *
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\Data\RejectOptionsInterface $value
-         * @return $this
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $value
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface
          */
         function setRejectOptions(RejectOptionsInterface  $rejectOptions);
 
         /**
          * Gets Line Item Rejection Reason
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface.
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface.
          */
         function getLineItemRejectionReason(): LineItemRejectionReasonInterface;
 
         /**
          * Sets Line Item Rejection Reason
          *
-         * @param Hippiemonkeys\SkroutzSmartCart\Api\Data\LineItemRejectionReasonInterface $value
-         * @return $this
+         * @api
+         * @access public
+         *
+         * @param Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface $value
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface
          */
         function setLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason);
     }

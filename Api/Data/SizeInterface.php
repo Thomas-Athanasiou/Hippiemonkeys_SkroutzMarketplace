@@ -2,87 +2,120 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Api\Data;
+    namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
+
+    use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
     interface SizeInterface
+    extends ModelInterface
     {
-        /**
-         * Gets ID
-         *
-         * @return mixed.
-         */
-        function getId();
         /**
          * Sets ID
          *
+         * @api
+         * @access public
+         *
          * @param mixed $value
-         * @return $this
+         *
+         * @return mixed
          */
         function setId($id);
 
         /**
          * Gets Label
          *
+         * @api
+         * @access public
+         *
          * @return string.
          */
-        function getLabel();
+        function getLabel(): string;
+
         /**
          * Sets Label
          *
+         * @api
+         * @access public
+         *
          * @param string $label
-         * @return $this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
          */
-        function setLabel($label);
+        function setLabel(string $label): SizeInterface;
 
         /**
          * Gets Value
          *
+         * @api
+         * @access public
+         *
          * @return string.
          */
-        function getValue();
+        function getValue(): string;
+
         /**
          * Sets Value
          *
-         * @param string $value
-         * @return $this
+         * @api
+         * @access public
+         *
+         * @param string|null $value
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
          */
-        function setValue($value);
+        function setValue(string $value): SizeInterface;
 
         /**
          * Gets shop value
          *
-         * @return string.
+         * @api
+         * @access public
+         *
+         * @return string|null.
          */
-        function getShopValue();
+        function getShopValue(): ?string;
+
         /**
          * Sets shop value
          *
-         * @param string|null $shop_value
-         * @return $this
+         * @api
+         * @access public
+         *
+         * @param string|null $shopValue
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
          */
-        function setShopValue($shopValue);
+        function setShopValue(?string $shopValue): SizeInterface;
 
         /**
          * Gets shop variation uid
          *
-         * @return string.
+         * @api
+         * @access public
+         *
+         * @return string|null
          */
-        function getShopVariationUid();
+        function getShopVariationUid(): ?string;
 
         /**
          * Sets shop variation uid
          *
-         * @param string|null $shop_variation_uid
-         * @return $this
+         * @api
+         * @access public
+         *
+         * @param string|null $shopVariationUid
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
          */
-        function setShopVariationUid($shopVariationUid);
+        function setShopVariationUid(?string $shopVariationUid): SizeInterface;
     }
 ?>

@@ -2,30 +2,28 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\SizeResourceInterface;
 
     class Size
-    extends AbstractDb
+    extends AbstractResource
+    implements SizeResourceInterface
     {
-        public const
-            FIELD_ID                    = 'id',
-            FIELD_LABEL                 = 'label',
-            FIELD_VALUE                 = 'value',
-            FIELD_SHOP_VALUE            = 'shop_value',
-            FIELD_SHOP_VARIATION_UID    = 'shop_variation_uid';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_size';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_size';
 
         /**
          * @inheritdoc
@@ -33,6 +31,30 @@
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveSize(SizeInterface $size): SizeResourceInterface
+        {
+            return $this->saveModel($size);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadSizeById(SizeInterface $size, $id): SizeResourceInterface
+        {
+            return $this->loadModelById($size, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteSize(SizeInterface $size): bool
+        {
+            return $this->deleteModel($size);
         }
     }
 ?>

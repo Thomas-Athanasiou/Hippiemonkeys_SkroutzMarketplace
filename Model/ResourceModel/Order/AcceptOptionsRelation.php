@@ -2,26 +2,28 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel\Order;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order;
 
     use Magento\Framework\Model\AbstractModel,
         Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
-        Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface,
-        Hippiemonkeys\SkroutzSmartCart\Exception\NoSuchEntityException;
+        Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class AcceptOptionsRelation
     implements RelationInterface
     {
         /**
-         * @param \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
          */
         public function __construct(
             AcceptOptionsRepositoryInterface $acceptOptionsRepository
@@ -70,14 +72,14 @@
         /**
          * Accept Options Repository property
          *
-         * @var \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
         private $_acceptOptionsRepository;
 
         /**
          * Gets Accept Options Repository
          *
-         * @return \Hippiemonkeys\SkroutzSmartCart\Api\AcceptOptionsRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
         protected function getAcceptOptionsRepository()
         {

@@ -2,35 +2,59 @@
     /**
      * @Thomas-Athanasiou
      *
-     * @author Thomas Athanasiou at Hippiemonkeys
+     * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
+     * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE (https://hippiemonkeys.com)
-     * @package Hippiemonkeys_SkroutzSmartCart
+     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
+     * @package Hippiemonkeys_SkroutzMarketplace
      */
 
     declare(strict_types=1);
 
-    namespace Hippiemonkeys\SkroutzSmartCart\Model\ResourceModel;
+    namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectionInfoResourceInterface;
 
     class RejectionInfo
-    extends AbstractDb
+    extends AbstractResource
+    implements RejectionInfoResourceInterface
     {
-        public const
-            FIELD_ID        = 'id',
-            FIELD_REASON    = 'reason',
-            FIELD_ACTOR     = 'actor';
-
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzsmartcart_rejectioninfo';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_rejectioninfo';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function saveRejectionInfo(RejectionInfoInterface $rejectionInfo): RejectionInfoResourceInterface
+        {
+            return $this->saveModel($rejectionInfo);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadRejectionInfoById(RejectionInfoInterface $rejectionInfo, $id): RejectionInfoResourceInterface
+        {
+            return $this->loadModelById($rejectionInfo, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function deleteRejectionInfo(RejectionInfoInterface $rejectionInfo): bool
+        {
+            return $this->deleteModel($rejectionInfo);
         }
     }
 ?>

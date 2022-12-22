@@ -9,16 +9,15 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\Context,
+    use Magento\Framework\Model\Context,
         Magento\Framework\Registry,
-        Magento\Framework\Model\ResourceModel\AbstractResource,
-        Magento\Framework\Data\Collection\AbstractDb,
         Magento\Catalog\Api\Data\ProductInterface,
         Magento\Catalog\Api\ProductRepositoryInterface,
-
+        Hippiemonkeys\Core\Model\AbstractModel,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
@@ -29,216 +28,208 @@
     implements LineItemInterface
     {
         protected const
-            FIELD_ORDER     = 'order',
-            FIELD_PRODUCT   = 'product',
-            FIELD_SIZE      = 'size';
+            FIELD_ORDER = 'order',
+            FIELD_PRODUCT = 'product',
+            FIELD_SIZE = 'size';
 
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Magento\Framework\Model\Context $context
+         * @param \Magento\Framework\Registry $registry
+         * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         */
         public function __construct(
             Context $context,
             Registry $registry,
             ProductRepositoryInterface $productRepository,
             OrderRepositoryInterface $orderRepository,
-            AbstractResource $resource = null,
-            AbstractDb $resourceCollection = null,
             array $data = []
         )
         {
-            parent::__construct(
-                $context,
-                $registry,
-                $resource,
-                $resourceCollection,
-                $data
-            );
+            parent::__construct($context, $registry, $data);
             $this->_productRepository = $productRepository;
-        }
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
+            $this->_orderRepository = $orderRepository;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getLocalId()
-        {
-            return (int) $this->getData(ResourceModel::FIELD_LOCAL_ID);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setLocalId(int $localId)
-        {
-            return $this->setData(ResourceModel::FIELD_LOCAL_ID, (string) $localId);
-        }
-
-        /**
-         * @inheritdoc
-         */
-        function getSkroutzId(): string
+        public function getSkroutzId(): string
         {
             return $this->getData(ResourceModel::FIELD_SKROUTZ_ID);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        function setSkroutzId(string $skroutzId)
+        public function setSkroutzId(string $skroutzId): LineItem
         {
             return $this->setData(ResourceModel::FIELD_SKROUTZ_ID, $skroutzId);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getShopUid(): int
         {
             return $this->getData(ResourceModel::FIELD_SHOPUID);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setShopUid(int $uid)
+        public function setShopUid(int $uid): LineItem
         {
             return $this->setData(ResourceModel::FIELD_SHOPUID, $uid);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getProductName() : string
         {
             return $this->getData(ResourceModel::FIELD_PRODUCT_NAME);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setProductName(string $productName)
+        public function setProductName(string $productName): LineItem
         {
             return $this->setData(ResourceModel::FIELD_PRODUCT_NAME, $productName);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getQuantity() : int
         {
             return (int) $this->getData(ResourceModel::FIELD_QUANTITY);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setQuantity(int $quantity)
+        public function setQuantity(int $quantity): LineItem
         {
             return $this->setData(ResourceModel::FIELD_QUANTITY, $quantity);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getUnitPrice() : float
         {
             return (float) $this->getData(ResourceModel::FIELD_UNIT_PRICE);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setUnitPrice(float $unitPrice)
+        public function setUnitPrice(float $unitPrice): LineItem
         {
             return $this->setData(ResourceModel::FIELD_UNIT_PRICE, $unitPrice);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getTotalPrice() : float
         {
             return (float) $this->getData(ResourceModel::FIELD_TOTAL_PRICE);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setTotalPrice(float $totalPrice)
+        public function setTotalPrice(float $totalPrice): LineItem
         {
             return $this->setData(ResourceModel::FIELD_TOTAL_PRICE, $totalPrice);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getPriceIncludesVat() : bool
         {
             return (int) $this->getData(ResourceModel::FIELD_PRICE_INCLUDES_VAT);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setPriceIncludesVat(bool $priceIncludesVat)
+        public function setPriceIncludesVat(bool $priceIncludesVat): LineItem
         {
             return $this->setData(ResourceModel::FIELD_PRICE_INCLUDES_VAT, $priceIncludesVat);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getIslandVatDiscountApplied()
+        public function getIslandVatDiscountApplied(): ?bool
         {
-            return (int) $this->getData(ResourceModel::FIELD_ISLAND_VAT_DISCOUNT_APPLIED);
+            return (bool) $this->getData(ResourceModel::FIELD_ISLAND_VAT_DISCOUNT_APPLIED);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setIslandVatDiscountApplied($islandVatDiscountApplied)
+        public function setIslandVatDiscountApplied(?bool $islandVatDiscountApplied): LineItem
         {
             return $this->setData(ResourceModel::FIELD_ISLAND_VAT_DISCOUNT_APPLIED, $islandVatDiscountApplied);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getEan()
+        public function getEan(): string
         {
             return $this->getData(ResourceModel::FIELD_EAN);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setEan($ean)
+        public function setEan($ean): LineItem
         {
             return $this->setData(ResourceModel::FIELD_EAN, $ean);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getExtraInfo()
+        public function getExtraInfo(): ?string
         {
             return $this->getData(ResourceModel::FIELD_EXTRA_INFO);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setExtraInfo($extraInfo)
+        public function setExtraInfo(?string $extraInfo): LineItem
         {
             return $this->setData(ResourceModel::FIELD_EXTRA_INFO, $extraInfo);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getSize()
+        public function getSize(): ?SizeInterface
         {
             return $this->getData(self::FIELD_SIZE);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setSize($size)
+        public function setSize(?SizeInterface $size): LineItem
         {
             return $this->setData(self::FIELD_SIZE, $size);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getOrder() : OrderInterface
         {
@@ -251,25 +242,26 @@
             }
             return $order;
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setOrder(OrderInterface $order)
+        public function setOrder(OrderInterface $order): LineItem
         {
             $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
             return $this->setData(self::FIELD_ORDER, $order);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getRejectionReason()
+        public function getRejectionReason(): ?string
         {
             return $this->getData(ResourceModel::FIELD_REJECTION_REASON);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setRejectionReason($rejectionReason)
         {
@@ -277,7 +269,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getReturnReason()
         {
@@ -285,7 +277,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setReturnReason($returnReason)
         {
@@ -293,7 +285,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getSerialNumbers()
         {
@@ -301,7 +293,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setSerialNumbers($serialNumbers)
         {
@@ -309,7 +301,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getShopVariationUid()
         {
@@ -317,7 +309,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setShopVariationUid($shopVariationUid)
         {
@@ -325,7 +317,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         function getProduct(): ProductInterface
         {
@@ -339,7 +331,7 @@
             return $product;
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         function setProduct(ProductInterface $product)
         {

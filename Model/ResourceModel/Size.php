@@ -26,7 +26,7 @@
             TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_size';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {

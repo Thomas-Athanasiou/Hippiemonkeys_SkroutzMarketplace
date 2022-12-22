@@ -27,7 +27,7 @@
          *
          * @param mixed $value
          *
-         * @return \this
+         * @return mixed
          */
         function setId($id);
 
@@ -171,7 +171,7 @@
          *
          * @return bool|null
          */
-        function getPickupFromCollectionPoint();
+        function getPickupFromCollectionPoint(): ?bool;
 
         /**
          * Sets pickup from collection point
@@ -183,7 +183,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setPickupFromCollectionPoint($pickupFromCollectionPoint): AddressInterface;
+        function setPickupFromCollectionPoint(?bool $pickupFromCollectionPoint): AddressInterface;
 
         /**
          * Gets collection point address

@@ -24,7 +24,6 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_ID = 'id',
             FIELD_COMPANY = 'company',
             FIELD_PROFESSION = 'profession',
             FIELD_DOY = 'doy',

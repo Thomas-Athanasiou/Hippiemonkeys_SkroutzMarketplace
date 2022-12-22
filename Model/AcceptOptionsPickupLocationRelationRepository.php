@@ -9,6 +9,9 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
@@ -27,18 +30,25 @@
     class AcceptOptionsPickupLocationRelationRepository
     implements AcceptOptionsPickupLocationRelationRepositoryInterface
     {
-        protected $_idIndex = [];
+        /**
+         * Id Cache property
+         *
+         * @access protected
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $_idCache
+         */
+        protected $_idCache = [];
 
         /**
          * Constructor
          *
          * @access public
          *
-         * \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupLocationRelationResourceInterface $resource,
-         * \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory $acceptOptionsPickupLocationRelationFactory
-         * \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
-         * \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterfaceFactory $searchResulFactory
-         * \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupLocationRelationResourceInterface $resource,
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory $acceptOptionsPickupLocationRelationFactory
+         * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterfaceFactory $searchResulFactory
+         * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
         public function __construct(
             ResourceInterface $resource,
@@ -56,11 +66,11 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getById($id) : AcceptOptionsPickupLocationRelationInterface
         {
-            $acceptOptionsPickupLocationRelation = $this->_idIndex[$id] ?? null;
+            $acceptOptionsPickupLocationRelation = $this->_idCache[$id] ?? null;
             if(!$acceptOptionsPickupLocationRelation) {
                 $acceptOptionsPickupLocationRelation = $this->getAcceptOptionsPickupLocationRelationFactory()->create();
                 $this->getResource()->loadAcceptOptionsPickupLocationRelationById($acceptOptionsPickupLocationRelation, $id);
@@ -70,13 +80,13 @@
                         __('The relation with id "%1" that was requested doesn\'t exist. Verify the relation and try again.', $id)
                     );
                 }
-                $this->_idIndex[$id] = $acceptOptionsPickupLocationRelation;
+                $this->_idCache[$id] = $acceptOptionsPickupLocationRelation;
             }
             return $acceptOptionsPickupLocationRelation;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getByAcceptOptionsAndPickupLocation(
             AcceptOptionsInterface $acceptOptions,
@@ -87,29 +97,31 @@
             $pickupLocationId = $pickupLocation->getId();
 
             $searchCriteriaBuilder = $this->getSearchCriteriaBuilder();
+
             $acceptOptionsPickupLocationRelation = $this->getList(
                 $searchCriteriaBuilder
                     ->addFilter(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptionsId, 'eq')
                     ->addFilter(ResourceInterface::FIELD_PICKUP_LOCATION_ID, $pickupLocationId, 'eq')
                     ->create()
             )
-            ->getFirstItem();
-            $searchCriteriaBuilder->setFilterGroups([]);
+            ->getItems() [0] ?? null;
 
-            if (!$acceptOptionsPickupLocationRelation->getId())
+            if($acceptOptionsPickupLocationRelation)
+            {
+                $this->_idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
+            }
+            else
             {
                 throw new NoSuchEntityException(
                     __('The Accept Options Pickup Location Relation with Accept Options ID "%1" and Pickup Location ID "%2" that was requested doesn\'t exist. Verify the Accept Options Pickup Location Relation and try again.', $acceptOptionsId, $pickupLocationId)
                 );
             }
 
-            $this->_idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
-
             return $acceptOptionsPickupLocationRelation;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupLocationRelationSearchResultInterface
         {
@@ -120,17 +132,17 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation) : AcceptOptionsPickupLocationRelationInterface
         {
             $this->getResource()->saveAcceptOptionsPickupLocationRelation($acceptOptionsPickupLocationRelation);
-            $this->_idIndex[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
+            $this->_idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
             return $acceptOptionsPickupLocationRelation;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation) : bool
         {
@@ -146,7 +158,6 @@
          */
         private $_resource;
 
-
         /**
          * Gets Resource
          *
@@ -159,20 +170,65 @@
             return $this->_resource;
         }
 
+        /**
+         * Accept Options Pickup Location Relation Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory $_acceptOptionsPickupLocationRelationFactory
+         */
         private $_acceptOptionsPickupLocationRelationFactory;
+
+        /**
+         * Gets Accept Options Pickup Location Relation Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory
+         */
         protected function getAcceptOptionsPickupLocationRelationFactory() : AcceptOptionsPickupLocationRelationInterfaceFactory
         {
             return $this->_acceptOptionsPickupLocationRelationFactory;
         }
 
+        /**
+         * Collection Processor property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         */
         private $_collectionProcessor;
+
+        /**
+         * Gets Collection Processor
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface
+         */
         protected function getCollectionProcessor() : CollectionProcessorInterface
         {
             return $this->_collectionProcessor;
         }
 
+        /**
+         * Search Result Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterfaceFactory $_searchResultFactory
+         */
         private $_searchResultFactory;
-        protected function getSearchResultFactory()
+
+        /**
+         * Gets Search Result Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterfaceFactory
+         */
+        protected function getSearchResultFactory(): SearchResultInterfaceFactory
         {
             return $this->_searchResultFactory;
         }

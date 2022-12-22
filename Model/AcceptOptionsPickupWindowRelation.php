@@ -9,6 +9,9 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Model\Context,
@@ -25,7 +28,7 @@
     extends AbstractModel
     implements AcceptOptionsPickupWindowRelationInterface
     {
-        public const
+        protected const
             FIELD_ACCEPT_OPTIONS = 'accept_options',
             FIELD_PICKUP_WINDOW = 'pickup_window';
 
@@ -71,7 +74,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setAcceptOptions(AcceptOptionsInterface $acceptOptions)
+        public function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupWindowRelation
         {
             $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
             return $this->setData(self::FIELD_ACCEPT_OPTIONS, $acceptOptions);
@@ -95,7 +98,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setPickupWindow(PickupWindowInterface $pickupWindow)
+        public function setPickupWindow(PickupWindowInterface $pickupWindow): AcceptOptionsPickupWindowRelation
         {
             $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindow->getId());
             return $this->setData(self::FIELD_PICKUP_WINDOW, $pickupWindow);
@@ -103,7 +106,7 @@
 
         /**
          * Accept Options Repository property
-         * 
+         *
          * @access private
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository

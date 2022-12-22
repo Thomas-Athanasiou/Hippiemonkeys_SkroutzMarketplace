@@ -27,7 +27,7 @@
          *
          * @param mixed $value
          *
-         * @return $this
+         * @return mixed
          */
         function setId($id);
 
@@ -49,9 +49,9 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $value
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface
          */
-        function setAcceptOptions(AcceptOptionsInterface $acceptOptions);
+        function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupWindowRelationInterface;
 
         /**
          * Gets Pickup Window
@@ -71,8 +71,8 @@
          *
          * @param Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $value
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface
          */
-        function setPickupWindow(PickupWindowInterface $pickupWindow);
+        function setPickupWindow(PickupWindowInterface $pickupWindow): AcceptOptionsPickupWindowRelationInterface;
     }
 ?>

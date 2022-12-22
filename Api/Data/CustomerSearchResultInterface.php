@@ -25,7 +25,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface[] Array of collection line items.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface[]
          */
         public function getItems();
 
@@ -36,7 +36,9 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface[] $customers
-         * @return $this
+         *
+         * @return mixed
+         *
          */
         public function setItems(array $customers);
     }

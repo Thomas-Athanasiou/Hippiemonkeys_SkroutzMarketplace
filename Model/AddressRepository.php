@@ -9,13 +9,16 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface as ResourceInterface;
 
     class AddressRepository
     implements AddressRepositoryInterface
@@ -23,80 +26,94 @@
         /**
          * Id Index property
          *
+         * @access protected
+         *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[]
          */
-        protected $_idIndex = [];
+        protected $_idCache = [];
 
         /**
-         * @param \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address $resourceModel
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface $resource
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory $addressFactory
          */
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             AddressInterfaceFactory $addressFactory
         )
         {
-            $this->_resourceModel   = $resourceModel;
+            $this->_resource = $resource;
             $this->_addressFactory  = $addressFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getById($id) : AddressInterface
         {
-            $address = $this->_idIndex[$id] ?? null;
-            if(!$address) {
+            $address = $this->_idCache[$id] ?? null;
+            if(!$address)
+            {
                 $address = $this->getAddressFactory()->create();
-                $this->getResourceModel()->load($address, $id, ResourceModel::FIELD_ID);
+                $this->getResource()->loadAddressById($address, $id);
                 if (!$address->getId())
                 {
                     throw new NoSuchEntityException(
                         __('The Address with id "%1" that was requested doesn\'t exist. Verify the address and try again.', $id)
                     );
                 }
-                $this->_idIndex[$id] = $address;
+
+                $this->_idCache[$id] = $address;
             }
             return $address;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(AddressInterface $address): AddressInterface
         {
-            $this->getResourceModel()->save($address);
-            $this->_idIndex[ $address->getId() ] = $address;
+            $this->getResource()->saveAddress($address);
+            $this->_idCache[$address->getId()] = $address;
             return $address;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(AddressInterface $address): bool
         {
-            return $this->getResourceModel()->delete($address);
+            return $this->getResource()->deleteAddress($address);
         }
 
         /**
          * Resource Model property
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface
          */
-        private $_resourceModel;
+        private $_resource;
 
         /**
          * Gets Resource Model
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface
          */
-        protected function getResourceModel(): ResourceModel
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
         /**
          * Address Factory property
+         *
+         * @access private
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory
          */
@@ -104,6 +121,8 @@
 
         /**
          * Gets Address Factory
+         *
+         * @access protected
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory
          */

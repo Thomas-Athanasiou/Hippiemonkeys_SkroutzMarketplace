@@ -63,7 +63,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getNumberOfParcels() : array
         {
@@ -71,15 +71,15 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setNumberOfParcels(array $numberOfParcels): AcceptOptionsInterface
+        public function setNumberOfParcels(array $numberOfParcels): AcceptOptions
         {
             return $this->setData(ResourceModel::FIELD_NUMBER_OF_PARCELS, implode(';', $numberOfParcels));
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getOrder(): OrderInterface
         {
@@ -94,16 +94,16 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setOrder(OrderInterface $order): AcceptOptionsInterface
+        public function setOrder(OrderInterface $order): AcceptOptions
         {
             $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
             return $this->setData(self::FIELD_ORDER, $order);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getPickupLocation(): array
         {
@@ -128,15 +128,15 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setPickupLocation(array $pickupLocation): AcceptOptionsInterface
+        public function setPickupLocation(array $pickupLocation): AcceptOptions
         {
             return $this->setData(ResourceModel::FIELD_PICKUP_LOCATION, $pickupLocation);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getPickupWindow(): array
         {
@@ -161,9 +161,9 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setPickupWindow(array $pickupWindow): AcceptOptionsInterface
+        public function setPickupWindow(array $pickupWindow): AcceptOptions
         {
             return $this->setData(ResourceModel::FIELD_PICKUP_WINDOW, $pickupWindow);
         }

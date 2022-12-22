@@ -34,32 +34,6 @@
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
         }
 
-        public function loadByAcceptOptionsIdAndPickupLocation(AbstractModel $object, int $acceptOptionsId, int $pickupLocationId)
-        {
-            $idField = self::FIELD_ID;
-
-            $acceptOptionsIdField       = self::FIELD_ACCEPT_OPTIONS_ID;
-            $acceptOptionsIdPlaceholder = ':'.$acceptOptionsIdField;
-
-            $pickupLocationField        = self::FIELD_PICKUP_LOCATION_ID;
-            $pickupLocationPlaceholder  = ':'.$pickupLocationField;
-
-            $connection = $this->getConnection();
-            return $this->load(
-                $object,
-                $connection->fetchOne(
-                    $connection->select()
-                        ->from($this->getMainTable(), $idField)
-                        ->where($acceptOptionsIdField . '=' . $acceptOptionsIdPlaceholder . ' AND ' . $pickupLocationField . '=' . $pickupLocationPlaceholder),
-                    [
-                        $acceptOptionsIdPlaceholder => $acceptOptionsId,
-                        $pickupLocationPlaceholder  => $pickupLocationId
-                    ]
-                ),
-                $idField
-            );
-        }
-
         /**
          * {@inheritdoc}
          */

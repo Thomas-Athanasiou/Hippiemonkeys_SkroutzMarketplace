@@ -9,18 +9,18 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-
-        Magento\Framework\Model\Context,
+    use Magento\Framework\Model\Context,
         Magento\Framework\Registry,
-        Magento\Framework\Model\ResourceModel\AbstractResource,
-        Magento\Framework\Data\Collection\AbstractDb,
-
+        Hippiemonkeys\Core\Model\AbstractModel,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface as ResourceInterface;
 
     class Customer
     extends AbstractModel
@@ -29,100 +29,88 @@
         protected const
             FIELD_ADDRESS = 'address';
 
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Magento\Framework\Model\Context $context
+         * @param \Magento\Framework\Registry $registry
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $addressRepository
+         * @param array $data
+         */
         public function __construct(
             Context $context,
             Registry $registry,
             AddressRepositoryInterface $addressRepository,
-            AbstractResource $resource = null,
-            AbstractDb $resourceCollection = null,
             array $data = []
         )
         {
-            parent::__construct(
-                $context,
-                $registry,
-                $resource,
-                $resourceCollection,
-                $data
-            );
+            parent::__construct($context, $registry, $data);
             $this->_addressRepository = $addressRepository;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        protected function _construct()
+        public function setId($id)
         {
-            $this->_init(ResourceModel::class);
+            return $this->setData(ResourceInterface::FIELD_ID, $id);
         }
 
         /**
-         * @inheritdoc
-         */
-        public function getLocalId()
-        {
-            return (int) $this->getData(ResourceModel::FIELD_LOCAL_ID);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setLocalId(int $localId)
-        {
-            return $this->setData(ResourceModel::FIELD_LOCAL_ID, (string) $localId);
-        }
-
-        /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getSkroutzId(): string
         {
-            return $this->getData(ResourceModel::FIELD_SKROUTZ_ID);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setSkroutzId(string $skroutzId)
-        {
-            return $this->setData(ResourceModel::FIELD_SKROUTZ_ID, $skroutzId);
+            return $this->getData(ResourceInterface::FIELD_SKROUTZ_ID);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setSkroutzId(string $skroutzId): Customer
+        {
+            return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getFirstName(): string
         {
-            return $this->getData(ResourceModel::FIELD_FIRST_NAME);
+            return $this->getData(ResourceInterface::FIELD_FIRST_NAME);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setFirstName(string $firstName)
+        public function setFirstName(string $firstName): Customer
         {
-            return $this->setData(ResourceModel::FIELD_FIRST_NAME, $firstName);
+            return $this->setData(ResourceInterface::FIELD_FIRST_NAME, $firstName);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getLastName(): string
         {
-            return $this->getData(ResourceModel::FIELD_LAST_NAME);
+            return $this->getData(ResourceInterface::FIELD_LAST_NAME);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setLastName(string $lastName)
+        public function setLastName(string $lastName): Customer
         {
-            return $this->setData(ResourceModel::FIELD_LAST_NAME, $lastName);
+            return $this->setData(ResourceInterface::FIELD_LAST_NAME, $lastName);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getAddress()
+        public function getAddress(): AddressInterface
         {
             $address    = $this->getData(self::FIELD_ADDRESS);
-            $addressId  = $this->getData(ResourceModel::FIELD_ADDRESS_ID);
+            $addressId  = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
             if($addressId && !$address)
             {
                 $address = $this->getAddressRepository()->getById($addressId);
@@ -132,11 +120,11 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setAddress($address)
+        public function setAddress($address): Customer
         {
-            $this->setData(ResourceModel::FIELD_ADDRESS_ID, ($address ? $address->getId() : $address) );
+            $this->setData(ResourceInterface::FIELD_ADDRESS_ID, ($address ? $address->getId() : $address) );
             return $this->setData(self::FIELD_ADDRESS, $address);
         }
 

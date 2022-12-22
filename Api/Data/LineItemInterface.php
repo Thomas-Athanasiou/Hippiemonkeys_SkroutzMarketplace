@@ -22,16 +22,6 @@
     extends ModelInterface
     {
         /**
-         * Gets ID
-         *
-         * @api
-         * @access public
-         *
-         * @return mixed.
-         */
-        function getId();
-
-        /**
          * Sets ID
          *
          * @api
@@ -39,31 +29,9 @@
          *
          * @param mixed $id
          *
-         * @return $this
+         * @return mixed
          */
         function setId($id);
-
-        /**
-         * Gets Local ID
-         *
-         * @api
-         * @access public
-         *
-         * @return int|null.
-         */
-        function getLocalId();
-
-        /**
-         * Sets Local ID
-         *
-         * @api
-         * @access public
-         *
-         * @param int $localId
-         *
-         * @return $this
-         */
-        function setLocalId(int $localId);
 
         /**
          * Gets Skroutz ID
@@ -83,9 +51,9 @@
          *
          * @param string $value
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setSkroutzId(string $skroutzId);
+        function setSkroutzId(string $skroutzId): LineItemInterface;
 
         /**
          * Gets Shop Uid
@@ -105,9 +73,9 @@
          *
          * @param string $shopUid
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setShopUid(int $shopUid);
+        function setShopUid(int $shopUid): LineItemInterface;
 
         /**
          * Gets size
@@ -117,7 +85,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface|null
          */
-        function getSize();
+        function getSize(): ?SizeInterface;
 
         /**
          * Sets size
@@ -125,11 +93,11 @@
          * @api
          * @access public
          *
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface $size
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface|null $size
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setSize($size);
+        function setSize(?SizeInterface $size): LineItemInterface;
 
         /**
          * Gets product name
@@ -149,9 +117,9 @@
          *
          * @param string $productName
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setProductName(string $productName);
+        function setProductName(string $productName): LineItemInterface;
 
         /**
          * Gets Quantity
@@ -161,7 +129,7 @@
          *
          * @return int
          */
-        function getQuantity() : int;
+        function getQuantity(): int;
 
         /**
          * Sets Quantity
@@ -171,9 +139,9 @@
          *
          * @param int $quantity
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setQuantity(int $quantity);
+        function setQuantity(int $quantity): LineItemInterface;
 
         /**
          * Gets Unit Price
@@ -193,9 +161,9 @@
          *
          * @param float $unitPrice
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setUnitPrice(float $unitPrice);
+        function setUnitPrice(float $unitPrice): LineItemInterface;
 
         /**
          * Gets Total Price
@@ -215,9 +183,9 @@
          *
          * @param float $totalPrice
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setTotalPrice(float $totalPrice);
+        function setTotalPrice(float $totalPrice): LineItemInterface;
 
         /**
          * Gets Price Includes Vat
@@ -237,9 +205,9 @@
          *
          * @param bool $priceIncludesVat
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setPriceIncludesVat(bool $priceIncludesVat);
+        function setPriceIncludesVat(bool $priceIncludesVat): LineItemInterface;
 
         /**
          * Gets Ean
@@ -249,7 +217,7 @@
          *
          * @return string|null
          */
-        function getEan();
+        function getEan(): ?string;
 
         /**
          * Sets Ean
@@ -259,9 +227,9 @@
          *
          * @param string|null $ean
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setEan($ean);
+        function setEan(?string $ean): LineItemInterface;
 
         /**
          * Gets Island Vat Discount Applied
@@ -271,7 +239,7 @@
          *
          * @return bool|null
          */
-        function getIslandVatDiscountApplied();
+        function getIslandVatDiscountApplied(): ?bool;
 
         /**
          * Sets Island Vat Discount Applied
@@ -281,9 +249,9 @@
          *
          * @param bool|null $ean
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setIslandVatDiscountApplied($islandVatDistcountApplied);
+        function setIslandVatDiscountApplied(?bool $islandVatDistcountApplied): LineItemInterface;
 
         /**
          * Gets extra info
@@ -293,7 +261,7 @@
          *
          * @return string|null
          */
-        function getExtraInfo();
+        function getExtraInfo(): ?string;
 
         /**
          * Sets extra info
@@ -303,9 +271,9 @@
          *
          * @param string|null $extraInfo
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setExtraInfo($extraInfo);
+        function setExtraInfo(?string $extraInfo): LineItemInterface;
 
         /**
          * Gets Order
@@ -325,9 +293,9 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setOrder(OrderInterface $order);
+        function setOrder(OrderInterface $order): LineItemInterface;
 
         /**
          * Gets Rejection Reason
@@ -337,7 +305,7 @@
          *
          * @return string|null
          */
-        function getRejectionReason();
+        function getRejectionReason(): ?string;
 
         /**
          * Sets Rejection Reason
@@ -347,9 +315,9 @@
          *
          * @param string|null $rejectionReason
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setRejectionReason($rejectionReason);
+        function setRejectionReason($rejectionReason): LineItemInterface;
 
         /**
          * Gets Return Reason
@@ -359,7 +327,7 @@
          *
          * @return string|null
          */
-        function getReturnReason();
+        function getReturnReason(): ?string;
 
         /**
          * Sets Return Reason
@@ -369,9 +337,9 @@
          *
          * @param string|null $returnReason
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setReturnReason($returnReason);
+        function setReturnReason($returnReason): LineItemInterface;
 
         /**
          * Gets Serial Number
@@ -381,7 +349,7 @@
          *
          * @return string|null
          */
-        function getSerialNumbers();
+        function getSerialNumbers(): ?string;
 
         /**
          * Sets Serial Number
@@ -391,9 +359,9 @@
          *
          * @param string|null $serialNumbers
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setSerialNumbers($serialNumbers);
+        function setSerialNumbers($serialNumbers): LineItemInterface;
 
         /**
          * Gets Ean
@@ -413,7 +381,7 @@
          *
          * @param \Magento\Catalog\Api\Data\ProductInterface $product
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
         function setProduct(ProductInterface $product);
 
@@ -423,9 +391,9 @@
          * @api
          * @access public
          *
-         * @return string.
+         * @return string|null
          */
-        function getShopVariationUid();
+        function getShopVariationUid(): ?string;
 
         /**
          * Sets shop variation uid
@@ -434,8 +402,8 @@
          * @access public
          *
          * @param string|null $shop_variation_uid
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setShopVariationUid($shopVariationUid);
+        function setShopVariationUid($shopVariationUid): LineItemInterface;
     }
 ?>

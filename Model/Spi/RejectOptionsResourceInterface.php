@@ -24,7 +24,6 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_ID = 'id',
             FIELD_ORDER_ID = 'order_id';
 
         /**

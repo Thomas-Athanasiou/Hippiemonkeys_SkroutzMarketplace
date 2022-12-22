@@ -20,23 +20,24 @@
     extends SearchResultsInterface
     {
         /**
-         * Gets collection items
+         * Gets collection Accept Options items
          *
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface[] Array of collection line items.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface[]
          */
         public function getItems();
 
         /**
-         * Sets collection line items
+         * Sets collection Accept Options items
          *
          * @api
          * @access public
          *
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface[] $acceptoptions
-         * @return $this
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface[] $acceptOptions
+         *
+         * @return mixed
          */
         public function setItems(array $acceptOptions);
     }

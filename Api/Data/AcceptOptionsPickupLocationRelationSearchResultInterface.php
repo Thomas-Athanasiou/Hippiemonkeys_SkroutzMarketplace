@@ -20,7 +20,7 @@
     extends SearchResultsInterface
     {
         /**
-         * Gets collection items.
+         * Gets collection Accept Options Pickup Location Relation items
          *
          * @api
          * @access public
@@ -30,14 +30,14 @@
         public function getItems();
 
         /**
-         * Sets collection line items.
+         * Sets collection Accept Options Pickup Location Relation items.
          *
          * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface[] $acceptOptionsPickupLocationRelation
          *
-         * @return $this
+         * @return mixed
          */
         public function setItems(array $acceptOptionsPickupLocationRelation);
     }

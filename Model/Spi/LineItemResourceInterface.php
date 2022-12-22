@@ -24,7 +24,6 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_LOCAL_ID = 'id',
             FIELD_SKROUTZ_ID = 'skroutz_id',
             FIELD_SIZE = 'size',
             FIELD_SHOPUID = 'shopuid',

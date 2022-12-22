@@ -24,7 +24,6 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_LOCAL_ID = 'id',
             FIELD_SKROUTZ_ID = 'skroutz_id',
             FIELD_FIRST_NAME = 'first_name',
             FIELD_LAST_NAME = 'last_name',
@@ -54,6 +53,19 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerResourceInterface
          */
         function loadCustomerById(CustomerInterface $customer, $id): CustomerResourceInterface;
+
+        /**
+         * Loads a Customer by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer
+         * @param string $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerResourceInterface
+         */
+        function loadCustomerBySkroutzId(CustomerInterface $customer, string $skroutzId): CustomerResourceInterface;
 
         /**
          * Deletes the Customer

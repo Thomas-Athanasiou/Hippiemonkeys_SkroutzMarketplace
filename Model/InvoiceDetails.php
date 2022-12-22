@@ -9,122 +9,121 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-
-        Magento\Framework\Model\Context,
+    use Magento\Framework\Model\Context,
         Magento\Framework\Registry,
-        Magento\Framework\Model\ResourceModel\AbstractResource,
-        Magento\Framework\Data\Collection\AbstractDb,
-
+        Hippiemonkeys\Core\Model\AbstractModel,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface as ResourceInterface;
 
     class InvoiceDetails
     extends AbstractModel
     implements InvoiceDetailsInterface
     {
         protected const
-            FIELD_ADDRESS                       = 'address',
+            FIELD_ADDRESS = 'address',
             FIELD_VAT_EXCLUSION_REPRESENTATIVE  = 'vat_exclusion_representative';
 
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Magento\Framework\Model\Context $context
+         * @param \Magento\Framework\Registry $registry
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $addressRepository
+         * @param array $data
+         */
         public function __construct(
             Context $context,
             Registry $registry,
             AddressRepositoryInterface $addressRepository,
-            AbstractResource $resource = null,
-            AbstractDb $resourceCollection = null,
             array $data = []
         )
         {
             parent::__construct(
                 $context,
                 $registry,
-                $resource,
-                $resourceCollection,
                 $data
             );
             $this->_addressRepository = $addressRepository;
         }
 
         /**
-         * @inheritdoc
-         */
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
-        /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getCompany(): string
         {
-            return $this->getData(ResourceModel::FIELD_COMPANY);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setCompany(string $company)
-        {
-            return $this->setData(ResourceModel::FIELD_COMPANY, $company);
+            return $this->getData(ResourceInterface::FIELD_COMPANY);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setCompany(string $company): InvoiceDetails
+        {
+            return $this->setData(ResourceInterface::FIELD_COMPANY, $company);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getProfession(): string
         {
-            return $this->getData(ResourceModel::FIELD_PROFESSION);
+            return $this->getData(ResourceInterface::FIELD_PROFESSION);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setProfession(string $profession)
+        public function setProfession(string $profession): InvoiceDetails
         {
-            return $this->setData(ResourceModel::FIELD_PROFESSION, $profession);
+            return $this->setData(ResourceInterface::FIELD_PROFESSION, $profession);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getDoy(): string
         {
-            return $this->getDoy(ResourceModel::FIELD_DOY);
+            return $this->getDoy(ResourceInterface::FIELD_DOY);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setDoy(string $doy)
+        public function setDoy(string $doy): InvoiceDetails
         {
-            return $this->setData(ResourceModel::FIELD_DOY, $doy);
+            return $this->setData(ResourceInterface::FIELD_DOY, $doy);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getVatNumber(): string
         {
-            return $this->getData(ResourceModel::FIELD_VAT_NUMBER);
+            return $this->getData(ResourceInterface::FIELD_VAT_NUMBER);
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setVatNumber(string $vatNumber)
+        public function setVatNumber(string $vatNumber): InvoiceDetails
         {
-            return $this->setData(ResourceModel::FIELD_VAT_NUMBER, $vatNumber);
+            return $this->setData(ResourceInterface::FIELD_VAT_NUMBER, $vatNumber);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getAddress()
+        public function getAddress(): ?AddressInterface
         {
             $address    = $this->getData(self::FIELD_ADDRESS);
-            $addressId  = $this->getData(ResourceModel::FIELD_ADDRESS_ID);
+            $addressId  = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
             if($addressId && !$address)
             {
                 $address = $this->getAddressRepository()->getById($addressId);
@@ -132,46 +131,64 @@
             }
             return $address;
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setAddress($address)
+        public function setAddress(?AddressInterface $address): InvoiceDetails
         {
-            $this->setData(ResourceModel::FIELD_ADDRESS_ID, $address ? $address->getId() : null);
+            $this->setData(ResourceInterface::FIELD_ADDRESS_ID, $address ? $address->getId() : null);
             return $this->setData(self::FIELD_ADDRESS, $address);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getVatExclusionRequested(): bool
         {
-            return $this->getData(ResourceModel::FIELD_VAT_EXCLUSION_REQUESTED);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setVatExclusionRequested($vatExclusionRequested)
-        {
-            return (bool) $this->setData(ResourceModel::FIELD_VAT_EXCLUSION_REQUESTED, $vatExclusionRequested);
+            return $this->getData(ResourceInterface::FIELD_VAT_EXCLUSION_REQUESTED);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setVatExclusionRequested(bool $vatExclusionRequested): InvoiceDetails
+        {
+            return (bool) $this->setData(ResourceInterface::FIELD_VAT_EXCLUSION_REQUESTED, $vatExclusionRequested);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getVatExclusionRepresentative(): VatExclusionRepresentativeInterface
         {
             return $this->getData(self::FIELD_VAT_EXCLUSION_REPRESENTATIVE);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative)
         {
             return $this->setData(self::FIELD_VAT_EXCLUSION_REPRESENTATIVE, $vatExclusionRepresentative);
         }
 
+        /**
+         * Address Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $_addressRepository
+         */
         private $_addressRepository;
+
+        /**
+         * Gets Address Repository
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface
+         */
         protected function getAddressRepository(): AddressRepositoryInterface
         {
             return $this->_addressRepository;

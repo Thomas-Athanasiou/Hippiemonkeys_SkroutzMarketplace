@@ -24,7 +24,6 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_ID = 'id',
             FIELD_ORDER_ID = 'order_id',
             FIELD_NUMBER_OF_PARCELS = 'number_of_parcels',
             FIELD_PICKUP_LOCATION = 'pickup_location',
@@ -54,6 +53,19 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsResourceInterface
          */
         function loadAcceptOptionsById(AcceptOptionsInterface $acceptOptions, $id): AcceptOptionsResourceInterface;
+
+        /**
+         * Load a Accept Options by Order Id
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
+         * @param mixed $orderId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsResourceInterface
+         */
+        function loadAcceptOptionsByOrderId(AcceptOptionsInterface $acceptOptions, $orderId): AcceptOptionsResourceInterface;
 
         /**
          * Delete the Accept Options

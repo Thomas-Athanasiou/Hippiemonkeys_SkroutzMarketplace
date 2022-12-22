@@ -9,6 +9,9 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Registry,
@@ -55,7 +58,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getAcceptOptions(): AcceptOptionsInterface
         {
@@ -70,16 +73,16 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setAcceptOptions(AcceptOptionsInterface $acceptOptions)
+        public function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupLocationRelation
         {
             $this->setData(ResourceModel::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
             return $this->setData(self::FIELD_ACCEPT_OPTIONS, $acceptOptions);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getPickupLocation(): PickupLocationInterface
         {
@@ -94,9 +97,9 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setPickupLocation(PickupLocationInterface $pickupLocation)
+        public function setPickupLocation(PickupLocationInterface $pickupLocation): AcceptOptionsPickupLocationRelation
         {
             $this->setData(ResourceModel::FIELD_PICKUP_LOCATION_ID, $pickupLocation->getId());
             return $this->setData(self::FIELD_PICKUP_LOCATION, $pickupLocation);

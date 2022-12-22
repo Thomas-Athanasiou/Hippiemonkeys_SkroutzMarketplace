@@ -9,141 +9,145 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface as ResourceInterface;
 
     class Address
     extends AbstractModel
     implements AddressInterface
     {
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getStreetName() : string
         {
-            return $this->getData(ResourceModel::FIELD_STREET_NAME);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setStreetName(string $streetName)
-        {
-            return $this->setData(ResourceModel::FIELD_STREET_NAME, $streetName);
+            return $this->getData(ResourceInterface::FIELD_STREET_NAME);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setStreetName(string $streetName): Address
+        {
+            return $this->setData(ResourceInterface::FIELD_STREET_NAME, $streetName);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getStreetNumber() : string
         {
-            return $this->getData(ResourceModel::FIELD_STREET_NUMBER);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setStreetNumber(string $streetNumber)
-        {
-            return $this->setData(ResourceModel::FIELD_STREET_NUMBER, $streetNumber);
+            return $this->getData(ResourceInterface::FIELD_STREET_NUMBER);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setStreetNumber(string $streetNumber): Address
+        {
+            return $this->setData(ResourceInterface::FIELD_STREET_NUMBER, $streetNumber);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getZip() : string
         {
-            return $this->getData(ResourceModel::FIELD_ZIP);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setZip(string $zip)
-        {
-            return $this->setData(ResourceModel::FIELD_ZIP, $zip);
+            return $this->getData(ResourceInterface::FIELD_ZIP);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setZip(string $zip): Address
+        {
+            return $this->setData(ResourceInterface::FIELD_ZIP, $zip);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         function getCity() : string
         {
-            return $this->getData(ResourceModel::FIELD_CITY);
-        }
-        /**
-         * @inheritdoc
-         */
-        function setCity(string $city)
-        {
-            return $this->setData(ResourceModel::FIELD_CITY, $city);
+            return $this->getData(ResourceInterface::FIELD_CITY);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        function setCity(string $city): Address
+        {
+            return $this->setData(ResourceInterface::FIELD_CITY, $city);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getRegion() : string
         {
-            return $this->getData(ResourceModel::FIELD_REGION);
+            return $this->getData(ResourceInterface::FIELD_REGION);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setRegion(string $region)
+        public function setRegion(string $region): Address
         {
-            return $this->setData(ResourceModel::FIELD_REGION, $region);
+            return $this->setData(ResourceInterface::FIELD_REGION, $region);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getCountryCode() : string
         {
-            return $this->getData(ResourceModel::FIELD_COUNTRY_CODE);
+            return $this->getData(ResourceInterface::FIELD_COUNTRY_CODE);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setCountryCode(string $countryCode)
+        public function setCountryCode(string $countryCode): Address
         {
-            return $this->setData(ResourceModel::FIELD_COUNTRY_CODE, $countryCode);
+            return $this->setData(ResourceInterface::FIELD_COUNTRY_CODE, $countryCode);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getPickupFromCollectionPoint()
+        public function getPickupFromCollectionPoint(): ?bool
         {
-            return $this->getData(ResourceModel::FIELD_PICKUP_FROM_COLLECTION_POINT);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setPickupFromCollectionPoint($pickupFromCollectionPoint)
-        {
-            return $this->setData(ResourceModel::FIELD_PICKUP_FROM_COLLECTION_POINT, $pickupFromCollectionPoint);
+            return (bool) $this->getData(ResourceInterface::FIELD_PICKUP_FROM_COLLECTION_POINT);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
+         */
+        public function setPickupFromCollectionPoint($pickupFromCollectionPoint): Address
+        {
+            return $this->setData(ResourceInterface::FIELD_PICKUP_FROM_COLLECTION_POINT, $pickupFromCollectionPoint);
+        }
+
+        /**
+         * {@inheritdoc}
          */
         public function getCollectionPointAddress() : string
         {
-            return $this->getData(ResourceModel::FIELD_COLLECTION_POINT_ADDRESS);
+            return $this->getData(ResourceInterface::FIELD_COLLECTION_POINT_ADDRESS);
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setCollectionPointAddress(string $collectionPointAddress)
+        public function setCollectionPointAddress(string $collectionPointAddress): Address
         {
-            return $this->setData(ResourceModel::FIELD_COLLECTION_POINT_ADDRESS, $collectionPointAddress);
+            return $this->setData(ResourceInterface::FIELD_COLLECTION_POINT_ADDRESS, $collectionPointAddress);
         }
     }
 ?>

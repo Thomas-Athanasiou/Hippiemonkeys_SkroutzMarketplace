@@ -19,19 +19,19 @@
     interface CustomerRepositoryInterface
     {
         /**
-         * Get Customer by local id
+         * Gets Customer by Id
          *
          * @api
          * @access public
          *
-         * @param int $localId
+         * @param mixed $id
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
-        function getByLocalId(int $localId): CustomerInterface;
+        function getById(int $id): CustomerInterface;
 
         /**
-         * Get Customer skroutz id
+         * Gets Customer Skroutz Id
          *
          * @api
          * @access public
@@ -43,7 +43,7 @@
         function getBySkroutzId(string $skroutzId): CustomerInterface;
 
         /**
-         * Delete Customer
+         * Deletes Customer
          *
          * @api
          * @access public
@@ -55,7 +55,7 @@
         function delete(CustomerInterface $customer): bool;
 
         /**
-         * Save Customer
+         * Saves Customer
          *
          * @api
          * @access public

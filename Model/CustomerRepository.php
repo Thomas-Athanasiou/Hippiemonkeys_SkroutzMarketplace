@@ -9,49 +9,60 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface as ResourceInterface;
 
     class CustomerRepository
     implements CustomerRepositoryInterface
     {
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface $resource
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory $customerFactory
+         */
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             CustomerInterfaceFactory $customerFactory
         )
         {
-            $this->_resourceModel   = $resourceModel;
+            $this->_resource = $resource;
             $this->_customerFactory = $customerFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getByLocalId(int $localId) : CustomerInterface
+        public function getById(int $id) : CustomerInterface
         {
             $customer = $this->getCustomerFactory()->create();
-            $this->getResourceModel()->load($customer, $localId, ResourceModel::FIELD_LOCAL_ID);
+            $this->getResource()->loadCustomerById($customer, $id);
             if (!$customer->getId())
             {
                 throw new NoSuchEntityException(
-                    __('The Customer with id "%1" that was requested doesn\'t exist. Verify the customer and try again.', $localId)
+                    __('The Customer with Id "%1" that was requested doesn\'t exist. Verify the customer and try again.', $id)
                 );
             }
             return $customer;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getBySkroutzId(string $skroutzId) : CustomerInterface
         {
             $customer = $this->getCustomerFactory()->create();
-            $this->getResourceModel()->load($customer, $skroutzId, ResourceModel::FIELD_SKROUTZ_ID);
+            $this->getResource()->loadCustomerBySkroutzId($customer, $skroutzId);
             if (!$customer->getId())
             {
                 throw new NoSuchEntityException(
@@ -62,30 +73,59 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(CustomerInterface $customer) : CustomerInterface
         {
-            $this->getResourceModel()->save($customer);
+            $this->getResource()->saveCustomer($customer);
             return $customer;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(CustomerInterface $customer) : bool
         {
-            $this->getResourceModel()->delete($customer);
-            return $customer->isDeleted();
+            return $this->getResource()->deleteCustomer($customer);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
+        /**
+         * Customer Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory $_customerFactory
+         */
         private $_customerFactory;
+
+        /**
+         * Gets Customer Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory
+         */
         protected function getCustomerFactory() : CustomerInterfaceFactory
         {
             return $this->_customerFactory;

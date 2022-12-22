@@ -25,7 +25,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[] Array of collection address items.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[]
          */
         public function getItems();
 
@@ -37,7 +37,7 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[] $address
          *
-         * @return \this
+         * @return mixed
          */
         public function setItems(array $address);
     }

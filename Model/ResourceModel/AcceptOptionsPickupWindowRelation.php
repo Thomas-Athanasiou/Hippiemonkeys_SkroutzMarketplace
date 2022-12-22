@@ -34,32 +34,6 @@
             $this->_init(static::TABLE_MAIN, static::FIELD_ID);
         }
 
-        public function loadByAcceptOptionsIdAndPickupWindow(AbstractModel $object, int $acceptOptionsId, int $pickupWindowId)
-        {
-            $idField = self::FIELD_ID;
-
-            $acceptOptionsIdField       = static::FIELD_ACCEPT_OPTIONS_ID;
-            $acceptOptionsIdPlaceholder = ':'.$acceptOptionsIdField;
-
-            $pickupWindowField          = self::FIELD_PICKUP_WINDOW_ID;
-            $pickupWindowPlaceholder    = ':'.$pickupWindowField;
-
-            $connection = $this->getConnection();
-            return $this->load(
-                $object,
-                $connection->fetchOne(
-                    $connection->select()
-                        ->from($this->getMainTable(), $idField)
-                        ->where($acceptOptionsIdField . '=' . $acceptOptionsIdPlaceholder . ' AND ' . $pickupWindowField . '=' . $pickupWindowPlaceholder),
-                    [
-                        $acceptOptionsIdPlaceholder => $acceptOptionsId,
-                        $pickupWindowPlaceholder    => $pickupWindowId
-                    ]
-                ),
-                $idField
-            );
-        }
-
         /**
          * {@inheritdoc}
          */

@@ -24,7 +24,6 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_ID = 'id',
             FIELD_REASON = 'reason',
             FIELD_ACTOR = 'actor';
 

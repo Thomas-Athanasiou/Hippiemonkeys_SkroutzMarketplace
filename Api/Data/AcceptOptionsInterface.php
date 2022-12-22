@@ -27,7 +27,7 @@
          *
          * @param mixed $value
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
+         * @return mixed
          */
         function setId($id);
 

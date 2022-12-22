@@ -52,6 +52,14 @@
         /**
          * {@inheritdoc}
          */
+        public function loadCustomerBySkroutzId(CustomerInterface $customer, string $skroutzId): CustomerResourceInterface
+        {
+            return $this->loadModel($customer, $skroutzId, static::FIELD_SKROUTZ_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
         public function deleteCustomer(CustomerInterface $customer): bool
         {
             return $this->deleteModel($customer);

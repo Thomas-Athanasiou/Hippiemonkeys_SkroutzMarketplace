@@ -9,33 +9,36 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterfaceFactory,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface as ResourceInterface;
 
     class InvoiceDetailsRepository
     implements InvoiceDetailsRepositoryInterface
     {
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             InvoiceDetailsInterfaceFactory $invoiceDetailsFactory
         )
         {
-            $this->_resourceModel           = $resourceModel;
-            $this->_invoiceDetailsFactory   = $invoiceDetailsFactory;
+            $this->_resource = $resource;
+            $this->_invoiceDetailsFactory = $invoiceDetailsFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getById($id) : InvoiceDetailsInterface
         {
             $invoiceDetails = $this->getInvoiceDetailsFactory()->create();
-            $this->getResourceModel()->load($invoiceDetails, $id, ResourceModel::FIELD_ID);
+            $this->getResource()->loadInvoiceDetailsById($invoiceDetails, $id);
             if (!$invoiceDetails->getId())
             {
                 throw new NoSuchEntityException(
@@ -46,30 +49,59 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(InvoiceDetailsInterface $invoiceDetails) : InvoiceDetailsInterface
         {
-            $this->getResourceModel()->save($invoiceDetails);
+            $this->getResource()->saveInvoiceDetails($invoiceDetails);
             return $invoiceDetails;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(InvoiceDetailsInterface $invoiceDetails) : bool
         {
-            $this->getResourceModel()->delete($invoiceDetails);
-            return $invoiceDetails->isDeleted();
+            return $this->getResource()->deleteInvoiceDetails($invoiceDetails);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
+        /**
+         * Invoice Details Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterfaceFactory $_invoiceDetailsFactory
+         */
         private $_invoiceDetailsFactory;
+
+        /**
+         * Gets Invoice Details Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterfaceFactory
+         */
         protected function getInvoiceDetailsFactory() : InvoiceDetailsInterfaceFactory
         {
             return $this->_invoiceDetailsFactory;

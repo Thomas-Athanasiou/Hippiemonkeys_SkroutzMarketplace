@@ -24,7 +24,6 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_ID = 'id',
             FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
             FIELD_PICKUP_LOCATION_ID = 'pickup_location_id';
 

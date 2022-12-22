@@ -9,40 +9,69 @@
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
+
+    declare(strict_types=1);
+
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions as ResourceModel,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface as ResourceInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class AcceptOptionsRepository
     implements AcceptOptionsRepositoryInterface
     {
         protected
-            $_idIndex       = [],
-            $_orderIdIndex  = [];
+            /**
+             * Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $_idCache
+             */
+            $_idCache = [],
 
+            /**
+             * Order Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $_orderIdCache
+             */
+            $_orderIdCache  = [];
+
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface $resource
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory $acceptOptionsFactory
+         */
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             AcceptOptionsInterfaceFactory $acceptOptionsFactory
         )
         {
-            $this->_resourceModel           = $resourceModel;
-            $this->_acceptOptionsFactory    = $acceptOptionsFactory;
+            $this->_resource = $resource;
+            $this->_acceptOptionsFactory = $acceptOptionsFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getById($id) : AcceptOptionsInterface
+        public function getById($id): AcceptOptionsInterface
         {
-            $acceptOptions = $this->_idIndex[$id] ?? null;
-            if(!$acceptOptions) {
+            $acceptOptions = $this->_idCache[$id] ?? null;
+
+            if(!$acceptOptions)
+            {
                 $acceptOptions = $this->getAcceptOptionsFactory()->create();
-                $this->getResourceModel()->load($acceptOptions, $id, ResourceModel::FIELD_ID);
+
+                $this->getResource()->loadAcceptOptionsById($acceptOptions, $id);
                 if (!$acceptOptions->getId())
                 {
                     throw new NoSuchEntityException(
@@ -50,62 +79,95 @@
                     );
                 }
                 $orderId = $acceptOptions->getOrder()->getId();
-                $this->_orderIdIndex[$orderId]  = $acceptOptions;
-                $this->_idIndex[$id]            = $acceptOptions;
+                $this->_orderIdCache[$orderId] = $acceptOptions;
+
+                $this->_idCache[$id] = $acceptOptions;
             }
+
             return $acceptOptions;
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getByOrder(OrderInterface $order) : AcceptOptionsInterface
+        public function getByOrder(OrderInterface $order): AcceptOptionsInterface
         {
             $orderId = $order->getId();
-            $acceptOptions = $this->_orderIdIndex[$orderId] ?? null;
-            if(!$acceptOptions) {
+            $acceptOptions = $this->_orderIdCache[$orderId] ?? null;
+            if(!$acceptOptions)
+            {
                 $acceptOptions = $this->getAcceptOptionsFactory()->create();
-                $this->getResourceModel()->load($acceptOptions, $orderId, ResourceModel::FIELD_ORDER_ID);
+                $this->getResource()->loadAcceptOptionsByOrderId($acceptOptions, $orderId);
                 $id = $acceptOptions->getId();
                 if (!$id)
                 {
                     throw new NoSuchEntityException(
-                        __('The accept options with order id "%1" that was requested doesn\'t exist. Verify the accept options and try again.', $orderId)
+                        __('The Accept Options with Order Id "%1" that was requested doesn\'t exist. Verify the Accept Options and try again.', $orderId)
                     );
                 }
-                $this->_orderIdIndex[$orderId]  = $acceptOptions;
-                $this->_idIndex[$id]            = $acceptOptions;
+                $this->_orderIdCache[$orderId] = $acceptOptions;
+                $this->_idCache[$id] = $acceptOptions;
             }
             return $acceptOptions;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function save(AcceptOptionsInterface $acceptOptions) : AcceptOptionsInterface
+        public function save(AcceptOptionsInterface $acceptOptions): AcceptOptionsInterface
         {
-            $this->getResourceModel()->save($acceptOptions);
-            $this->_idIndex[ $acceptOptions->getId() ] = $acceptOptions;
+            $this->getResource()->saveAcceptOptions($acceptOptions);
+            $this->_idCache[$acceptOptions->getId()] = $acceptOptions;
             return $acceptOptions;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function delete(AcceptOptionsInterface $acceptOptions) : bool
+        public function delete(AcceptOptionsInterface $acceptOptions): bool
         {
-            $this->getResourceModel()->delete($acceptOptions);
-            unset( $this->_orderIdIndex[ $acceptOptions->getOrder()->getId() ] );
-            unset( $this->_idIndex[ $acceptOptions->getId() ] );
-            return $acceptOptions->isDeleted();
+            unset($this->_orderIdCache[$acceptOptions->getOrder()->getId()]);
+            unset($this->_idCache[$acceptOptions->getId() ]);
+            return $this->getResource()->deleteAcceptOptions($acceptOptions);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
+        /**
+         * Gets Accept Options Factory
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory $_acceptOptionsFactory
+         */
         private $_acceptOptionsFactory;
+
+        /**
+         * Accept Options Factory property
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory
+         */
         protected function getAcceptOptionsFactory() : AcceptOptionsInterfaceFactory
         {
             return $this->_acceptOptionsFactory;

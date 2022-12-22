@@ -27,35 +27,15 @@
          *
          * @param mixed $value
          *
-         * @return $this
+         * @return mixed
          */
         function setId($id);
-
-        /**
-         * Gets Local ID
-         *
-         * @api
-         * @access public
-         *
-         * @return int|null.
-         */
-        function getLocalId();
-
-        /**
-         * Sets Local ID
-         *
-         * @api
-         *
-         * @param int $localId
-         *
-         * @return $this
-         */
-        function setLocalId(int $localId);
 
         /**
          * Gets Skroutz ID
          *
          * @api
+         * @access public
          *
          * @return string.
          */
@@ -65,15 +45,19 @@
          * Sets Skroutz ID
          *
          * @api
+         * @access public
          *
          * @param string $skroutzId
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
-        function setSkroutzId(string $skroutzId);
+        function setSkroutzId(string $skroutzId): CustomerInterface;
 
         /**
          * Gets the first name for the customer.
+         *
+         * @api
+         * @access public
          *
          * @return string First name.
          */
@@ -82,16 +66,20 @@
         /**
          * Sets the first name for the customer.
          *
+         * @api
+         * @access public
+         *
          * @param string $firstname
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
-        function setFirstName(string $firstName);
+        function setFirstName(string $firstName): CustomerInterface;
 
         /**
          * Gets the last name for the customer
          *
          * @api
+         * @access public
          *
          * @return string Last name.
          */
@@ -101,31 +89,34 @@
          * Sets the last name for the customer
          *
          * @api
+         * @access public
          *
          * @param string $lastname
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
-        function setLastName(string $lastName);
+        function setLastName(string $lastName): CustomerInterface;
 
         /**
          * Get Customer's Address
          *
          * @api
+         * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface|null
          */
-        function getAddress();
+        function getAddress(): ?AddressInterface;
 
         /**
          * Set Customer's Address
          *
          * @api
+         * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface|null $address
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */
-        function setAddress($address);
+        function setAddress(?AddressInterface $address): CustomerInterface;
     }
 ?>

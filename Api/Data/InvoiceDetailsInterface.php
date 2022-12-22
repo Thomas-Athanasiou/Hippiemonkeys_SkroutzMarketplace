@@ -26,7 +26,8 @@
          * @access public
          *
          * @param mixed $value
-         * @return $this
+         *
+         * @return mixed
          */
         function setId($id);
 
@@ -47,9 +48,9 @@
          * @access public
          *
          * @param mixed $company
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function setCompany(string $company);
+        function setCompany(string $company): InvoiceDetailsInterface;
 
         /**
          * Gets Profession
@@ -68,9 +69,9 @@
          * @access public
          *
          * @param mixed $profession
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function setProfession(string $profession);
+        function setProfession(string $profession): InvoiceDetailsInterface;
 
         /**
          * Gets Vat Number
@@ -90,9 +91,9 @@
          *
          * @param mixed $vatNumber
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function setVatNumber(string $vatNumber);
+        function setVatNumber(string $vatNumber): InvoiceDetailsInterface;
 
         /**
          * Gets Company's public economic service
@@ -112,9 +113,9 @@
          *
          * @param mixed $doy
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function setDoy(string $doy);
+        function setDoy(string $doy): InvoiceDetailsInterface;
 
         /**
          * Gets Address
@@ -124,7 +125,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface|null
          */
-        function getAddress();
+        function getAddress(): ?AddressInterface;
         /**
          * Sets Address
          *
@@ -133,9 +134,9 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface|null $address
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function setAddress($address);
+        function setAddress(?AddressInterface $address): InvoiceDetailsInterface;
 
         /**
          * Gets Vat Exclusion Requested
@@ -146,17 +147,18 @@
          * @return bool.
          */
         function getVatExclusionRequested(): bool;
+
         /**
-         * Sets Address
+         * Sets Vat Exclusion Requested
          *
          * @api
          * @access public
          *
-         * @param mixed $doy
+         * @param bool $vatExclusionRequested
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function setVatExclusionRequested(bool $vatExclusionRequested);
+        function setVatExclusionRequested(bool $vatExclusionRequested): InvoiceDetailsInterface;
 
         /**
          * Gets Vat Exclusion Representative
@@ -176,7 +178,7 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface $vatExclusionRepresentative
          *
-         * @return $this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
         function setVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative);
     }

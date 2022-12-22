@@ -24,11 +24,9 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_ID = 'id',
             FIELD_ID_TYPE = 'id_type',
             FIELD_ID_NUMBER = 'id_number',
-            FIELD_OTP = 'otp'
-;
+            FIELD_OTP = 'otp';
 
         /**
          * Saves Vat Exclusion Representative data

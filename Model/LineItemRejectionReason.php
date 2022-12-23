@@ -14,48 +14,28 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-
+    use Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItemRejectionReason as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface as ResourceInterface;
 
     class LineItemRejectionReason
     extends AbstractModel
     implements LineItemRejectionReasonInterface
     {
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
-        /**
-         * @inheritdoc
-         */
-        public function getLocalId()
-        {
-            return (int) $this->getData(ResourceModel::FIELD_LOCAL_ID);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setLocalId(int $localId)
-        {
-            return $this->setData(ResourceModel::FIELD_LOCAL_ID, (string) $localId);
-        }
-
         /**
          * @inheritdoc
          */
         public function getSkroutzId(): int
         {
-            return (int) $this->getData(ResourceModel::FIELD_SKROUTZ_ID);
+            return (int) $this->getData(ResourceInterface::FIELD_SKROUTZ_ID);
         }
+
         /**
          * @inheritdoc
          */
-        public function setSkroutzId(int $skroutzId)
+        public function setSkroutzId(int $skroutzId): LineItemRejectionReason
         {
-            return $this->setData(ResourceModel::FIELD_SKROUTZ_ID, (string) $skroutzId);
+            return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
 
         /**
@@ -63,14 +43,15 @@
          */
         public function getLabel(): string
         {
-            return $this->getData(ResourceModel::FIELD_LABEL);
+            return $this->getData(ResourceInterface::FIELD_LABEL);
         }
+
         /**
          * @inheritdoc
          */
-        public function setLabel(string $label)
+        public function setLabel(string $label): LineItemRejectionReason
         {
-            return $this->setData(ResourceModel::FIELD_LABEL, $label);
+            return $this->setData(ResourceInterface::FIELD_LABEL, $label);
         }
 
         /**
@@ -78,14 +59,15 @@
          */
         public function getRequiresAvailableQuantity(): bool
         {
-            return (bool) $this->getData(ResourceModel::FIELD_REQUIRES_AVAILABILITY_QUANTITY);
+            return (bool) $this->getData(ResourceInterface::FIELD_REQUIRES_AVAILABILITY_QUANTITY);
         }
+
         /**
          * @inheritdoc
          */
-        public function setRequiresAvailableQuantity(bool $requiresAvailableQuantity)
+        public function setRequiresAvailableQuantity(bool $requiresAvailableQuantity): LineItemRejectionReason
         {
-            return $this->setData(ResourceModel::FIELD_REQUIRES_AVAILABILITY_QUANTITY, $requiresAvailableQuantity);
+            return $this->setData(ResourceInterface::FIELD_REQUIRES_AVAILABILITY_QUANTITY, $requiresAvailableQuantity);
         }
     }
 ?>

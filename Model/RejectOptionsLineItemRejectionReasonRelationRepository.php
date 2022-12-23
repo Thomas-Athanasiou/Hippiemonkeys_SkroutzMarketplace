@@ -25,80 +25,97 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
-
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelation as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsLineItemRejectionReasonRelationResourceInterface as ResourceInterface;
 
     class RejectOptionsLineItemRejectionReasonRelationRepository
     implements RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
     {
-        protected $_idIndex = [];
+        /**
+         * Id Cache property
+         *
+         * @access protected
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelationResourceInterface $_idCache
+         */
+        protected $_idCache = [];
 
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelationResourceInterface $resource
+         */
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory,
             CollectionProcessorInterface $collectionProcessor,
             SearchResultInterfaceFactory $searchResulFactory
         )
         {
-            $this->_resourceModel                                       = $resourceModel;
+            $this->_resource = $resource;
             $this->_rejectOptionsLineItemRejectionReasonRelationFactory = $rejectOptionsLineItemRejectionReasonRelationFactory;
-            $this->_collectionProcessor                                 = $collectionProcessor;
-            $this->_searchResultFactory                                 = $searchResulFactory;
+            $this->_collectionProcessor = $collectionProcessor;
+            $this->_searchResultFactory = $searchResulFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getById($id) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
-            $rejectOptionsLineItemRejectionReasonRelation = $this->_idIndex[$id] ?? null;
+            $rejectOptionsLineItemRejectionReasonRelation = $this->_idCache[$id] ?? null;
             if(!$rejectOptionsLineItemRejectionReasonRelation) {
                 $rejectOptionsLineItemRejectionReasonRelation = $this->getRejectOptionsLineItemRejectionReasonRelationFactory()->create();
-                $this->getResourceModel()->load($rejectOptionsLineItemRejectionReasonRelation, $id, ResourceModel::FIELD_ID);
+                $this->getResource()->loadRejectOptionsLineItemRejectionReasonRelationById($rejectOptionsLineItemRejectionReasonRelation, $id);
                 if (!$rejectOptionsLineItemRejectionReasonRelation->getId())
                 {
                     throw new NoSuchEntityException(
                         __('The relation with id "%1" that was requested doesn\'t exist. Verify the relation and try again.', $id)
                     );
                 }
-                $this->_idIndex[$id] = $rejectOptionsLineItemRejectionReasonRelation;
+                $this->_idCache[$id] = $rejectOptionsLineItemRejectionReasonRelation;
             }
             return $rejectOptionsLineItemRejectionReasonRelation;
         }
+
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getByRejectOptionsAndLineItemRejectionReason(
             RejectOptionsInterface $rejectOptions,
             LineItemRejectionReasonInterface $lineItemRejectionReason
         ) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
-            $rejectOptionsLineItemRejectionReasonRelation = $this->getRejectOptionsLineItemRejectionReasonRelationFactory()->create();
-            $rejectOptionsId            = $rejectOptions->getId();
-            $lineItemRejectionReasonId  = $lineItemRejectionReason->getLocalId();
-            $this->getResourceModel()->loadByRejectOptionsIdAndLineItemRejectionReason(
-                $rejectOptionsLineItemRejectionReasonRelation,
-                $rejectOptionsId,
-                $lineItemRejectionReasonId
-            );
-            $id = $rejectOptionsLineItemRejectionReasonRelation->getId();
-            if (!$id)
+            $rejectOptionsId = $rejectOptions->getId();
+            $lineItemRejectionReasonId = $lineItemRejectionReason->getId();
+
+            $searchCriteriaBuilder = $this->getSearchCriteriaBuilder();
+
+            $rejectOptionsPickupLocationRelation = $this->getList(
+                $searchCriteriaBuilder
+                    ->addFilter(ResourceInterface::FIELD_REJECT_OPTIONS_ID, $rejectOptionsId, 'eq')
+                    ->addFilter(ResourceInterface::FIELD_LINE_ITEM_REJECTION_REASON_ID, $lineItemRejectionReasonId, 'eq')
+                    ->create()
+            )
+            ->getItems() [0] ?? null;
+
+            if($rejectOptionsPickupLocationRelation)
+            {
+                $this->_idCache[$rejectOptionsPickupLocationRelation->getId()] = $rejectOptionsPickupLocationRelation;
+            }
+            else
             {
                 throw new NoSuchEntityException(
-                    __(
-                        'The relation with Reject Options ID "%1" and Line Item Rejection Reason ID "%2" that was requested doesn\'t exist. Verify the relation and try again.',
-                        $rejectOptionsId,
-                        $lineItemRejectionReasonId
-                    )
+                    __('The Accept Options Pickup Location Relation with Accept Options ID "%1" and Pickup Window ID "%2" that was requested doesn\'t exist. Verify the Accept Options Pickup Wondow Relation and try again.', $rejectOptionsId, $lineItemRejectionReasonId)
                 );
             }
-            $this->_idIndex[$id] = $rejectOptionsLineItemRejectionReasonRelation;
-            return $rejectOptionsLineItemRejectionReasonRelation;
+
+            return $rejectOptionsPickupLocationRelation;
         }
 
-
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getList(SearchCriteriaInterface $searchCriteria): RejectOptionsLineItemRejectionReasonRelationSearchResultInterface
         {
@@ -109,29 +126,43 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
-            $this->getResourceModel()->save($rejectOptionsLineItemRejectionReasonRelation);
-            $this->_idIndex[ $rejectOptionsLineItemRejectionReasonRelation->getId() ] = $rejectOptionsLineItemRejectionReasonRelation;
+            $this->getResource()->saveRejectOptionsLineItemRejectionReasonRelation($rejectOptionsLineItemRejectionReasonRelation);
+            $this->_idCache[ $rejectOptionsLineItemRejectionReasonRelation->getId() ] = $rejectOptionsLineItemRejectionReasonRelation;
             return $rejectOptionsLineItemRejectionReasonRelation;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation) : bool
         {
-            $this->getResourceModel()->delete($rejectOptionsLineItemRejectionReasonRelation);
-            unset( $this->_idIndex[ $rejectOptionsLineItemRejectionReasonRelation->getId() ] );
-            return $rejectOptionsLineItemRejectionReasonRelation->isDeleted();
+            unset($this->_idCache[$rejectOptionsLineItemRejectionReasonRelation->getId()]);
+            return $this->getResource()->deleteRejectOptionsLineItemRejectionReasonRelation($rejectOptionsLineItemRejectionReasonRelation);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsLineItemRejectionReasonRelationResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsLineItemRejectionReasonRelationResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
         private $_rejectOptionsLineItemRejectionReasonRelationFactory;

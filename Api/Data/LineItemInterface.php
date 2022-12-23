@@ -317,7 +317,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setRejectionReason($rejectionReason): LineItemInterface;
+        function setRejectionReason(?string $rejectionReason): LineItemInterface;
 
         /**
          * Gets Return Reason
@@ -339,7 +339,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setReturnReason($returnReason): LineItemInterface;
+        function setReturnReason(?string $returnReason): LineItemInterface;
 
         /**
          * Gets Serial Number
@@ -361,7 +361,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setSerialNumbers($serialNumbers): LineItemInterface;
+        function setSerialNumbers(?string $serialNumbers): LineItemInterface;
 
         /**
          * Gets Ean
@@ -404,6 +404,6 @@
          * @param string|null $shop_variation_uid
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setShopVariationUid($shopVariationUid): LineItemInterface;
+        function setShopVariationUid(?string $shopVariationUid): LineItemInterface;
     }
 ?>

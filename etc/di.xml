@@ -5,21 +5,20 @@
     Hippiemonkeys_SkroutzMarketplace
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Accept Options -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptions" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsRepository" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions" />
 
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupLocationRelation" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupLocationRelation\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupLocationRelationRepository" />
-
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupWindowRelation" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupWindowRelation\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupWindowRelationRepository" />
-
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\Address" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AddressRepository" />
-
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\Customer" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\CustomerRepository" />

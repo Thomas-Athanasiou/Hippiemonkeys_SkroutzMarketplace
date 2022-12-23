@@ -25,7 +25,7 @@
          * @api
          * @access public
          *
-         * @param mixed $value
+         * @param mixed $id
          *
          * @return mixed
          */

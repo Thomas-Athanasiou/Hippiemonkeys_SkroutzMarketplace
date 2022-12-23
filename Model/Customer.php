@@ -81,6 +81,7 @@
         {
             return $this->getData(ResourceInterface::FIELD_FIRST_NAME);
         }
+
         /**
          * {@inheritdoc}
          */
@@ -96,6 +97,7 @@
         {
             return $this->getData(ResourceInterface::FIELD_LAST_NAME);
         }
+
         /**
          * {@inheritdoc}
          */
@@ -109,11 +111,12 @@
          */
         public function getAddress(): AddressInterface
         {
-            $address    = $this->getData(self::FIELD_ADDRESS);
-            $addressId  = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
-            if($addressId && !$address)
+            $address = $this->getData(static::FIELD_ADDRESS);
+            if($address === null)
             {
-                $address = $this->getAddressRepository()->getById($addressId);
+                $address = $this->getAddressRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_ADDRESS_ID)
+                );
                 $this->setAddress($address);
             }
             return $address;
@@ -122,16 +125,25 @@
         /**
          * {@inheritdoc}
          */
-        public function setAddress($address): Customer
+        public function setAddress(?AddressInterface $address): Customer
         {
-            $this->setData(ResourceInterface::FIELD_ADDRESS_ID, ($address ? $address->getId() : $address) );
-            return $this->setData(self::FIELD_ADDRESS, $address);
+            $this->setData(ResourceInterface::FIELD_ADDRESS_ID, ($address === null ? $address : $address->getId()));
+            return $this->setData(static::FIELD_ADDRESS, $address);
         }
 
+        /**
+         * Address Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplaceWebhook\Api\AddressRepositoryInterface $_addressRepository
+         */
         private $_addressRepository;
 
         /**
          * Gets Address Repository
+         *
+         * @access protected
          *
          * @return \Hippiemonkeys\SkroutzMarketplaceWebhook\Api\AddressRepositoryInterface
          */

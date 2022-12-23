@@ -61,12 +61,13 @@
          */
         public function getAcceptOptions(): AcceptOptionsInterface
         {
-            $acceptOptions = $this->getData(self::FIELD_ACCEPT_OPTIONS);
-            $acceptOptionsId = $this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID);
-            if(!$acceptOptions && $acceptOptionsId)
+            $acceptOptions = $this->getData(static::FIELD_ACCEPT_OPTIONS);
+            if($acceptOptions === null)
             {
-                $acceptOptions = $this->getAcceptOptionsRepository()->getById($acceptOptionsId);
-                $this->setData(self::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+                $acceptOptions = $this->getAcceptOptionsRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID)
+                );
+                $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
             }
             return $acceptOptions;
         }
@@ -77,7 +78,7 @@
         public function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupWindowRelation
         {
             $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
-            return $this->setData(self::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+            return $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
         }
 
         /**
@@ -85,12 +86,13 @@
          */
         public function getPickupWindow(): PickupWindowInterface
         {
-            $pickupWindow = $this->getData(self::FIELD_PICKUP_WINDOW);
-            $pickupWindowId = $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW_ID);
-            if(!$pickupWindow && $pickupWindowId)
+            $pickupWindow = $this->getData(static::FIELD_PICKUP_WINDOW);
+            if($pickupWindow === null)
             {
-                $pickupWindow     = $this->getPickupWindowRepository()->getById($pickupWindowId);
-                $this->setData(self::FIELD_PICKUP_WINDOW, $pickupWindow);
+                $pickupWindow = $this->getPickupWindowRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW_ID)
+                );
+                $this->setData(static::FIELD_PICKUP_WINDOW, $pickupWindow);
             }
             return $pickupWindow;
         }
@@ -101,7 +103,7 @@
         public function setPickupWindow(PickupWindowInterface $pickupWindow): AcceptOptionsPickupWindowRelation
         {
             $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindow->getId());
-            return $this->setData(self::FIELD_PICKUP_WINDOW, $pickupWindow);
+            return $this->setData(static::FIELD_PICKUP_WINDOW, $pickupWindow);
         }
 
         /**

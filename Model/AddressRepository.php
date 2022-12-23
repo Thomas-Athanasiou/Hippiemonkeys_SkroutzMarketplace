@@ -55,7 +55,7 @@
         public function getById($id) : AddressInterface
         {
             $address = $this->_idCache[$id] ?? null;
-            if(!$address)
+            if($address === null)
             {
                 $address = $this->getAddressFactory()->create();
                 $this->getResource()->loadAddressById($address, $id);
@@ -68,6 +68,7 @@
 
                 $this->_idCache[$id] = $address;
             }
+
             return $address;
         }
 
@@ -76,9 +77,8 @@
          */
         public function save(AddressInterface $address): AddressInterface
         {
-            $this->getResource()->saveAddress($address);
             $this->_idCache[$address->getId()] = $address;
-            return $address;
+            return $this->getResource()->saveAddress($address);
         }
 
         /**

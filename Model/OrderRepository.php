@@ -19,7 +19,7 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface as ResourceInterface;
 
     class OrderRepository
     implements OrderRepositoryInterface
@@ -29,21 +29,22 @@
             $_magentoOrderIndex = [];
 
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             OrderInterfaceFactory $orderFactory
         )
         {
-            $this->_resourceModel   = $resourceModel;
-            $this->_orderFactory    = $orderFactory;
+            $this->_resource = $resource;
+            $this->_orderFactory = $orderFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getByCode(string $code) : OrderInterface
         {
             $order = $this->getOrderFactory()->create();
-            $this->getResourceModel()->load($order, $code, ResourceModel::FIELD_CODE);
+            $this->getResource()->loadOrderByCode($order, $code);
+
             $id = $order->getId();
             if (!$id)
             {
@@ -51,17 +52,19 @@
                     __('The order with code "%1" that was requested doesn\'t exist. Verify the order and try again.', $code)
                 );
             }
+
             $magentoOrder = $order->getMagentoOrder();
-            if($magentoOrder)
+            if($magentoOrder !== null)
             {
-                $this->_magentoOrderIndex[ $magentoOrder->getId() ] = $order;
+                $this->_magentoOrderIndex[$magentoOrder->getId()] = $order;
             }
-            $this->_idIndex[$id]        = $order;
+
+            $this->_idIndex[$id] = $order;
             return $order;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getById($id) : OrderInterface
         {
@@ -69,84 +72,119 @@
             if(!$order)
             {
                 $order = $this->getOrderFactory()->create();
-                $this->getResourceModel()->load($order, $id, ResourceModel::FIELD_ID);
+                $this->getResource()->loadOrderById($order, $id);
                 if (!$order->getId())
                 {
                     throw new NoSuchEntityException(
                         __('The order with id "%1" that was requested doesn\'t exist. Verify the order and try again.', $id)
                     );
                 }
+
                 $magentoOrder = $order->getMagentoOrder();
-                if($magentoOrder)
+                if($magentoOrder !== null)
                 {
-                    $this->_magentoOrderIndex[ $magentoOrder->getId() ] = $magentoOrder;
+                    $this->_magentoOrderIndex[$magentoOrder->getId()] = $magentoOrder;
                 }
+
                 $this->_idIndex[$id] = $order;
             }
             return $order;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getByMagentoOrder(MagentoOrderInterface $magentoOrder) : OrderInterface
         {
-            $magentoOrderId = $magentoOrder->getId();
-            $order          = $this->_magentoOrderIndex[$magentoOrderId] ?? null;
-            if(!$order) {
+            $magentoOrderId = $magentoOrder->getEntityId();
+            $order = $this->_magentoOrderIndex[$magentoOrderId] ?? null;
+            if(!$order)
+            {
                 $order = $this->getOrderFactory()->create();
-                $order->loadByMagentoOrder($magentoOrder);
+                $this->getResource()->loadOrderByMagentoOrderId($order, $magentoOrderId);
                 $id = $order->getId();
+
                 if (!$id)
                 {
                     throw new NoSuchEntityException(
-                        __('The order with magento order id "%1" that was requested doesn\'t exist. Verify the order and try again.', $magentoOrderId)
+                        __('The Order with Magento Order Id "%1" that was requested doesn\'t exist. Verify the Order and try again.', $magentoOrderId)
                     );
                 }
+
                 $this->_magentoOrderIndex[$magentoOrderId]  = $magentoOrderId;
-                $this->_idIndex[$id]                        = $order;
+                $this->_idIndex[$id] = $order;
             }
             return $order;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(OrderInterface $order) : OrderInterface
         {
-            $order->getResource()->save($order);
             $this->_idIndex[ $order->getId() ] = $order;
             $magentoOrder = $order->getMagentoOrder();
-            if($magentoOrder)
+            if($magentoOrder !== null)
             {
-                $this->_magentoOrderIndex[ $magentoOrder->getId() ] = $order;
+                $this->_magentoOrderIndex[$magentoOrder->getEntityId()] = $order;
             }
+            $this->getResource()->saveOrder($order);
+
             return $order;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(OrderInterface $order) : bool
         {
-            $order->getResource()->delete($order);
             unset( $this->_idIndex[ $order->getId() ] );
             $magentoOrder = $order->getMagentoOrder();
-            if($magentoOrder)
+            if($magentoOrder !== null)
             {
-                unset( $this->_magentoOrderIndex[ $magentoOrder->getId() ] );
+                unset($this->_magentoOrderIndex[$magentoOrder->getEntityId()]);
             }
-            return $order->isDeleted();
+            return $this->getResource()->deleteOrder($order);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
+        /**
+         * Order Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory $_orderFactory
+         */
         private $_orderFactory;
-        protected function getOrderFactory() : OrderInterfaceFactory
+
+        /**
+         * Gets Order Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory
+         */
+        protected function getOrderFactory(): OrderInterfaceFactory
         {
             return $this->_orderFactory;
         }

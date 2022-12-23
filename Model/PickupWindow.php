@@ -14,33 +14,28 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-
+    use Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface as ResourceInterface;
 
     class PickupWindow
     extends AbstractModel
     implements PickupWindowInterface
     {
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
         /**
          * @inheritdoc
          */
         public function getSkroutzId(): int
         {
-            return (int) $this->getData(ResourceModel::FIELD_SKROUTZ_ID);
+            return (int) $this->getData(ResourceInterface::FIELD_SKROUTZ_ID);
         }
+
         /**
          * @inheritdoc
          */
-        public function setSkroutzId(int $skroutzId)
+        public function setSkroutzId(int $skroutzId): PickupWindow
         {
-            return $this->setData(ResourceModel::FIELD_SKROUTZ_ID, (string) $skroutzId);
+            return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
 
         /**
@@ -48,14 +43,15 @@
          */
         public function getLabel(): string
         {
-            return $this->getData(ResourceModel::FIELD_LABEL);
+            return $this->getData(ResourceInterface::FIELD_LABEL);
         }
+
         /**
          * @inheritdoc
          */
-        public function setLabel(string $label)
+        public function setLabel(string $label): PickupWindow
         {
-            return $this->setData(ResourceModel::FIELD_LABEL, $label);
+            return $this->setData(ResourceInterface::FIELD_LABEL, $label);
         }
     }
 ?>

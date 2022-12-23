@@ -18,16 +18,14 @@
         Hippiemonkeys\Core\Model\Spi\ModelResourceInterface;
 
     /**
-     * Accept Options Resource interface
+     * Pickup Window Resource interface
      */
     interface PickupWindowResourceInterface
     extends ModelResourceInterface
     {
         const
-            FIELD_ORDER_ID = 'order_id',
-            FIELD_NUMBER_OF_PARCELS = 'number_of_parcels',
-            FIELD_PICKUP_LOCATION = 'pickup_location',
-            FIELD_PICKUP_WINDOW = 'pickup_window';
+            FIELD_SKROUTZ_ID = 'skroutz_id',
+            FIELD_LABEL = 'label';
 
         /**
          * Save PickupWindow data
@@ -53,6 +51,19 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowResourceInterface
          */
         function loadPickupWindowById(PickupWindowInterface $pickupWindow, $id): PickupWindowResourceInterface;
+
+        /**
+         * Load a Pickup Window by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
+         * @param int $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowResourceInterface
+         */
+        function loadPickupWindowBySkroutzId(PickupWindowInterface $pickupWindow, int $skroutzId): PickupWindowResourceInterface;
 
         /**
          * Delete the PickupWindow

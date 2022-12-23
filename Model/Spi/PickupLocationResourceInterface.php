@@ -53,6 +53,19 @@
         function loadPickupLocationById(PickupLocationInterface $pickupLocation, $id): PickupLocationResourceInterface;
 
         /**
+         * Loads a Pickup Location by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
+         * @param string $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationResourceInterface
+         */
+        function loadPickupLocationBySkroutzId(PickupLocationInterface $pickupLocation, string $skroutzId): PickupLocationResourceInterface;
+
+        /**
          * Deletes the Pickup Location
          *
          * @api

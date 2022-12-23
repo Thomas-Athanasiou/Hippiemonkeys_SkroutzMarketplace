@@ -14,7 +14,7 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
+    use Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectionInfo as ResourceModel;
 
@@ -22,11 +22,6 @@
     extends AbstractModel
     implements RejectionInfoInterface
     {
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
         /**
          * @inheritdoc
          */
@@ -38,7 +33,7 @@
         /**
          * @inheritdoc
          */
-        public function setReason(string $reason)
+        public function setReason(string $reason): RejectionInfo
         {
             return $this->setData(ResourceModel::FIELD_REASON, $reason);
         }
@@ -54,7 +49,7 @@
         /**
          * @inheritdoc
          */
-        public function setActor(string $actor)
+        public function setActor(string $actor): RejectionInfo
         {
             return $this->setData(ResourceModel::FIELD_ACTOR, $actor);
         }

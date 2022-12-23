@@ -14,34 +14,20 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-
+    use Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\OrderPickupWindow as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderPickupWindowResourceInterface as ResourceInterface;
 
     class OrderPickupWindow
     extends AbstractModel
     implements OrderPickupWindowInterface
     {
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
-        /**
-         * @inheritdoc
-         */
-        public function getId()
-        {
-            return $this->getData(ResourceModel::FIELD_ID);
-        }
-
         /**
          * @inheritdoc
          */
         public function setId($id)
         {
-            return $this->setData(ResourceModel::FIELD_LOCAL_ID, (string) $localId);
+            return $this->setData(ResourceInterface::FIELD_ID, $id);
         }
 
         /**
@@ -49,15 +35,15 @@
          */
         public function getFrom(): string
         {
-            return $this->getData(ResourceModel::FIELD_FROM);
+            return $this->getData(ResourceInterface::FIELD_FROM);
         }
 
         /**
          * @inheritdoc
          */
-        public function setFrom(string $from)
+        public function setFrom(string $from): OrderPickupWindow
         {
-            return $this->setData(ResourceModel::FIELD_FROM, $from);
+            return $this->setData(ResourceInterface::FIELD_FROM, $from);
         }
 
         /**
@@ -65,15 +51,15 @@
          */
         public function getTo(): string
         {
-            return $this->getData(ResourceModel::FIELD_TO);
+            return $this->getData(ResourceInterface::FIELD_TO);
         }
 
         /**
          * @inheritdoc
          */
-        public function setTo(string $to)
+        public function setTo(string $to): OrderPickupWindow
         {
-            return $this->setData(ResourceModel::FIELD_TO, $to);
+            return $this->setData(ResourceInterface::FIELD_TO, $to);
         }
     }
 ?>

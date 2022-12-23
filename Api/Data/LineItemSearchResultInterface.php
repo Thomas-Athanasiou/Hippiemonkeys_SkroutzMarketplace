@@ -22,17 +22,23 @@
         /**
          * Gets collection of Line Item items
          *
+         * @api
+         * @access public
+         *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[]
          */
-        public function getItems();
+        function getItems();
 
         /**
          * Sets collection of Line Item items
+         *
+         * @api
+         * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $lineItems
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface
          */
-        public function setItems(array $lineItems);
+        function setItems(array $lineItems);
     }
 ?>

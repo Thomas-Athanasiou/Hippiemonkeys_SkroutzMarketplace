@@ -38,7 +38,6 @@
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface[] $customers
          *
          * @return mixed
-         *
          */
         public function setItems(array $customers);
     }

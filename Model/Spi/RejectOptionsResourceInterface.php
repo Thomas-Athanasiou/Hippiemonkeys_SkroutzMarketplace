@@ -52,6 +52,19 @@
         function loadRejectOptionsById(RejectOptionsInterface $rejectOptions, $id): RejectOptionsResourceInterface;
 
         /**
+         * Load a RejectOptions by Order Id
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $rejectOptions
+         * @param mixed $orderId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsResourceInterface
+         */
+        function loadRejectOptionsByOrderId(RejectOptionsInterface $rejectOptions, $orderId): RejectOptionsResourceInterface;
+
+        /**
          * Delete the RejectOptions
          *
          * @api

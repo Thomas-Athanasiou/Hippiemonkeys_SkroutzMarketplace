@@ -27,10 +27,12 @@
             FIELD_ORDER_ID = 'order_id',
             FIELD_NUMBER_OF_PARCELS = 'number_of_parcels',
             FIELD_PICKUP_LOCATION = 'pickup_location',
-            FIELD_PICKUP_WINDOW = 'pickup_window';
+            FIELD_PICKUP_WINDOW = 'pickup_window',
+            FIELD_FROM = 'from',
+            FIELD_TO = 'to';
 
         /**
-         * Save OrderPickupWindow data
+         * Save Order Pickup Window data
          *
          * @api
          * @access public

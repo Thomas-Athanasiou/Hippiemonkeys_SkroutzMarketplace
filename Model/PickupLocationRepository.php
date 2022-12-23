@@ -18,99 +18,152 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupLocation as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface as ResourceInterface;
 
     class PickupLocationRepository
     implements PickupLocationRepositoryInterface
     {
         protected
-            $_localIdIndex      = [],
-            $_skroutzIdIndex    = [];
+            /**
+             * Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $_idCache
+             */
+            $_idCache = [],
 
+            /**
+             * Skroutz Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $_skroutzIdCache
+             */
+            $_skroutzIdCache = [];
+
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface $resource
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory $pickupLocationFactory
+         */
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             PickupLocationInterfaceFactory $pickupLocationFactory
         )
         {
-            $this->_resourceModel           = $resourceModel;
-            $this->_pickupLocationFactory   = $pickupLocationFactory;
+            $this->_resource = $resource;
+            $this->_pickupLocationFactory = $pickupLocationFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getByLocalId(int $localId) : PickupLocationInterface
+        public function getById($id) : PickupLocationInterface
         {
-            $pickupLocation = $this->_localIdIndex[$localId] ?? null;
-            if(!$pickupLocation)
+            $pickupLocation = $this->_idCache[$id] ?? null;
+            if($pickupLocation === null)
             {
                 $pickupLocation = $this->getPickupLocationFactory()->create();
-                $this->getResourceModel()->load($pickupLocation, $localId, ResourceModel::FIELD_ID);
-                $localId = $pickupLocation->getLocalId();
-                if (!$localId)
+                $this->getResource()->loadPickupLocationById($pickupLocation, $id);
+                if ($pickupLocation->getId() === null)
                 {
                     throw new NoSuchEntityException(
-                        __('The Pickup Location with id "%1" that was requested doesn\'t exist. Verify the pickupLocation and try again.', $localId)
+                        __('The Pickup Location with id "%1" that was requested doesn\'t exist. Verify the pickupLocation and try again.', $id)
                     );
                 }
-                $this->_localIdIndex[$localId]                              = $pickupLocation;
-                $this->_skroutzIdIndex[ $pickupLocation->getSkroutzId() ]   = $pickupLocation;
+
+                $this->_idCache[$id] = $pickupLocation;
+                $this->_skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
             }
             return $pickupLocation;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getBySkroutzId(string $skroutzId) : PickupLocationInterface
         {
-            $pickupLocation = $this->_skroutzIdIndex[$skroutzId] ?? null;
-            if(!$pickupLocation)
+            $pickupLocation = $this->_skroutzIdCache[$skroutzId] ?? null;
+            if($pickupLocation === null)
             {
                 $pickupLocation = $this->getPickupLocationFactory()->create();
-                $this->getResourceModel()->load($pickupLocation, $skroutzId, ResourceModel::FIELD_SKROUTZ_ID);
-                $localId = $pickupLocation->getLocalId();
-                if (!$localId)
+                $this->getResource()->loadPickupLocationBySkroutzId($pickupLocation, $skroutzId, ResourceInterface::FIELD_SKROUTZ_ID);
+                $id = $pickupLocation->getId();
+                if($id === null)
                 {
                     throw new NoSuchEntityException(
                         __('The Pickup Location with skroutz id "%1" that was requested doesn\'t exist. Verify the pickupLocation and try again.', $skroutzId)
                     );
                 }
-                $this->_localIdIndex[$localId]      = $pickupLocation;
-                $this->_skroutzIdIndex[$skroutzId]  = $pickupLocation;
+
+                $this->_idCache[$id] = $pickupLocation;
+                $this->_skroutzIdCache[$skroutzId] = $pickupLocation;
             }
             return $pickupLocation;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(PickupLocationInterface $pickupLocation) : PickupLocationInterface
         {
-            $this->getResourceModel()->save($pickupLocation);
-            $this->_skroutzIdIndex[ $pickupLocation->getBySkroutzId() ] = $pickupLocation;
-            $this->_localIdIndex[ $pickupLocation->getLocalId() ]       = $pickupLocation;
+            $this->getResource()->savePickupLocation($pickupLocation);
+            $this->_skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
+            $this->_idCache[$pickupLocation->getId()] = $pickupLocation;
             return $pickupLocation;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(PickupLocationInterface $pickupLocation) : bool
         {
-            $this->getResourceModel()->delete($pickupLocation);
-            unset( $this->_localIdIndex[ $pickupLocation->getLocalId() ] );
-            unset( $this->_skroutzIdIndex[ $pickupLocation->getSkroutzId() ] );
-            return $pickupLocation->isDeleted();
+            unset($this->_idCache[$pickupLocation->getId()]);
+            unset($this->_skroutzIdCache[$pickupLocation->getSkroutzId()]);
+            return $this->getResource()->deletePickupLocation($pickupLocation);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
+        /**
+         * Pickup Location Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory $_pickupLocationFactory
+         */
         private $_pickupLocationFactory;
+
+        /**
+         * Gets Pickup Location Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory
+         */
         protected function getPickupLocationFactory() : PickupLocationInterfaceFactory
         {
             return $this->_pickupLocationFactory;

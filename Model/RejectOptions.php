@@ -16,69 +16,56 @@
 
     use Magento\Framework\Registry,
         Magento\Framework\Model\Context,
-        Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\AbstractResource,
-        Magento\Framework\Data\Collection\AbstractDb,
-
+        Magento\Framework\Api\SearchCriteriaBuilder,
+        Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface as ResourceInterface;
 
     class RejectOptions
     extends AbstractModel
     implements RejectOptionsInterface
     {
         public const
-            FIELD_ORDER                         = 'order',
-            FIELD_LINE_ITEM_REJECTION_REASON    = 'line_item_rejection_reason',
+            FIELD_ORDER = 'order',
+            FIELD_LINE_ITEM_REJECTION_REASON = 'line_item_rejection_reason',
 
             REJECT_OPTIONS_LINE_ITEM_REJECTION_RESON_RELATION_FIELD_REJECT_OPTIONS_ID = 'reject_options_id';
 
         public function __construct(
             Context $context,
             Registry $registry,
-
             RejectOptionslineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository,
             LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository,
             OrderRepositoryInterface $orderRepository,
-
-            AbstractResource $resource = null,
-            AbstractDb $resourceCollection = null,
+            SearchCriteriaBuilder $searchCriteriaBuilder,
             array $data = []
         )
         {
-            parent::__construct(
-                $context,
-                $registry,
-                $resource,
-                $resourceCollection,
-                $data
-            );
+            parent::__construct($context, $registry, $data);
+
             $this->_rejectOptionsLineItemRejectionReasonRelationRepository  = $rejectOptionsLineItemRejectionReasonRelationRepository;
-            $this->_lineItemRejectionReasonRepository                       = $lineItemRejectionReasonRepository;
-            $this->_orderRepository                                         = $orderRepository;
-        }
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
+            $this->_lineItemRejectionReasonRepository = $lineItemRejectionReasonRepository;
+            $this->_orderRepository = $orderRepository;
+            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getLineItemRejectionReasons(): array
         {
-            $lineItemRejectionReason = $this->getData(self::FIELD_LINE_ITEM_REJECTION_REASON);
-            if (!$lineItemRejectionReason) {
+            $lineItemRejectionReason = $this->getData(static::FIELD_LINE_ITEM_REJECTION_REASON);
+            if(!$lineItemRejectionReason === null)
+            {
                 $lineItemRejectionReason = [];
                 $rejectOptionsLineItemRejectionReasonRelations = $this->getRejectOptionsLineItemRejectionReasonRelationRepository()
                     ->getList(
-                        $this->getSearchCriteriaBuilderFactory()
-                            ->create()
-                            ->addFilter(self::REJECT_OPTIONS_LINE_ITEM_REJECTION_RESON_RELATION_FIELD_REJECT_OPTIONS_ID, $this->getId())
+                        $this->getSearchCriteriaBuilder()
+                            ->addFilter(static::REJECT_OPTIONS_LINE_ITEM_REJECTION_RESON_RELATION_FIELD_REJECT_OPTIONS_ID, $this->getId())
                             ->create()
                     )
                     ->getItems();
@@ -92,41 +79,46 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setLineItemRejectionReasons(array $lineItemRejectionReason)
         {
-            return $this->setData(self::FIELD_LINE_ITEM_REJECTION_REASON, $lineItemRejectionReason);
-        }
-
-        private $_rejectOptionsLineItemRejectionReasonRelationRepository;
-        protected function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
-        {
-            return $this->_rejectOptionsLineItemRejectionReasonRelationRepository;
+            return $this->setData(static::FIELD_LINE_ITEM_REJECTION_REASON, $lineItemRejectionReason);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getOrder(): OrderInterface
         {
-            $order      = $this->getData(self::FIELD_ORDER);
-            $orderId    = $this->getData(ResourceModel::FIELD_ORDER_ID);
-            if (!$order && $orderId)
+            $order = $this->getData(static::FIELD_ORDER);
+            if ($order === null)
             {
-                $order = $this->getOrderRepository()->getById((int) $orderId);
-                $this->setOrder($order);
+                $order = $this->getOrderRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_ORDER_ID)
+                );
+                $this->setData(ResourceInterface::FIELD_ORDER_ID, $order);
             }
             return $order;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setOrder(OrderInterface $order)
         {
-            $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
-            return $this->setData(self::FIELD_ORDER, $order);
+            $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
+            return $this->setData(static::FIELD_ORDER, $order);
+        }
+
+        private $_rejectOptionsLineItemRejectionReasonRelationRepository;
+
+        /**
+         *
+         */
+        protected function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
+        {
+            return $this->_rejectOptionsLineItemRejectionReasonRelationRepository;
         }
 
         private $_orderRepository;

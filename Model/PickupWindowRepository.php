@@ -18,99 +18,145 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface as ResourceInterface;
 
     class PickupWindowRepository
     implements PickupWindowRepositoryInterface
     {
         protected
-            $_localIdIndex      = [],
-            $_skroutzIdIndex    = [];
+            /**
+             * Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $_idCache
+             */
+            $_idCache = [],
+
+            /**
+             * Skroutz Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $_skroutzIdCache
+             */
+            $_skroutzIdCache = [];
 
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             PickupWindowInterfaceFactory $pickupWindowFactory
         )
         {
-            $this->_resourceModel       = $resourceModel;
+            $this->_resource = $resource;
             $this->_pickupWindowFactory = $pickupWindowFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getByLocalId(int $localId) : PickupWindowInterface
+        public function getById(int $id) : PickupWindowInterface
         {
-            $pickupWindow = $this->_localIdIndex[$localId] ?? null;
-            if(!$pickupWindow)
+            $pickupWindow = $this->_idCache[$id] ?? null;
+            if($pickupWindow === null)
             {
                 $pickupWindow = $this->getPickupWindowFactory()->create();
-                $this->getResourceModel()->load($pickupWindow, $localId, ResourceModel::FIELD_ID);
-                $localId = $pickupWindow->getLocalId();
-                if (!$localId)
+                $this->getResource()->loadPickupWindowById($pickupWindow, $id, ResourceInterface::FIELD_ID);
+                if ($pickupWindow->getId() === null)
                 {
                     throw new NoSuchEntityException(
-                        __('The Pickup Window with id "%1" that was requested doesn\'t exist. Verify the pickupWindow and try again.', $localId)
+                        __('The Pickup Window with id "%1" that was requested doesn\'t exist. Verify the Pickup Window and try again.', $id)
                     );
                 }
-                $this->_localIdIndex[$localId]                              = $pickupWindow;
-                $this->_skroutzIdIndex[ $pickupWindow->getBySkroutzId() ]   = $pickupWindow;
+
+                $this->_idCache[$id] = $pickupWindow;
+                $this->_skroutzIdCache[$pickupWindow->getBySkroutzId()] = $pickupWindow;
             }
+
             return $pickupWindow;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getBySkroutzId(int $skroutzId) : PickupWindowInterface
         {
-            $pickupWindow = $this->_skroutzIdIndex[$skroutzId] ?? null;
-            if(!$pickupWindow)
+            $pickupWindow = $this->_skroutzIdCache[$skroutzId] ?? null;
+            if($pickupWindow === null)
             {
                 $pickupWindow = $this->getPickupWindowFactory()->create();
-                $this->getResourceModel()->load($pickupWindow, $skroutzId, ResourceModel::FIELD_SKROUTZ_ID);
-                $localId = $pickupWindow->getLocalId();
-                if (!$localId)
+                $this->getResource()->loadPickupWindowBySkroutzId($pickupWindow, $skroutzId);
+                $id = $pickupWindow->getId();
+                if ($id === null)
                 {
                     throw new NoSuchEntityException(
                         __('The Pickup Window with skroutz id "%1" that was requested doesn\'t exist. Verify the pickupWindow and try again.', $skroutzId)
                     );
                 }
-                $this->_localIdIndex[$localId]      = $pickupWindow;
-                $this->_skroutzIdIndex[$skroutzId]  = $pickupWindow;
+
+                $this->_idCache[$id] = $pickupWindow;
+                $this->_skroutzIdCache[$skroutzId] = $pickupWindow;
             }
             return $pickupWindow;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(PickupWindowInterface $pickupWindow) : PickupWindowInterface
         {
-            $this->getResourceModel()->save($pickupWindow);
-            $this->_skroutzIdIndex[ $pickupWindow->getBySkroutzId() ]   = $pickupWindow;
-            $this->_localIdIndex[ $pickupWindow->getLocalId() ]              = $pickupWindow;
+            $this->getResource()->savePickupWindow($pickupWindow);
+            $this->_skroutzIdCache[$pickupWindow->getSkroutzId()] = $pickupWindow;
+            $this->_idCache[$pickupWindow->getId()] = $pickupWindow;
             return $pickupWindow;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(PickupWindowInterface $pickupWindow) : bool
         {
-            $this->getResourceModel()->delete($pickupWindow);
-            unset( $this->_localIdIndex[ $pickupWindow->getLocalId() ] );
-            unset( $this->_skroutzIdIndex[ $pickupWindow->getSkroutzId() ] );
-            return $pickupWindow->isDeleted();
+            unset( $this->_idCache[ $pickupWindow->getId() ] );
+            unset( $this->_skroutzIdCache[ $pickupWindow->getSkroutzId() ] );
+            return $this->getResource()->deletePickupWindow($pickupWindow);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
+        /**
+         * Pickup Window Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterfaceFactory $_pickupWindowFactory
+         */
         private $_pickupWindowFactory;
+
+        /**
+         * Gets Pickup Window Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterfaceFactory
+         */
         protected function getPickupWindowFactory() : PickupWindowInterfaceFactory
         {
             return $this->_pickupWindowFactory;

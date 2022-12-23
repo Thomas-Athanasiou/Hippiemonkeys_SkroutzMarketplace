@@ -56,6 +56,14 @@
         /**
          * {@inheritdoc}
          */
+        public function loadPickupWindowBySkroutzId(PickupWindowInterface $pickupWindow, string $skroutzId): PickupWindowResourceInterface
+        {
+            return $this->loadModel($pickupWindow, $skroutzId, static::FIELD_SKROUTZ_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
         public function deletePickupWindow(PickupWindowInterface $pickupWindow): bool
         {
             return $this->deleteModel($pickupWindow);

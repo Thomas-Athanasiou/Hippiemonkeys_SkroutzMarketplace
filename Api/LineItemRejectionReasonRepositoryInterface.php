@@ -28,7 +28,20 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function getById(int $localId): LineItemRejectionReasonInterface;
+        function getById($id): LineItemRejectionReasonInterface;
+
+
+        /**
+         * Get Line Item Rejection Reason by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param int $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
+         */
+        function getBySkroutzId(int $skroutzId) : LineItemRejectionReasonInterface;
 
         /**
          * Deletes Line Item Rejection Reason

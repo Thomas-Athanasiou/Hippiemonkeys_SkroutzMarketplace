@@ -22,11 +22,6 @@
     extends AbstractResource
     implements RejectOptionsLineItemRejectionReasonRelationResourceInterface
     {
-        public const
-            FIELD_ID = 'id',
-            FIELD_REJECT_OPTIONS_ID = 'reject_options_id',
-            FIELD_LINE_ITEM_REJECTION_REASON_ID = 'line_item_rejection_reason_id';
-
         protected const
             TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_rejectoptionslirr_r';
 

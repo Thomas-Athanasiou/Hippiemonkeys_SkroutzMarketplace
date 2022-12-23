@@ -67,10 +67,9 @@
         {
             $acceptOptions = $this->_idCache[$id] ?? null;
 
-            if(!$acceptOptions)
+            if($acceptOptions === null)
             {
                 $acceptOptions = $this->getAcceptOptionsFactory()->create();
-
                 $this->getResource()->loadAcceptOptionsById($acceptOptions, $id);
                 if (!$acceptOptions->getId())
                 {
@@ -78,9 +77,8 @@
                         __('The accept options with id "%1" that was requested doesn\'t exist. Verify the accept options and try again.', $id)
                     );
                 }
-                $orderId = $acceptOptions->getOrder()->getId();
-                $this->_orderIdCache[$orderId] = $acceptOptions;
 
+                $this->_orderIdCache[$acceptOptions->getOrder()->getId()] = $acceptOptions;
                 $this->_idCache[$id] = $acceptOptions;
             }
 
@@ -94,7 +92,7 @@
         {
             $orderId = $order->getId();
             $acceptOptions = $this->_orderIdCache[$orderId] ?? null;
-            if(!$acceptOptions)
+            if($acceptOptions === null)
             {
                 $acceptOptions = $this->getAcceptOptionsFactory()->create();
                 $this->getResource()->loadAcceptOptionsByOrderId($acceptOptions, $orderId);
@@ -127,7 +125,7 @@
         public function delete(AcceptOptionsInterface $acceptOptions): bool
         {
             unset($this->_orderIdCache[$acceptOptions->getOrder()->getId()]);
-            unset($this->_idCache[$acceptOptions->getId() ]);
+            unset($this->_idCache[$acceptOptions->getId()]);
             return $this->getResource()->deleteAcceptOptions($acceptOptions);
         }
 

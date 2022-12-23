@@ -19,97 +19,152 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface as ResourceInterface;
 
     class RejectOptionsRepository
     implements RejectOptionsRepositoryInterface
     {
         protected
-            $_idIndex       = [],
-            $_orderIdIndex  = [];
+            /**
+             * Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] $_idCache
+             */
+            $_idCache = [],
 
+            /**
+             * OrderId Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] $_orderIdCache
+             */
+            $_orderIdCache = [];
+
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $resource
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory $rejectOptionsFactory
+         */
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             RejectOptionsInterfaceFactory $rejectOptionsFactory
         )
         {
-            $this->_resourceModel           = $resourceModel;
-            $this->_rejectOptionsFactory    = $rejectOptionsFactory;
+            $this->_resource = $resource;
+            $this->_rejectOptionsFactory = $rejectOptionsFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getById($id) : RejectOptionsInterface
         {
-            $rejectOptions = $this->_idIndex[$id] ?? null;
-            if(!$rejectOptions) {
+            $rejectOptions = $this->_idCache[$id] ?? null;
+            if($rejectOptions === null)
+            {
                 $rejectOptions = $this->getRejectOptionsFactory()->create();
-                $this->getResourceModel()->load($rejectOptions, $id, ResourceModel::FIELD_ID);
-                if (!$rejectOptions->getId())
+                $this->getResource()->loadRejectOptionsById($rejectOptions, $id);
+                if ($rejectOptions->getId() === null)
                 {
                     throw new NoSuchEntityException(
                         __('The reject options with id "%1" that was requested doesn\'t exist. Verify the reject options and try again.', $id)
                     );
                 }
-                $this->_orderIdIndex[ $rejectOptions->getOrder()->getId() ] = $rejectOptions;
-                $this->_idIndex[$id]                                        = $rejectOptions;
+
+                $this->_orderIdCache[$rejectOptions->getOrder()->getId()] = $rejectOptions;
+                $this->_idCache[$id] = $rejectOptions;
             }
             return $rejectOptions;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getByOrder(OrderInterface $order) : RejectOptionsInterface
         {
             $orderId = $order->getId();
-            $rejectOptions = $this->_orderIdIndex[$orderId] ?? null;
-            if(!$rejectOptions) {
+            $rejectOptions = $this->_orderIdCache[$orderId] ?? null;
+            if($rejectOptions === null)
+            {
                 $rejectOptions = $this->getRejectOptionsFactory()->create();
-                $this->getResourceModel()->load($rejectOptions, $orderId, ResourceModel::FIELD_ORDER_ID);
+                $this->getResource()->loadRejectOptionsByOrderId($rejectOptions, $orderId);
                 $id = $rejectOptions->getId();
-                if (!$id)
+                if ($id === null)
                 {
                     throw new NoSuchEntityException(
                         __('The reject options with order id "%1" that was requested doesn\'t exist. Verify the reject options and try again.', $orderId)
                     );
                 }
-                $this->_orderIdIndex[$orderId]  = $rejectOptions;
-                $this->_idIndex[$id]            = $rejectOptions;
+
+                $this->_orderIdCache[$orderId] = $rejectOptions;
+                $this->_idCache[$id] = $rejectOptions;
             }
             return $rejectOptions;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(RejectOptionsInterface $rejectOptions) : RejectOptionsInterface
         {
-            $rejectOptions->getResource()->save($rejectOptions);
-            $this->_idIndex[ $rejectOptions->getId() ] = $rejectOptions;
-            $this->_orderIdIndex[ $rejectOptions->getOrder()->getId() ] = $rejectOptions;
-            return $rejectOptions;
+            $this->_idCache[$rejectOptions->getId()] = $rejectOptions;
+            $this->_orderIdCache[$rejectOptions->getOrder()->getId()] = $rejectOptions;
+            return $this->getResource()->saveRejectOptions($rejectOptions);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(RejectOptionsInterface $rejectOptions) : bool
         {
-            $rejectOptions->getResource()->delete($rejectOptions);
-            unset( $this->_idIndex[ $rejectOptions->getId() ] );
-            unset( $this->_orderIdIndex[ $rejectOptions->getOrder()->getId() ] );
-            return $rejectOptions->isDeleted();
+            unset($this->_idCache[$rejectOptions->getId()]);
+            unset($this->_orderIdCache[$rejectOptions->getOrder()->getId()]);
+            return $this->getResource()->deleteRejectOptions($rejectOptions);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $_resource
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
+        /**
+         * Reject Options Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory $_rejectOptionsFactory
+         */
         private $_rejectOptionsFactory;
+
+        /**
+         * Gets Reject Options Factory
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory
+         */
         protected function getRejectOptionsFactory() : RejectOptionsInterfaceFactory
         {
             return $this->_rejectOptionsFactory;

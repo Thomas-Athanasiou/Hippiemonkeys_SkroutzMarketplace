@@ -22,7 +22,7 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupLocationRelation as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupLocationRelationResourceInterface as ResourceInterface;
 
     class AcceptOptionsPickupLocationRelation
     extends AbstractModel
@@ -62,12 +62,13 @@
          */
         public function getAcceptOptions(): AcceptOptionsInterface
         {
-            $acceptOptions      = $this->getData(self::FIELD_ACCEPT_OPTIONS);
-            $acceptOptionsId    = $this->getData(ResourceModel::FIELD_ACCEPT_OPTIONS_ID);
-            if(!$acceptOptions && $acceptOptionsId)
+            $acceptOptions = $this->getData(static::FIELD_ACCEPT_OPTIONS);
+            if($acceptOptions === null)
             {
-                $acceptOptions = $this->getAcceptOptionsRepository()->getById($acceptOptionsId);
-                $this->setData(self::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+                $acceptOptions = $this->getAcceptOptionsRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID)
+                );
+                $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
             }
             return $acceptOptions;
         }
@@ -77,8 +78,8 @@
          */
         public function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupLocationRelation
         {
-            $this->setData(ResourceModel::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
-            return $this->setData(self::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+            $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
+            return $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
         }
 
         /**
@@ -86,12 +87,13 @@
          */
         public function getPickupLocation(): PickupLocationInterface
         {
-            $pickupLocation     = $this->getData(self::FIELD_PICKUP_LOCATION);
-            $pickupLocationId   = $this->getData(ResourceModel::FIELD_PICKUP_LOCATION_ID);
-            if(!$pickupLocation && $pickupLocationId)
+            $pickupLocation = $this->getData(static::FIELD_PICKUP_LOCATION);
+            if($pickupLocation === null)
             {
-                $pickupLocation = $this->getPickupLocationRepository()->getById($pickupLocationId);
-                $this->setData(self::FIELD_PICKUP_LOCATION, $pickupLocation);
+                $pickupLocation = $this->getPickupLocationRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_PICKUP_LOCATION_ID)
+                );
+                $this->setData(static::FIELD_PICKUP_LOCATION, $pickupLocation);
             }
             return $pickupLocation;
         }
@@ -101,8 +103,8 @@
          */
         public function setPickupLocation(PickupLocationInterface $pickupLocation): AcceptOptionsPickupLocationRelation
         {
-            $this->setData(ResourceModel::FIELD_PICKUP_LOCATION_ID, $pickupLocation->getId());
-            return $this->setData(self::FIELD_PICKUP_LOCATION, $pickupLocation);
+            $this->setData(ResourceInterface::FIELD_PICKUP_LOCATION_ID, $pickupLocation->getId());
+            return $this->setData(static::FIELD_PICKUP_LOCATION, $pickupLocation);
         }
 
         /**

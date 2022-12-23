@@ -126,6 +126,7 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface|null
          */
         function getAddress(): ?AddressInterface;
+
         /**
          * Sets Address
          *

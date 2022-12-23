@@ -23,7 +23,7 @@
     implements PickupLocationResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_pickuplocation';
+            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_pickuplocation';
 
         /**
          * {@inheritdoc}
@@ -47,6 +47,14 @@
         public function loadPickupLocationById(PickupLocationInterface $pickupLocation, $id): PickupLocationResourceInterface
         {
             return $this->loadModelById($pickupLocation, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadPickupLocationBySkroutzId(PickupLocationInterface $pickupLocation, string $skroutzId): PickupLocationResourceInterface
+        {
+            return $this->loadModel($pickupLocation, $skroutzId, static::FIELD_SKROUTZ_ID);
         }
 
         /**

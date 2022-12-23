@@ -24,8 +24,8 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_REASON = 'reason',
-            FIELD_ACTOR = 'actor';
+            FIELD_REJECT_OPTIONS_ID = 'reject_options_id',
+            FIELD_LINE_ITEM_REJECTION_REASON_ID = 'line_item_rejection_reason_id';
 
         /**
          * Saves RejectOptionsLineItemRejectionReasonRelation data

@@ -14,81 +14,76 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Size as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface;
+    use Hippiemonkeys\core\Model\AbstractModel,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\SizeResourceInterface as ResourceInterface;
 
     class Size
     extends AbstractModel
     implements SizeInterface
     {
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        protected function _construct()
+        public function getLabel(): string
         {
-            $this->_init(ResourceModel::class);
+            return $this->getData(ResourceInterface::FIELD_LABEL);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getLabel()
+        public function setLabel(string $label): Size
         {
-            return $this->getData(ResourceModel::FIELD_LABEL);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setLabel($label)
-        {
-            return $this->setData(ResourceModel::FIELD_LABEL, $label);
+            return $this->setData(ResourceInterface::FIELD_LABEL, $label);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getValue()
+        public function getValue(): string
         {
-            return $this->getData(ResourceModel::FIELD_VALUE);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setValue($value)
-        {
-            return $this->setData(ResourceModel::FIELD_VALUE, $value);
+            return $this->getData(ResourceInterface::FIELD_VALUE);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getShopValue()
+        public function setValue(string $value): Size
         {
-            return $this->getData(ResourceModel::FIELD_SHOP_VALUE);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setShopValue($shopValue)
-        {
-            return $this->setData(ResourceModel::FIELD_SHOP_VALUE, $shopValue);
+            return $this->setData(ResourceInterface::FIELD_VALUE, $value);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getShopVariationUid()
+        public function getShopValue(): ?string
         {
-            return $this->getData(ResourceModel::FIELD_SHOP_VARIATION_UID);
+            return $this->getData(ResourceInterface::FIELD_SHOP_VALUE);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function setShopVariationUid($shopVariationUid)
+        public function setShopValue(?string $shopValue): Size
         {
-            return $this->setData(ResourceModel::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
+            return $this->setData(ResourceInterface::FIELD_SHOP_VALUE, $shopValue);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getShopVariationUid(): ?string
+        {
+            return $this->getData(ResourceInterface::FIELD_SHOP_VARIATION_UID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function setShopVariationUid(?string $shopVariationUid): Size
+        {
+            return $this->setData(ResourceInterface::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
         }
     }
 ?>

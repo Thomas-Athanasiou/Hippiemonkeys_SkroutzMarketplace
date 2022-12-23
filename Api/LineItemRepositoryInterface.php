@@ -15,13 +15,32 @@
     namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
-
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface;
 
     interface LineItemRepositoryInterface
     {
-        function getByLocalId(int $id): LineItemInterface;
+        /**
+         * Gets Line Item by Id
+         *
+         * @api
+         * @access public
+         *
+         * @param mixed $id
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
+         */
+        function getById($id): LineItemInterface;
 
+        /**
+         * Gets Line Item by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param string $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
+         */
         function getBySkroutzId(string $skroutzId) : LineItemInterface;
 
         /**

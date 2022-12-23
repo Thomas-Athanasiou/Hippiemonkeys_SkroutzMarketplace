@@ -137,7 +137,7 @@
          */
         public function save(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation) : AcceptOptionsPickupWindowRelationInterface
         {
-            $this->getResource()->save($acceptOptionsPickupWindowRelation);
+            $this->getResource()->saveAcceptOptionsPickupWindowRelation($acceptOptionsPickupWindowRelation);
             $this->_idCache[ $acceptOptionsPickupWindowRelation->getId() ] = $acceptOptionsPickupWindowRelation;
             return $acceptOptionsPickupWindowRelation;
         }
@@ -147,7 +147,7 @@
          */
         public function delete(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation) : bool
         {
-            return $this->getResource()->delete($acceptOptionsPickupWindowRelation);
+            return $this->getResource()->deleteAcceptOptionsPickupWindowRelation($acceptOptionsPickupWindowRelation);
         }
 
         /**

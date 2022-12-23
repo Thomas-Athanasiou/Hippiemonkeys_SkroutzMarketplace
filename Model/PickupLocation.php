@@ -14,48 +14,28 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Model\AbstractModel,
-
+    use Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupLocation as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface as ResourceInterface;
 
     class PickupLocation
     extends AbstractModel
     implements PickupLocationInterface
     {
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
-
-        /**
-         * @inheritdoc
-         */
-        public function getLocalId()
-        {
-            return (int) $this->getData(ResourceModel::FIELD_LOCAL_ID);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setLocalId(int $localId)
-        {
-            return $this->setData(ResourceModel::FIELD_LOCAL_ID, (string) $localId);
-        }
-
         /**
          * @inheritdoc
          */
         public function getSkroutzId(): string
         {
-            return $this->getData(ResourceModel::FIELD_SKROUTZ_ID);
+            return $this->getData(ResourceInterface::FIELD_SKROUTZ_ID);
         }
+
         /**
          * @inheritdoc
          */
-        public function setSkroutzId(string $skroutzId)
+        public function setSkroutzId(string $skroutzId): PickupLocation
         {
-            return $this->setData(ResourceModel::FIELD_SKROUTZ_ID, $skroutzId);
+            return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
 
         /**
@@ -63,14 +43,15 @@
          */
         public function getLabel(): string
         {
-            return $this->getData(ResourceModel::FIELD_LABEL);
+            return $this->getData(ResourceInterface::FIELD_LABEL);
         }
+
         /**
          * @inheritdoc
          */
-        public function setLabel(string $label)
+        public function setLabel(string $label): PickupLocation
         {
-            return $this->setData(ResourceModel::FIELD_LABEL, $label);
+            return $this->setData(ResourceInterface::FIELD_LABEL, $label);
         }
     }
 ?>

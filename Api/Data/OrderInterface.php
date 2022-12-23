@@ -38,7 +38,7 @@
          * @api
          * @access public
          *
-         * @param mixed $value
+         * @param mixed $id
          *
          * @return mixed
          */
@@ -414,7 +414,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
-        function setMagentoOrder($magentoOrder): OrderInterface;
+        function setMagentoOrder(?MagentoOrderInterface $magentoOrder): OrderInterface;
 
         /**
          * Gets Express

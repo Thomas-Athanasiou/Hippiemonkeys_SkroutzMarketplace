@@ -25,7 +25,7 @@
          * @api
          * @access public
          *
-         * @param mixed $value
+         * @param mixed $id
          *
          * @return $this
          */
@@ -47,7 +47,7 @@
          * @api
          * @access public
          *
-         * @param int $value
+         * @param int $skroutzId
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface
          */

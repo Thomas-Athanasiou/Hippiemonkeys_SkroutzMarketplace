@@ -54,17 +54,17 @@
         function setSkroutzId(string $skroutzId): CustomerInterface;
 
         /**
-         * Gets the first name for the customer.
+         * Gets the first name for the customer
          *
          * @api
          * @access public
          *
-         * @return string First name.
+         * @return string
          */
         function getFirstName(): string;
 
         /**
-         * Sets the first name for the customer.
+         * Sets the first name for the customer
          *
          * @api
          * @access public
@@ -81,7 +81,7 @@
          * @api
          * @access public
          *
-         * @return string Last name.
+         * @return string
          */
         function getLastName(): string;
 
@@ -91,7 +91,7 @@
          * @api
          * @access public
          *
-         * @param string $lastname
+         * @param string $lastName
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */

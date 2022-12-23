@@ -18,94 +18,108 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItemRejectionReason as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface as ResourceInterface;
 
     class LineItemRejectionReasonRepository
     implements LineItemRejectionReasonRepositoryInterface
     {
         protected
-            $_localIdIndex      = [],
-            $_skroutzIdIndex    = [];
+            $_idCache = [],
+            $_skroutzIdCache = [];
 
         public function __construct(
-            ResourceModel $resourceModel,
+            ResourceInterface $resource,
             LineItemRejectionReasonInterfaceFactory $lineItemRejectionReasonFactory
         )
         {
-            $this->_resourceModel                   = $resourceModel;
-            $this->_lineItemRejectionReasonFactory  = $lineItemRejectionReasonFactory;
+            $this->_resource = $resource;
+            $this->_lineItemRejectionReasonFactory = $lineItemRejectionReasonFactory;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
-        public function getByLocalId(int $localId) : LineItemRejectionReasonInterface
+        public function getById($id) : LineItemRejectionReasonInterface
         {
-            $lineItemRejectionReason = $this->_localIdIndex[$localId] ?? null;
-            if(!$lineItemRejectionReason) {
+            $lineItemRejectionReason = $this->_idCache[$id] ?? null;
+            if($lineItemRejectionReason === null)
+            {
                 $lineItemRejectionReason = $this->getLineItemRejectionReasonFactory()->create();
-                $this->getResourceModel()->load($lineItemRejectionReason, $localId, ResourceModel::FIELD_LOCAL_ID);
-                $localId = $lineItemRejectionReason->getLocalId();
-                if (!$localId)
+                $this->getResource()->loadLineItemRejectionReasonById($lineItemRejectionReason, $id);
+                if (!$lineItemRejectionReason->getId())
                 {
                     throw new NoSuchEntityException(
-                        __('The Rejection Reason with id "%1" that was requested doesn\'t exist. Verify the Rejection Reason and try again.', $localId)
+                        __('The Line Item Rejection Reason with id "%1" that was requested doesn\'t exist. Verify the Line Item Rejection Reason and try again.', $id)
                     );
                 }
-                $this->_localIdIndex[$localId]                                      = $lineItemRejectionReason;
-                $this->_skroutzIdIndex[ $lineItemRejectionReason->getSkroutzId() ]  = $lineItemRejectionReason;
+                $this->_idCache[$id] = $lineItemRejectionReason;
+                $this->_skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]  = $lineItemRejectionReason;
             }
             return $lineItemRejectionReason;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getBySkroutzId(int $skroutzId) : LineItemRejectionReasonInterface
         {
-            $lineItemRejectionReason = $this->_skroutzIdIndex[$skroutzId] ?? null;
-            if(!$lineItemRejectionReason) {
+            $lineItemRejectionReason = $this->_skroutzIdCache[$skroutzId] ?? null;
+            if($lineItemRejectionReason === null)
+            {
                 $lineItemRejectionReason = $this->getLineItemRejectionReasonFactory()->create();
-                $this->getResourceModel()->load($lineItemRejectionReason, $localId, ResourceModel::FIELD_SKROUTZ_ID);
-                $localId = $lineItemRejectionReason->getLocalId();
-                if (!$localId)
+                $this->getResource()->loadLineItemRejectionReasonBySkroutzId($lineItemRejectionReason, $skroutzId);
+                $id = $lineItemRejectionReason->getId();
+                if ($id === null)
                 {
                     throw new NoSuchEntityException(
-                        __('The Rejection Reason with id "%1" that was requested doesn\'t exist. Verify the Rejection Reason and try again.', $localId)
+                        __('The Line Item Rejection Reason with Skroutz Id "%0" that was requested doesn\'t exist. Verify the Line Item Rejection Reason and try again.', $skroutzId)
                     );
                 }
-                $this->_localIdIndex[$localId]      = $lineItemRejectionReason;
-                $this->_skroutzIdIndex[$skroutzId]  = $lineItemRejectionReason;
+                $this->_idCache[$id] = $lineItemRejectionReason;
+                $this->_skroutzIdCache[$skroutzId] = $lineItemRejectionReason;
             }
             return $lineItemRejectionReason;
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function save(LineItemRejectionReasonInterface $lineItemRejectionReason) : LineItemRejectionReasonInterface
         {
-            $this->getResourceModel()->save($lineItemRejectionReason);
-            $this->_localIdIndex[ $lineItemRejectionReason->getLocalId() ]           = $lineItemRejectionReason;
-            $this->_skroutzIdIndex[ $lineItemRejectionReason->getSkroutzId() ]  = $lineItemRejectionReason;
-            return $lineItemRejectionReason;
+            $this->_idCache[$lineItemRejectionReason->getId()] = $lineItemRejectionReason;
+            $this->_skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]  = $lineItemRejectionReason;
+            return $this->getResource()->saveLineItemRejectionReason($lineItemRejectionReason);
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function delete(LineItemRejectionReasonInterface $lineItemRejectionReason) : bool
         {
-            $this->getResourceModel()->delete($lineItemRejectionReason);
-            unset( $this->_localIdIndex[ $lineItemRejectionReason->getLocalId() ] );
-            unset( $this->_skroutzIdIndex[ $lineItemRejectionReason->getSkroutzId() ] );
-            return $lineItemRejectionReason->isDeleted();
+            unset( $this->_idCache[ $lineItemRejectionReason->getLocalId() ] );
+            unset( $this->_skroutzIdCache[ $lineItemRejectionReason->getSkroutzId() ] );
+            return $this->getResource()->deleteLineItemRejectionReason($lineItemRejectionReason);
         }
 
-        private $_resourceModel;
-        protected function getResourceModel(): ResourceModel
+        /**
+         * Resource property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface $_resource
+         */
+        private $_resource;
+
+        /**
+         * Gets Resource
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface
+         */
+        protected function getResource(): ResourceInterface
         {
-            return $this->_resourceModel;
+            return $this->_resource;
         }
 
         private $_lineItemRejectionReasonFactory;

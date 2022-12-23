@@ -33,7 +33,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setIdType(string $idType): VatExclusionRepresentativeInterface
+        public function setIdType(string $idType): VatExclusionRepresentative
         {
             return $this->setData(ResourceInterface::FIELD_ID_TYPE, $idType);
         }
@@ -49,7 +49,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setIdNumber(string $idNumber): VatExclusionRepresentativeInterface
+        public function setIdNumber(string $idNumber): VatExclusionRepresentative
         {
             return $this->setData(ResourceInterface::FIELD_ID_NUMBER, $idNumber);
         }
@@ -65,7 +65,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setOtp(string $otp): VatExclusionRepresentativeInterface
+        public function setOtp(string $otp): VatExclusionRepresentative
         {
             return $this->setData(ResourceInterface::FIELD_OTP, $otp);
         }

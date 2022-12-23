@@ -16,6 +16,7 @@
 
     use Magento\Framework\Registry,
         Magento\Framework\Model\Context,
+        Magento\Framework\Api\SearchCriteriaBuilder,
         Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface,
@@ -30,7 +31,6 @@
     {
         public const
             FIELD_ORDER = 'order',
-
             ACCEPT_OPTIONS_PICKUP_LOCATION_RELATION_FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
             ACCEPT_OPTIONS_PICKUP_WINDOW_RELATION_FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id';
 
@@ -44,6 +44,7 @@
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $acceptOptionsPickupLocationRelationRepository
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface $acceptOptionsPickupWindowRelationRepository
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          * @param array $data
          */
         public function __construct(
@@ -52,6 +53,7 @@
             AcceptOptionsPickupLocationRelationRepositoryInterface $acceptOptionsPickupLocationRelationRepository,
             AcceptOptionsPickupWindowRelationRepositoryInterface $acceptOptionsPickupWindowRelationRepository,
             OrderRepositoryInterface $orderRepository,
+            SearchCriteriaBuilder $searchCriteriaBuilder,
             array $data = []
         )
         {
@@ -60,6 +62,7 @@
             $this->_acceptOptionsPickupLocationRelationRepository = $acceptOptionsPickupLocationRelationRepository;
             $this->_acceptOptionsPickupWindowRelationRepository = $acceptOptionsPickupWindowRelationRepository;
             $this->_orderRepository = $orderRepository;
+            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         }
 
         /**
@@ -83,12 +86,13 @@
          */
         public function getOrder(): OrderInterface
         {
-            $order      = $this->getData(self::FIELD_ORDER);
-            $orderId    = $this->getData(ResourceModel::FIELD_ORDER_ID);
-            if (!$order && $orderId)
+            $order = $this->getData(static::FIELD_ORDER);
+            if ($order === null)
             {
-                $order = $this->getOrderRepository()->getById((int) $orderId);
-                $this->setOrder($order);
+                $order = $this->getOrderRepository()->getById(
+                    $this->getData(ResourceModel::FIELD_ORDER_ID)
+                );
+                $this->setData(static::FIELD_ORDER, $order);
             }
             return $order;
         }
@@ -99,7 +103,7 @@
         public function setOrder(OrderInterface $order): AcceptOptions
         {
             $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
-            return $this->setData(self::FIELD_ORDER, $order);
+            return $this->setData(static::FIELD_ORDER, $order);
         }
 
         /**
@@ -108,12 +112,12 @@
         public function getPickupLocation(): array
         {
             $pickupLocation = $this->getData(ResourceModel::FIELD_PICKUP_LOCATION);
-            if (!$pickupLocation) {
+            if ($pickupLocation === null)
+            {
                 $pickupLocation = [];
                 $acceptOptionsPickupLocationRelations = $this->getAcceptOptionsPickupLocationRelationRepository()
                     ->getList(
-                        $this->getSearchCriteriaBuilderFactory()
-                            ->create()
+                        $this->getSearchCriteriaBuilder()
                             ->addFilter(self::ACCEPT_OPTIONS_PICKUP_LOCATION_RELATION_FIELD_ACCEPT_OPTIONS_ID, $this->getId())
                             ->create()
                     )
@@ -145,8 +149,7 @@
                 $pickupWindow = [];
                 $acceptOptionsPickupWindowRelations = $this->getAcceptOptionsPickupWindowRelationRepository()
                     ->getList(
-                        $this->getSearchCriteriaBuilderFactory()
-                            ->create()
+                        $this->getSearchCriteriaBuilder()
                             ->addFilter(self::ACCEPT_OPTIONS_PICKUP_WINDOW_RELATION_FIELD_ACCEPT_OPTIONS_ID, $this->getId())
                             ->create()
                     )
@@ -168,22 +171,88 @@
             return $this->setData(ResourceModel::FIELD_PICKUP_WINDOW, $pickupWindow);
         }
 
+        /**
+         * Accept Options Pickup Location Relation Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $_orderRepository
+         */
         private $_acceptOptionsPickupLocationRelationRepository;
+
+        /**
+         * Gets Accept Options Pickup Location Relation Repository
+         *
+         * @access protected
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $_orderRepository
+         */
         protected function getAcceptOptionsPickupLocationRelationRepository(): AcceptOptionsPickupLocationRelationRepositoryInterface
         {
             return $this->_acceptOptionsPickupLocationRelationRepository;
         }
 
+        /**
+         * Accept Options Pickup Window Relation Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface $_orderRepository
+         */
         private $_acceptOptionsPickupWindowRelationRepository;
+
+        /**
+         * Gets Accept Options Pickup Window Relation Repository
+         *
+         * @access protected
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface $_orderRepository
+         */
         protected function getAcceptOptionsPickupWindowRelationRepository(): AcceptOptionsPickupWindowRelationRepositoryInterface
         {
             return $this->_acceptOptionsPickupWindowRelationRepository;
         }
 
+        /**
+         * Order Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $_orderRepository
+         */
         private $_orderRepository;
+
+        /**
+         * Gets Order Repository
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
+         */
         protected function getOrderRepository(): OrderRepositoryInterface
         {
             return $this->_orderRepository;
+        }
+
+        /**
+         * Search Criteria Builder property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         */
+        private $_searchCriteriaBuilder;
+
+        /**
+         * Gets Search Criteria Builder
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Api\SearchCriteriaBuilder
+         */
+        protected function getSearchCriteriaBuilder(): SearchCriteriaBuilder
+        {
+            return $this->_searchCriteriaBuilder;
         }
     }
 ?>

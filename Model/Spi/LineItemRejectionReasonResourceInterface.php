@@ -29,7 +29,7 @@
             FIELD_REQUIRES_AVAILABILITY_QUANTITY = 'requires_available_quantity';
 
         /**
-         * Save LineItemRejectionReason data
+         * Save Line Item Rejection Reason data
          *
          * @api
          * @access public
@@ -41,7 +41,7 @@
         function saveLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason): LineItemRejectionReasonResourceInterface;
 
         /**
-         * Load a LineItemRejectionReason by Id
+         * Load a Line Item Rejection Reason by Id
          *
          * @api
          * @access public
@@ -54,7 +54,20 @@
         function loadLineItemRejectionReasonById(LineItemRejectionReasonInterface $lineItemRejectionReason, $id): LineItemRejectionReasonResourceInterface;
 
         /**
-         * Delete the LineItemRejectionReason
+         * Load a Line Item Rejection Reason by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface $lineItemRejectionReason
+         * @param int $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonResourceInterface
+         */
+        function loadLineItemRejectionReasonBySkroutzId(LineItemRejectionReasonInterface $lineItemRejectionReason, int $skroutzId): LineItemRejectionReasonResourceInterface;
+
+        /**
+         * Deletes Line Item Rejection Reason
          *
          * @api
          * @access public

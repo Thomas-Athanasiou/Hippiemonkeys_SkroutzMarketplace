@@ -21,7 +21,7 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItem as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface as ResourceInterface;
 
     class LineItem
     extends AbstractModel
@@ -41,6 +41,7 @@
          * @param \Magento\Framework\Registry $registry
          * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         * @param array $data
          */
         public function __construct(
             Context $context,
@@ -60,7 +61,7 @@
          */
         public function getSkroutzId(): string
         {
-            return $this->getData(ResourceModel::FIELD_SKROUTZ_ID);
+            return $this->getData(ResourceInterface::FIELD_SKROUTZ_ID);
         }
 
         /**
@@ -68,7 +69,7 @@
          */
         public function setSkroutzId(string $skroutzId): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_SKROUTZ_ID, $skroutzId);
+            return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
 
         /**
@@ -76,7 +77,7 @@
          */
         public function getShopUid(): int
         {
-            return $this->getData(ResourceModel::FIELD_SHOPUID);
+            return $this->getData(ResourceInterface::FIELD_SHOPUID);
         }
 
         /**
@@ -84,7 +85,7 @@
          */
         public function setShopUid(int $uid): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_SHOPUID, $uid);
+            return $this->setData(ResourceInterface::FIELD_SHOPUID, $uid);
         }
 
         /**
@@ -92,7 +93,7 @@
          */
         public function getProductName() : string
         {
-            return $this->getData(ResourceModel::FIELD_PRODUCT_NAME);
+            return $this->getData(ResourceInterface::FIELD_PRODUCT_NAME);
         }
 
         /**
@@ -100,7 +101,7 @@
          */
         public function setProductName(string $productName): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_PRODUCT_NAME, $productName);
+            return $this->setData(ResourceInterface::FIELD_PRODUCT_NAME, $productName);
         }
 
         /**
@@ -108,7 +109,7 @@
          */
         public function getQuantity() : int
         {
-            return (int) $this->getData(ResourceModel::FIELD_QUANTITY);
+            return (int) $this->getData(ResourceInterface::FIELD_QUANTITY);
         }
 
         /**
@@ -116,7 +117,7 @@
          */
         public function setQuantity(int $quantity): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_QUANTITY, $quantity);
+            return $this->setData(ResourceInterface::FIELD_QUANTITY, $quantity);
         }
 
         /**
@@ -124,7 +125,7 @@
          */
         public function getUnitPrice() : float
         {
-            return (float) $this->getData(ResourceModel::FIELD_UNIT_PRICE);
+            return (float) $this->getData(ResourceInterface::FIELD_UNIT_PRICE);
         }
 
         /**
@@ -132,7 +133,7 @@
          */
         public function setUnitPrice(float $unitPrice): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_UNIT_PRICE, $unitPrice);
+            return $this->setData(ResourceInterface::FIELD_UNIT_PRICE, $unitPrice);
         }
 
         /**
@@ -140,7 +141,7 @@
          */
         public function getTotalPrice() : float
         {
-            return (float) $this->getData(ResourceModel::FIELD_TOTAL_PRICE);
+            return (float) $this->getData(ResourceInterface::FIELD_TOTAL_PRICE);
         }
 
         /**
@@ -148,7 +149,7 @@
          */
         public function setTotalPrice(float $totalPrice): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_TOTAL_PRICE, $totalPrice);
+            return $this->setData(ResourceInterface::FIELD_TOTAL_PRICE, $totalPrice);
         }
 
         /**
@@ -156,7 +157,7 @@
          */
         public function getPriceIncludesVat() : bool
         {
-            return (int) $this->getData(ResourceModel::FIELD_PRICE_INCLUDES_VAT);
+            return (int) $this->getData(ResourceInterface::FIELD_PRICE_INCLUDES_VAT);
         }
 
         /**
@@ -164,7 +165,7 @@
          */
         public function setPriceIncludesVat(bool $priceIncludesVat): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_PRICE_INCLUDES_VAT, $priceIncludesVat);
+            return $this->setData(ResourceInterface::FIELD_PRICE_INCLUDES_VAT, $priceIncludesVat);
         }
 
         /**
@@ -172,30 +173,31 @@
          */
         public function getIslandVatDiscountApplied(): ?bool
         {
-            return (bool) $this->getData(ResourceModel::FIELD_ISLAND_VAT_DISCOUNT_APPLIED);
+            return (bool) $this->getData(ResourceInterface::FIELD_ISLAND_VAT_DISCOUNT_APPLIED);
         }
+
         /**
          * {@inheritdoc}
          */
         public function setIslandVatDiscountApplied(?bool $islandVatDiscountApplied): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_ISLAND_VAT_DISCOUNT_APPLIED, $islandVatDiscountApplied);
+            return $this->setData(ResourceInterface::FIELD_ISLAND_VAT_DISCOUNT_APPLIED, $islandVatDiscountApplied);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function getEan(): string
+        public function getEan(): ?string
         {
-            return $this->getData(ResourceModel::FIELD_EAN);
+            return $this->getData(ResourceInterface::FIELD_EAN);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setEan($ean): LineItem
+        public function setEan(?string $ean): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_EAN, $ean);
+            return $this->setData(ResourceInterface::FIELD_EAN, $ean);
         }
 
         /**
@@ -203,14 +205,14 @@
          */
         public function getExtraInfo(): ?string
         {
-            return $this->getData(ResourceModel::FIELD_EXTRA_INFO);
+            return $this->getData(ResourceInterface::FIELD_EXTRA_INFO);
         }
         /**
          * {@inheritdoc}
          */
         public function setExtraInfo(?string $extraInfo): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_EXTRA_INFO, $extraInfo);
+            return $this->setData(ResourceInterface::FIELD_EXTRA_INFO, $extraInfo);
         }
 
         /**
@@ -218,14 +220,14 @@
          */
         public function getSize(): ?SizeInterface
         {
-            return $this->getData(self::FIELD_SIZE);
+            return $this->getData(static::FIELD_SIZE);
         }
         /**
          * {@inheritdoc}
          */
         public function setSize(?SizeInterface $size): LineItem
         {
-            return $this->setData(self::FIELD_SIZE, $size);
+            return $this->setData(static::FIELD_SIZE, $size);
         }
 
         /**
@@ -233,12 +235,13 @@
          */
         public function getOrder() : OrderInterface
         {
-            $order      = $this->getData(self::FIELD_ORDER);
-            $orderId    = $this->getData(self::FIELD_ORDER_ID);
-            if ($orderId !== null && $order === null)
+            $order = $this->getData(static::FIELD_ORDER);
+            if ($order === null)
             {
-                $order = $this->getOrderRepository()->getById($orderId);
-                $this->setData(self::FIELD_PRODUCT, $order);
+                $order = $this->getOrderRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_ORDER_ID)
+                );
+                $this->setData(static::FIELD_ORDER, $order);
             }
             return $order;
         }
@@ -248,8 +251,8 @@
          */
         public function setOrder(OrderInterface $order): LineItem
         {
-            $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
-            return $this->setData(self::FIELD_ORDER, $order);
+            $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
+            return $this->setData(static::FIELD_ORDER, $order);
         }
 
         /**
@@ -257,63 +260,63 @@
          */
         public function getRejectionReason(): ?string
         {
-            return $this->getData(ResourceModel::FIELD_REJECTION_REASON);
+            return $this->getData(ResourceInterface::FIELD_REJECTION_REASON);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setRejectionReason($rejectionReason)
+        public function setRejectionReason(?string $rejectionReason): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_REJECTION_REASON, $rejectionReason);
+            return $this->setData(ResourceInterface::FIELD_REJECTION_REASON, $rejectionReason);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function getReturnReason()
+        public function getReturnReason(): ?string
         {
-            return $this->getData(ResourceModel::FIELD_RETURN_REASON);
+            return $this->getData(ResourceInterface::FIELD_RETURN_REASON);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setReturnReason($returnReason)
+        public function setReturnReason(?string $returnReason): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_RETURN_REASON, $returnReason);
+            return $this->setData(ResourceInterface::FIELD_RETURN_REASON, $returnReason);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function getSerialNumbers()
+        public function getSerialNumbers(): ?string
         {
-            return $this->getData(ResourceModel::FIELD_SERIAL_NUMBERS);
+            return $this->getData(ResourceInterface::FIELD_SERIAL_NUMBERS);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setSerialNumbers($serialNumbers)
+        public function setSerialNumbers(?string $serialNumbers): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_SERIAL_NUMBERS, $serialNumbers);
+            return $this->setData(ResourceInterface::FIELD_SERIAL_NUMBERS, $serialNumbers);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function getShopVariationUid()
+        public function getShopVariationUid(): ?string
         {
-            return $this->getData(ResourceModel::FIELD_SHOP_VARIATION_UID);
+            return $this->getData(ResourceInterface::FIELD_SHOP_VARIATION_UID);
         }
 
         /**
          * {@inheritdoc}
          */
-        public function setShopVariationUid($shopVariationUid)
+        public function setShopVariationUid(?string $shopVariationUid): LineItem
         {
-            return $this->setData(ResourceModel::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
+            return $this->setData(ResourceInterface::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
         }
 
         /**
@@ -321,31 +324,65 @@
          */
         function getProduct(): ProductInterface
         {
-            $product    = $this->getData(self::FIELD_PRODUCT);
-            $productId  = $this->getShopUid();
-            if ($productId !== null && $product === null)
+            $product = $this->getData(static::FIELD_PRODUCT);
+            if ($product === null)
             {
-                $product = $this->getProductRepository()->getById($productId);
-                $this->setData(self::FIELD_PRODUCT, $product);
+                /**TODO: More product ids */
+                $product = $this->getProductRepository()->getById(
+                    $this->getShopUid()
+                );
+                $this->setData(static::FIELD_PRODUCT, $product);
             }
             return $product;
         }
+
         /**
          * {@inheritdoc}
          */
-        function setProduct(ProductInterface $product)
+        function setProduct(ProductInterface $product): LineItem
         {
+            /**TODO: More product ids */
             $this->setShopUid((int) $product->getId());
-            return $this->setData(self::FIELD_PRODUCT, $product);
+            return $this->setData(static::FIELD_PRODUCT, $product);
         }
 
+        /**
+         * Product Repository property
+         *
+         * @access private
+         *
+         * @var \Magento\Catalog\Api\ProductRepositoryInterface $_productRepository
+         */
         private $_productRepository;
+
+        /**
+         *  Gets Product Repository
+         *
+         * @access protected
+         *
+         * @return \Magento\Catalog\Api\ProductRepositoryInterface
+         */
         protected function getProductRepository(): ProductRepositoryInterface
         {
             return $this->_productRepository;
         }
 
+        /**
+         * Order Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $_orderRepository
+         */
         private $_orderRepository;
+
+        /**
+         * Gets Order Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
+         */
         protected function getOrderRepository(): OrderRepositoryInterface
         {
             return $this->_orderRepository;

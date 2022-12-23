@@ -16,51 +16,34 @@
 
     use Magento\Framework\Registry,
         Magento\Framework\Model\Context,
-        Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\AbstractResource,
-        Magento\Framework\Data\Collection\AbstractDb,
-
+        Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelation as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsLineItemRejectionReasonRelationResourceInterface as ResourceInterface;
 
     class RejectOptionsLineItemRejectionReasonRelation
     extends AbstractModel
     implements RejectOptionsLineItemRejectionReasonRelationInterface
     {
         protected const
-            FIELD_REJECT_OPTIONS                    = 'reject_options',
-            FIELD_LINE_ITEM_REJECTION_REASON        = 'line_item_rejection_reason';
-
-        protected function _construct()
-        {
-            $this->_init(ResourceModel::class);
-        }
+            FIELD_REJECT_OPTIONS = 'reject_options',
+            FIELD_LINE_ITEM_REJECTION_REASON = 'line_item_rejection_reason';
 
         public function __construct(
             Context $context,
             Registry $registry,
-
             RejectOptionsRepositoryInterface $rejectOptionsRepository,
             LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository,
-
-            AbstractResource $resource = null,
-            AbstractDb $resourceCollection = null,
             array $data = []
         )
         {
-            parent::__construct(
-                $context,
-                $registry,
-                $resource,
-                $resourceCollection,
-                $data
-            );
-            $this->_rejectOptionsRepository             = $rejectOptionsRepository;
-            $this->_lineItemRejectionReasonRepository   = $lineItemRejectionReasonRepository;
+            parent::__construct($context, $registry, $data);
+
+            $this->_rejectOptionsRepository = $rejectOptionsRepository;
+            $this->_lineItemRejectionReasonRepository = $lineItemRejectionReasonRepository;
         }
 
         /**
@@ -69,10 +52,11 @@
         public function getRejectOptions(): RejectOptionsInterface
         {
             $rejectOptions = $this->getData(self::FIELD_REJECT_OPTIONS);
-            if(!$rejectOptions)
+            if($rejectOptions === null)
             {
-                $rejectOptionsId    = $this->getData(ResourceModel::FIELD_REJECT_OPTIONS_ID);
-                $rejectOptions      = $this->getRejectOptionsRepository()->getById($rejectOptionsId);
+                $rejectOptions = $this->getRejectOptionsRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_REJECT_OPTIONS_ID)
+                );
                 $this->setRejectOptions($rejectOptions);
             }
             return $rejectOptions;
@@ -83,7 +67,7 @@
          */
         public function setRejectOptions(RejectOptionsInterface $rejectOptions)
         {
-            $this->setData(ResourceModel::FIELD_REJECT_OPTIONS_ID, $rejectOptions->getId());
+            $this->setData(ResourceInterface::FIELD_REJECT_OPTIONS_ID, $rejectOptions->getId());
             return $this->setData(self::FIELD_REJECT_OPTIONS, $rejectOptions);
         }
 
@@ -93,11 +77,12 @@
         public function getLineItemRejectionReason(): LineItemRejectionReasonInterface
         {
             $lineItemRejectionReason = $this->getData(self::FIELD_LINE_ITEM_REJECTION_REASON);
-            if(!$rejectOptions)
+            if($lineItemRejectionReason === null)
             {
-                $lineItemRejectionReasonId   = $this->getData(ResourceModel::FIELD_LINE_ITEM_REJECTION_REASON_ID);
-                $lineItemRejectionReason     = $this->getLineItemRejectionReasonRepository()->getByLocalId($lineItemRejectionReasonId);
-                $this->setLineItemRejectionReason($lineItemRejectionReason);
+                $lineItemRejectionReason = $this->getLineItemRejectionReasonRepository()->getById(
+                    $this->getData(ResourceInterface::FIELD_LINE_ITEM_REJECTION_REASON_ID)
+                );
+                $this->setData(self::FIELD_LINE_ITEM_REJECTION_REASON, $lineItemRejectionReason);
             }
             return $lineItemRejectionReason;
         }
@@ -107,7 +92,7 @@
          */
         public function setLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason)
         {
-            $this->setData(ResourceModel::FIELD_LINE_ITEM_REJECTION_REASON_ID, $lineItemRejectionReason->getLocalId());
+            $this->setData(ResourceInterface::FIELD_LINE_ITEM_REJECTION_REASON_ID, $lineItemRejectionReason->getId());
             return $this->setData(self::FIELD_LINE_ITEM_REJECTION_REASON, $lineItemRejectionReason);
         }
 

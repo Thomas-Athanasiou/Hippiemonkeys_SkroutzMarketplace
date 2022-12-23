@@ -52,6 +52,14 @@
         /**
          * {@inheritdoc}
          */
+        public function loadRejectOptionsByOrderId(RejectOptionsInterface $rejectOptions, $orderId): RejectOptionsResourceInterface
+        {
+            return $this->loadModel($rejectOptions, $orderId, static::FIELD_ORDER_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
         public function deleteRejectOptions(RejectOptionsInterface $rejectOptions): bool
         {
             return $this->deleteModel($rejectOptions);

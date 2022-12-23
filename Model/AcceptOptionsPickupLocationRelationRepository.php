@@ -71,7 +71,8 @@
         public function getById($id) : AcceptOptionsPickupLocationRelationInterface
         {
             $acceptOptionsPickupLocationRelation = $this->_idCache[$id] ?? null;
-            if(!$acceptOptionsPickupLocationRelation) {
+            if($acceptOptionsPickupLocationRelation === null)
+            {
                 $acceptOptionsPickupLocationRelation = $this->getAcceptOptionsPickupLocationRelationFactory()->create();
                 $this->getResource()->loadAcceptOptionsPickupLocationRelationById($acceptOptionsPickupLocationRelation, $id);
                 if (!$acceptOptionsPickupLocationRelation->getId())

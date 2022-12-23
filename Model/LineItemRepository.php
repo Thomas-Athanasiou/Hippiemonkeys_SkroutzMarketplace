@@ -27,8 +27,8 @@
     implements LineItemRepositoryInterface
     {
         protected
-            $_localIdIndex      = [],
-            $_skroutzIdIndex    = [];
+            $_idCache = [],
+            $_skroutzIdCache = [];
 
         public function __construct(
             ResourceModel $resourceModel,
@@ -36,29 +36,29 @@
             CollectionProcessorInterface $collectionProcessor
         )
         {
-            $this->_resourceModel       = $resourceModel;
-            $this->_lineItemFactory     = $lineItemFactory;
+            $this->_resourceModel = $resourceModel;
+            $this->_lineItemFactory = $lineItemFactory;
             $this->_collectionProcessor = $collectionProcessor;
         }
 
         /**
          * @inheritdoc
          */
-        public function getByLocalId(int $localId) : LineItemInterface
+        public function getById($id) : LineItemInterface
         {
-            $lineItem = $this->_localIdIndex[$localId] ?? null;
+            $lineItem = $this->_idCache[$id] ?? null;
             if(!$lineItem) {
                 $lineItem = $this->getLineItemFactory()->create();
-                $this->getResourceModel()->load($lineItem, $localId, ResourceModel::FIELD_LOCAL_ID);
-                $localId = $lineItem->getLocalId();
-                if (!$localId)
+                $this->getResourceModel()->load($lineItem, $id, ResourceModel::FIELD_LOCAL_ID);
+                $id = $lineItem->getId();
+                if (!$id)
                 {
                     throw new NoSuchEntityException(
-                        __('The lineItem with id "%1" that was requested doesn\'t exist. Verify the lineItem and try again.', $localId)
+                        __('The lineItem with id "%1" that was requested doesn\'t exist. Verify the lineItem and try again.', $id)
                     );
                 }
-                $this->_localIdIndex[$localId]                      = $lineItem;
-                $this->_localIdIndex[ $lineItem->getSkroutzId() ]   = $lineItem;
+                $this->_idCache[$id]                      = $lineItem;
+                $this->_idCache[ $lineItem->getSkroutzId() ]   = $lineItem;
             }
             return $lineItem;
         }
@@ -68,19 +68,19 @@
          */
         public function getBySkroutzId(string $skroutzId) : LineItemInterface
         {
-            $lineItem = $this->_skroutzIdIndex[$skroutzId] ?? null;
+            $lineItem = $this->_skroutzIdCache[$skroutzId] ?? null;
             if(!$lineItem) {
                 $lineItem = $this->getLineItemFactory()->create();
                 $this->getResourceModel()->load($lineItem, $skroutzId, ResourceModel::FIELD_SKROUTZ_ID);
-                $localId = $lineItem->getLocalId();
-                if (!$localId)
+                $id = $lineItem->getId();
+                if (!$id)
                 {
                     throw new NoSuchEntityException(
-                        __('The Line Item with id "%1" that was requested doesn\'t exist. Verify the lineItem and try again.', $localId)
+                        __('The Line Item with id "%1" that was requested doesn\'t exist. Verify the lineItem and try again.', $id)
                     );
                 }
-                $this->_skroutzIdIndex[$skroutzId]  = $lineItem;
-                $this->_localIdIndex[$localId]      = $lineItem;
+                $this->_skroutzIdCache[$skroutzId]  = $lineItem;
+                $this->_idCache[$id]      = $lineItem;
             }
             return $lineItem;
         }
@@ -102,8 +102,8 @@
         public function save(LineItemInterface $lineItem) : LineItemInterface
         {
             $this->getResourceModel()->save($lineItem);
-            $this->_localIdIndex[ $lineItem->getLocalId() ]     = $lineItem;
-            $this->_skroutzIdIndex[ $lineItem->getSkroutzId() ] = $lineItem;
+            $this->_idCache[ $lineItem->getId() ]     = $lineItem;
+            $this->_skroutzIdCache[ $lineItem->getSkroutzId() ] = $lineItem;
             return $lineItem;
         }
 
@@ -113,8 +113,8 @@
         public function delete(LineItemInterface $lineItem) : bool
         {
             $this->getResourceModel()->delete($lineItem);
-            unset( $this->_localIdIndex[ $lineItem->getLocalId() ] );
-            unset( $this->_skroutzIdIndex[ $lineItem->getSkroutzId() ] );
+            unset( $this->_idCache[ $lineItem->getId() ] );
+            unset( $this->_skroutzIdCache[ $lineItem->getSkroutzId() ] );
             return $lineItem->isDeleted();
         }
 

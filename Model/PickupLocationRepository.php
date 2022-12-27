@@ -75,9 +75,11 @@
                         __('The Pickup Location with id "%1" that was requested doesn\'t exist. Verify the pickupLocation and try again.', $id)
                     );
                 }
-
-                $this->_idCache[$id] = $pickupLocation;
-                $this->_skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
+                else
+                {
+                    $this->_idCache[$id] = $pickupLocation;
+                    $this->_skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
+                }
             }
             return $pickupLocation;
         }
@@ -99,9 +101,11 @@
                         __('The Pickup Location with skroutz id "%1" that was requested doesn\'t exist. Verify the pickupLocation and try again.', $skroutzId)
                     );
                 }
-
-                $this->_idCache[$id] = $pickupLocation;
-                $this->_skroutzIdCache[$skroutzId] = $pickupLocation;
+                else
+                {
+                    $this->_idCache[$id] = $pickupLocation;
+                    $this->_skroutzIdCache[$skroutzId] = $pickupLocation;
+                }
             }
             return $pickupLocation;
         }

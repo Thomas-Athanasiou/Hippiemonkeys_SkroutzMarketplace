@@ -30,7 +30,7 @@
          */
         protected function _construct()
         {
-            $this->_init(static::TABLE_MAIN, static::FIELD_LOCAL_ID);
+            $this->_init(static::TABLE_MAIN, static::FIELD_ID);
         }
 
         /**
@@ -47,6 +47,14 @@
         public function loadLineItemById(LineItemInterface $lineItem, $id): LineItemResourceInterface
         {
             return $this->loadModelById($lineItem, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadLineItemBySkroutzId(LineItemInterface $lineItem, string $skroutzId): LineItemResourceInterface
+        {
+            return $this->loadModel($lineItem, $skroutzId, static::FIELD_SKROUTZ_ID);
         }
 
         /**

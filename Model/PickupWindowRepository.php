@@ -67,9 +67,11 @@
                         __('The Pickup Window with id "%1" that was requested doesn\'t exist. Verify the Pickup Window and try again.', $id)
                     );
                 }
-
-                $this->_idCache[$id] = $pickupWindow;
-                $this->_skroutzIdCache[$pickupWindow->getBySkroutzId()] = $pickupWindow;
+                else
+                {
+                    $this->_idCache[$id] = $pickupWindow;
+                    $this->_skroutzIdCache[$pickupWindow->getBySkroutzId()] = $pickupWindow;
+                }
             }
 
             return $pickupWindow;
@@ -92,9 +94,11 @@
                         __('The Pickup Window with skroutz id "%1" that was requested doesn\'t exist. Verify the pickupWindow and try again.', $skroutzId)
                     );
                 }
-
-                $this->_idCache[$id] = $pickupWindow;
-                $this->_skroutzIdCache[$skroutzId] = $pickupWindow;
+                else
+                {
+                    $this->_idCache[$id] = $pickupWindow;
+                    $this->_skroutzIdCache[$skroutzId] = $pickupWindow;
+                }
             }
             return $pickupWindow;
         }
@@ -115,8 +119,8 @@
          */
         public function delete(PickupWindowInterface $pickupWindow) : bool
         {
-            unset( $this->_idCache[ $pickupWindow->getId() ] );
-            unset( $this->_skroutzIdCache[ $pickupWindow->getSkroutzId() ] );
+            unset($this->_idCache[$pickupWindow->getId()]);
+            unset($this->_skroutzIdCache[$pickupWindow->getSkroutzId()]);
             return $this->getResource()->deletePickupWindow($pickupWindow);
         }
 

@@ -71,15 +71,17 @@
             {
                 $acceptOptions = $this->getAcceptOptionsFactory()->create();
                 $this->getResource()->loadAcceptOptionsById($acceptOptions, $id);
-                if (!$acceptOptions->getId())
+                if ($acceptOptions->getId() === null)
                 {
                     throw new NoSuchEntityException(
                         __('The accept options with id "%1" that was requested doesn\'t exist. Verify the accept options and try again.', $id)
                     );
                 }
-
-                $this->_orderIdCache[$acceptOptions->getOrder()->getId()] = $acceptOptions;
-                $this->_idCache[$id] = $acceptOptions;
+                else
+                {
+                    $this->_orderIdCache[$acceptOptions->getOrder()->getId()] = $acceptOptions;
+                    $this->_idCache[$id] = $acceptOptions;
+                }
             }
 
             return $acceptOptions;
@@ -97,14 +99,17 @@
                 $acceptOptions = $this->getAcceptOptionsFactory()->create();
                 $this->getResource()->loadAcceptOptionsByOrderId($acceptOptions, $orderId);
                 $id = $acceptOptions->getId();
-                if (!$id)
+                if ($id === null)
                 {
                     throw new NoSuchEntityException(
                         __('The Accept Options with Order Id "%1" that was requested doesn\'t exist. Verify the Accept Options and try again.', $orderId)
                     );
                 }
-                $this->_orderIdCache[$orderId] = $acceptOptions;
-                $this->_idCache[$id] = $acceptOptions;
+                else
+                {
+                    $this->_orderIdCache[$orderId] = $acceptOptions;
+                    $this->_idCache[$id] = $acceptOptions;
+                }
             }
             return $acceptOptions;
         }

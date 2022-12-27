@@ -37,7 +37,7 @@
          * @api
          * @access public
          *
-         * @return int.
+         * @return int
          */
         function getSkroutzId(): int;
 

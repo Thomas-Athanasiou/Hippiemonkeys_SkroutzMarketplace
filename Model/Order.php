@@ -408,10 +408,10 @@ use Magento\Framework\Api\SearchCriteriaBuilder,
         {
             $magentoOrder = $this->getData(static::FIELD_MAGENTO_ORDER);
             $magentoOrderId = $this->getData(ResourceInterface::FIELD_MAGENTO_ORDER_ID);
-            if ($magentoOrderId && !$magentoOrder)
+            if ($magentoOrderId !== null && $magentoOrder === null)
             {
                 $magentoOrder = $this->getMagentoOrderRepository()->get($magentoOrderId);
-                $this->setMagentoOrder($magentoOrder);
+                $this->setData(static::FIELD_MAGENTO_ORDER, $magentoOrder);
             }
             return $magentoOrder;
         }

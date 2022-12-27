@@ -14,19 +14,21 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions;
 
-    use Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
+    use Magento\Framework\Model\AbstractModel as MagentoAbstractModel,
+        Hippiemonkeys\Core\Api\Data\ModelInterface,
+        Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class PickupWindowRelation
-    implements RelationInterface
+    implements ModelRelationProcessorInterface
     {
         protected const
-            FIELD_ACCEPT_OPTIONS_ID     = 'accept_options_id',
-            FIELD_PICKUP_LOCATION_ID    = 'pickup_location_id';
+            FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
+            FIELD_PICKUP_WINDOW_ID = 'pickup_window_id';
 
         public function __construct(
             PickupWindowRepositoryInterface $pickupWindowRepository,
@@ -34,69 +36,116 @@
             AcceptOptionsPickupWindowRelationRepositoryInterface $acceptOptionsPickupWindowRelationRepository
         )
         {
-            $this->_pickupWindowRepository                      = $pickupWindowRepository;
-            $this->_acceptOptionsPickupWindowRelationFactory    = $acceptOptionsPickupWindowRelationFactory;
+            $this->_pickupWindowRepository = $pickupWindowRepository;
+            $this->_acceptOptionsPickupWindowRelationFactory = $acceptOptionsPickupWindowRelationFactory;
             $this->_acceptOptionsPickupWindowRelationRepository = $acceptOptionsPickupWindowRelationRepository;
         }
 
         /**
-         * Saves relations for Pickup Window
-         *
-         * @param \Magento\Framework\Model\AbstractModel $object
-         * @return void
-         * @throws \Exception
+         * {@inheritdoc}
          */
-        public function processRelation(AbstractModel $object)
+        public function processModelRelation(ModelInterface $model): void
         {
-            $pickupWindowRepository                         = $this->getPickupWindowRepository();
-            $acceptOptionsPickupWindowRelationFactory       = $this->getAcceptOptionsPickupWindowRelationFactory();
-            $acceptOptionsPickupWindowRelationRepository    = $this->getAcceptOptionsPickupWindowRelationRepository();
-            foreach($object->getPickupWindow() as $pickupWindow)
+            $pickupWindowRepository = $this->getPickupWindowRepository();
+            $acceptOptionsPickupWindowRelationFactory = $this->getAcceptOptionsPickupWindowRelationFactory();
+            $acceptOptionsPickupWindowRelationRepository = $this->getAcceptOptionsPickupWindowRelationRepository();
+            if($model instanceof AcceptOptionsInterface)
             {
-                if(!$pickupWindow->getLocalId())
+                foreach($model->getPickupWindow() as $pickupWindow)
                 {
-                    try{
-                        $persistedPickupWindow = $pickupWindowRepository->getBySkroutzId(
-                            $pickupWindow->getSkroutzId()
-                        );
-                        $pickupWindow->setLocalId(
-                            $persistedPickupWindow->getLocalId()
-                        );
-                    }
-                    catch(NoSuchEntityException $exception)
+                    if(!$pickupWindow->getId())
                     {
-                        $pickupWindow->isObjectNew(true);
+                        try{
+                            $persistedPickupWindow = $pickupWindowRepository->getBySkroutzId(
+                                $pickupWindow->getSkroutzId()
+                            );
+                            $pickupWindow->setId(
+                                $persistedPickupWindow->getId()
+                            );
+                        }
+                        catch(NoSuchEntityException)
+                        {
+                            if ($pickupWindow instanceof MagentoAbstractModel)
+                            {
+                                $pickupWindow->isObjectNew(true);
+                            }
+                        }
                     }
-                }
-                $pickupWindowRepository->save($pickupWindow);
+                    $pickupWindowRepository->save($pickupWindow);
 
-                try
-                {
-                    $acceptOptionsPickupWindowRelation = $acceptOptionsPickupWindowRelationRepository->getByAcceptOptionsAndPickupWindow($object, $pickupWindow);
-                }
-                catch(NoSuchEntityException $exception)
-                {
-                    $acceptOptionsPickupWindowRelation = $acceptOptionsPickupWindowRelationFactory->create();
-                    $acceptOptionsPickupWindowRelation->setAcceptOptions($object);
-                    $acceptOptionsPickupWindowRelation->setPickupWindow($pickupWindow);
-                    $acceptOptionsPickupWindowRelationRepository->save($acceptOptionsPickupWindowRelation);
+                    try
+                    {
+                        $acceptOptionsPickupWindowRelation = $acceptOptionsPickupWindowRelationRepository->getByAcceptOptionsAndPickupWindow($model, $pickupWindow);
+                    }
+                    catch(NoSuchEntityException)
+                    {
+                        $acceptOptionsPickupWindowRelation = $acceptOptionsPickupWindowRelationFactory->create();
+                        $acceptOptionsPickupWindowRelation->setAcceptOptions($model);
+                        $acceptOptionsPickupWindowRelation->setPickupWindow($pickupWindow);
+                        $acceptOptionsPickupWindowRelationRepository->save($acceptOptionsPickupWindowRelation);
+                    }
                 }
             }
         }
 
+        /**
+         * Pickup Window Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface
+         */
         private $_pickupWindowRepository;
+
+        /**
+         * Gets Pickup Window Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface
+         */
         protected function getPickupWindowRepository(): PickupWindowRepositoryInterface
         {
             return $this->_pickupWindowRepository;
         }
 
+        /**
+         * Accept Options Pickup Window Relation Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory $_acceptOptionsPickupWindowRelationFactory
+         */
         private $_acceptOptionsPickupWindowRelationFactory;
+
+        /**
+         * Gets Accept Options Pickup Window Relation Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory
+         */
         protected function getAcceptOptionsPickupWindowRelationFactory(): AcceptOptionsPickupWindowRelationInterfaceFactory
         {
             return $this->_acceptOptionsPickupWindowRelationFactory;
         }
 
+        /**
+         * Accept Options Pickup Window Relation Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface $_acceptOptionsPickupWindowRelationRepository
+         */
         private $_acceptOptionsPickupWindowRelationRepository;
+
+        /**
+         * Gets Accept Options Pickup Window Relation Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface
+         */
         protected function getAcceptOptionsPickupWindowRelationRepository(): AcceptOptionsPickupWindowRelationRepositoryInterface
         {
             return $this->_acceptOptionsPickupWindowRelationRepository;

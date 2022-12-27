@@ -145,7 +145,8 @@
         public function getPickupWindow(): array
         {
             $pickupWindow = $this->getData(ResourceModel::FIELD_PICKUP_WINDOW);
-            if (!$pickupWindow) {
+            if (!$pickupWindow)
+            {
                 $pickupWindow = [];
                 $acceptOptionsPickupWindowRelations = $this->getAcceptOptionsPickupWindowRelationRepository()
                     ->getList(
@@ -154,6 +155,7 @@
                             ->create()
                     )
                     ->getItems();
+
                 foreach($acceptOptionsPickupWindowRelations as $acceptOptionsPickupWindowRelation)
                 {
                     $pickupWindow[] = $acceptOptionsPickupWindowRelation->getPickupWindow();

@@ -67,6 +67,19 @@
         function loadLineItemById(LineItemInterface $lineItem, $id): LineItemResourceInterface;
 
         /**
+         * Load a Line Item by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem
+         * @param string $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemResourceInterface
+         */
+        function loadLineItemBySkroutzId(LineItemInterface $lineItem, string $skroutzId): LineItemResourceInterface;
+
+        /**
          * Deletes the Line Item
          *
          * @api

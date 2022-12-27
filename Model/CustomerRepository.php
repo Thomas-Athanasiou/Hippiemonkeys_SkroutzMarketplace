@@ -47,7 +47,7 @@
         {
             $customer = $this->getCustomerFactory()->create();
             $this->getResource()->loadCustomerById($customer, $id);
-            if (!$customer->getId())
+            if ($customer->getId() === null)
             {
                 throw new NoSuchEntityException(
                     __('The Customer with Id "%1" that was requested doesn\'t exist. Verify the customer and try again.', $id)
@@ -63,7 +63,7 @@
         {
             $customer = $this->getCustomerFactory()->create();
             $this->getResource()->loadCustomerBySkroutzId($customer, $skroutzId);
-            if (!$customer->getId())
+            if ($customer->getId() === null)
             {
                 throw new NoSuchEntityException(
                     __('The Customer with id "%1" that was requested doesn\'t exist. Verify the customer and try again.', $skroutzId)

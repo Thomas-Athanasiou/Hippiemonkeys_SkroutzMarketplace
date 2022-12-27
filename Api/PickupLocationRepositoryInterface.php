@@ -19,7 +19,7 @@
     interface PickupLocationRepositoryInterface
     {
         /**
-         * Gets Pickup Location by local id
+         * Gets Pickup Location by Id
          *
          * @api
          * @access public
@@ -29,6 +29,18 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface
          */
         function getById($id): PickupLocationInterface;
+
+        /**
+         * Gets Pickup Location by Skroutz Id
+         *
+         * @api
+         * @access public
+         *
+         * @param string $skroutzId
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface
+         */
+        function getBySkroutzId(string $skroutzId): PickupLocationInterface;
 
         /**
          * Deletes the Pickup Location instance from the repository

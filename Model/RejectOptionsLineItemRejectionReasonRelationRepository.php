@@ -16,7 +16,6 @@
 
     use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
-
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
@@ -44,19 +43,22 @@
          *
          * @access public
          *
-         * @param Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelationResourceInterface $resource
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelationResourceInterface $resource
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory
+         * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory $searchResultFactory
          */
         public function __construct(
             ResourceInterface $resource,
             RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory,
             CollectionProcessorInterface $collectionProcessor,
-            SearchResultInterfaceFactory $searchResulFactory
+            SearchResultInterfaceFactory $searchResultFactory
         )
         {
             $this->_resource = $resource;
             $this->_rejectOptionsLineItemRejectionReasonRelationFactory = $rejectOptionsLineItemRejectionReasonRelationFactory;
             $this->_collectionProcessor = $collectionProcessor;
-            $this->_searchResultFactory = $searchResulFactory;
+            $this->_searchResultFactory = $searchResultFactory;
         }
 
         /**
@@ -65,16 +67,20 @@
         public function getById($id) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
             $rejectOptionsLineItemRejectionReasonRelation = $this->_idCache[$id] ?? null;
-            if(!$rejectOptionsLineItemRejectionReasonRelation) {
+            if($rejectOptionsLineItemRejectionReasonRelation === null)
+            {
                 $rejectOptionsLineItemRejectionReasonRelation = $this->getRejectOptionsLineItemRejectionReasonRelationFactory()->create();
                 $this->getResource()->loadRejectOptionsLineItemRejectionReasonRelationById($rejectOptionsLineItemRejectionReasonRelation, $id);
-                if (!$rejectOptionsLineItemRejectionReasonRelation->getId())
+                if ($rejectOptionsLineItemRejectionReasonRelation->getId() === null)
                 {
                     throw new NoSuchEntityException(
                         __('The relation with id "%1" that was requested doesn\'t exist. Verify the relation and try again.', $id)
                     );
                 }
-                $this->_idCache[$id] = $rejectOptionsLineItemRejectionReasonRelation;
+                else
+                {
+                    $this->_idCache[$id] = $rejectOptionsLineItemRejectionReasonRelation;
+                }
             }
             return $rejectOptionsLineItemRejectionReasonRelation;
         }
@@ -100,15 +106,15 @@
             )
             ->getItems() [0] ?? null;
 
-            if($rejectOptionsPickupLocationRelation)
-            {
-                $this->_idCache[$rejectOptionsPickupLocationRelation->getId()] = $rejectOptionsPickupLocationRelation;
-            }
-            else
+            if($rejectOptionsPickupLocationRelation === null)
             {
                 throw new NoSuchEntityException(
                     __('The Accept Options Pickup Location Relation with Accept Options ID "%1" and Pickup Window ID "%2" that was requested doesn\'t exist. Verify the Accept Options Pickup Wondow Relation and try again.', $rejectOptionsId, $lineItemRejectionReasonId)
                 );
+            }
+            else
+            {
+                $this->_idCache[$rejectOptionsPickupLocationRelation->getId()] = $rejectOptionsPickupLocationRelation;
             }
 
             return $rejectOptionsPickupLocationRelation;
@@ -131,7 +137,7 @@
         public function save(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
             $this->getResource()->saveRejectOptionsLineItemRejectionReasonRelation($rejectOptionsLineItemRejectionReasonRelation);
-            $this->_idCache[ $rejectOptionsLineItemRejectionReasonRelation->getId() ] = $rejectOptionsLineItemRejectionReasonRelation;
+            $this->_idCache[$rejectOptionsLineItemRejectionReasonRelation->getId()] = $rejectOptionsLineItemRejectionReasonRelation;
             return $rejectOptionsLineItemRejectionReasonRelation;
         }
 
@@ -165,19 +171,64 @@
             return $this->_resource;
         }
 
+        /**
+         * Reject Options Line Item Rejection Reason Relation Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $_rejectOptionsLineItemRejectionReasonRelationFactory
+         */
         private $_rejectOptionsLineItemRejectionReasonRelationFactory;
+
+        /**
+         * Gets Reject Options Line Item Rejection Reason Relation Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory
+         */
         protected function getRejectOptionsLineItemRejectionReasonRelationFactory() : RejectOptionsLineItemRejectionReasonRelationInterfaceFactory
         {
             return $this->_rejectOptionsLineItemRejectionReasonRelationFactory;
         }
 
+        /**
+         * Collection Processor property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         */
         private $_collectionProcessor;
+
+        /**
+         * Gets Collection Processor
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface
+         */
         protected function getCollectionProcessor() : CollectionProcessorInterface
         {
             return $this->_collectionProcessor;
         }
 
+        /**
+         * Search Result Factory property
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationsearchResultFactory $_searchResultFactory
+         */
         private $_searchResultFactory;
+
+        /**
+         * Gets Search Result Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationsearchResultFactory
+         */
         protected function getSearchResultFactory()
         {
             return $this->_searchResultFactory;

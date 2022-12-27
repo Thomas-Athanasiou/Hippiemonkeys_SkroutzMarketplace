@@ -52,14 +52,17 @@
                     __('The order with code "%1" that was requested doesn\'t exist. Verify the order and try again.', $code)
                 );
             }
-
-            $magentoOrder = $order->getMagentoOrder();
-            if($magentoOrder !== null)
+            else
             {
-                $this->_magentoOrderIndex[$magentoOrder->getId()] = $order;
+                $magentoOrder = $order->getMagentoOrder();
+                if($magentoOrder !== null)
+                {
+                    $this->_magentoOrderIndex[$magentoOrder->getId()] = $order;
+                }
+
+                $this->_idIndex[$id] = $order;
             }
 
-            $this->_idIndex[$id] = $order;
             return $order;
         }
 
@@ -69,7 +72,7 @@
         public function getById($id) : OrderInterface
         {
             $order = $this->_idIndex[$id] ?? null;
-            if(!$order)
+            if($order === null)
             {
                 $order = $this->getOrderFactory()->create();
                 $this->getResource()->loadOrderById($order, $id);
@@ -79,15 +82,18 @@
                         __('The order with id "%1" that was requested doesn\'t exist. Verify the order and try again.', $id)
                     );
                 }
-
-                $magentoOrder = $order->getMagentoOrder();
-                if($magentoOrder !== null)
+                else
                 {
-                    $this->_magentoOrderIndex[$magentoOrder->getId()] = $magentoOrder;
-                }
+                    $magentoOrder = $order->getMagentoOrder();
+                    if($magentoOrder !== null)
+                    {
+                        $this->_magentoOrderIndex[$magentoOrder->getId()] = $magentoOrder;
+                    }
 
-                $this->_idIndex[$id] = $order;
+                    $this->_idIndex[$id] = $order;
+                }
             }
+
             return $order;
         }
 
@@ -98,21 +104,23 @@
         {
             $magentoOrderId = $magentoOrder->getEntityId();
             $order = $this->_magentoOrderIndex[$magentoOrderId] ?? null;
-            if(!$order)
+            if($order === null)
             {
                 $order = $this->getOrderFactory()->create();
                 $this->getResource()->loadOrderByMagentoOrderId($order, $magentoOrderId);
                 $id = $order->getId();
 
-                if (!$id)
+                if ($id === null)
                 {
                     throw new NoSuchEntityException(
                         __('The Order with Magento Order Id "%1" that was requested doesn\'t exist. Verify the Order and try again.', $magentoOrderId)
                     );
                 }
-
-                $this->_magentoOrderIndex[$magentoOrderId]  = $magentoOrderId;
-                $this->_idIndex[$id] = $order;
+                else
+                {
+                    $this->_magentoOrderIndex[$magentoOrderId]  = $magentoOrderId;
+                    $this->_idIndex[$id] = $order;
+                }
             }
             return $order;
         }

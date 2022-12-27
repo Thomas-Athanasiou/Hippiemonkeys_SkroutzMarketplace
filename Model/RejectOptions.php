@@ -69,10 +69,12 @@
                             ->create()
                     )
                     ->getItems();
+
                 foreach($rejectOptionsLineItemRejectionReasonRelations as $rejectOptionsLineItemRejectionReasonRelation)
                 {
                     $lineItemRejectionReason[] = $rejectOptionsLineItemRejectionReasonRelation->getLineItemRejectionReasons();
                 }
+
                 $this->setLineItemRejectionReasons($lineItemRejectionReason);
             }
             return $lineItemRejectionReason;
@@ -111,17 +113,44 @@
             return $this->setData(static::FIELD_ORDER, $order);
         }
 
+        /**
+         * Reject Options Line Item Rejection Reason Relation Repository property
+         *
+         * @access private
+         *
+         * @var Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
+         */
         private $_rejectOptionsLineItemRejectionReasonRelationRepository;
 
+
         /**
+         * Gets Reject Options Line Item Rejection Reason Relation Repository property
          *
+         * @access protected
+         *
+         * @return Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
          */
         protected function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
         {
             return $this->_rejectOptionsLineItemRejectionReasonRelationRepository;
         }
 
+        /**
+         * Order Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $_orderRepository
+         */
         private $_orderRepository;
+
+        /**
+         * Gets Order Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
+         */
         protected function getOrderRepository(): OrderRepositoryInterface
         {
             return $this->_orderRepository;

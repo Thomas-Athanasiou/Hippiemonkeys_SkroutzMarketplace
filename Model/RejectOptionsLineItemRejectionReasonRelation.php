@@ -32,6 +32,16 @@
             FIELD_REJECT_OPTIONS = 'reject_options',
             FIELD_LINE_ITEM_REJECTION_REASON = 'line_item_rejection_reason';
 
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Magento\Framework\Model\Context $context
+         * @param \Magento\Framework\Registry $registry
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface $rejectOptionsRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository
+         */
         public function __construct(
             Context $context,
             Registry $registry,
@@ -47,7 +57,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getRejectOptions(): RejectOptionsInterface
         {
@@ -63,7 +73,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setRejectOptions(RejectOptionsInterface $rejectOptions)
         {
@@ -72,7 +82,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getLineItemRejectionReason(): LineItemRejectionReasonInterface
         {
@@ -88,7 +98,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason)
         {
@@ -96,13 +106,43 @@
             return $this->setData(self::FIELD_LINE_ITEM_REJECTION_REASON, $lineItemRejectionReason);
         }
 
+        /**
+         *  Reject Options Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface $_rejectOptionsRepository
+         */
         private $_rejectOptionsRepository;
+
+        /**
+         *  Gets Reject Options Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
+         */
         protected function getRejectOptionsRepository(): RejectOptionsRepositoryInterface
         {
             return $this->_rejectOptionsRepository;
         }
 
+        /**
+         * Line Item Rejection Reason Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface $_lineItemRejectionReasonRepository
+         */
         private $_lineItemRejectionReasonRepository;
+
+        /**
+         *  Gets Line Item Rejection Reason Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface
+         */
         protected function getLineItemRejectionReasonRepository(): LineItemRejectionReasonRepositoryInterface
         {
             return $this->_lineItemRejectionReasonRepository;

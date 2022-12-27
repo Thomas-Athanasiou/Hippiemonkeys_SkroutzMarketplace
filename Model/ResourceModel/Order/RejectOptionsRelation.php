@@ -14,15 +14,20 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order;
 
-    use Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
+    use Hippiemonkeys\Core\Api\Data\ModelInterface,
+        Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class RejectOptionsRelation
-    implements RelationInterface
+    implements ModelRelationProcessorInterface
     {
         /**
+         * Constructor
+         *
+         * @access public
+         *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
         public function __construct(
@@ -33,38 +38,38 @@
         }
 
         /**
-         * Save relations for reject options
-         *
-         * @param \Magento\Framework\Model\AbstractModel $object
-         * @return void
-         * @throws \Exception
+         * {@inheritdoc}
          */
-        public function processRelation(AbstractModel $object)
+        public function processModelRelation(ModelInterface $model): void
         {
-            $rejectOptionsRepository    = $this->getRejectOptionsRepository();
-            $rejectOptions              = $object->getRejectOptions();
-            try
+            $rejectOptionsRepository = $this->getRejectOptionsRepository();
+            if($model instanceof OrderInterface)
             {
-                $persistedRejectOptions = $rejectOptionsRepository->getByOrder($object);
+                $rejectOptions = $model->getRejectOptions();
+                try
+                {
+                    $persistedRejectOptions = $rejectOptionsRepository->getByOrder($model);
+                    if($rejectOptions)
+                    {
+                        $rejectOptions->setId(
+                            $persistedRejectOptions->getId()
+                        );
+                    }
+                    else
+                    {
+                        $rejectOptionsRepository->delete($persistedRejectOptions);
+                    }
+                }
+                catch(NoSuchEntityException)
+                {
+
+                }
+
                 if($rejectOptions)
                 {
-                    $rejectOptions->setId(
-                        $persistedRejectOptions->getId()
-                    );
+                    $rejectOptions->setOrder($model);
+                    $rejectOptionsRepository->save($rejectOptions);
                 }
-                else
-                {
-                    $rejectOptionsRepository->delete($persistedRejectOptions);
-                }
-            }
-            catch(NoSuchEntityException $exception)
-            {
-
-            }
-            if($rejectOptions)
-            {
-                $rejectOptions->setOrder($object);
-                $rejectOptionsRepository->save($rejectOptions);
             }
         }
 

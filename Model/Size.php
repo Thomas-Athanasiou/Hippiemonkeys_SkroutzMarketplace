@@ -14,7 +14,7 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\core\Model\AbstractModel,
+    use Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\SizeResourceInterface as ResourceInterface;
 

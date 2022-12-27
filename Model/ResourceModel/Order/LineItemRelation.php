@@ -14,15 +14,20 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order;
 
-    use Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
+    use Hippiemonkeys\Core\Api\Data\ModelInterface,
+        Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class LineItemRelation
-    implements RelationInterface
+    implements ModelRelationProcessorInterface
     {
         /**
+         * Constructor
+         *
+         * @access public
+         *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $lineItemRepository
          */
         public function __construct(
@@ -33,33 +38,32 @@
         }
 
         /**
-         * Save relations for Line Item
-         *
-         * @param \Magento\Framework\Model\AbstractModel $object
-         * @return void
-         * @throws \Exception
+         * {@inheritdoc}
          */
-        public function processRelation(AbstractModel $object)
+        public function processModelRelation(ModelInterface $model): void
         {
-            /** @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\Order $object */
+            /** @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $model */
             $lineItemRepository = $this->getLineItemRepository();
-            foreach($object->getLineItems() as $lineItem)
+            if($model instanceof OrderInterface)
             {
-                if(!$lineItem->getLocalId())
+                foreach($model->getLineItems() as $lineItem)
                 {
-                    try
+                    if(!$lineItem->getId())
                     {
-                        $lineItem->setLocalId(
-                            $lineItemRepository->getBySkroutzId( $lineItem->getSkroutzId() )->getLocalId()
-                        );
+                        try
+                        {
+                            $lineItem->setId(
+                                $lineItemRepository->getBySkroutzId($lineItem->getSkroutzId())->getId()
+                            );
+                        }
+                        catch(NoSuchEntityException)
+                        {
+                            /** Line Item doesnt exist in the first place */
+                        }
                     }
-                    catch(NoSuchEntityException $exception)
-                    {
-                        /** Line Item doesnt exist in the first place */
-                    }
+                    $lineItem->setOrder($model);
+                    $lineItemRepository->save($lineItem);
                 }
-                $lineItem->setOrder($object);
-                $lineItemRepository->save($lineItem);
             }
         }
 

@@ -52,6 +52,14 @@
         /**
          * {@inheritdoc}
          */
+        public function loadAcceptOptionsByOrderId(AcceptOptionsInterface $acceptOptions, $orderId): AcceptOptionsResourceInterface
+        {
+            return $this->loadModel($acceptOptions, $orderId, static::FIELD_ORDER_ID);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
         public function deleteAcceptOptions(AcceptOptionsInterface $acceptOptions): bool
         {
             return $this->deleteModel($acceptOptions);

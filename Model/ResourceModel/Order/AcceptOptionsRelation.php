@@ -14,15 +14,20 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order;
 
-    use Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
+    use Hippiemonkeys\Core\Api\Data\ModelInterface,
+        Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class AcceptOptionsRelation
-    implements RelationInterface
+    implements ModelRelationProcessorInterface
     {
         /**
+         * Constructor
+         *
+         * @access public
+         *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
          */
         public function __construct(
@@ -33,39 +38,39 @@
         }
 
         /**
-         * Save relations for Line Item
-         *
-         * @param \Magento\Framework\Model\AbstractModel $object
-         * @return void
-         * @throws \Exception
+         * {@inheritdoc}
          */
-        public function processRelation(AbstractModel $object)
+        public function processModelRelation(ModelInterface $model): void
         {
-            $acceptOptionsRepository    = $this->getAcceptOptionsRepository();
-            $acceptOptions              = $object->getAcceptOptions();
-            try
+            $acceptOptionsRepository = $this->getAcceptOptionsRepository();
+            if($model instanceof OrderInterface)
             {
-                $persistedAcceptOptions = $acceptOptionsRepository->getByOrder($object);
+                $acceptOptions = $model->getAcceptOptions();
+
+                try
+                {
+                    $persistedAcceptOptions = $acceptOptionsRepository->getByOrder($model);
+                    if($acceptOptions)
+                    {
+                        $acceptOptions->setId(
+                            $persistedAcceptOptions->getId()
+                        );
+                    }
+                    else
+                    {
+                        $acceptOptionsRepository->delete($persistedAcceptOptions);
+                    }
+                }
+                catch(NoSuchEntityException)
+                {
+
+                }
+
                 if($acceptOptions)
                 {
-                    $acceptOptions->setId(
-                        $persistedAcceptOptions->getId()
-                    );
+                    $acceptOptions->setOrder($model);
+                    $acceptOptionsRepository->save($acceptOptions);
                 }
-                else
-                {
-                    $acceptOptionsRepository->delete($persistedAcceptOptions);
-                }
-            }
-            catch(NoSuchEntityException $exception)
-            {
-
-            }
-
-            if($acceptOptions)
-            {
-                $acceptOptions->setOrder($object);
-                $acceptOptionsRepository->save($acceptOptions);
             }
         }
 

@@ -14,25 +14,30 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions;
 
-    use Magento\Framework\Model\AbstractModel,
-        Magento\Framework\Model\ResourceModel\Db\VersionControl\RelationInterface,
+    use Magento\Framework\Model\AbstractModel as MagentoAbstractModel,
+        Hippiemonkeys\Core\Api\Data\ModelInterface,
+        Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
 
     class LineItemRejectionReasonRelation
-    implements RelationInterface
+    implements ModelRelationProcessorInterface
     {
         protected const
             FIELD_REJECT_OPTIONS_ID = 'reject_options_id',
-            FIELD_PICKUP_WINDOW_ID  = 'line_item_rejection_reason_id';
+            FIELD_PICKUP_WINDOW_ID = 'line_item_rejection_reason_id';
 
         /**
+         * Constructor
+         *
+         * @access public
+         *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository
-         *
          */
         public function __construct(
             LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository,
@@ -40,69 +45,116 @@
             RejectOptionsLineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository
         )
         {
-            $this->_lineItemRejectionReasonRepository                       = $lineItemRejectionReasonRepository;
-            $this->_rejectOptionsLineItemRejectionReasonRelationFactory     = $rejectOptionsLineItemRejectionReasonRelationFactory;
-            $this->_rejectOptionsLineItemRejectionReasonRelationRepository  = $rejectOptionsLineItemRejectionReasonRelationRepository;
+            $this->_lineItemRejectionReasonRepository = $lineItemRejectionReasonRepository;
+            $this->_rejectOptionsLineItemRejectionReasonRelationFactory = $rejectOptionsLineItemRejectionReasonRelationFactory;
+            $this->_rejectOptionsLineItemRejectionReasonRelationRepository = $rejectOptionsLineItemRejectionReasonRelationRepository;
         }
 
         /**
-         * Save relations for Line Item
-         *
-         * @param \Magento\Framework\Model\AbstractModel $object
-         * @return void
-         * @throws \Exception
+         * {@inheritdoc}
          */
-        public function processRelation(AbstractModel $object)
+        public function processModelRelation(ModelInterface $model): void
         {
-            $lineItemRejectionReasonRepository                       = $this->getLineItemRejectionReasonRepository();
-            $rejectOptionsLineItemRejectionReasonRelationFactory     = $this->getRejectOptionsLineItemRejectionReasonRelationFactory();
-            $rejectOptionsLineItemRejectionReasonRelationRepository  = $this->getRejectOptionsLineItemRejectionReasonRelationRepository();
-            foreach($object->getLineItemRejectionReason() as $lineItemRejectionReason)
+            $lineItemRejectionReasonRepository = $this->getLineItemRejectionReasonRepository();
+            $rejectOptionsLineItemRejectionReasonRelationFactory = $this->getRejectOptionsLineItemRejectionReasonRelationFactory();
+            $rejectOptionsLineItemRejectionReasonRelationRepository = $this->getRejectOptionsLineItemRejectionReasonRelationRepository();
+            if($model instanceof RejectOptionsInterface)
             {
-                if(!$lineItemRejectionReason->getLocalId())
+                foreach($model->getLineItemRejectionReasons() as $lineItemRejectionReason)
                 {
-                    try{
-                        $persistedLineItemRejectionReason = $lineItemRejectionReasonRepository->getBySkroutzId(
-                            $lineItemRejectionReason->getSkroutzId()
-                        );
-                        $lineItemRejectionReason->setLocalId(
-                            $persistedLineItemRejectionReason->getLocalId()
-                        );
-                    }
-                    catch(NoSuchEntityException $exception)
+                    if(!$lineItemRejectionReason->getId())
                     {
-                        $persistedLineItemRejectionReason->isObjectNew(true);
+                        try{
+                            $persistedLineItemRejectionReason = $lineItemRejectionReasonRepository->getBySkroutzId(
+                                $lineItemRejectionReason->getSkroutzId()
+                            );
+                            $lineItemRejectionReason->setId(
+                                $persistedLineItemRejectionReason->getId()
+                            );
+                        }
+                        catch(NoSuchEntityException)
+                        {
+                            if($persistedLineItemRejectionReason instanceof MagentoAbstractModel)
+                            {
+                                $persistedLineItemRejectionReason->isObjectNew(true);
+                            }
+                        }
                     }
-                }
-                $lineItemRejectionReasonRepository->save($lineItemRejectionReason);
+                    $lineItemRejectionReasonRepository->save($lineItemRejectionReason);
 
-                try
-                {
-                    $rejectOptionsLineItemRejectionReasonRelationRepository->getByRejectOptionsAndLineItemRejectionReason($object, $lineItemRejectionReason);
-                }
-                catch(NoSuchEntityException $exception)
-                {
-                    $rejectOptionsLineItemRejectionReasonRelation = $rejectOptionsLineItemRejectionReasonRelationFactory->create();
-                    $rejectOptionsLineItemRejectionReasonRelation->setRejectOptions($object);
-                    $rejectOptionsLineItemRejectionReasonRelation->setLineItemRejectionReason($lineItemRejectionReason);
-                    $rejectOptionsLineItemRejectionReasonRelationRepository->save($rejectOptionsLineItemRejectionReasonRelation);
+                    try
+                    {
+                        $rejectOptionsLineItemRejectionReasonRelationRepository->getByRejectOptionsAndLineItemRejectionReason($model, $lineItemRejectionReason);
+                    }
+                    catch(NoSuchEntityException)
+                    {
+                        $rejectOptionsLineItemRejectionReasonRelation = $rejectOptionsLineItemRejectionReasonRelationFactory->create();
+                        $rejectOptionsLineItemRejectionReasonRelation->setRejectOptions($model);
+                        $rejectOptionsLineItemRejectionReasonRelation->setLineItemRejectionReason($lineItemRejectionReason);
+                        $rejectOptionsLineItemRejectionReasonRelationRepository->save($rejectOptionsLineItemRejectionReasonRelation);
+                    }
                 }
             }
         }
 
+        /**
+         * Line Item Rejection Reason Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface $_lineItemRejectionReasonRepository
+         */
         private $_lineItemRejectionReasonRepository;
+
+        /**
+         * Gets Line Item Rejection Reason Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface
+         */
         protected function getLineItemRejectionReasonRepository(): LineItemRejectionReasonRepositoryInterface
         {
             return $this->_lineItemRejectionReasonRepository;
         }
 
+        /**
+         * Reject Options Line Item Rejection Reason Relation Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $_rejectOptionsLineItemRejectionReasonRelationFactory
+         */
         private $_rejectOptionsLineItemRejectionReasonRelationFactory;
+
+        /**
+         * Gets Reject Options Line Item Rejection Reason Relation Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory
+         */
         protected function getRejectOptionsLineItemRejectionReasonRelationFactory(): RejectOptionsLineItemRejectionReasonRelationInterfaceFactory
         {
             return $this->_rejectOptionsLineItemRejectionReasonRelationFactory;
         }
 
+        /**
+         * Reject Options Line Item Rejection Reason Relation Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterfaceInterface $_lineItemRejectionReasonRepository
+         */
         private $_rejectOptionsLineItemRejectionReasonRelationRepository;
+
+        /**
+         * Gets Reject Options Line Item Rejection Reason Relation Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
+         */
         protected function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
         {
             return $this->_rejectOptionsLineItemRejectionReasonRelationRepository;

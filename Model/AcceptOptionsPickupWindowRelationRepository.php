@@ -107,15 +107,15 @@
             )
             ->getItems() [0] ?? null;
 
-            if($acceptOptionsPickupLocationRelation)
-            {
-                $this->_idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
-            }
-            else
+            if($acceptOptionsPickupLocationRelation === null)
             {
                 throw new NoSuchEntityException(
                     __('The Accept Options Pickup Location Relation with Accept Options ID "%1" and Pickup Window ID "%2" that was requested doesn\'t exist. Verify the Accept Options Pickup Wondow Relation and try again.', $acceptOptionsId, $pickupWindowId)
                 );
+            }
+            else
+            {
+                $this->_idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
             }
 
             return $acceptOptionsPickupLocationRelation;

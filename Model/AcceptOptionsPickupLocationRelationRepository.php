@@ -75,13 +75,16 @@
             {
                 $acceptOptionsPickupLocationRelation = $this->getAcceptOptionsPickupLocationRelationFactory()->create();
                 $this->getResource()->loadAcceptOptionsPickupLocationRelationById($acceptOptionsPickupLocationRelation, $id);
-                if (!$acceptOptionsPickupLocationRelation->getId())
+                if ($acceptOptionsPickupLocationRelation->getId() === null)
                 {
                     throw new NoSuchEntityException(
                         __('The relation with id "%1" that was requested doesn\'t exist. Verify the relation and try again.', $id)
                     );
                 }
-                $this->_idCache[$id] = $acceptOptionsPickupLocationRelation;
+                else
+                {
+                    $this->_idCache[$id] = $acceptOptionsPickupLocationRelation;
+                }
             }
             return $acceptOptionsPickupLocationRelation;
         }

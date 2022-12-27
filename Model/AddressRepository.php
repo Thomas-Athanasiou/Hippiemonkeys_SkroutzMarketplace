@@ -59,14 +59,16 @@
             {
                 $address = $this->getAddressFactory()->create();
                 $this->getResource()->loadAddressById($address, $id);
-                if (!$address->getId())
+                if ($address->getId() === null)
                 {
                     throw new NoSuchEntityException(
                         __('The Address with id "%1" that was requested doesn\'t exist. Verify the address and try again.', $id)
                     );
                 }
-
-                $this->_idCache[$id] = $address;
+                else
+                {
+                    $this->_idCache[$id] = $address;
+                }
             }
 
             return $address;

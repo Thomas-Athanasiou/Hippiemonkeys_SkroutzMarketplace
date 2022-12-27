@@ -14,8 +14,7 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Magento\Framework\Model\AbstractModel,
-        Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupLocationRelationResourceInterface;
 
@@ -27,7 +26,7 @@
             TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_acceptoptionspickuplocation_r';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {

@@ -14,7 +14,8 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Api\SearchCriteriaInterface,
+use Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface;
+use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
 
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
@@ -119,7 +120,7 @@
         /**
          * {@inheritdoc}
          */
-        public function getList(SearchCriteriaInterface $searchCriteria)
+        public function getList(SearchCriteriaInterface $searchCriteria): LineItemSearchResultInterface
         {
             $searchResult = $this->getSearchResultFactory()->create();
             $searchResult->setSearchCriteria($searchCriteria);

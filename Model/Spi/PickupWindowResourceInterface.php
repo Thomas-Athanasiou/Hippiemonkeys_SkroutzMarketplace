@@ -24,7 +24,7 @@
     extends ModelResourceInterface
     {
         const
-            FIELD_SKROUTZ_ID = 'skroutz_id',
+            FIELD_SKROUTZ_ID = 'id',
             FIELD_LABEL = 'label';
 
         /**

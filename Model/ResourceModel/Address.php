@@ -23,7 +23,7 @@
     implements AddressResourceInterface
     {
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_address';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_address';
 
         /**
          * @inheritdoc

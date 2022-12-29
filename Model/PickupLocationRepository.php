@@ -14,10 +14,14 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+    use Magento\Framework\Api\SearchCriteriaInterface,
+        Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
+        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterface as SearchResultInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface as ResourceInterface;
 
     class PickupLocationRepository
@@ -49,14 +53,20 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface $resource
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory $pickupLocationFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterfaceFactory $searchResultFactory
+         * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          */
         public function __construct(
             ResourceInterface $resource,
-            PickupLocationInterfaceFactory $pickupLocationFactory
+            PickupLocationInterfaceFactory $pickupLocationFactory,
+            SearchResultInterfaceFactory $searchResultFactory,
+            CollectionProcessorInterface $collectionProcessor
         )
         {
             $this->_resource = $resource;
             $this->_pickupLocationFactory = $pickupLocationFactory;
+            $this->_searchResultFactory = $searchResultFactory;
+            $this->_collectionProcessor = $collectionProcessor;
         }
 
         /**
@@ -108,6 +118,17 @@
                 }
             }
             return $pickupLocation;
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
+        {
+            $searchResult = $this->getSearchResultFactory()->create();
+            $searchResult->setSearchCriteria($searchCriteria);
+            $this->getCollectionProcessor()->process($searchCriteria, $searchResult);
+            return $searchResult;
         }
 
         /**
@@ -171,6 +192,39 @@
         protected function getPickupLocationFactory() : PickupLocationInterfaceFactory
         {
             return $this->_pickupLocationFactory;
+        }
+
+        /**
+         * Gets Collection Processor
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface
+         */
+        protected function getCollectionProcessor() : CollectionProcessorInterface
+        {
+            return $this->_collectionProcessor;
+        }
+
+        /**
+         * Search Result Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationSearchResultInterfaceFactory $_searchResultFactory
+         */
+        private $_searchResultFactory;
+
+        /**
+         * Gets Search Result Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationSearchResultInterfaceFactory
+         */
+        protected function getSearchResultFactory(): SearchResultInterfaceFactory
+        {
+            return $this->_searchResultFactory;
         }
     }
 ?>

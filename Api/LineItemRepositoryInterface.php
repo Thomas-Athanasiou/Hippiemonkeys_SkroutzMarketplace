@@ -15,7 +15,8 @@
     namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface;
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface as SearchResultInterface;
 
     interface LineItemRepositoryInterface
     {
@@ -44,14 +45,39 @@
         function getBySkroutzId(string $skroutzId) : LineItemInterface;
 
         /**
+         * Gets list by Search Criteria
          *
-         * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria The search criteria.
-         * @return \Magento\Sales\Api\Data\OrderItemSearchResultInterface Order item search result interface.
+         * @api
+         * @access public
+         *
+         * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface
          */
-        function getList(SearchCriteriaInterface $searchCriteria);
+        function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface;
 
+        /**
+         * Deletes a Line Iitem
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem
+         *
+         * @return bool
+         */
         function delete(LineItemInterface $lineItem): bool;
 
+        /**
+         * Saves Line Item
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
+         */
         function save(LineItemInterface $lineItem): LineItemInterface;
     }
 ?>

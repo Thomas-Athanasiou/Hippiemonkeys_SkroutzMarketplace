@@ -14,7 +14,9 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface;
+    use Magento\Framework\Api\SearchCriteriaInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterface as SearchResultInterface;
 
     interface PickupLocationRepositoryInterface
     {
@@ -41,6 +43,18 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface
          */
         function getBySkroutzId(string $skroutzId): PickupLocationInterface;
+
+        /**
+         * Gets list by Search Criteria
+         *
+         * @api
+         * @access public
+         *
+         * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterface
+         */
+        function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface;
 
         /**
          * Deletes the Pickup Location instance from the repository

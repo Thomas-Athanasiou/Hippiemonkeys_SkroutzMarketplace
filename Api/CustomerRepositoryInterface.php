@@ -36,7 +36,7 @@
          * @api
          * @access public
          *
-         * @param mixed $skroutzId
+         * @param string $skroutzId
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface
          */

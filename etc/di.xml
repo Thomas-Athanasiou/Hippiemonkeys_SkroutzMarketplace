@@ -5,13 +5,29 @@
     Hippiemonkeys_SkroutzMarketplace
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\SkroutzMarketplace" />
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\General</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\SkroutzMarketplace">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+            <argument name="servicePayloadConverter" xsi:type="object">Magento\Framework\Webapi\ServiceInputProcessor</argument>
+        </arguments>
+    </type>
+
     <!-- Accept Options -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptions" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsRepository" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions" />
     <virtualType name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions\RelationComposite" type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite">
         <arguments>
-            <argument name="relationProcessors" xsi:type="array">
+            <argument name="modelRelationProcessors" xsi:type="array">
                 <item name="pickuplocation" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions\PickupLocationRelation</item>
                 <item name="pickupwindow" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions\PickupWindowRelation</item>
             </argument>
@@ -19,29 +35,46 @@
     </virtualType>
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions">
         <arguments>
-            <argument name="relationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions\RelationComposite</argument>
+            <argument name="modelRelationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions\RelationComposite</argument>
         </arguments>
     </type>
 
     <!-- Accept Options Pickup Location Relation -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupLocationRelation" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupLocationRelationResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupLocationRelation" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupLocationRelation\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupLocationRelationRepository" />
 
     <!-- Accept Options Pickup Window Relation -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupWindowRelation" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupWindowRelation" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupWindowRelation\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupWindowRelationRepository" />
 
     <!-- Address -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\Address" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Address\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\AddressRepository" />
 
     <!-- Customer -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\Customer" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\CustomerRepository" />
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomer" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_save_customer</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderCustomerProcessor">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomer</argument>
+        </arguments>
+    </type>
 
     <!-- Rejection Info -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectionInfo" />
@@ -51,16 +84,32 @@
 
     <!-- Invoice Details -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\InvoiceDetails" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\InvoiceDetailsRepository" />
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetails" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_save_invoice_details</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderInvoiceDetailsProcessor">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetails</argument>
+        </arguments>
+    </type>
 
     <!-- Line Item -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItem" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItem" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItem\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItemRepository" />
 
     <!-- Line Item Rejection Reason -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItemRejectionReason" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItemRejectionReason" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItemRejectionReason\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItemRejectionReasonRepository" />
 
@@ -72,58 +121,176 @@
 
     <!-- Order -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\Order" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\OrderRepository" />
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order">
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\OrderManagementInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\OrderManagement" />
+
+    <!-- Order: Customer Data -->
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomerData" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
         <arguments>
-            <argument name="relationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RelationComposite</argument>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_customer_data_save</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorCustomerData">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomerData</argument>
         </arguments>
     </type>
+
+    <!-- Order: Invoice Details Data -->
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetailsData" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_invoice_details_data_save</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorInvoiceDetailsData">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetailsData</argument>
+        </arguments>
+    </type>
+
+    <!-- Order: Magento Order Cancel -->
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderCancel" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_magento_order_cancel</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderCancel">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderCancel</argument>
+        </arguments>
+    </type>
+
+    <!-- Order: Magento Order Complete -->
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderComplete" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_magento_order_complete</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderComplete">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderComplete</argument>
+        </arguments>
+    </type>
+
+    <!-- Order: Magento Order Submit -->
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderSubmit" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_magento_order_submit</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderSubmit">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderSubmit</argument>
+        </arguments>
+    </type>
+
+    <!-- Order: Magento Order Accept -->
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceOrderAccept" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+        <arguments>
+            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
+            <argument name="group" xsi:type="string">marketplace</argument>
+            <argument name="activeField" xsi:type="string">active_order_accept</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorOrderAccept">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceOrderAccept</argument>
+        </arguments>
+    </type>
+
     <virtualType
         name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RelationComposite"
         type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite"
     >
         <arguments>
-            <argument name="relationProcessors" xsi:type="array">
+            <argument name="modelRelationProcessors" xsi:type="array">
                 <item name="lineitem" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\LineItemRelation</item>
                 <item name="acceptoptionsrelation" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\AcceptOptionsRelation</item>
                 <item name="rejectoptionsrelation" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RejectOptionsRelation</item>
             </argument>
         </arguments>
     </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order">
+        <arguments>
+            <argument name="modelRelationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RelationComposite</argument>
+        </arguments>
+    </type>
+
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorComposite">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+            <argument name="orderProcessors" xsi:type="array">
+                <item name="hippiemonkeys_skroutzmarketplace_customer" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorCustomerData</item>
+                <item name="hippiemonkeys_skroutzmarketplace_invoicedetails" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorInvoiceDetailsData</item>
+                <item name="hippiemonkeys_skroutzmarketplace_magentoordercomplete" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderComplete</item>
+                <item name="hippiemonkeys_skroutzmarketplace_magentoordercancel" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderCancel</item>
+                <item name="hippiemonkeys_skroutzmarketplace_magentoordercreate" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderSubmit</item>
+                <item name="hippiemonkeys_skroutzmarketplace_orderaccept" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorOrderAccept</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderManagement">
+        <arguments>
+            <argument name="orderProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorComposite</argument>
+        </arguments>
+    </type>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface">
+        <plugin name="hippiemonkeys_skroutzmarketplace_customer" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiCustomerPlugin" sortOrder="0" disabled="false" />
+        <plugin name="hippiemonkeys_skroutzmarketplace_lineitems" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiLineItemsPlugin" sortOrder="10" disabled="false" />
+        <plugin name="hippiemonkeys_skroutzmarketplace_pickuplocation" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiPickupLocationPlugin" sortOrder="20" disabled="false" />
+    </type>
 
     <!-- Pickup Location -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\PickupLocation" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupLocation" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupLocation\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\PickupLocationRepository" />
 
     <!-- Pickup Window -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\PickupWindow" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\PickupWindowRepository" />
 
     <!-- Reject Options -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectOptions" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectOptionsRepository" />
-    <virtualType
-        name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModelRejectOptions\RelationComposite"
-        type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite"
-    >
+    <virtualType name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions\RelationComposite" type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite">
         <arguments>
-            <argument name="relationProcessors" xsi:type="array">
+            <argument name="modelRelationProcessors" xsi:type="array">
                 <item name="lineitemrejecctionreason" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions\LineItemRejectionReasonRelation</item>
             </argument>
         </arguments>
     </virtualType>
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions">
         <arguments>
-            <argument name="entityRelationComposite" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions\RelationComposite</argument>
+            <argument name="modelRelationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions\RelationComposite</argument>
         </arguments>
     </type>
 
     <!-- Reject Options Line Item Rejection Reason Relation -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectOptionsLineItemRejectionReasonRelation" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsLineItemRejectionReasonRelationResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelation" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptionsLineItemRejectionReasonRelation\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectOptionsLineItemRejectionReasonRelationRepository" />
 </config>

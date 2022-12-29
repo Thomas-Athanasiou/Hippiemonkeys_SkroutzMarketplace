@@ -23,7 +23,7 @@
     implements RejectOptionsLineItemRejectionReasonRelationResourceInterface
     {
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_rejectoptionslirr_r';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_rejectoptionslirr_r';
 
         /**
          * {@inheritdoc}

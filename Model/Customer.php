@@ -136,7 +136,7 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplaceWebhook\Api\AddressRepositoryInterface $_addressRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $_addressRepository
          */
         private $_addressRepository;
 
@@ -145,7 +145,7 @@
          *
          * @access protected
          *
-         * @return \Hippiemonkeys\SkroutzMarketplaceWebhook\Api\AddressRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface
          */
         protected function getAddressRepository(): AddressRepositoryInterface
         {

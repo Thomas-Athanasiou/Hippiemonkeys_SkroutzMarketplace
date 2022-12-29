@@ -23,7 +23,7 @@
     implements AcceptOptionsPickupLocationRelationResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_acceptoptionspickuplocation_r';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_acceptoptionspickuplocation_r';
 
         /**
          * {@inheritdoc}

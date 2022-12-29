@@ -23,7 +23,7 @@
     implements PickupLocationResourceInterface
     {
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_pickuplocation';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_pickuplocation';
 
         /**
          * {@inheritdoc}

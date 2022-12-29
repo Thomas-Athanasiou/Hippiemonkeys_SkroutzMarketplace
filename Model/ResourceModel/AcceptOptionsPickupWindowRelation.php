@@ -16,15 +16,14 @@
 
     use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface,
-        Magento\Framework\Model\AbstractModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface;
 
     class AcceptOptionsPickupWindowRelation
     extends AbstractResource
     implements AcceptOptionsPickupWindowRelationResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_acceptoptionspickupwindow_r';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_acceptoptionspickupwindow_r';
 
         /**
          * @inheritdoc

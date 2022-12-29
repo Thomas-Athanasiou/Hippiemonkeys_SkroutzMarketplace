@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Thomas Athanasiou at Hippiemonkeys
+    Copyright (c) 2022 Hippiemonkeys (https://hippiemonkeys.com)
+    Hippiemonkeys_Skroutz
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <hippiemonkeys_skroutz>
+            <marketplace>
+                <active>1</active>
+                <active_customer_data_save>1</active_customer_data_save>
+                <active_invoice_details_data_save>1</active_invoice_details_data_save>
+                <active_magento_order_cancel>0</active_magento_order_cancel>
+                <active_magento_order_complete>0</active_magento_order_complete>
+                <active_magento_order_submit>0</active_magento_order_submit>
+                <active_order_accept>0</active_order_accept>
+                <api_token></api_token>
+                <api_host>https://api.skroutz.gr</api_host>
+                <preferred_accept_options_pickup_location_skroutz_id></preferred_accept_options_pickup_location_skroutz_id>
+                <preferred_number_of_parcels>1</preferred_number_of_parcels>
+            </marketplace>
+        </hippiemonkeys_skroutz>
+    </default>
+</config>

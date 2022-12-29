@@ -115,7 +115,8 @@
         {
             $this->_idCache[$rejectOptions->getId()] = $rejectOptions;
             $this->_orderIdCache[$rejectOptions->getOrder()->getId()] = $rejectOptions;
-            return $this->getResource()->saveRejectOptions($rejectOptions);
+            $this->getResource()->saveRejectOptions($rejectOptions);
+            return $rejectOptions;
         }
 
         /**

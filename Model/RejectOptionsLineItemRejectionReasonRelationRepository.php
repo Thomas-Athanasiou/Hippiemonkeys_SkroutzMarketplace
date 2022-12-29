@@ -15,6 +15,7 @@
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Api\SearchCriteriaInterface,
+        Magento\Framework\Api\SearchCriteriaBuilder,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
@@ -52,13 +53,15 @@
             ResourceInterface $resource,
             RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory,
             CollectionProcessorInterface $collectionProcessor,
-            SearchResultInterfaceFactory $searchResultFactory
+            SearchResultInterfaceFactory $searchResultFactory,
+            SearchCriteriaBuilder $searchCriteriaBuilder
         )
         {
             $this->_resource = $resource;
             $this->_rejectOptionsLineItemRejectionReasonRelationFactory = $rejectOptionsLineItemRejectionReasonRelationFactory;
             $this->_collectionProcessor = $collectionProcessor;
             $this->_searchResultFactory = $searchResultFactory;
+            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         }
 
         /**
@@ -232,6 +235,27 @@
         protected function getSearchResultFactory()
         {
             return $this->_searchResultFactory;
+        }
+
+        /**
+         * Search Criteria Builder property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         */
+        private $_searchCriteriaBuilder;
+
+        /**
+         * Gets Search Criteria Builder
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Api\SearchCriteriaBuilder
+         */
+        protected function getSearchCriteriaBuilder() : SearchCriteriaBuilder
+        {
+            return $this->_searchCriteriaBuilder;
         }
     }
 ?>

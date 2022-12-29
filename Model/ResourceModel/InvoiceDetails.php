@@ -23,7 +23,7 @@
     implements InvoiceDetailsResourceInterface
     {
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_invoicedetails';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_invoicedetails';
 
         /**
          * {@inheritdoc}

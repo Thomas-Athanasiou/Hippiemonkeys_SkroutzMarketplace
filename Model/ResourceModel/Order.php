@@ -23,7 +23,7 @@
     implements OrderResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_order';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_order';
 
         /**
          * {@inheritdoc}

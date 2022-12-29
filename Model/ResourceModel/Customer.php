@@ -23,14 +23,14 @@
     implements CustomerResourceInterface
     {
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_customer';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_customer';
 
         /**
          * {@inheritdoc}
          */
         protected function _construct()
         {
-            $this->_init(static::TABLE_MAIN, static::FIELD_LOCAL_ID);
+            $this->_init(static::TABLE_MAIN, static::FIELD_ID);
         }
 
         /**

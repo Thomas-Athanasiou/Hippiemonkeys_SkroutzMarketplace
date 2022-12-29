@@ -25,8 +25,23 @@
     implements OrderRepositoryInterface
     {
         protected
-            $_idIndex           = [],
-            $_magentoOrderIndex = [];
+            /**
+             * Id Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $_idCache
+             */
+            $_idCache = [],
+
+            /**
+             * Magento Order Cache property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $_magentoOrderCache
+             */
+            $_magentoOrderCache = [];
 
         public function __construct(
             ResourceInterface $resource,
@@ -57,10 +72,10 @@
                 $magentoOrder = $order->getMagentoOrder();
                 if($magentoOrder !== null)
                 {
-                    $this->_magentoOrderIndex[$magentoOrder->getId()] = $order;
+                    $this->_magentoOrderCache[$magentoOrder->getId()] = $order;
                 }
 
-                $this->_idIndex[$id] = $order;
+                $this->_idCache[$id] = $order;
             }
 
             return $order;
@@ -71,7 +86,7 @@
          */
         public function getById($id) : OrderInterface
         {
-            $order = $this->_idIndex[$id] ?? null;
+            $order = $this->_idCache[$id] ?? null;
             if($order === null)
             {
                 $order = $this->getOrderFactory()->create();
@@ -87,10 +102,10 @@
                     $magentoOrder = $order->getMagentoOrder();
                     if($magentoOrder !== null)
                     {
-                        $this->_magentoOrderIndex[$magentoOrder->getId()] = $magentoOrder;
+                        $this->_magentoOrderCache[$magentoOrder->getId()] = $magentoOrder;
                     }
 
-                    $this->_idIndex[$id] = $order;
+                    $this->_idCache[$id] = $order;
                 }
             }
 
@@ -103,7 +118,7 @@
         public function getByMagentoOrder(MagentoOrderInterface $magentoOrder) : OrderInterface
         {
             $magentoOrderId = $magentoOrder->getEntityId();
-            $order = $this->_magentoOrderIndex[$magentoOrderId] ?? null;
+            $order = $this->_magentoOrderCache[$magentoOrderId] ?? null;
             if($order === null)
             {
                 $order = $this->getOrderFactory()->create();
@@ -118,8 +133,8 @@
                 }
                 else
                 {
-                    $this->_magentoOrderIndex[$magentoOrderId]  = $magentoOrderId;
-                    $this->_idIndex[$id] = $order;
+                    $this->_magentoOrderCache[$magentoOrderId]  = $magentoOrderId;
+                    $this->_idCache[$id] = $order;
                 }
             }
             return $order;
@@ -130,14 +145,13 @@
          */
         public function save(OrderInterface $order) : OrderInterface
         {
-            $this->_idIndex[ $order->getId() ] = $order;
+            $this->_idCache[ $order->getId() ] = $order;
             $magentoOrder = $order->getMagentoOrder();
             if($magentoOrder !== null)
             {
-                $this->_magentoOrderIndex[$magentoOrder->getEntityId()] = $order;
+                $this->_magentoOrderCache[$magentoOrder->getEntityId()] = $order;
             }
             $this->getResource()->saveOrder($order);
-
             return $order;
         }
 
@@ -146,11 +160,11 @@
          */
         public function delete(OrderInterface $order) : bool
         {
-            unset( $this->_idIndex[ $order->getId() ] );
+            unset( $this->_idCache[ $order->getId() ] );
             $magentoOrder = $order->getMagentoOrder();
             if($magentoOrder !== null)
             {
-                unset($this->_magentoOrderIndex[$magentoOrder->getEntityId()]);
+                unset($this->_magentoOrderCache[$magentoOrder->getEntityId()]);
             }
             return $this->getResource()->deleteOrder($order);
         }

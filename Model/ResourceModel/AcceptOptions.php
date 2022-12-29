@@ -23,7 +23,7 @@
     implements AcceptOptionsResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_acceptoptions';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_acceptoptions';
 
         /**
          * {@inheritdoc}

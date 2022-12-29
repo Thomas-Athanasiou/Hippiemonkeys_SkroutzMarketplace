@@ -23,7 +23,7 @@
     implements SizeResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_size';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_size';
 
         /**
          * {@inheritdoc}

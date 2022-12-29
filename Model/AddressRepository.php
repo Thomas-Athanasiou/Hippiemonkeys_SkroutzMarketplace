@@ -80,7 +80,8 @@
         public function save(AddressInterface $address): AddressInterface
         {
             $this->_idCache[$address->getId()] = $address;
-            return $this->getResource()->saveAddress($address);
+            $this->getResource()->saveAddress($address);
+            return $address;
         }
 
         /**

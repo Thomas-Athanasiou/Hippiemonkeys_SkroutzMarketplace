@@ -23,7 +23,7 @@
     implements RejectionInfoResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzMarketplace_rejectioninfo';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_rejectioninfo';
 
         /**
          * {@inheritdoc}

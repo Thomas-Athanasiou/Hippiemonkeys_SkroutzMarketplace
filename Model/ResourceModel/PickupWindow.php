@@ -22,10 +22,6 @@
     extends AbstractResource
     implements PickupWindowResourceInterface
     {
-        public const
-            FIELD_SKROUTZ_ID = 'id',
-            FIELD_LABEL = 'label';
-
         protected const
             TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_pickupwindow';
 
@@ -56,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadPickupWindowBySkroutzId(PickupWindowInterface $pickupWindow, string $skroutzId): PickupWindowResourceInterface
+        public function loadPickupWindowBySkroutzId(PickupWindowInterface $pickupWindow, int $skroutzId): PickupWindowResourceInterface
         {
             return $this->loadModel($pickupWindow, $skroutzId, static::FIELD_SKROUTZ_ID);
         }

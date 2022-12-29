@@ -22,10 +22,6 @@
     extends AbstractResource
     implements OrderPickupWindowResourceInterface
     {
-        public const
-            FIELD_FROM  = 'from',
-            FIELD_TO    = 'to';
-
         protected const
             TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_orderpickupwindow';
 

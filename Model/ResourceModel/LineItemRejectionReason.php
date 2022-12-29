@@ -23,7 +23,7 @@
     implements LineItemRejectionReasonResourceInterface
     {
         protected const
-            TABLE_MAIN = 'hippiemonkeys_skroutzMarketplace_lineitemrejectionreason';
+            TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_lineitemrejectionreason';
 
         /**
          * {@inheritdoc}
@@ -47,6 +47,14 @@
         public function loadLineItemRejectionReasonById(LineItemRejectionReasonInterface $lineItemRejectionReason, $id): LineItemRejectionReasonResourceInterface
         {
             return $this->loadModelById($lineItemRejectionReason, $id);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function loadLineItemRejectionReasonBySkroutzId(LineItemRejectionReasonInterface $lineItemRejectionReason, int $skroutzId): LineItemRejectionReasonResourceInterface
+        {
+            return $this->loadModel($lineItemRejectionReason, $skroutzId, static::FIELD_SKROUTZ_ID);
         }
 
         /**

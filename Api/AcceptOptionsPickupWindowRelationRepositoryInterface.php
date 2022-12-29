@@ -26,6 +26,7 @@
          * Gets Accept Options - Pickup Window Relation by ID
          *
          * @api
+         * @access public
          *
          * @param mixed $id
          *
@@ -33,14 +34,36 @@
          */
         function getById($id): AcceptOptionsPickupWindowRelationInterface;
 
+        /**
+         * Gets Accept Options - Pickup Window Relation by Accept Options and Pickup Window
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface
+         */
         function getByAcceptOptionsAndPickupWindow(AcceptOptionsInterface $acceptOptions, PickupWindowInterface $pickupWindow) : AcceptOptionsPickupWindowRelationInterface;
 
+        /**
+         * Gets List by Search Criteria
+         *
+         * @api
+         * @access public
+         *
+         * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterface
+         */
         function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupWindowRelationSearchResultInterface;
 
         /**
          * Deletes Accept Options - Pickup Window relation
          *
          * @api
+         * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupLocationRelation
          *
@@ -52,6 +75,7 @@
          * Saves Accept Options - Pickup Window Relation
          *
          * @api
+         * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation
          *

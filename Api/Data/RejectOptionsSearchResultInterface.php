@@ -20,14 +20,20 @@
     extends SearchResultsInterface
     {
         /**
-         * Gets collection items.
+         * Gets collection items
+         *
+         * @api
+         * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] Array of collection line items.
          */
         public function getItems();
 
         /**
-         * Sets collection line items.
+         * Sets collection line items
+         *
+         * @api
+         * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] $rejectOptions
          * @return $this

@@ -29,5 +29,42 @@
          * @return void
          */
         function processOrder(OrderInterface $order): void;
+
+        /**
+         * Update and Process order
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
+         *
+         * @return void
+         */
+        function updateAndProcessOrder(OrderInterface $order): void;
+
+        /**
+         * Updates and Processes orders with given state
+         *
+         * @api
+         * @access public
+         *
+         * @param string $state
+         *
+         * @return void
+         */
+        function updateAndProcessOrdersWithState(string $state): void;
+
+        /**
+         * Updates and Processes orders with given state and limit
+         *
+         * @api
+         * @access public
+         *
+         * @param string $state
+         * @param int $limit
+         *
+         * @return void
+         */
+        function updateAndProcessOrdersWithStateAndLimit(string $state, int $limit): void;
     }
 ?>

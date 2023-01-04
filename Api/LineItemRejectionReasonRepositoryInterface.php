@@ -30,7 +30,6 @@
          */
         function getById($id): LineItemRejectionReasonInterface;
 
-
         /**
          * Get Line Item Rejection Reason by Skroutz Id
          *

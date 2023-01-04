@@ -14,10 +14,15 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface,
+    use Magento\Framework\Api\SearchCriteriaInterface,
+        Magento\Framework\Api\SearchCriteriaBuilder,
+        Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
+        Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface as SearchResultInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory as SearchsReultInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface as ResourceInterface;
 
@@ -43,13 +48,30 @@
              */
             $_magentoOrderCache = [];
 
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface $resource
+         * @param \Hippiemonkeys\Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory $orderFactory
+         * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor,
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory $searchResultFactory,
+         * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
+         */
         public function __construct(
             ResourceInterface $resource,
-            OrderInterfaceFactory $orderFactory
+            OrderInterfaceFactory $orderFactory,
+            CollectionProcessorInterface $collectionProcessor,
+            SearchsReultInterfaceFactory $searchResultFactory,
+            SearchCriteriaBuilder $searchCriteriaBuilder
         )
         {
             $this->_resource = $resource;
             $this->_orderFactory = $orderFactory;
+            $this->_collectionProcessor = $collectionProcessor;
+            $this->_searchResultFactory = $searchResultFactory;
+            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         }
 
         /**
@@ -143,6 +165,17 @@
         /**
          * {@inheritdoc}
          */
+        public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
+        {
+            $searchResult = $this->getSearchResultFactory()->create();
+            $searchResult->setSearchCriteria($searchCriteria);
+            $this->getCollectionProcessor()->process($searchCriteria, $searchResult);
+            return $searchResult;
+        }
+
+        /**
+         * {@inheritdoc}
+         */
         public function save(OrderInterface $order) : OrderInterface
         {
             $this->_idCache[ $order->getId() ] = $order;
@@ -209,6 +242,69 @@
         protected function getOrderFactory(): OrderInterfaceFactory
         {
             return $this->_orderFactory;
+        }
+
+        /**
+         * Collection Processor property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         */
+        private $_collectionProcessor;
+
+        /**
+         * Gets Collection Processor
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface
+         */
+        protected function getCollectionProcessor() : CollectionProcessorInterface
+        {
+            return $this->_collectionProcessor;
+        }
+
+        /**
+         * Search Result Factory property
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory $_searchResultFactory
+         */
+        private $_searchResultFactory;
+
+        /**
+         * Gets Search Result Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory
+         */
+        protected function getSearchResultFactory()
+        {
+            return $this->_searchResultFactory;
+        }
+
+        /**
+         * Search Criteria Builder property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         */
+        private $_searchCriteriaBuilder;
+
+        /**
+         * Gets Search Criteria Builder
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Api\SearchCriteriaBuilder
+         */
+        protected function getSearchCriteriaBuilder() : SearchCriteriaBuilder
+        {
+            return $this->_searchCriteriaBuilder;
         }
     }
 ?>

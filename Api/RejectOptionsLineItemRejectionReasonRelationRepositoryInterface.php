@@ -21,7 +21,7 @@
     interface RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
     {
         /**
-         * Gets Reject Options Line Item Rejection Reason Relation by id
+         * Gets Reject Options - Line Item Rejection Reason relation by id
          *
          * @api
          * @access public
@@ -32,10 +32,40 @@
          */
         function getById($id): RejectOptionsLineItemRejectionReasonRelationInterface;
 
+        /**
+         * Gets Reject Options - Line Item Rejection Reason relation by Reject Options and Line Item Rejection Reason
+         *
+         * @api
+         * @access public
+         *
+         * @param mixed $id
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface
+         */
         function getByRejectOptionsAndLineItemRejectionReason(RejectOptionsInterface $rejectOptions, LineItemRejectionReasonInterface $lineItemRejectionReason) : RejectOptionsLineItemRejectionReasonRelationInterface;
 
+        /**
+         * Deletes Reject Options - Line Item Rejection Reason relation
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
+         *
+         * @return bool
+         */
         function delete(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): bool;
 
+        /**
+         * Saves Reject Options - Line Item Rejection Reason relation
+         *
+         * @api
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface
+         */
         function save(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): RejectOptionsLineItemRejectionReasonRelationInterface;
     }
 ?>

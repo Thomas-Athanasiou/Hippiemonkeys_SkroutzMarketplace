@@ -9,16 +9,11 @@
         <hippiemonkeys_skroutz>
             <marketplace>
                 <active>1</active>
-                <active_customer_data_save>1</active_customer_data_save>
-                <active_invoice_details_data_save>1</active_invoice_details_data_save>
-                <active_magento_order_cancel>0</active_magento_order_cancel>
-                <active_magento_order_complete>0</active_magento_order_complete>
-                <active_magento_order_submit>0</active_magento_order_submit>
-                <active_order_accept>0</active_order_accept>
                 <api_token></api_token>
                 <api_host>https://api.skroutz.gr</api_host>
                 <preferred_accept_options_pickup_location_skroutz_id></preferred_accept_options_pickup_location_skroutz_id>
                 <preferred_number_of_parcels>1</preferred_number_of_parcels>
+                <stock_id>1</stock_id>
             </marketplace>
         </hippiemonkeys_skroutz>
     </default>

@@ -48,6 +48,7 @@
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory $rejectOptionsLineItemRejectionReasonRelationFactory
          * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory $searchResultFactory
+         * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
         public function __construct(
             ResourceInterface $resource,
@@ -221,7 +222,7 @@
          *
          * @access protected
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationsearchResultFactory $_searchResultFactory
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory $_searchResultFactory
          */
         private $_searchResultFactory;
 
@@ -230,7 +231,7 @@
          *
          * @access protected
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationsearchResultFactory
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory
          */
         protected function getSearchResultFactory()
         {

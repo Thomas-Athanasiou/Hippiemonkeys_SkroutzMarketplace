@@ -250,7 +250,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface|null
          */
-        function getCustomer();
+        function getCustomer(): ?CustomerInterface;
 
         /**
          * Sets customer

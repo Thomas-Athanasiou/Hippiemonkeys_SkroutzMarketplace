@@ -62,19 +62,6 @@
     <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\CustomerRepository" />
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomer" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_save_customer</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderCustomerProcessor">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomer</argument>
-        </arguments>
-    </type>
 
     <!-- Rejection Info -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectionInfo" />
@@ -125,97 +112,6 @@
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\OrderRepository" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\OrderManagementInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\OrderManagement" />
-
-    <!-- Order: Customer Data -->
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomerData" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_customer_data_save</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorCustomerData">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceCustomerData</argument>
-        </arguments>
-    </type>
-
-    <!-- Order: Invoice Details Data -->
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetailsData" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_invoice_details_data_save</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorInvoiceDetailsData">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetailsData</argument>
-        </arguments>
-    </type>
-
-    <!-- Order: Magento Order Cancel -->
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderCancel" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_magento_order_cancel</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderCancel">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderCancel</argument>
-        </arguments>
-    </type>
-
-    <!-- Order: Magento Order Complete -->
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderComplete" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_magento_order_complete</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderComplete">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderComplete</argument>
-        </arguments>
-    </type>
-
-    <!-- Order: Magento Order Submit -->
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderSubmit" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_magento_order_submit</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderSubmit">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceMagentoOrderSubmit</argument>
-        </arguments>
-    </type>
-
-    <!-- Order: Magento Order Accept -->
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceOrderAccept" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_order_accept</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorOrderAccept">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceOrderAccept</argument>
-        </arguments>
-    </type>
-
     <virtualType
         name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RelationComposite"
         type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite"
@@ -237,14 +133,7 @@
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorComposite">
         <arguments>
             <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-            <argument name="orderProcessors" xsi:type="array">
-                <item name="hippiemonkeys_skroutzmarketplace_customer" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorCustomerData</item>
-                <item name="hippiemonkeys_skroutzmarketplace_invoicedetails" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorInvoiceDetailsData</item>
-                <item name="hippiemonkeys_skroutzmarketplace_magentoordercomplete" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderComplete</item>
-                <item name="hippiemonkeys_skroutzmarketplace_magentoordercancel" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderCancel</item>
-                <item name="hippiemonkeys_skroutzmarketplace_magentoordercreate" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorMagentoOrderSubmit</item>
-                <item name="hippiemonkeys_skroutzmarketplace_orderaccept" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorOrderAccept</item>
-            </argument>
+            <argument name="orderProcessors" xsi:type="array"></argument>
         </arguments>
     </type>
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderManagement">
@@ -255,7 +144,8 @@
     <type name="Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface">
         <plugin name="hippiemonkeys_skroutzmarketplace_customer" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiCustomerPlugin" sortOrder="0" disabled="false" />
         <plugin name="hippiemonkeys_skroutzmarketplace_lineitems" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiLineItemsPlugin" sortOrder="10" disabled="false" />
-        <plugin name="hippiemonkeys_skroutzmarketplace_pickuplocation" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiPickupLocationPlugin" sortOrder="20" disabled="false" />
+        <plugin name="hippiemonkeys_skroutzmarketplace_orders" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiOrderPlugin" sortOrder="30" disabled="false" />
+        <plugin name="hippiemonkeys_skroutzmarketplace_pickuplocation" type="Hippiemonkeys\SkroutzMarketplace\Plugin\WebapiPickupLocationPlugin" sortOrder="40" disabled="false" />
     </type>
 
     <!-- Pickup Location -->

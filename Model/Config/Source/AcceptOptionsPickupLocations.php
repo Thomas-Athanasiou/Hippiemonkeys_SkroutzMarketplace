@@ -40,7 +40,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function toOptionArray()
         {

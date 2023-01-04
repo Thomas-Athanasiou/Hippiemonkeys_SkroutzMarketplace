@@ -122,7 +122,7 @@
          */
         public function getAddress(): ?AddressInterface
         {
-            $address    = $this->getData(self::FIELD_ADDRESS);
+            $address = $this->getData(self::FIELD_ADDRESS);
             $addressId  = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
             if($addressId && !$address)
             {
@@ -146,7 +146,7 @@
          */
         public function getVatExclusionRequested(): bool
         {
-            return $this->getData(ResourceInterface::FIELD_VAT_EXCLUSION_REQUESTED);
+            return (bool) $this->getData(ResourceInterface::FIELD_VAT_EXCLUSION_REQUESTED);
         }
 
         /**
@@ -154,7 +154,7 @@
          */
         public function setVatExclusionRequested(bool $vatExclusionRequested): InvoiceDetails
         {
-            return (bool) $this->setData(ResourceInterface::FIELD_VAT_EXCLUSION_REQUESTED, $vatExclusionRequested);
+            return $this->setData(ResourceInterface::FIELD_VAT_EXCLUSION_REQUESTED, $vatExclusionRequested);
         }
 
         /**

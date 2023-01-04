@@ -145,7 +145,7 @@
          * @api
          * @access public
          *
-         * @return bool.
+         * @return bool
          */
         function getVatExclusionRequested(): bool;
 

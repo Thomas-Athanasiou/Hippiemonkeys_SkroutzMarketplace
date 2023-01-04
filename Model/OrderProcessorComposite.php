@@ -45,9 +45,17 @@
          */
         protected function processOrderInternal(OrderInterface $order): void
         {
+            $logger = $this->getLogger();
             foreach ($this->getOrderProcessors() as $orderProcessor)
             {
-                $orderProcessor->processOrder($order);
+                try
+                {
+                    $orderProcessor->processOrder($order);
+                }
+                catch (\Exception $exception)
+                {
+                    $logger->error($exception->getMessage());
+                }
             }
         }
 

@@ -27,7 +27,7 @@
          *
          * @param mixed $id
          *
-         * @return $this
+         * @return mixed
          */
         function setId($id);
 

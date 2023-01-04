@@ -56,12 +56,8 @@
                     if(!$pickupWindow->getId())
                     {
                         try{
-                            $persistedPickupWindow = $pickupWindowRepository->getBySkroutzId(
-                                $pickupWindow->getSkroutzId()
-                            );
-                            $pickupWindow->setId(
-                                $persistedPickupWindow->getId()
-                            );
+                            $persistedPickupWindow = $pickupWindowRepository->getBySkroutzId($pickupWindow->getSkroutzId());
+                            $pickupWindow->setId($persistedPickupWindow->getId());
                         }
                         catch(NoSuchEntityException)
                         {

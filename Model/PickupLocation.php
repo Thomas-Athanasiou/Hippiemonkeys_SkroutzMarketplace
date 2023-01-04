@@ -23,7 +23,7 @@
     implements PickupLocationInterface
     {
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getSkroutzId(): string
         {
@@ -31,7 +31,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setSkroutzId(string $skroutzId): PickupLocation
         {
@@ -39,7 +39,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getLabel(): string
         {
@@ -47,7 +47,7 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setLabel(string $label): PickupLocation
         {

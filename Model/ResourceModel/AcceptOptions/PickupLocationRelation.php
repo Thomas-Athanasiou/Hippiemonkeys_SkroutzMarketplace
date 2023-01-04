@@ -65,13 +65,10 @@
                 {
                     if(!$pickupLocation->getId())
                     {
-                        try{
-                            $persistedPickupLocation = $pickupLocationRepository->getBySkroutzId(
-                                $pickupLocation->getSkroutzId()
-                            );
-                            $pickupLocation->setId(
-                                $persistedPickupLocation->getId()
-                            );
+                        try
+                        {
+                            $persistedPickupLocation = $pickupLocationRepository->getBySkroutzId($pickupLocation->getSkroutzId());
+                            $pickupLocation->setId($persistedPickupLocation->getId());
                         }
                         catch(NoSuchEntityException)
                         {

@@ -14,9 +14,7 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-use Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface;
-use Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface;
-use Magento\Framework\Api\SearchCriteriaBuilder,
+    use Magento\Framework\Api\SearchCriteriaBuilder,
         Magento\Framework\Registry,
         Magento\Framework\Model\Context,
         Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface,
@@ -30,7 +28,9 @@ use Magento\Framework\Api\SearchCriteriaBuilder,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface as ResourceInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface;

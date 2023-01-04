@@ -10,8 +10,6 @@
             <module name="Hippiemonkeys_Core"/>
             <module name="Hippiemonkeys_Skroutz" />
             <module name="Magento_Catalog" />
-            <module name="Magento_Sales" />
-            <module name="Magento_Quote" />
         </sequence>
     </module>
 </config>

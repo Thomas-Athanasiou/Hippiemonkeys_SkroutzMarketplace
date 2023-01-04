@@ -26,7 +26,7 @@
             TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_acceptoptionspickupwindow_r';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {

@@ -15,6 +15,7 @@
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
     use Magento\Framework\Api\SearchCriteriaBuilder,
+        Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderManagementInterface,
@@ -33,16 +34,19 @@
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderProcessorInterface $orderProcessor
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
          * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface $skroutzMarketplace
          */
         public function __construct(
             OrderProcessorInterface $orderProcessor,
             OrderRepositoryInterface $orderRepository,
-            SearchCriteriaBuilder $searchCriteriaBuilder
+            SearchCriteriaBuilder $searchCriteriaBuilder,
+            SkroutzMarketplaceInterface $skroutzMarketplace
         )
         {
             $this->_orderProcessor = $orderProcessor;
             $this->_orderRepository = $orderRepository;
             $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+            $this->_skroutzMarketplace = $skroutzMarketplace;
         }
 
         /**
@@ -51,6 +55,18 @@
         public function processOrder(OrderInterface $order): void
         {
             $this->getOrderProcessor()->processOrder($order);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function updateAndProcessOrder(OrderInterface $order): void
+        {
+            $this->processOrder(
+                $this->getSkroutzMarketplace()->getOrder(
+                    $order->getCode()
+                )
+            );
         }
 
         /**
@@ -65,7 +81,6 @@
                         ->setPageSize(null)
                         ->create()
                 )
-                ->getItems()
             );
         }
 
@@ -81,19 +96,22 @@
                         ->setPageSize($limit)
                         ->create()
                 )
-                ->getItems()
             );
         }
 
-        protected function updateAndProcessOrderList(OrderSearchResultInterface $orderSearchResult)
+        /**
+         * Updates and processes order list
+         *
+         * @access protected
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderSearchResultInterface $orderSearchResult
+         */
+        protected function updateAndProcessOrderList(OrderSearchResultInterface $orderSearchResult): void
         {
-            foreach ($persistentOrders as $persistentOrder)
+            foreach ($orderSearchResult->getItems() as $order)
             {
-                $this->processOrder(
-                    $this->getSkroutzMa
-                );
+                $this->updateAndProcessOrder($order);
             }
-
         }
 
         /**
@@ -157,6 +175,27 @@
         protected function getSearchCriteriaBuilder() : SearchCriteriaBuilder
         {
             return $this->_searchCriteriaBuilder;
+        }
+
+        /**
+         * Skroutz Marketplace property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface $_searchCriteriaBuilder
+         */
+        private $_skroutzMarketplace;
+
+        /**
+         * Gets Skroutz Marketplace
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface
+         */
+        protected function getSkroutzMarketplace() : SkroutzMarketplaceInterface
+        {
+            return $this->_skroutzMarketplace;
         }
     }
 ?>

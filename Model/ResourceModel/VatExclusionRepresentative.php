@@ -26,7 +26,7 @@
             TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_vatexlusionrepresentative';
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {

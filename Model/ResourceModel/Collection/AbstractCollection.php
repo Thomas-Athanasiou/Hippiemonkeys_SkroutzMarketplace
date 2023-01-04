@@ -23,7 +23,7 @@
     extends MagentoAbstractCollection
     {
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         protected function _construct()
         {
@@ -33,14 +33,14 @@
         private $_searchCriteria;
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getSearchCriteria()
         {
             return $this->_searchCriteria;
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null)
         {
@@ -49,21 +49,21 @@
         }
 
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function getTotalCount()
         {
             return $this->getSize();
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setTotalCount($totalCount)
         {
             return $this;
         }
         /**
-         * @inheritdoc
+         * {@inheritdoc}
          */
         public function setItems(array $items = null)
         {

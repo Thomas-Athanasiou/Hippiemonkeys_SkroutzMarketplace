@@ -75,7 +75,7 @@
         /**
          * {@inheritdoc}
          */
-        public function getShopUid(): int
+        public function getShopUid()
         {
             return $this->getData(ResourceInterface::FIELD_SHOPUID);
         }
@@ -83,7 +83,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setShopUid(int $uid): LineItem
+        public function setShopUid($uid): LineItem
         {
             return $this->setData(ResourceInterface::FIELD_SHOPUID, $uid);
         }

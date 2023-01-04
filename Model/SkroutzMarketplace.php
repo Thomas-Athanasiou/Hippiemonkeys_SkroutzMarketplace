@@ -21,7 +21,8 @@
         Hippiemonkeys\SkroutzMarketplace\Api\OrderManagementInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface;
+        Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface,
+        Hippiemonkeys\SkroutzMarketplace\Exception\ServiceException;
 
     class SkroutzMarketplace
     implements SkroutzMarketplaceInterface
@@ -30,10 +31,12 @@
             CONF_PATH_API_HOST = 'api_host',
             CONF_PATH_API_TOKEN = 'api_token',
 
+            TOKEN_FORMAT = 'Bearer %s',
+
             GET_ORDER_PATH_FORMAT = '%s/merchants/ecommerce/orders/%s',
 
             ACCEPT_OPTIONS_PATH_FORMAT = '%s/merchants/ecommerce/orders/%s/accept',
-            ACCEPT_OPTIONS_BODY_FORMAT = '{"number_of_parcels":%d,"pickup_location":"%s","pickup_window":%d}';
+            ACCEPT_OPTIONS_BODY_FORMAT = '{ "pickup_location": "%s", "pickup_window": %d, "number_of_parcels": %d }';
 
         /**
          * Constructor
@@ -56,7 +59,8 @@
 
             $httpClient->setOption(CURLOPT_RETURNTRANSFER, true);
             $httpClient->addHeader('Accept', 'application/vnd.skroutz+json; version=3.0');
-            $httpClient->addHeader('Authorization',  $this->getApiToken());
+            $httpClient->addHeader('Content-Type', 'application/json; charset=utf-8');
+            $httpClient->addHeader('Authorization',  \sprintf(self::TOKEN_FORMAT, $this->getApiToken()));
         }
 
         /**
@@ -67,10 +71,29 @@
             $httpClient = $this->getHttpClient();
             $httpClient->post(
                 \sprintf(self::ACCEPT_OPTIONS_PATH_FORMAT, $this->getApiHost(), $order->getCode()),
-                \sprintf(self::ACCEPT_OPTIONS_BODY_FORMAT, $numberOfParcels, $pickupLocation->getSkroutzId(), $pickupWindow->getSkroutzId()),
+                \sprintf(self::ACCEPT_OPTIONS_BODY_FORMAT, $pickupLocation->getSkroutzId(), $pickupWindow->getSkroutzId(), $numberOfParcels),
             );
 
             $response = \json_decode($httpClient->getBody(), false, 512, 0);
+
+            $errors = $response->errors ?? [];
+            if(\count($errors) > 0)
+            {
+                throw new ServiceException(
+                    __(
+                        \implode(
+                            '. ',
+                            array_map(
+                                function (object $error): string
+                                {
+                                    return implode(', ', $error->messages);
+                                },
+                                $errors
+                            )
+                        )
+                    )
+                );
+            }
 
             return \is_object($response) ? $response : new \stdClass();
         }

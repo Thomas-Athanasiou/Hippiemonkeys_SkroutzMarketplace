@@ -25,7 +25,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface[] Array of collection line items.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface[]
          */
         public function getItems();
 

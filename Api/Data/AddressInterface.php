@@ -191,9 +191,9 @@
          * @api
          * @access public
          *
-         * @return string
+         * @return string|null
          */
-        function getCollectionPointAddress() : string;
+        function getCollectionPointAddress() : ?string;
 
         /**
          * Sets collection point address
@@ -201,10 +201,10 @@
          * @api
          * @access public
          *
-         * @param string $collectionPointAddress
+         * @param string|null $collectionPointAddress
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface
          */
-        function setCollectionPointAddress(string $collectionPointAddress): AddressInterface;
+        function setCollectionPointAddress(?string $collectionPointAddress): AddressInterface;
     }
 ?>

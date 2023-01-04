@@ -92,27 +92,23 @@
         /**
          * {@inheritdoc}
          */
-        public function getByAcceptOptionsAndPickupLocation(
-            AcceptOptionsInterface $acceptOptions,
-            PickupLocationInterface $pickupLocation
-        ) : AcceptOptionsPickupLocationRelationInterface
+        public function getByAcceptOptionsAndPickupLocation(AcceptOptionsInterface $acceptOptions, PickupLocationInterface $pickupLocation) : AcceptOptionsPickupLocationRelationInterface
         {
             $acceptOptionsId = $acceptOptions->getId();
             $pickupLocationId = $pickupLocation->getId();
 
-            $searchCriteriaBuilder = $this->getSearchCriteriaBuilder();
-
             $acceptOptionsPickupLocationRelation = $this->getList(
-                $searchCriteriaBuilder
+                $this->getSearchCriteriaBuilder()
                     ->addFilter(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptionsId, 'eq')
                     ->addFilter(ResourceInterface::FIELD_PICKUP_LOCATION_ID, $pickupLocationId, 'eq')
                     ->create()
             )
             ->getItems() [0] ?? null;
 
-            if($acceptOptionsPickupLocationRelation)
+            $id = $acceptOptionsPickupLocationRelation === null ? null : $acceptOptionsPickupLocationRelation->getId();
+            if($id !== null)
             {
-                $this->_idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
+                $this->_idCache[$id] = $acceptOptionsPickupLocationRelation;
             }
             else
             {

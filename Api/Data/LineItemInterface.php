@@ -61,9 +61,9 @@
          * @api
          * @access public
          *
-         * @return int
+         * @return mixed
          */
-        function getShopUid(): int;
+        function getShopUid();
 
         /**
          * Sets Shop Uid
@@ -71,11 +71,11 @@
          * @api
          * @access public
          *
-         * @param string $shopUid
+         * @param mixed $shopUid
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setShopUid(int $shopUid): LineItemInterface;
+        function setShopUid($shopUid): LineItemInterface;
 
         /**
          * Gets size

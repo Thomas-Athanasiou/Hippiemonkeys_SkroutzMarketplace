@@ -22,15 +22,22 @@
         /**
          * Gets collection of Pickup Window items
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] Array of collection line items.
+         * @api
+         * @access public
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[]
          */
         public function getItems();
 
         /**
          * Sets collection of Pickup Window items
          *
+         * @api
+         * @access public
+         *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $pickupWindows
-         * @return $this
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowSearchResultInterface
          */
         public function setItems(array $pickupWindows);
     }

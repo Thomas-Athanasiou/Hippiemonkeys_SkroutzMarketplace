@@ -14,8 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
-    use Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface;
+    use Magento\Framework\Api\SearchCriteriaInterface,
+        Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface as SearchResultInterface;
 
     interface OrderRepositoryInterface
     {
@@ -54,6 +56,18 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
          */
         function getByMagentoOrder(MagentoOrderInterface $magentoOrder): OrderInterface;
+
+        /**
+         * Gets list by Search Criteria
+         *
+         * @api
+         * @access public
+         *
+         * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface
+         */
+        function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface;
 
         /**
          * Deletes Order

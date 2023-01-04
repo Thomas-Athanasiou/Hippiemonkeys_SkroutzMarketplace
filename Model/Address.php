@@ -137,7 +137,7 @@
         /**
          * {@inheritdoc}
          */
-        public function getCollectionPointAddress() : string
+        public function getCollectionPointAddress() : ?string
         {
             return $this->getData(ResourceInterface::FIELD_COLLECTION_POINT_ADDRESS);
         }
@@ -145,7 +145,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setCollectionPointAddress(string $collectionPointAddress): Address
+        public function setCollectionPointAddress(?string $collectionPointAddress): Address
         {
             return $this->setData(ResourceInterface::FIELD_COLLECTION_POINT_ADDRESS, $collectionPointAddress);
         }

@@ -508,6 +508,22 @@
         /**
          * {@inheritdoc}
          */
+        public function getStorePickup(): bool
+        {
+            return (bool) $this->getData(ResourceInterface::FIELD_STORE_PICKUP);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function setStorePickup(bool $storePickup): Order
+        {
+            return $this->setData(ResourceInterface::FIELD_STORE_PICKUP, $storePickup);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
         public function getPickupWindow(): ?OrderPickupWindowInterface
         {
             $pickupWindow = $this->getData(static::FIELD_PICKUP_WINDOW);

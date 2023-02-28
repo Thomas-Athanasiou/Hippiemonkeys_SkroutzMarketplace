@@ -194,6 +194,7 @@
         <column xsi:type="boolean" name="custom" nullable="true" comment="Custom" />
         <column xsi:type="boolean" name="gift_wrap" nullable="true" comment="Gift Wrap" />
         <column xsi:type="boolean" name="fulfilled_by_skroutz" nullable="true" comment="Fulfilled By Skroutz" />
+        <column xsi:type="boolean" name="store_pickup" nullable="true" comment="Store Pickup" />
         <column xsi:type="varchar" length="256" name="fbs_delivery_note" nullable="true" comment="Fbs Delivery Note" />
         <column xsi:type="varchar" length="256" name="pickup_address" nullable="true" comment="Pickup Address" />
         <column xsi:type="int" unsigned="true" name="number_of_parcels" nullable="true" comment="Number Of Parcels" />

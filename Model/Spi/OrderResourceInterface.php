@@ -45,6 +45,7 @@
             FIELD_GIFT_WRAP = 'gift_wrap',
             FIELD_FULFILLED_BY_SKROUTZ = 'fulfilled_by_skroutz',
             FIELD_FBS_DELIVERY_NOTE = 'fbs_delivery_note',
+            FIELD_STORE_PICKUP = 'store_pickup',
             FIELD_REJECTION_INFO_ID = 'rejection_info_id',
             FIELD_PICKUP_WINDOW_ID = 'pickup_window_id',
             FIELD_PICKUP_ADDRESS = 'pickup_address',

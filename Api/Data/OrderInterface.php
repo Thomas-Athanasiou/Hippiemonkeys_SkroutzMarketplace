@@ -526,6 +526,28 @@
         function setFbsDeliveryNote(?string $fbsDeliveryNote): OrderInterface;
 
         /**
+         * Gets Store Pickup
+         *
+         * @api
+         * @access public
+         *
+         * @return bool
+         */
+        function getStorePickup(): bool;
+
+        /**
+         * Sets Fulfilled By Skroutz
+         *
+         * @api
+         * @access public
+         *
+         * @param bool $storePickup
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
+         */
+        function setStorePickup(bool $storePickup): OrderInterface;
+
+        /**
          * Gets Pickup Window
          *
          * @api

@@ -5,7 +5,7 @@
      * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
      * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
@@ -99,15 +99,17 @@
 
             $searchCriteriaBuilder = $this->getSearchCriteriaBuilder();
 
-            $acceptOptionsPickupLocationRelation = $this->getList(
-                $searchCriteriaBuilder
-                    ->addFilter(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptionsId, 'eq')
-                    ->addFilter(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindowId, 'eq')
-                    ->create()
-            )
-            ->getItems() [0] ?? null;
+            $acceptOptionsPickupWindowRelations = $this->getList(
+                    $searchCriteriaBuilder
+                        ->addFilter(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptionsId, 'eq')
+                        ->addFilter(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindowId, 'eq')
+                        ->create()
+                )
+                ->getItems();
 
-            if($acceptOptionsPickupLocationRelation === null)
+            $acceptOptionsPickupWindowRelation = reset($acceptOptionsPickupWindowRelations);
+
+            if($acceptOptionsPickupWindowRelation === false)
             {
                 throw new NoSuchEntityException(
                     __('The Accept Options Pickup Location Relation with Accept Options ID "%1" and Pickup Window ID "%2" that was requested doesn\'t exist. Verify the Accept Options Pickup Wondow Relation and try again.', $acceptOptionsId, $pickupWindowId)
@@ -115,10 +117,10 @@
             }
             else
             {
-                $this->_idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
+                $this->_idCache[$acceptOptionsPickupWindowRelation->getId()] = $acceptOptionsPickupWindowRelation;
             }
 
-            return $acceptOptionsPickupLocationRelation;
+            return $acceptOptionsPickupWindowRelation;
         }
 
         /**

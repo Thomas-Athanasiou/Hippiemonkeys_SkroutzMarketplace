@@ -5,7 +5,7 @@
      * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
      * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
@@ -195,6 +195,15 @@
         }
 
         /**
+         * Collection Processor property
+         *
+         * @access private
+         *
+         * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         */
+        private $_collectionProcessor;
+
+        /**
          * Gets Collection Processor
          *
          * @access protected
@@ -211,7 +220,7 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationSearchResultInterfaceFactory $_searchResultFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterfaceFactory $_searchResultFactory
          */
         private $_searchResultFactory;
 
@@ -220,7 +229,7 @@
          *
          * @access protected
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationSearchResultInterfaceFactory
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterfaceFactory
          */
         protected function getSearchResultFactory(): SearchResultInterfaceFactory
         {

@@ -5,7 +5,7 @@
      * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
      * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
@@ -14,8 +14,9 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Webapi\ServicePayloadConverterInterface,
+    use Magento\Framework\Webapi\ServiceInputProcessor,
         Magento\Framework\HTTP\Client\Curl,
+        Magento\Framework\Serialize\Serializer\Json as JsonSerializer,
         Hippiemonkeys\Core\Api\Helper\ConfigInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderManagementInterface,
@@ -45,17 +46,19 @@
          *
          * @param \Hippiemonkeys\Core\Api\Helper\ConfigInterface $config
          * @param \Magento\Framework\HTTP\Client\Curl $httpClient
-         * @param \Magento\Framework\Webapi\ServicePayloadConverterInterface $servicePayloadConverter
+         * @param \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor
          */
         public function __construct(
             ConfigInterface $config,
             Curl $httpClient,
-            ServicePayloadConverterInterface $servicePayloadConverter
+            ServiceInputProcessor $serviceInputProcessor,
+            JsonSerializer $jsonSerializer
         )
         {
             $this->_config = $config;
             $this->_httpClient = $httpClient;
-            $this->_servicePayloadConverter = $servicePayloadConverter;
+            $this->_serviceInputProcessor = $serviceInputProcessor;
+            $this->_jsonSerializer = $jsonSerializer;
 
             $httpClient->setOption(CURLOPT_RETURNTRANSFER, true);
             $httpClient->addHeader('Accept', 'application/vnd.skroutz+json; version=3.0');
@@ -104,6 +107,7 @@
         public function getOrder(string $code): ?OrderInterface
         {
             $order = null;
+
             try
             {
                 $httpClient = $this->getHttpClient();
@@ -112,11 +116,18 @@
                     [],
                 );
 
-                $order = $this->getServicePayloadConverter()->process(
+                $orderData = $this->getServiceInputProcessor()->process(
                     OrderManagementInterface::class,
                     'processOrder',
-                    \json_decode($httpClient->getBody(), true, 512, 0)
+                    $this->getJsonSerializer()->unserialize(
+                        $httpClient->getBody()
+                    )
                 );
+
+                if($orderData instanceof OrderInterface)
+                {
+                    $order = $orderData;
+                }
             }
             catch (\Exception)
             {
@@ -197,21 +208,41 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Webapi\ServicePayloadConverterInterface $_servicePayloadConverter
+         * @var \Magento\Framework\Webapi\ServiceInputProcessor $_serviceInputProcessor
          */
-        private $_servicePayloadConverter;
+        private $_serviceInputProcessor;
 
         /**
          * Gets Service Payload Converter
          *
          * @access protected
          *
-         * @return \Magento\Framework\Webapi\ServicePayloadConverterInterface
+         * @return \Magento\Framework\Webapi\ServiceInputProcessor
          */
-        protected function getServicePayloadConverter(): ServicePayloadConverterInterface
+        protected function getServiceInputProcessor(): ServiceInputProcessor
         {
-            return $this->_servicePayloadConverter;
+            return $this->_serviceInputProcessor;
         }
 
+        /**
+         * Json Serializer property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Serialize\Serializer\Json $_jsonSerializer
+         */
+        private $_jsonSerializer;
+
+        /**
+         * Gets Json Serializer
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\Serialize\Serializer\Json
+         */
+        protected function getJsonSerializer(): JsonSerializer
+        {
+            return $this->_jsonSerializer;
+        }
     }
 ?>

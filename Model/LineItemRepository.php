@@ -5,7 +5,7 @@
      * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
      * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
@@ -14,13 +14,13 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-use Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface;
-use Magento\Framework\Api\SearchCriteriaInterface,
+    use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
-
         Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory as SearchResultInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface as ResourceInterface;
 
@@ -54,16 +54,19 @@ use Magento\Framework\Api\SearchCriteriaInterface,
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface $resource
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory $lineItemFactory
          * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory $searchResultFactory
          */
         public function __construct(
             ResourceInterface $resource,
             LineItemInterfaceFactory $lineItemFactory,
-            CollectionProcessorInterface $collectionProcessor
+            CollectionProcessorInterface $collectionProcessor,
+            SearchResultInterfaceFactory $searchResultFactory
         )
         {
             $this->_resource = $resource;
             $this->_lineItemFactory = $lineItemFactory;
             $this->_collectionProcessor = $collectionProcessor;
+            $this->_searchResultFactory = $searchResultFactory;
         }
 
         /**
@@ -210,6 +213,27 @@ use Magento\Framework\Api\SearchCriteriaInterface,
         protected function getCollectionProcessor() : CollectionProcessorInterface
         {
             return $this->_collectionProcessor;
+        }
+
+        /**
+         * Search Result Factory property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory $_searchResultFactory
+         */
+        private $_searchResultFactory;
+
+        /**
+         * Gets Search Result Factory
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory
+         */
+        protected function getSearchResultFactory(): SearchResultInterfaceFactory
+        {
+            return $this->_searchResultFactory;
         }
     }
 ?>

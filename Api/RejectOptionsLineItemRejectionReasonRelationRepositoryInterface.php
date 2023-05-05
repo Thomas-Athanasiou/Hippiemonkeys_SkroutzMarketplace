@@ -5,7 +5,7 @@
      * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
      * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
@@ -14,7 +14,9 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface,
+    use Magento\Framework\Api\Search\SearchCriteriaInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface;
 
@@ -28,9 +30,21 @@
          *
          * @param mixed $id
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface
          */
         function getById($id): RejectOptionsLineItemRejectionReasonRelationInterface;
+
+        /**
+         * Gets List of Reject Options Items
+         *
+         * @api
+         * @access public
+         *
+         * @param \Magento\Framework\Api\Search\SearchCriteriaInterface $searchCriteria
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface,
+         */
+        function getList(SearchCriteriaInterface $searchCriteria): RejectOptionsLineItemRejectionReasonRelationSearchResultInterface;
 
         /**
          * Gets Reject Options - Line Item Rejection Reason relation by Reject Options and Line Item Rejection Reason

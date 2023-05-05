@@ -5,7 +5,7 @@
      * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
      * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
@@ -103,8 +103,7 @@
          */
         public function setPickupLocation(PickupLocationInterface $pickupLocation): AcceptOptionsPickupLocationRelation
         {
-            $this->setData(ResourceInterface::FIELD_PICKUP_LOCATION_ID, $pickupLocation->getId());
-            return $this->setData(static::FIELD_PICKUP_LOCATION, $pickupLocation);
+            return $this->setData(ResourceInterface::FIELD_PICKUP_LOCATION_ID, $pickupLocation->getId())->setData(static::FIELD_PICKUP_LOCATION, $pickupLocation);
         }
 
         /**

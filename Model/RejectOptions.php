@@ -5,7 +5,7 @@
      * @author Thomas Athanasiou {thomas@hippiemonkeys.com}
      * @link https://hippiemonkeys.com
      * @link https://github.com/Thomas-Athanasiou
-     * @copyright Copyright (c) 2022 Hippiemonkeys Web Inteligence EE All Rights Reserved.
+     * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
      * @package Hippiemonkeys_SkroutzMarketplace
      */
@@ -72,7 +72,7 @@
 
                 foreach($rejectOptionsLineItemRejectionReasonRelations as $rejectOptionsLineItemRejectionReasonRelation)
                 {
-                    $lineItemRejectionReason[] = $rejectOptionsLineItemRejectionReasonRelation->getLineItemRejectionReasons();
+                    $lineItemRejectionReason[] = $rejectOptionsLineItemRejectionReasonRelation->getLineItemRejectionReason();
                 }
 
                 $this->setLineItemRejectionReasons($lineItemRejectionReason);
@@ -83,7 +83,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setLineItemRejectionReasons(array $lineItemRejectionReason)
+        public function setLineItemRejectionReasons(array $lineItemRejectionReason): RejectOptions
         {
             return $this->setData(static::FIELD_LINE_ITEM_REJECTION_REASON, $lineItemRejectionReason);
         }
@@ -107,7 +107,7 @@
         /**
          * {@inheritdoc}
          */
-        public function setOrder(OrderInterface $order)
+        public function setOrder(OrderInterface $order): RejectOptions
         {
             $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
             return $this->setData(static::FIELD_ORDER, $order);
@@ -118,7 +118,7 @@
          *
          * @access private
          *
-         * @var Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
          */
         private $_rejectOptionsLineItemRejectionReasonRelationRepository;
 
@@ -128,7 +128,7 @@
          *
          * @access protected
          *
-         * @return Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
          */
         protected function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
         {

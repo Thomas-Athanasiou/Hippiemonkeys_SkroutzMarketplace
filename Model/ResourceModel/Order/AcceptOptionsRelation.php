@@ -30,9 +30,7 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
          */
-        public function __construct(
-            AcceptOptionsRepositoryInterface $acceptOptionsRepository
-        )
+        public function __construct(AcceptOptionsRepositoryInterface $acceptOptionsRepository)
         {
             $this->_acceptOptionsRepository = $acceptOptionsRepository;
         }
@@ -50,15 +48,13 @@
                 try
                 {
                     $persistedAcceptOptions = $acceptOptionsRepository->getByOrder($model);
-                    if($acceptOptions)
+                    if($acceptOptions === null)
                     {
-                        $acceptOptions->setId(
-                            $persistedAcceptOptions->getId()
-                        );
+                        $acceptOptionsRepository->delete($persistedAcceptOptions);
                     }
                     else
                     {
-                        $acceptOptionsRepository->delete($persistedAcceptOptions);
+                        $acceptOptions->setId($persistedAcceptOptions->getId());
                     }
                 }
                 catch(NoSuchEntityException)
@@ -66,7 +62,7 @@
 
                 }
 
-                if($acceptOptions)
+                if($acceptOptions !== null)
                 {
                     $acceptOptions->setOrder($model);
                     $acceptOptionsRepository->save($acceptOptions);
@@ -77,6 +73,8 @@
         /**
          * Accept Options Repository property
          *
+         * @access private
+         *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
         private $_acceptOptionsRepository;
@@ -84,9 +82,11 @@
         /**
          * Gets Accept Options Repository
          *
+         * @access protected
+         *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
-        protected function getAcceptOptionsRepository()
+        protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
             return $this->_acceptOptionsRepository;
         }

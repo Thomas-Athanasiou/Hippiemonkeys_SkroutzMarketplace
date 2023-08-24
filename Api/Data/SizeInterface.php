@@ -117,5 +117,27 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
          */
         function setShopVariationUid(?string $shopVariationUid): SizeInterface;
+
+        /**
+         * Gets Ean
+         *
+         * @api
+         * @access public
+         *
+         * @return string|null
+         */
+        function getEan(): ?string;
+
+        /**
+         * Sets Ean
+         *
+         * @api
+         * @access public
+         *
+         * @param string|null $ean
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
+         */
+        function setEan(?string $ean): SizeInterface;
     }
 ?>

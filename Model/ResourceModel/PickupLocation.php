@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function savePickupLocation(PickupLocationInterface $pickupLocation): PickupLocationResourceInterface
+        public function savePickupLocation(PickupLocationInterface $pickupLocation): self
         {
             return $this->saveModel($pickupLocation);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadPickupLocationById(PickupLocationInterface $pickupLocation, $id): PickupLocationResourceInterface
+        public function loadPickupLocationById(PickupLocationInterface $pickupLocation, $id): self
         {
             return $this->loadModelById($pickupLocation, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadPickupLocationBySkroutzId(PickupLocationInterface $pickupLocation, string $skroutzId): PickupLocationResourceInterface
+        public function loadPickupLocationBySkroutzId(PickupLocationInterface $pickupLocation, string $skroutzId): self
         {
             return $this->loadModel($pickupLocation, $skroutzId, static::FIELD_SKROUTZ_ID);
         }

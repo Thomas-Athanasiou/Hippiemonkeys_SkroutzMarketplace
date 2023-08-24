@@ -85,5 +85,21 @@
         {
             return $this->setData(ResourceInterface::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
         }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getEan(): ?string
+        {
+            return $this->getData(ResourceInterface::FIELD_EAN);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function setEan(?string $ean): SizeInterface
+        {
+            return $this->setData(ResourceInterface::FIELD_EAN, $ean);
+        }
     }
 ?>

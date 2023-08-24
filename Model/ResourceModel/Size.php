@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveSize(SizeInterface $size): SizeResourceInterface
+        public function saveSize(SizeInterface $size): self
         {
             return $this->saveModel($size);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadSizeById(SizeInterface $size, $id): SizeResourceInterface
+        public function loadSizeById(SizeInterface $size, $id): self
         {
             return $this->loadModelById($size, $id);
         }

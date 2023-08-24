@@ -44,10 +44,12 @@
          */
         public function toOptionArray()
         {
-            return \array_map(
+            return array_map(
                 function(PickupLocationInterface $pickupLocation): array
                 {
-                    return ['value' => $pickupLocation->getSkroutzId(), 'label' => $pickupLocation->getLabel()];
+                    $label = $pickupLocation->getLabel();
+                    $skroutzId = $pickupLocation->getSkroutzId();
+                    return ['value' => $pickupLocation->getSkroutzId(), 'label' => "$label (ID: $skroutzId)"];
                 },
                 $this->getPickupLocationRepository()->getList($this->getSearchCriteria())->getItems()
             );

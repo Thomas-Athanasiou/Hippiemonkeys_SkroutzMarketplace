@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveRejectOptions(RejectOptionsInterface $rejectOptions): RejectOptionsResourceInterface
+        public function saveRejectOptions(RejectOptionsInterface $rejectOptions): self
         {
             return $this->saveModel($rejectOptions);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadRejectOptionsById(RejectOptionsInterface $rejectOptions, $id): RejectOptionsResourceInterface
+        public function loadRejectOptionsById(RejectOptionsInterface $rejectOptions, $id): self
         {
             return $this->loadModelById($rejectOptions, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadRejectOptionsByOrderId(RejectOptionsInterface $rejectOptions, $orderId): RejectOptionsResourceInterface
+        public function loadRejectOptionsByOrderId(RejectOptionsInterface $rejectOptions, $orderId): self
         {
             return $this->loadModel($rejectOptions, $orderId, static::FIELD_ORDER_ID);
         }

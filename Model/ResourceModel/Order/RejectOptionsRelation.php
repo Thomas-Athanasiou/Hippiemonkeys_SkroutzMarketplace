@@ -30,9 +30,7 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
-        public function __construct(
-            RejectOptionsRepositoryInterface $rejectOptionsRepository
-        )
+        public function __construct(RejectOptionsRepositoryInterface $rejectOptionsRepository)
         {
             $this->_rejectOptionsRepository = $rejectOptionsRepository;
         }
@@ -49,15 +47,13 @@
                 try
                 {
                     $persistedRejectOptions = $rejectOptionsRepository->getByOrder($model);
-                    if($rejectOptions)
+                    if($rejectOptions === null)
                     {
-                        $rejectOptions->setId(
-                            $persistedRejectOptions->getId()
-                        );
+                        $rejectOptionsRepository->delete($persistedRejectOptions);
                     }
                     else
                     {
-                        $rejectOptionsRepository->delete($persistedRejectOptions);
+                        $rejectOptions->setId($persistedRejectOptions->getId());
                     }
                 }
                 catch(NoSuchEntityException)
@@ -65,7 +61,7 @@
 
                 }
 
-                if($rejectOptions)
+                if($rejectOptions !== null)
                 {
                     $rejectOptions->setOrder($model);
                     $rejectOptionsRepository->save($rejectOptions);
@@ -76,6 +72,8 @@
         /**
          * Reject Options Repository property
          *
+         * @access private
+         *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
         private $_rejectOptionsRepository;
@@ -83,9 +81,11 @@
         /**
          * Gets Reject Options Repository
          *
+         * @access protected
+         *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
-        protected function getRejectOptionsRepository()
+        protected function getRejectOptionsRepository(): RejectOptionsRepositoryInterface
         {
             return $this->_rejectOptionsRepository;
         }

@@ -63,7 +63,7 @@
             {
                 foreach($model->getPickupLocation() as $pickupLocation)
                 {
-                    if(!$pickupLocation->getId())
+                    if($pickupLocation->getId() === null)
                     {
                         try
                         {

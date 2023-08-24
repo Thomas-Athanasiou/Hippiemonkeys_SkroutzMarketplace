@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveOrderPickupWindow(OrderPickupWindowInterface $orderPickupWindow): OrderPickupWindowResourceInterface
+        public function saveOrderPickupWindow(OrderPickupWindowInterface $orderPickupWindow): self
         {
             return $this->saveModel($orderPickupWindow);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadOrderPickupWindowById(OrderPickupWindowInterface $orderPickupWindow, $id): OrderPickupWindowResourceInterface
+        public function loadOrderPickupWindowById(OrderPickupWindowInterface $orderPickupWindow, $id): self
         {
             return $this->loadModelById($orderPickupWindow, $id);
         }

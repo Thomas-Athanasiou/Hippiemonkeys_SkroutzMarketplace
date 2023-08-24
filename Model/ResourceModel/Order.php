@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveOrder(OrderInterface $order): OrderResourceInterface
+        public function saveOrder(OrderInterface $order): self
         {
             return $this->saveModel($order);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadOrderById(OrderInterface $order, $id): OrderResourceInterface
+        public function loadOrderById(OrderInterface $order, $id): self
         {
             return $this->loadModelById($order, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadOrderByCode(OrderInterface $order, string $code): OrderResourceInterface
+        public function loadOrderByCode(OrderInterface $order, string $code): self
         {
             return $this->loadModel($order, $code, static::FIELD_CODE);
         }
@@ -60,7 +60,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadOrderByMagentoOrderId(OrderInterface $order, $magentoOrderId): OrderResourceInterface
+        public function loadOrderByMagentoOrderId(OrderInterface $order, $magentoOrderId): self
         {
             return $this->loadModel($order, $magentoOrderId, static::FIELD_MAGENTO_ORDER_ID);
         }

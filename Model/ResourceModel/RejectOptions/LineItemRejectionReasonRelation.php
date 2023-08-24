@@ -15,21 +15,17 @@
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions;
 
     use Magento\Framework\Model\AbstractModel as MagentoAbstractModel,
+        Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\Core\Api\Data\ModelInterface,
         Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterfaceFactory,
-        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface;
 
     class LineItemRejectionReasonRelation
     implements ModelRelationProcessorInterface
     {
-        protected const
-            FIELD_REJECT_OPTIONS_ID = 'reject_options_id',
-            FIELD_PICKUP_WINDOW_ID = 'line_item_rejection_reason_id';
-
         /**
          * Constructor
          *
@@ -62,7 +58,7 @@
             {
                 foreach($model->getLineItemRejectionReasons() as $lineItemRejectionReason)
                 {
-                    if(!$lineItemRejectionReason->getId())
+                    if($lineItemRejectionReason->getId() === null)
                     {
                         try{
                             $persistedLineItemRejectionReason = $lineItemRejectionReasonRepository->getBySkroutzId(
@@ -74,9 +70,9 @@
                         }
                         catch(NoSuchEntityException)
                         {
-                            if($persistedLineItemRejectionReason instanceof MagentoAbstractModel)
+                            if($lineItemRejectionReason instanceof MagentoAbstractModel)
                             {
-                                $persistedLineItemRejectionReason->isObjectNew(true);
+                                $lineItemRejectionReason->isObjectNew(true);
                             }
                         }
                     }

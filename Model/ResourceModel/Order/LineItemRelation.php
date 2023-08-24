@@ -30,9 +30,7 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $lineItemRepository
          */
-        public function __construct(
-            LineItemRepositoryInterface $lineItemRepository
-        )
+        public function __construct(LineItemRepositoryInterface $lineItemRepository)
         {
             $this->_lineItemRepository = $lineItemRepository;
         }
@@ -48,7 +46,7 @@
             {
                 foreach($model->getLineItems() as $lineItem)
                 {
-                    if(!$lineItem->getId())
+                    if($lineItem->getId() === null)
                     {
                         try
                         {
@@ -58,9 +56,10 @@
                         }
                         catch(NoSuchEntityException)
                         {
-                            /** Line Item doesnt exist in the first place */
+                            /** Line Item doesn't exist in the first place */
                         }
                     }
+
                     $lineItem->setOrder($model);
                     $lineItemRepository->save($lineItem);
                 }
@@ -70,6 +69,8 @@
         /**
          * Line Item Repository property
          *
+         * @access private
+         *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface
          */
         private $_lineItemRepository;
@@ -77,9 +78,11 @@
         /**
          * Gets Line Item Repository
          *
+         * @access protected
+         *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface
          */
-        protected function getLineItemRepository()
+        protected function getLineItemRepository(): LineItemRepositoryInterface
         {
             return $this->_lineItemRepository;
         }

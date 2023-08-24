@@ -53,7 +53,7 @@
             {
                 foreach($model->getPickupWindow() as $pickupWindow)
                 {
-                    if(!$pickupWindow->getId())
+                    if($pickupWindow->getId() === null)
                     {
                         try{
                             $persistedPickupWindow = $pickupWindowRepository->getBySkroutzId($pickupWindow->getSkroutzId());

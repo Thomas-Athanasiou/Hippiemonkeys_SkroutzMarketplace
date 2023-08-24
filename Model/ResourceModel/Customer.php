@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveCustomer(CustomerInterface $customer): CustomerResourceInterface
+        public function saveCustomer(CustomerInterface $customer): self
         {
             return $this->saveModel($customer);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadCustomerById(CustomerInterface $customer, $id): CustomerResourceInterface
+        public function loadCustomerById(CustomerInterface $customer, $id): self
         {
             return $this->loadModelById($customer, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadCustomerBySkroutzId(CustomerInterface $customer, string $skroutzId): CustomerResourceInterface
+        public function loadCustomerBySkroutzId(CustomerInterface $customer, string $skroutzId): self
         {
             return $this->loadModel($customer, $skroutzId, static::FIELD_SKROUTZ_ID);
         }

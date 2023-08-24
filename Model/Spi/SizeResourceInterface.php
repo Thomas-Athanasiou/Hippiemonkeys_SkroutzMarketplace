@@ -27,7 +27,8 @@
             FIELD_LABEL = 'label',
             FIELD_VALUE = 'value',
             FIELD_SHOP_VALUE = 'shop_value',
-            FIELD_SHOP_VARIATION_UID = 'shop_variation_uid';
+            FIELD_SHOP_VARIATION_UID = 'shop_variation_uid',
+            FIELD_EAN = 'ean';
 
         /**
          * Save Size data

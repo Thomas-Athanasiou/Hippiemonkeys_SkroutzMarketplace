@@ -53,8 +53,8 @@
         {
             parent::__construct($context, $registry, $data);
 
-            $this->_acceptOptionsRepository     = $acceptOptionsRepository;
-            $this->_pickupLocationRepository    = $pickupLocationRepository;
+            $this->_acceptOptionsRepository = $acceptOptionsRepository;
+            $this->_pickupLocationRepository = $pickupLocationRepository;
         }
 
         /**

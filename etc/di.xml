@@ -11,7 +11,7 @@
             <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
             <argument name="group" xsi:type="string">marketplace</argument>
             <argument name="activeField" xsi:type="string">active</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\General</argument>
+            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\General</argument>
         </arguments>
     </virtualType>
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\SkroutzMarketplace">

@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason): LineItemRejectionReasonResourceInterface
+        public function saveLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason): self
         {
             return $this->saveModel($lineItemRejectionReason);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadLineItemRejectionReasonById(LineItemRejectionReasonInterface $lineItemRejectionReason, $id): LineItemRejectionReasonResourceInterface
+        public function loadLineItemRejectionReasonById(LineItemRejectionReasonInterface $lineItemRejectionReason, $id): self
         {
             return $this->loadModelById($lineItemRejectionReason, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadLineItemRejectionReasonBySkroutzId(LineItemRejectionReasonInterface $lineItemRejectionReason, int $skroutzId): LineItemRejectionReasonResourceInterface
+        public function loadLineItemRejectionReasonBySkroutzId(LineItemRejectionReasonInterface $lineItemRejectionReason, int $skroutzId): self
         {
             return $this->loadModel($lineItemRejectionReason, $skroutzId, static::FIELD_SKROUTZ_ID);
         }

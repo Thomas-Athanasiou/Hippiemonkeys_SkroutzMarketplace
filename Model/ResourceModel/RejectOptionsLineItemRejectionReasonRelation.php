@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveRejectOptionsLineItemRejectionReasonRelation(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): RejectOptionsLineItemRejectionReasonRelationResourceInterface
+        public function saveRejectOptionsLineItemRejectionReasonRelation(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): self
         {
             return $this->saveModel($rejectOptionsLineItemRejectionReasonRelation);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadRejectOptionsLineItemRejectionReasonRelationById(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation, $id): RejectOptionsLineItemRejectionReasonRelationResourceInterface
+        public function loadRejectOptionsLineItemRejectionReasonRelationById(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation, $id): self
         {
             return $this->loadModelById($rejectOptionsLineItemRejectionReasonRelation, $id);
         }

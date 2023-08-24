@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveInvoiceDetails(InvoiceDetailsInterface $invoiceDetails): InvoiceDetailsResourceInterface
+        public function saveInvoiceDetails(InvoiceDetailsInterface $invoiceDetails): self
         {
             return $this->saveModel($invoiceDetails);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadInvoiceDetailsById(InvoiceDetailsInterface $invoiceDetails, $id): InvoiceDetailsResourceInterface
+        public function loadInvoiceDetailsById(InvoiceDetailsInterface $invoiceDetails, $id): self
         {
             return $this->loadModelById($invoiceDetails, $id);
         }

@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsResourceInterface
+        public function saveAcceptOptions(AcceptOptionsInterface $acceptOptions): self
         {
             return $this->saveModel($acceptOptions);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadAcceptOptionsById(AcceptOptionsInterface $acceptOptions, $id): AcceptOptionsResourceInterface
+        public function loadAcceptOptionsById(AcceptOptionsInterface $acceptOptions, $id): self
         {
             return $this->loadModelById($acceptOptions, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadAcceptOptionsByOrderId(AcceptOptionsInterface $acceptOptions, $orderId): AcceptOptionsResourceInterface
+        public function loadAcceptOptionsByOrderId(AcceptOptionsInterface $acceptOptions, $orderId): self
         {
             return $this->loadModel($acceptOptions, $orderId, static::FIELD_ORDER_ID);
         }

@@ -146,7 +146,7 @@
          */
         protected function getApiHost(): string
         {
-            return \rtrim($this->getConfig()->getData(self::CONF_PATH_API_HOST), '/');
+            return rtrim($this->getConfig()->getData(self::CONF_PATH_API_HOST), '/');
         }
 
         /**
@@ -158,7 +158,7 @@
          */
         protected function getApiToken(): string
         {
-            return \rtrim($this->getConfig()->getData(self::CONF_PATH_API_TOKEN), '/');
+            return rtrim($this->getConfig()->getData(self::CONF_PATH_API_TOKEN), '/');
         }
 
         /**

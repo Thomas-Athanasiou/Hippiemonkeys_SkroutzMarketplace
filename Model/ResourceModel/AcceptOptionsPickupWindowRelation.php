@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveAcceptOptionsPickupWindowRelation(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation): AcceptOptionsPickupWindowRelationResourceInterface
+        public function saveAcceptOptionsPickupWindowRelation(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation): self
         {
             return $this->saveModel($acceptOptionsPickupWindowRelation);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadAcceptOptionsPickupWindowRelationById(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation, $id): AcceptOptionsPickupWindowRelationResourceInterface
+        public function loadAcceptOptionsPickupWindowRelationById(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation, $id): self
         {
             return $this->loadModelById($acceptOptionsPickupWindowRelation, $id);
         }

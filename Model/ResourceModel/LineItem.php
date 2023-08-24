@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveLineItem(LineItemInterface $lineItem): LineItemResourceInterface
+        public function saveLineItem(LineItemInterface $lineItem): self
         {
             return $this->saveModel($lineItem);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadLineItemById(LineItemInterface $lineItem, $id): LineItemResourceInterface
+        public function loadLineItemById(LineItemInterface $lineItem, $id): self
         {
             return $this->loadModelById($lineItem, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadLineItemBySkroutzId(LineItemInterface $lineItem, string $skroutzId): LineItemResourceInterface
+        public function loadLineItemBySkroutzId(LineItemInterface $lineItem, string $skroutzId): self
         {
             return $this->loadModel($lineItem, $skroutzId, static::FIELD_SKROUTZ_ID);
         }

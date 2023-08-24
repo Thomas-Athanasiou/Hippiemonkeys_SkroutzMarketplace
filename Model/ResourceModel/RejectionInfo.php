@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveRejectionInfo(RejectionInfoInterface $rejectionInfo): RejectionInfoResourceInterface
+        public function saveRejectionInfo(RejectionInfoInterface $rejectionInfo): self
         {
             return $this->saveModel($rejectionInfo);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadRejectionInfoById(RejectionInfoInterface $rejectionInfo, $id): RejectionInfoResourceInterface
+        public function loadRejectionInfoById(RejectionInfoInterface $rejectionInfo, $id): self
         {
             return $this->loadModelById($rejectionInfo, $id);
         }

@@ -17,12 +17,14 @@
     use Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface;
 
+    /**
+     * @api
+     */
     interface AcceptOptionsRepositoryInterface
     {
         /**
-         * Get Accept Options by id
+         * Get Accept Options by Id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -34,7 +36,6 @@
         /**
          * Get Accept Options by Order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -46,7 +47,6 @@
         /**
          * Delete Accept Options
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
@@ -58,7 +58,6 @@
         /**
          * Save Accept Options
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions

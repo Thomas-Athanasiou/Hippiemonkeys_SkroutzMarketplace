@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function savePickupWindow(PickupWindowInterface $pickupWindow): PickupWindowResourceInterface
+        public function savePickupWindow(PickupWindowInterface $pickupWindow): self
         {
             return $this->saveModel($pickupWindow);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadPickupWindowById(PickupWindowInterface $pickupWindow, $id): PickupWindowResourceInterface
+        public function loadPickupWindowById(PickupWindowInterface $pickupWindow, $id): self
         {
             return $this->loadModelById($pickupWindow, $id);
         }
@@ -52,7 +52,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadPickupWindowBySkroutzId(PickupWindowInterface $pickupWindow, int $skroutzId): PickupWindowResourceInterface
+        public function loadPickupWindowBySkroutzId(PickupWindowInterface $pickupWindow, int $skroutzId): self
         {
             return $this->loadModel($pickupWindow, $skroutzId, static::FIELD_SKROUTZ_ID);
         }

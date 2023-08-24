@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveAcceptOptionsPickupLocationRelation(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation): AcceptOptionsPickupLocationRelationResourceInterface
+        public function saveAcceptOptionsPickupLocationRelation(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation): self
         {
             return $this->saveModel($acceptOptionsPickupLocationRelation);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        public function loadAcceptOptionsPickupLocationRelationById(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation, $id): AcceptOptionsPickupLocationRelationResourceInterface
+        public function loadAcceptOptionsPickupLocationRelationById(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation, $id): self
         {
             return $this->loadModelById($acceptOptionsPickupLocationRelation, $id);
         }

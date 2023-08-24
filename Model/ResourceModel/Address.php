@@ -36,7 +36,7 @@
         /**
          * {@inheritdoc}
          */
-        public function saveAddress(AddressInterface $address): AddressResourceInterface
+        public function saveAddress(AddressInterface $address): self
         {
             return $this->saveModel($address);
         }
@@ -44,7 +44,7 @@
         /**
          * {@inheritdoc}
          */
-        function loadAddressById(AddressInterface $address, $id): AddressResourceInterface
+        function loadAddressById(AddressInterface $address, $id): self
         {
             return $this->loadModelById($address, $id);
         }

@@ -20,12 +20,14 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface;
 
+    /**
+     * @api
+     */
     interface AcceptOptionsPickupLocationRelationRepositoryInterface
     {
         /**
          * Gets Accept Options and Pickup Location Relation by id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -37,7 +39,6 @@
         /**
          * Gets Accept Options and Pickup Location Relation by Accept Options and Pickup Location
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
@@ -50,7 +51,6 @@
         /**
          * Gets list by search criteria provided
          *
-         * @api
          * @access public
          *
          * @param \Magento\Framework\Api\SearchCriteriaInterface
@@ -60,9 +60,8 @@
         function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupLocationRelationSearchResultInterface;
 
         /**
-         * Deletes Accept Options - Pickup Location relation
+         * Deletes Accept Options Pickup Location relation
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
@@ -72,9 +71,8 @@
         function delete(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation): bool;
 
         /**
-         * Saves Accept Options - Pickup Location relation
+         * Saves Accept Options Pickup Location relation
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation

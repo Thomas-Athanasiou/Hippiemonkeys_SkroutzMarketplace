@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Exception;
 
-    use Magento\Framework\Exception\LocalizedException;
+    use Magento\Framework\Exception\NoSuchEntityException as MagentoNoSuchEntityException;
 
     class NoSuchEntityException
-    extends LocalizedException
+    extends MagentoNoSuchEntityException
     {
 
     }

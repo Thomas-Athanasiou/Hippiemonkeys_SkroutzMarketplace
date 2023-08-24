@@ -23,6 +23,9 @@
     extends AbstractCollection
     implements SearchResultInterface
     {
+        /**
+         * {@inheritdoc}
+         */
         protected function _construct()
         {
             $this->_init(Model::class, ResourceModel::class);

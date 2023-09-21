@@ -26,7 +26,7 @@
             TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_lineitemrejectionreason';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {
@@ -34,7 +34,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function saveLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason): self
         {
@@ -42,7 +42,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadLineItemRejectionReasonById(LineItemRejectionReasonInterface $lineItemRejectionReason, $id): self
         {
@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadLineItemRejectionReasonBySkroutzId(LineItemRejectionReasonInterface $lineItemRejectionReason, int $skroutzId): self
         {
@@ -58,7 +58,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function deleteLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason): bool
         {

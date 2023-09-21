@@ -26,7 +26,7 @@
             TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_address';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {
@@ -34,7 +34,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function saveAddress(AddressInterface $address): self
         {
@@ -42,7 +42,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function loadAddressById(AddressInterface $address, $id): self
         {
@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function deleteAddress(AddressInterface $address): bool
         {

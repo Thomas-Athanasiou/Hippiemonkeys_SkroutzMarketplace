@@ -23,14 +23,13 @@
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions as ResourceModel;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface as ResourceInterface;
 
     class AcceptOptions
     extends AbstractModel
     implements AcceptOptionsInterface
     {
         public const
-            FIELD_ORDER = 'order',
             ACCEPT_OPTIONS_PICKUP_LOCATION_RELATION_FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
             ACCEPT_OPTIONS_PICKUP_WINDOW_RELATION_FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id';
 
@@ -59,59 +58,74 @@
         {
             parent::__construct($context, $registry, $data);
 
-            $this->_acceptOptionsPickupLocationRelationRepository = $acceptOptionsPickupLocationRelationRepository;
-            $this->_acceptOptionsPickupWindowRelationRepository = $acceptOptionsPickupWindowRelationRepository;
-            $this->_orderRepository = $orderRepository;
-            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+            $this->acceptOptionsPickupLocationRelationRepository = $acceptOptionsPickupLocationRelationRepository;
+            $this->acceptOptionsPickupWindowRelationRepository = $acceptOptionsPickupWindowRelationRepository;
+            $this->orderRepository = $orderRepository;
+            $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+
+            $this->order = null;
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
+         * @final
          */
-        public function getNumberOfParcels() : array
+        public final function getNumberOfParcels() : array
         {
-            return explode(';', $this->getData(ResourceModel::FIELD_NUMBER_OF_PARCELS));
+            return explode(';', $this->getData(ResourceInterface::FIELD_NUMBER_OF_PARCELS));
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
+         * @final
          */
-        public function setNumberOfParcels(array $numberOfParcels): AcceptOptions
+        public final function setNumberOfParcels(array $numberOfParcels): AcceptOptions
         {
-            return $this->setData(ResourceModel::FIELD_NUMBER_OF_PARCELS, implode(';', $numberOfParcels));
+            return $this->setData(ResourceInterface::FIELD_NUMBER_OF_PARCELS, implode(';', $numberOfParcels));
         }
 
+
         /**
-         * {@inheritdoc}
+         * Order Property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
          */
-        public function getOrder(): OrderInterface
+        private $order;
+
+        /**
+         * @inheritdoc
+         * @final
+         */
+        public final function getOrder(): OrderInterface
         {
-            $order = $this->getData(static::FIELD_ORDER);
+            $order = $this->order;
             if ($order === null)
             {
-                $order = $this->getOrderRepository()->getById(
-                    $this->getData(ResourceModel::FIELD_ORDER_ID)
-                );
-                $this->setData(static::FIELD_ORDER, $order);
+                $order = $this->getOrderRepository()->getById($this->getData(ResourceInterface::FIELD_ORDER_ID));
+                $this->order = $order;
             }
             return $order;
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
+         * @final
          */
-        public function setOrder(OrderInterface $order): AcceptOptions
+        public final function setOrder(OrderInterface $order): AcceptOptions
         {
-            $this->setData(ResourceModel::FIELD_ORDER_ID, $order->getId());
-            return $this->setData(static::FIELD_ORDER, $order);
+            $this->order = $order;
+            return $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
+         * @final
          */
-        public function getPickupLocation(): array
+        public final function getPickupLocation(): array
         {
-            $pickupLocation = $this->getData(ResourceModel::FIELD_PICKUP_LOCATION);
+            $pickupLocation = $this->getData(ResourceInterface::FIELD_PICKUP_LOCATION);
             if ($pickupLocation === null)
             {
                 $pickupLocation = [];
@@ -133,19 +147,21 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
+         * @final
          */
-        public function setPickupLocation(array $pickupLocation): AcceptOptions
+        public final function setPickupLocation(array $pickupLocation): AcceptOptions
         {
-            return $this->setData(ResourceModel::FIELD_PICKUP_LOCATION, $pickupLocation);
+            return $this->setData(ResourceInterface::FIELD_PICKUP_LOCATION, $pickupLocation);
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
+         * @final
          */
-        public function getPickupWindow(): array
+        public final function getPickupWindow(): array
         {
-            $pickupWindow = $this->getData(ResourceModel::FIELD_PICKUP_WINDOW);
+            $pickupWindow = $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW);
             if (!$pickupWindow)
             {
                 $pickupWindow = [];
@@ -167,11 +183,12 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
+         * @final
          */
-        public function setPickupWindow(array $pickupWindow): AcceptOptions
+        public final function setPickupWindow(array $pickupWindow): AcceptOptions
         {
-            return $this->setData(ResourceModel::FIELD_PICKUP_WINDOW, $pickupWindow);
+            return $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW, $pickupWindow);
         }
 
         /**
@@ -179,20 +196,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $_orderRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $acceptOptionsPickupLocationRelationRepository
          */
-        private $_acceptOptionsPickupLocationRelationRepository;
+        private $acceptOptionsPickupLocationRelationRepository;
 
         /**
          * Gets Accept Options Pickup Location Relation Repository
          *
          * @access protected
+         * @final
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $_orderRepository
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface
          */
-        protected function getAcceptOptionsPickupLocationRelationRepository(): AcceptOptionsPickupLocationRelationRepositoryInterface
+        protected final function getAcceptOptionsPickupLocationRelationRepository(): AcceptOptionsPickupLocationRelationRepositoryInterface
         {
-            return $this->_acceptOptionsPickupLocationRelationRepository;
+            return $this->acceptOptionsPickupLocationRelationRepository;
         }
 
         /**
@@ -200,20 +218,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface $_orderRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface $acceptOptionsPickupWindowRelationRepository
          */
-        private $_acceptOptionsPickupWindowRelationRepository;
+        private $acceptOptionsPickupWindowRelationRepository;
 
         /**
          * Gets Accept Options Pickup Window Relation Repository
          *
          * @access protected
+         * @final
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface $_orderRepository
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupWindowRelationRepositoryInterface
          */
-        protected function getAcceptOptionsPickupWindowRelationRepository(): AcceptOptionsPickupWindowRelationRepositoryInterface
+        protected final function getAcceptOptionsPickupWindowRelationRepository(): AcceptOptionsPickupWindowRelationRepositoryInterface
         {
-            return $this->_acceptOptionsPickupWindowRelationRepository;
+            return $this->acceptOptionsPickupWindowRelationRepository;
         }
 
         /**
@@ -221,20 +240,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $_orderRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
          */
-        private $_orderRepository;
+        private $orderRepository;
 
         /**
          * Gets Order Repository
          *
-         * @access private
+         * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
          */
         protected function getOrderRepository(): OrderRepositoryInterface
         {
-            return $this->_orderRepository;
+            return $this->orderRepository;
         }
 
         /**
@@ -242,20 +262,21 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
-        private $_searchCriteriaBuilder;
+        private $searchCriteriaBuilder;
 
         /**
          * Gets Search Criteria Builder
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Framework\Api\SearchCriteriaBuilder
          */
-        protected function getSearchCriteriaBuilder(): SearchCriteriaBuilder
+        protected final function getSearchCriteriaBuilder(): SearchCriteriaBuilder
         {
-            return $this->_searchCriteriaBuilder;
+            return $this->searchCriteriaBuilder;
         }
     }
 ?>

@@ -23,7 +23,7 @@
     implements SizeInterface
     {
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getLabel(): string
         {
@@ -31,7 +31,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setLabel(string $label): Size
         {
@@ -39,7 +39,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getValue(): string
         {
@@ -47,7 +47,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setValue(string $value): Size
         {
@@ -55,7 +55,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getShopValue(): ?string
         {
@@ -63,7 +63,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setShopValue(?string $shopValue): Size
         {
@@ -71,7 +71,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getShopVariationUid(): ?string
         {
@@ -79,7 +79,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setShopVariationUid(?string $shopVariationUid): Size
         {
@@ -87,7 +87,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getEan(): ?string
         {
@@ -95,7 +95,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setEan(?string $ean): SizeInterface
         {

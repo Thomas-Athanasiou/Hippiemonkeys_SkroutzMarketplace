@@ -26,7 +26,7 @@
             TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_acceptoptions';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {
@@ -34,7 +34,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function saveAcceptOptions(AcceptOptionsInterface $acceptOptions): self
         {
@@ -42,7 +42,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadAcceptOptionsById(AcceptOptionsInterface $acceptOptions, $id): self
         {
@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadAcceptOptionsByOrderId(AcceptOptionsInterface $acceptOptions, $orderId): self
         {
@@ -58,7 +58,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function deleteAcceptOptions(AcceptOptionsInterface $acceptOptions): bool
         {

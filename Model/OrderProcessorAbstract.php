@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function processOrder(OrderInterface $order): void
         {

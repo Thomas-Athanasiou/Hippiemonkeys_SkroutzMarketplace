@@ -26,7 +26,7 @@
             TABLE_MAIN = 'hippiemonkeys_skroutzmarketplace_acceptoptionspickuplocation_r';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {
@@ -34,7 +34,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function saveAcceptOptionsPickupLocationRelation(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation): self
         {
@@ -42,7 +42,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadAcceptOptionsPickupLocationRelationById(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation, $id): self
         {
@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function deleteAcceptOptionsPickupLocationRelation(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation): bool
         {

@@ -23,7 +23,7 @@
     implements OrderPickupWindowInterface
     {
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setId($id)
         {
@@ -31,7 +31,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getFrom(): string
         {
@@ -39,7 +39,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setFrom(string $from): OrderPickupWindow
         {
@@ -47,7 +47,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getTo(): string
         {
@@ -55,7 +55,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setTo(string $to): OrderPickupWindow
         {

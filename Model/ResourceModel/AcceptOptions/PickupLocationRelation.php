@@ -51,7 +51,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function processModelRelation(ModelInterface $model): void
         {

@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function processOrder(OrderInterface $order): void
         {
@@ -58,7 +58,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function updateAndProcessOrder(OrderInterface $order): void
         {
@@ -70,7 +70,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function updateAndProcessOrdersWithState(string $state): void
         {
@@ -85,7 +85,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function updateAndProcessOrdersWithStateAndLimit(string $state, int $limit): void
         {

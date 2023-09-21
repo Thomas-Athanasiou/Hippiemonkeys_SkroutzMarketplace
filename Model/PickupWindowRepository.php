@@ -52,7 +52,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById(int $id) : PickupWindowInterface
         {
@@ -78,7 +78,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getBySkroutzId(int $skroutzId) : PickupWindowInterface
         {
@@ -104,7 +104,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(PickupWindowInterface $pickupWindow) : PickupWindowInterface
         {
@@ -115,7 +115,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(PickupWindowInterface $pickupWindow) : bool
         {

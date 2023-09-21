@@ -66,7 +66,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id): AcceptOptionsPickupWindowRelationInterface
         {
@@ -87,7 +87,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getByAcceptOptionsAndPickupWindow(
             AcceptOptionsInterface $acceptOptions,
@@ -124,7 +124,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupWindowRelationSearchResultInterface
         {
@@ -135,7 +135,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation) : AcceptOptionsPickupWindowRelationInterface
         {
@@ -145,7 +145,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation) : bool
         {

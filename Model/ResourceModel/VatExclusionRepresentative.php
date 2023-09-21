@@ -26,7 +26,7 @@
             TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_vatexlusionrepresentative';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {
@@ -34,7 +34,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function saveVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative): VatExclusionRepresentativeResourceInterface
         {
@@ -42,7 +42,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadVatExclusionRepresentativeById(VatExclusionRepresentativeInterface $vatExclusionRepresentative, $id): VatExclusionRepresentativeResourceInterface
         {
@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function deleteVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative): bool
         {

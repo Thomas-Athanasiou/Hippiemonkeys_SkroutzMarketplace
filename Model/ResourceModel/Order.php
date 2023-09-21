@@ -26,7 +26,7 @@
             TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_order';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {
@@ -34,7 +34,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function saveOrder(OrderInterface $order): self
         {
@@ -42,7 +42,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadOrderById(OrderInterface $order, $id): self
         {
@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadOrderByCode(OrderInterface $order, string $code): self
         {
@@ -58,7 +58,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadOrderByMagentoOrderId(OrderInterface $order, $magentoOrderId): self
         {
@@ -67,7 +67,7 @@
 
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function deleteOrder(OrderInterface $order): bool
         {

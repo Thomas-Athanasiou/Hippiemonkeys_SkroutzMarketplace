@@ -57,7 +57,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getRejectOptions(): RejectOptionsInterface
         {
@@ -73,7 +73,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setRejectOptions(RejectOptionsInterface $rejectOptions)
         {
@@ -82,7 +82,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getLineItemRejectionReason(): LineItemRejectionReasonInterface
         {
@@ -98,7 +98,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setLineItemRejectionReason(LineItemRejectionReasonInterface $lineItemRejectionReason)
         {

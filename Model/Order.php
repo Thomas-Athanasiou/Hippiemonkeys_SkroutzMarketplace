@@ -92,7 +92,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCode(): string
         {
@@ -100,7 +100,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCode(string $code): Order
         {
@@ -108,7 +108,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getState(): string
         {
@@ -116,7 +116,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setState(string $state): Order
         {
@@ -124,7 +124,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCustomer(): ?CustomerInterface
         {
@@ -139,7 +139,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCustomer(?CustomerInterface $customer): Order
         {
@@ -148,7 +148,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getInvoiceDetails(): ?InvoiceDetailsInterface
         {
@@ -163,7 +163,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setInvoiceDetails(?InvoiceDetailsInterface $invoiceDetails): Order
         {
@@ -172,7 +172,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getInvoice(): bool
         {
@@ -180,7 +180,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setInvoice(bool $invoice): Order
         {
@@ -188,7 +188,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getComments(): ?string
         {
@@ -196,7 +196,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setComments(?string $comments): Order
         {
@@ -204,7 +204,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getLineItems() : array
         {
@@ -224,7 +224,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setLineItems(array $lineItems): Order
         {
@@ -232,7 +232,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCourier(): string
         {
@@ -240,7 +240,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCourier(string $courier): Order
         {
@@ -248,7 +248,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCourierVoucher(): ?string
         {
@@ -256,7 +256,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCourierVoucher(?string $courierVoucher): Order
         {
@@ -264,7 +264,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCourierTrackingCodes(): array
         {
@@ -272,7 +272,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCourierTrackingCodes(array $courierTrackingCodes): Order
         {
@@ -280,7 +280,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCreatedAt(): string
         {
@@ -288,7 +288,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCreatedAt(string $createdAt): Order
         {
@@ -296,7 +296,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getExpiresAt(): string
         {
@@ -304,7 +304,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setExpiresAt(string $expiresAt): Order
         {
@@ -312,7 +312,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getDispatchUntil(): string
         {
@@ -320,7 +320,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setDispatchUntil(string $dispatchUntil): Order
         {
@@ -328,7 +328,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getRejectionInfo(): ?RejectionInfoInterface
         {
@@ -343,7 +343,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setRejectionInfo(?RejectionInfoInterface $rejectionInfo): Order
         {
@@ -352,7 +352,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getAcceptOptions(): ?AcceptOptionsInterface
         {
@@ -367,7 +367,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setAcceptOptions(?AcceptOptionsInterface $acceptOptions): Order
         {
@@ -377,7 +377,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getRejectOptions(): ?RejectOptionsInterface
         {
@@ -392,7 +392,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setRejectOptions(?RejectOptionsInterface $rejectOptions): Order
         {
@@ -402,7 +402,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getMagentoOrder(): ?MagentoOrderInterface
         {
@@ -417,7 +417,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setMagentoOrder(?MagentoOrderInterface $magentoOrder): Order
         {
@@ -426,7 +426,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getExpress(): bool
         {
@@ -434,7 +434,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setExpress(bool $express): Order
         {
@@ -442,7 +442,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCustom(): bool
         {
@@ -450,7 +450,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCustom(bool $custom): Order
         {
@@ -458,7 +458,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getGiftWrap(): bool
         {
@@ -466,7 +466,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setGiftWrap(bool $giftWrap): Order
         {
@@ -474,7 +474,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getFulfilledBySkroutz(): bool
         {
@@ -482,7 +482,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setFulfilledBySkroutz(bool $fulfilledBySkroutz): Order
         {
@@ -490,7 +490,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getFbsDeliveryNote(): ?string
         {
@@ -498,7 +498,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setFbsDeliveryNote(?string $fbsDeliveryNote): Order
         {
@@ -506,7 +506,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getStorePickup(): bool
         {
@@ -514,7 +514,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setStorePickup(bool $storePickup): Order
         {
@@ -522,7 +522,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getPickupWindow(): ?OrderPickupWindowInterface
         {
@@ -537,7 +537,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setPickupWindow(?OrderPickupWindowInterface $pickupWindow): Order
         {
@@ -546,7 +546,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getPickupAddress(): ?string
         {
@@ -554,7 +554,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setPickupAddress(?string $pickupAddress): Order
         {
@@ -562,7 +562,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getNumberOfParcels(): ?int
         {
@@ -570,7 +570,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setNumberOfParcels(?int $numberOfParcels): Order
         {

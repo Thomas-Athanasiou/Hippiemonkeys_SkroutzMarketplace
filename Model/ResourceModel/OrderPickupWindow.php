@@ -26,7 +26,7 @@
             TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_orderpickupwindow';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {
@@ -34,7 +34,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function saveOrderPickupWindow(OrderPickupWindowInterface $orderPickupWindow): self
         {
@@ -42,7 +42,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function loadOrderPickupWindowById(OrderPickupWindowInterface $orderPickupWindow, $id): self
         {
@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function deleteOrderPickupWindow(OrderPickupWindowInterface $orderPickupWindow): bool
         {

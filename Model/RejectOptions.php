@@ -54,7 +54,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getLineItemRejectionReasons(): array
         {
@@ -81,7 +81,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setLineItemRejectionReasons(array $lineItemRejectionReason): RejectOptions
         {
@@ -89,7 +89,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getOrder(): OrderInterface
         {
@@ -105,7 +105,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setOrder(OrderInterface $order): RejectOptions
         {

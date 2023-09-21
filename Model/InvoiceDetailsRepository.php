@@ -33,7 +33,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : InvoiceDetailsInterface
         {
@@ -49,7 +49,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(InvoiceDetailsInterface $invoiceDetails) : InvoiceDetailsInterface
         {
@@ -58,7 +58,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(InvoiceDetailsInterface $invoiceDetails) : bool
         {

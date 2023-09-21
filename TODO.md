@@ -4,3 +4,4 @@
 5. Rename Pickup Window to Accept Options Pickup Window
 6. Size persistent storage
 7. Vat Exclusion Representative persistent storage
+8. Custom Carrier (Skroutz marketplace)

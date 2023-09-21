@@ -51,7 +51,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setId($id)
         {
@@ -59,7 +59,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getSkroutzId(): string
         {
@@ -67,7 +67,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setSkroutzId(string $skroutzId): Customer
         {
@@ -75,7 +75,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getFirstName(): string
         {
@@ -83,7 +83,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setFirstName(string $firstName): Customer
         {
@@ -91,7 +91,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getLastName(): string
         {
@@ -99,7 +99,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setLastName(string $lastName): Customer
         {
@@ -107,7 +107,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getAddress(): AddressInterface
         {
@@ -123,7 +123,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setAddress(?AddressInterface $address): Customer
         {

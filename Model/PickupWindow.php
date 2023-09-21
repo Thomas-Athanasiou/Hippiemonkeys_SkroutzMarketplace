@@ -23,7 +23,7 @@
     implements PickupWindowInterface
     {
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getSkroutzId(): int
         {
@@ -31,7 +31,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setSkroutzId(int $skroutzId): PickupWindow
         {
@@ -39,7 +39,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getLabel(): string
         {
@@ -47,7 +47,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setLabel(string $label): PickupWindow
         {

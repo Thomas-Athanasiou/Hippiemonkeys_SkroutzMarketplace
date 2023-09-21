@@ -37,7 +37,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : LineItemRejectionReasonInterface
         {
@@ -62,7 +62,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getBySkroutzId(int $skroutzId) : LineItemRejectionReasonInterface
         {
@@ -88,7 +88,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(LineItemRejectionReasonInterface $lineItemRejectionReason) : LineItemRejectionReasonInterface
         {
@@ -99,7 +99,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(LineItemRejectionReasonInterface $lineItemRejectionReason) : bool
         {

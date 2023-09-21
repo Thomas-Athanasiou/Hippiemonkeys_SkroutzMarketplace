@@ -50,7 +50,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : AddressInterface
         {
@@ -75,7 +75,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(AddressInterface $address): AddressInterface
         {
@@ -85,7 +85,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(AddressInterface $address): bool
         {

@@ -41,7 +41,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById(int $id) : CustomerInterface
         {
@@ -57,7 +57,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getBySkroutzId(string $skroutzId) : CustomerInterface
         {
@@ -73,7 +73,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(CustomerInterface $customer) : CustomerInterface
         {
@@ -82,7 +82,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(CustomerInterface $customer) : bool
         {

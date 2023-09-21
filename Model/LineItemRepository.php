@@ -70,7 +70,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : LineItemInterface
         {
@@ -95,7 +95,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getBySkroutzId(string $skroutzId) : LineItemInterface
         {
@@ -121,7 +121,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getList(SearchCriteriaInterface $searchCriteria): LineItemSearchResultInterface
         {
@@ -132,7 +132,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(LineItemInterface $lineItem) : LineItemInterface
         {
@@ -143,7 +143,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(LineItemInterface $lineItem) : bool
         {

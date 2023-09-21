@@ -28,10 +28,6 @@
     extends AbstractModel
     implements AcceptOptionsPickupLocationRelationInterface
     {
-        protected const
-            FIELD_ACCEPT_OPTIONS = 'accept_options',
-            FIELD_PICKUP_LOCATION = 'pickup_location';
-
         /**
          * Constructor
          *
@@ -53,57 +49,75 @@
         {
             parent::__construct($context, $registry, $data);
 
-            $this->_acceptOptionsRepository = $acceptOptionsRepository;
-            $this->_pickupLocationRepository = $pickupLocationRepository;
+            $this->acceptOptionsRepository = $acceptOptionsRepository;
+            $this->pickupLocationRepository = $pickupLocationRepository;
+
+            $this->acceptOptions = null;
+            $this->pickupLocation = null;
         }
 
         /**
-         * {@inheritdoc}
+         * Accept Options
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
+         */
+        private $acceptOptions;
+
+        /**
+         * @inheritdoc
          */
         public function getAcceptOptions(): AcceptOptionsInterface
         {
-            $acceptOptions = $this->getData(static::FIELD_ACCEPT_OPTIONS);
+            $acceptOptions = $this->acceptOptions;
             if($acceptOptions === null)
             {
-                $acceptOptions = $this->getAcceptOptionsRepository()->getById(
-                    $this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID)
-                );
-                $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+                $acceptOptions = $this->getAcceptOptionsRepository()->getById($this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID));
+                $this->acceptOptions = $acceptOptions;
             }
             return $acceptOptions;
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupLocationRelation
         {
-            $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
-            return $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+            $this->acceptOptions = $acceptOptions;
+            return $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
         }
 
         /**
-         * {@inheritdoc}
+         * Pickup Location
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
+         */
+        private $pickupLocation;
+
+        /**
+         * @inheritdoc
          */
         public function getPickupLocation(): PickupLocationInterface
         {
-            $pickupLocation = $this->getData(static::FIELD_PICKUP_LOCATION);
+            $pickupLocation = $this->pickupLocation;
             if($pickupLocation === null)
             {
-                $pickupLocation = $this->getPickupLocationRepository()->getById(
-                    $this->getData(ResourceInterface::FIELD_PICKUP_LOCATION_ID)
-                );
-                $this->setData(static::FIELD_PICKUP_LOCATION, $pickupLocation);
+                $pickupLocation = $this->getPickupLocationRepository()->getById($this->getData(ResourceInterface::FIELD_PICKUP_LOCATION_ID));
+                $this->pickupLocation = $pickupLocation;
             }
             return $pickupLocation;
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setPickupLocation(PickupLocationInterface $pickupLocation): AcceptOptionsPickupLocationRelation
         {
-            return $this->setData(ResourceInterface::FIELD_PICKUP_LOCATION_ID, $pickupLocation->getId())->setData(static::FIELD_PICKUP_LOCATION, $pickupLocation);
+            $this->pickupLocation = $pickupLocation;
+            return $this->setData(ResourceInterface::FIELD_PICKUP_LOCATION_ID, $pickupLocation->getId());
         }
 
         /**
@@ -111,9 +125,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
          */
-        private $_acceptOptionsRepository;
+        private $acceptOptionsRepository;
 
         /**
          * Gets Accept Options Repository
@@ -124,7 +138,7 @@
          */
         protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
-            return $this->_acceptOptionsRepository;
+            return $this->acceptOptionsRepository;
         }
 
         /**
@@ -132,9 +146,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface $_acceptOptionsRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface $acceptOptionsRepository
          */
-        private $_pickupLocationRepository;
+        private $pickupLocationRepository;
 
         /**
          * Gets Pickup Location Repository
@@ -145,7 +159,7 @@
          */
         protected function getPickupLocationRepository(): PickupLocationRepositoryInterface
         {
-            return $this->_pickupLocationRepository;
+            return $this->pickupLocationRepository;
         }
     }
 ?>

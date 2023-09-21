@@ -57,7 +57,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCompany(): string
         {
@@ -65,7 +65,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCompany(string $company): InvoiceDetails
         {
@@ -73,14 +73,14 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getProfession(): string
         {
             return $this->getData(ResourceInterface::FIELD_PROFESSION);
         }
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setProfession(string $profession): InvoiceDetails
         {
@@ -88,14 +88,14 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getDoy(): string
         {
             return $this->getDoy(ResourceInterface::FIELD_DOY);
         }
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setDoy(string $doy): InvoiceDetails
         {
@@ -103,14 +103,14 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getVatNumber(): string
         {
             return $this->getData(ResourceInterface::FIELD_VAT_NUMBER);
         }
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setVatNumber(string $vatNumber): InvoiceDetails
         {
@@ -118,7 +118,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getAddress(): ?AddressInterface
         {
@@ -133,7 +133,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setAddress(?AddressInterface $address): InvoiceDetails
         {
@@ -142,7 +142,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getVatExclusionRequested(): bool
         {
@@ -150,7 +150,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setVatExclusionRequested(bool $vatExclusionRequested): InvoiceDetails
         {
@@ -158,7 +158,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getVatExclusionRepresentative(): VatExclusionRepresentativeInterface
         {
@@ -166,7 +166,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative)
         {

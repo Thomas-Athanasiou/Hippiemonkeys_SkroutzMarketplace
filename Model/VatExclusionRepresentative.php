@@ -23,7 +23,7 @@
     implements VatExclusionRepresentativeInterface
     {
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getIdType(): string
         {
@@ -31,7 +31,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setIdType(string $idType): VatExclusionRepresentative
         {
@@ -39,7 +39,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function getIdNumber(): string
         {
@@ -47,7 +47,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setIdNumber(string $idNumber): VatExclusionRepresentative
         {
@@ -55,7 +55,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getOtp(): string
         {
@@ -63,7 +63,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setOtp(string $otp): VatExclusionRepresentative
         {

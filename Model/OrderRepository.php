@@ -75,7 +75,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getByCode(string $code) : OrderInterface
         {
@@ -104,7 +104,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : OrderInterface
         {
@@ -135,7 +135,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getByMagentoOrder(MagentoOrderInterface $magentoOrder) : OrderInterface
         {
@@ -163,7 +163,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
         {
@@ -174,7 +174,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(OrderInterface $order) : OrderInterface
         {
@@ -189,7 +189,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(OrderInterface $order) : bool
         {

@@ -66,7 +66,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
@@ -90,7 +90,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getByRejectOptionsAndLineItemRejectionReason(
             RejectOptionsInterface $rejectOptions,
@@ -125,7 +125,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getList(SearchCriteriaInterface $searchCriteria): RejectOptionsLineItemRejectionReasonRelationSearchResultInterface
         {
@@ -136,7 +136,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation) : RejectOptionsLineItemRejectionReasonRelationInterface
         {
@@ -146,7 +146,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation) : bool
         {

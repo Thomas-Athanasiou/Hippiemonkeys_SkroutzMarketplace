@@ -52,12 +52,12 @@
         )
         {
             parent::__construct($context, $registry, $data);
-            $this->_acceptOptionsRepository = $acceptOptionsRepository;
-            $this->_pickupWindowRepository = $pickupWindowRepository;
+            $this->acceptOptionsRepository = $acceptOptionsRepository;
+            $this->pickupWindowRepository = $pickupWindowRepository;
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getAcceptOptions(): AcceptOptionsInterface
         {
@@ -73,7 +73,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupWindowRelation
         {
@@ -82,7 +82,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getPickupWindow(): PickupWindowInterface
         {
@@ -98,7 +98,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setPickupWindow(PickupWindowInterface $pickupWindow): AcceptOptionsPickupWindowRelation
         {
@@ -111,9 +111,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
          */
-        private $_acceptOptionsRepository;
+        private $acceptOptionsRepository;
 
         /**
          * Gets Accept Options Repository
@@ -124,7 +124,7 @@
          */
         protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
-            return $this->_acceptOptionsRepository;
+            return $this->acceptOptionsRepository;
         }
 
         /**
@@ -134,7 +134,7 @@
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface
          */
-        private $_pickupWindowRepository;
+        private $pickupWindowRepository;
 
         /**
          * Gets Pickup Window Repository
@@ -145,7 +145,7 @@
          */
         protected function getPickupWindowRepository(): PickupWindowRepositoryInterface
         {
-            return $this->_pickupWindowRepository;
+            return $this->pickupWindowRepository;
         }
     }
 ?>

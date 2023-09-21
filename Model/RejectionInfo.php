@@ -23,7 +23,7 @@
     implements RejectionInfoInterface
     {
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getReason(): string
         {
@@ -31,7 +31,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setReason(string $reason): RejectionInfo
         {
@@ -39,7 +39,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getActor(): string
         {
@@ -47,7 +47,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setActor(string $actor): RejectionInfo
         {

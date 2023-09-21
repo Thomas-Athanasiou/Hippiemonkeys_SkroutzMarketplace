@@ -61,7 +61,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : RejectOptionsInterface
         {
@@ -84,7 +84,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getByOrder(OrderInterface $order) : RejectOptionsInterface
         {
@@ -109,7 +109,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(RejectOptionsInterface $rejectOptions) : RejectOptionsInterface
         {
@@ -120,7 +120,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(RejectOptionsInterface $rejectOptions) : bool
         {

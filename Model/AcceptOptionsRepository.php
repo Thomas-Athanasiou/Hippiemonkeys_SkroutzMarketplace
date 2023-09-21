@@ -61,7 +61,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id): AcceptOptionsInterface
         {
@@ -88,7 +88,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getByOrder(OrderInterface $order): AcceptOptionsInterface
         {
@@ -115,7 +115,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(AcceptOptionsInterface $acceptOptions): AcceptOptionsInterface
         {
@@ -125,7 +125,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(AcceptOptionsInterface $acceptOptions): bool
         {

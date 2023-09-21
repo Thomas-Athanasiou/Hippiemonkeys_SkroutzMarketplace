@@ -23,7 +23,7 @@
     implements AddressInterface
     {
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getStreetName() : string
         {
@@ -31,7 +31,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setStreetName(string $streetName): Address
         {
@@ -39,7 +39,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getStreetNumber() : string
         {
@@ -47,7 +47,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setStreetNumber(string $streetNumber): Address
         {
@@ -55,7 +55,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getZip() : string
         {
@@ -63,7 +63,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setZip(string $zip): Address
         {
@@ -71,7 +71,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function getCity() : string
         {
@@ -79,7 +79,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function setCity(string $city): Address
         {
@@ -87,7 +87,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getRegion() : string
         {
@@ -95,7 +95,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setRegion(string $region): Address
         {
@@ -103,7 +103,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCountryCode() : string
         {
@@ -111,7 +111,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCountryCode(string $countryCode): Address
         {
@@ -119,7 +119,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getPickupFromCollectionPoint(): ?bool
         {
@@ -127,7 +127,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setPickupFromCollectionPoint($pickupFromCollectionPoint): Address
         {
@@ -135,7 +135,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getCollectionPointAddress() : ?string
         {
@@ -143,7 +143,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setCollectionPointAddress(?string $collectionPointAddress): Address
         {

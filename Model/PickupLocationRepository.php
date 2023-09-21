@@ -70,7 +70,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getById($id) : PickupLocationInterface
         {
@@ -95,7 +95,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getBySkroutzId(string $skroutzId) : PickupLocationInterface
         {
@@ -121,7 +121,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
         {
@@ -132,7 +132,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function save(PickupLocationInterface $pickupLocation) : PickupLocationInterface
         {
@@ -143,7 +143,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function delete(PickupLocationInterface $pickupLocation) : bool
         {

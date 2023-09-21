@@ -24,7 +24,7 @@
     implements SearchResultInterface
     {
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function _construct()
         {

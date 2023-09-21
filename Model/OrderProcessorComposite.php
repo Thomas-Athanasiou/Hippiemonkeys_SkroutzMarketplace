@@ -41,7 +41,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         protected function processOrderInternal(OrderInterface $order): void
         {

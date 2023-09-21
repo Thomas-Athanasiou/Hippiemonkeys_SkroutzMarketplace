@@ -57,7 +57,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getSkroutzId(): string
         {
@@ -65,7 +65,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setSkroutzId(string $skroutzId): LineItem
         {
@@ -73,7 +73,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getShopUid()
         {
@@ -81,7 +81,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setShopUid($uid): LineItem
         {
@@ -89,7 +89,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getProductName() : string
         {
@@ -97,7 +97,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setProductName(string $productName): LineItem
         {
@@ -105,7 +105,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getQuantity() : int
         {
@@ -113,7 +113,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setQuantity(int $quantity): LineItem
         {
@@ -121,7 +121,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getUnitPrice() : float
         {
@@ -129,7 +129,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setUnitPrice(float $unitPrice): LineItem
         {
@@ -137,7 +137,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getTotalPrice() : float
         {
@@ -145,7 +145,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setTotalPrice(float $totalPrice): LineItem
         {
@@ -153,7 +153,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getPriceIncludesVat() : bool
         {
@@ -161,7 +161,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setPriceIncludesVat(bool $priceIncludesVat): LineItem
         {
@@ -169,7 +169,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getIslandVatDiscountApplied(): ?bool
         {
@@ -177,7 +177,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setIslandVatDiscountApplied(?bool $islandVatDiscountApplied): LineItem
         {
@@ -185,7 +185,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getEan(): ?string
         {
@@ -193,7 +193,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setEan(?string $ean): LineItem
         {
@@ -201,14 +201,14 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getExtraInfo(): ?string
         {
             return $this->getData(ResourceInterface::FIELD_EXTRA_INFO);
         }
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setExtraInfo(?string $extraInfo): LineItem
         {
@@ -216,14 +216,14 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getSize(): ?SizeInterface
         {
             return $this->getData(static::FIELD_SIZE);
         }
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setSize(?SizeInterface $size): LineItem
         {
@@ -231,7 +231,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getOrder() : OrderInterface
         {
@@ -247,7 +247,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setOrder(OrderInterface $order): LineItem
         {
@@ -256,7 +256,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getRejectionReason(): ?string
         {
@@ -264,7 +264,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setRejectionReason(?string $rejectionReason): LineItem
         {
@@ -272,7 +272,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getReturnReason(): ?string
         {
@@ -280,7 +280,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setReturnReason(?string $returnReason): LineItem
         {
@@ -288,7 +288,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getSerialNumbers(): ?string
         {
@@ -296,7 +296,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setSerialNumbers(?string $serialNumbers): LineItem
         {
@@ -304,7 +304,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function getShopVariationUid(): ?string
         {
@@ -312,7 +312,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function setShopVariationUid(?string $shopVariationUid): LineItem
         {
@@ -320,7 +320,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function getProduct(): ProductInterface
         {
@@ -337,7 +337,7 @@
         }
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         function setProduct(ProductInterface $product): LineItem
         {

@@ -28,10 +28,6 @@
     extends AbstractModel
     implements AcceptOptionsPickupWindowRelationInterface
     {
-        protected const
-            FIELD_ACCEPT_OPTIONS = 'accept_options',
-            FIELD_PICKUP_WINDOW = 'pickup_window';
-
         /**
          * Constructor
          *
@@ -54,20 +50,30 @@
             parent::__construct($context, $registry, $data);
             $this->acceptOptionsRepository = $acceptOptionsRepository;
             $this->pickupWindowRepository = $pickupWindowRepository;
+
+            $this->acceptOptions = null;
+            $this->pickupWindow = null;
         }
+
+        /**
+         * Accept Options property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface|null $acceptOptions
+         */
+        private $acceptOptions;
 
         /**
          * @inheritdoc
          */
         public function getAcceptOptions(): AcceptOptionsInterface
         {
-            $acceptOptions = $this->getData(static::FIELD_ACCEPT_OPTIONS);
+            $acceptOptions = $this->acceptOptions;
             if($acceptOptions === null)
             {
-                $acceptOptions = $this->getAcceptOptionsRepository()->getById(
-                    $this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID)
-                );
-                $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+                $acceptOptions = $this->getAcceptOptionsRepository()->getById($this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID));
+                $this->acceptOptions = $acceptOptions;
             }
             return $acceptOptions;
         }
@@ -77,22 +83,30 @@
          */
         public function setAcceptOptions(AcceptOptionsInterface $acceptOptions): AcceptOptionsPickupWindowRelation
         {
-            $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
-            return $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+            $this->acceptOptions = $acceptOptions;
+            return $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
         }
+
+
+        /**
+         * Pickup Window property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface|null $pickupWindow
+         */
+        private $pickupWindow;
 
         /**
          * @inheritdoc
          */
         public function getPickupWindow(): PickupWindowInterface
         {
-            $pickupWindow = $this->getData(static::FIELD_PICKUP_WINDOW);
+            $pickupWindow = $this->pickupWindow;
             if($pickupWindow === null)
             {
-                $pickupWindow = $this->getPickupWindowRepository()->getById(
-                    $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW_ID)
-                );
-                $this->setData(static::FIELD_PICKUP_WINDOW, $pickupWindow);
+                $pickupWindow = $this->getPickupWindowRepository()->getById($this->getData(ResourceInterface::FIELD_PICKUP_WINDOW_ID));
+                $this->pickupWindow = $pickupWindow;
             }
             return $pickupWindow;
         }
@@ -102,8 +116,8 @@
          */
         public function setPickupWindow(PickupWindowInterface $pickupWindow): AcceptOptionsPickupWindowRelation
         {
-            $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindow->getId());
-            return $this->setData(static::FIELD_PICKUP_WINDOW, $pickupWindow);
+            $this->pickupWindow = $pickupWindow;
+            return $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindow->getId());
         }
 
         /**
@@ -119,10 +133,11 @@
          * Gets Accept Options Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
-        protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
+        protected final function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
             return $this->acceptOptionsRepository;
         }
@@ -140,10 +155,11 @@
          * Gets Pickup Window Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface
          */
-        protected function getPickupWindowRepository(): PickupWindowRepositoryInterface
+        protected final function getPickupWindowRepository(): PickupWindowRepositoryInterface
         {
             return $this->pickupWindowRepository;
         }

@@ -33,18 +33,18 @@
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $_idCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $idCache
              */
-            $_idCache = [],
+            $idCache = [],
 
             /**
              * Skroutz Id Cache property
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $_skroutzIdCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $skroutzIdCache
              */
-            $_skroutzIdCache = [];
+            $skroutzIdCache = [];
 
         /**
          * Constructor
@@ -52,21 +52,21 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface $resource
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory $lineItemFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory $factory
          * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory $searchResultFactory
          */
         public function __construct(
             ResourceInterface $resource,
-            LineItemInterfaceFactory $lineItemFactory,
+            LineItemInterfaceFactory $factory,
             CollectionProcessorInterface $collectionProcessor,
             SearchResultInterfaceFactory $searchResultFactory
         )
         {
-            $this->_resource = $resource;
-            $this->_lineItemFactory = $lineItemFactory;
-            $this->_collectionProcessor = $collectionProcessor;
-            $this->_searchResultFactory = $searchResultFactory;
+            $this->resource = $resource;
+            $this->factory = $factory;
+            $this->collectionProcessor = $collectionProcessor;
+            $this->searchResultFactory = $searchResultFactory;
         }
 
         /**
@@ -74,10 +74,10 @@
          */
         public function getById($id) : LineItemInterface
         {
-            $lineItem = $this->_idCache[$id] ?? null;
+            $lineItem = $this->idCache[$id] ?? null;
             if($lineItem === null)
             {
-                $lineItem = $this->getLineItemFactory()->create();
+                $lineItem = $this->getFactory()->create();
                 $this->getResource()->loadLineItemById($lineItem, $id);
                 if ($lineItem->getId() === null)
                 {
@@ -87,8 +87,8 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $lineItem;
-                    $this->_idCache[$lineItem->getSkroutzId()] = $lineItem;
+                    $this->idCache[$id] = $lineItem;
+                    $this->skroutzIdCache[$lineItem->getSkroutzId()] = $lineItem;
                 }
             }
             return $lineItem;
@@ -99,10 +99,10 @@
          */
         public function getBySkroutzId(string $skroutzId) : LineItemInterface
         {
-            $lineItem = $this->_skroutzIdCache[$skroutzId] ?? null;
+            $lineItem = $this->skroutzIdCache[$skroutzId] ?? null;
             if($lineItem === null)
             {
-                $lineItem = $this->getLineItemFactory()->create();
+                $lineItem = $this->getFactory()->create();
                 $this->getResource()->loadLineItemBySkroutzId($lineItem, $skroutzId);
                 $id = $lineItem->getId();
                 if ($id === null)
@@ -113,8 +113,8 @@
                 }
                 else
                 {
-                    $this->_skroutzIdCache[$skroutzId] = $lineItem;
-                    $this->_idCache[$id] = $lineItem;
+                    $this->skroutzIdCache[$skroutzId] = $lineItem;
+                    $this->idCache[$id] = $lineItem;
                 }
             }
             return $lineItem;
@@ -137,8 +137,8 @@
         public function save(LineItemInterface $lineItem) : LineItemInterface
         {
             $this->getResource()->saveLineItem($lineItem);
-            $this->_idCache[$lineItem->getId()] = $lineItem;
-            $this->_skroutzIdCache[$lineItem->getSkroutzId()] = $lineItem;
+            $this->idCache[$lineItem->getId()] = $lineItem;
+            $this->skroutzIdCache[$lineItem->getSkroutzId()] = $lineItem;
             return $lineItem;
         }
 
@@ -147,8 +147,8 @@
          */
         public function delete(LineItemInterface $lineItem) : bool
         {
-            unset($this->_idCache[$lineItem->getId()]);
-            unset($this->_skroutzIdCache[$lineItem->getSkroutzId()]);
+            unset($this->idCache[$lineItem->getId()]);
+            unset($this->skroutzIdCache[$lineItem->getSkroutzId()]);
             return $this->getResource()->deleteLineItem($lineItem);
         }
 
@@ -157,20 +157,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface
          */
-        protected function getResource(): ResourceInterface
+        protected final function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
@@ -178,20 +179,22 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory $_lineItemFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory $factory
          */
-        private $_lineItemFactory;
+        private $factory;
 
         /**
          * Gets Line Item Factory
          *
          * @access protected
+         * @final
+         *
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterfaceFactory
          */
-        protected function getLineItemFactory() : LineItemInterfaceFactory
+        protected final function getFactory() : LineItemInterfaceFactory
         {
-            return $this->_lineItemFactory;
+            return $this->factory;
         }
 
         /**
@@ -199,20 +202,21 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          */
-        private $_collectionProcessor;
+        private $collectionProcessor;
 
         /**
          * Gets Collection Processor
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface
          */
-        protected function getCollectionProcessor() : CollectionProcessorInterface
+        protected final function getCollectionProcessor() : CollectionProcessorInterface
         {
-            return $this->_collectionProcessor;
+            return $this->collectionProcessor;
         }
 
         /**
@@ -220,20 +224,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory $_searchResultFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory $searchResultFactory
          */
-        private $_searchResultFactory;
+        private $searchResultFactory;
 
         /**
          * Gets Search Result Factory
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterfaceFactory
          */
-        protected function getSearchResultFactory(): SearchResultInterfaceFactory
+        protected final function getSearchResultFactory(): SearchResultInterfaceFactory
         {
-            return $this->_searchResultFactory;
+            return $this->searchResultFactory;
         }
     }
 ?>

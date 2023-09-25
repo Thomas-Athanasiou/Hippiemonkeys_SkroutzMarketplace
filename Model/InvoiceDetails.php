@@ -28,7 +28,6 @@
     implements InvoiceDetailsInterface
     {
         protected const
-            FIELD_ADDRESS = 'address',
             FIELD_VAT_EXCLUSION_REPRESENTATIVE  = 'vat_exclusion_representative';
 
         /**
@@ -48,12 +47,8 @@
             array $data = []
         )
         {
-            parent::__construct(
-                $context,
-                $registry,
-                $data
-            );
-            $this->_addressRepository = $addressRepository;
+            parent::__construct($context, $registry, $data);
+            $this->addressRepository = $addressRepository;
         }
 
         /**
@@ -109,6 +104,7 @@
         {
             return $this->getData(ResourceInterface::FIELD_VAT_NUMBER);
         }
+
         /**
          * @inheritdoc
          */
@@ -117,17 +113,30 @@
             return $this->setData(ResourceInterface::FIELD_VAT_NUMBER, $vatNumber);
         }
 
+
+        /**
+         * Address property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address
+         */
+        private $address;
+
         /**
          * @inheritdoc
          */
-        public function getAddress(): ?AddressInterface
+        public function getAddress(): AddressInterface
         {
-            $address = $this->getData(self::FIELD_ADDRESS);
-            $addressId  = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
-            if($addressId && !$address)
+            $address = $this->address;
+            if($address === null)
             {
-                $address = $this->getAddressRepository()->getById($addressId);
-                $this->setAddress($address);
+                $addressId = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
+                if($addressId !== null)
+                {
+                    $address = $this->getAddressRepository()->getById($addressId);
+                    $this->address = $address;
+                }
             }
             return $address;
         }
@@ -137,8 +146,8 @@
          */
         public function setAddress(?AddressInterface $address): InvoiceDetails
         {
-            $this->setData(ResourceInterface::FIELD_ADDRESS_ID, $address ? $address->getId() : null);
-            return $this->setData(self::FIELD_ADDRESS, $address);
+            $this->address = $address;
+            return $this->setData(ResourceInterface::FIELD_ADDRESS_ID, $address ? $address->getId() : null);
         }
 
         /**
@@ -178,20 +187,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $_addressRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $addressRepository
          */
-        private $_addressRepository;
+        private $addressRepository;
 
         /**
          * Gets Address Repository
          *
-         * @access private
+         * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface
          */
-        protected function getAddressRepository(): AddressRepositoryInterface
+        protected final function getAddressRepository(): AddressRepositoryInterface
         {
-            return $this->_addressRepository;
+            return $this->addressRepository;
         }
     }
 ?>

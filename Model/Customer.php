@@ -26,9 +26,6 @@
     extends AbstractModel
     implements CustomerInterface
     {
-        protected const
-            FIELD_ADDRESS = 'address';
-
         /**
          * Constructor
          *
@@ -47,7 +44,8 @@
         )
         {
             parent::__construct($context, $registry, $data);
-            $this->_addressRepository = $addressRepository;
+            $this->addressRepository = $addressRepository;
+            $this->address = null;
         }
 
         /**
@@ -107,17 +105,28 @@
         }
 
         /**
+         * Address property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address
+         */
+        private $address;
+
+        /**
          * @inheritdoc
          */
         public function getAddress(): AddressInterface
         {
-            $address = $this->getData(static::FIELD_ADDRESS);
+            $address = $this->address;
             if($address === null)
             {
-                $address = $this->getAddressRepository()->getById(
-                    $this->getData(ResourceInterface::FIELD_ADDRESS_ID)
-                );
-                $this->setAddress($address);
+                $addressId = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
+                if($addressId !== null)
+                {
+                    $address = $this->getAddressRepository()->getById($addressId);
+                    $this->address = $address;
+                }
             }
             return $address;
         }
@@ -127,8 +136,8 @@
          */
         public function setAddress(?AddressInterface $address): Customer
         {
-            $this->setData(ResourceInterface::FIELD_ADDRESS_ID, ($address === null ? $address : $address->getId()));
-            return $this->setData(static::FIELD_ADDRESS, $address);
+            $this->address = $address;
+            return $this->setData(ResourceInterface::FIELD_ADDRESS_ID, ($address === null ? $address : $address->getId()));
         }
 
         /**
@@ -136,20 +145,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $_addressRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $addressRepository
          */
-        private $_addressRepository;
+        private $addressRepository;
 
         /**
          * Gets Address Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface
          */
-        protected function getAddressRepository(): AddressRepositoryInterface
+        protected final function getAddressRepository(): AddressRepositoryInterface
         {
-            return $this->_addressRepository;
+            return $this->addressRepository;
         }
     }
 ?>

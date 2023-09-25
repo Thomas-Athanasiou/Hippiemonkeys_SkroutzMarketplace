@@ -24,16 +24,32 @@
     implements LineItemRejectionReasonRepositoryInterface
     {
         protected
-            $_idCache = [],
-            $_skroutzIdCache = [];
+            /**
+             * Id Index property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonRepositoryInterface[] $idCache
+             */
+            $idCache = [],
+
+
+            /**
+             * Skroutz Id Index property
+             *
+             * @access protected
+             *
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonRepositoryInterface[] $skroutzIdCache
+             */
+            $skroutzIdCache = [];
 
         public function __construct(
             ResourceInterface $resource,
             LineItemRejectionReasonInterfaceFactory $lineItemRejectionReasonFactory
         )
         {
-            $this->_resource = $resource;
-            $this->_lineItemRejectionReasonFactory = $lineItemRejectionReasonFactory;
+            $this->resource = $resource;
+            $this->factory = $lineItemRejectionReasonFactory;
         }
 
         /**
@@ -41,10 +57,10 @@
          */
         public function getById($id) : LineItemRejectionReasonInterface
         {
-            $lineItemRejectionReason = $this->_idCache[$id] ?? null;
+            $lineItemRejectionReason = $this->idCache[$id] ?? null;
             if($lineItemRejectionReason === null)
             {
-                $lineItemRejectionReason = $this->getLineItemRejectionReasonFactory()->create();
+                $lineItemRejectionReason = $this->getFactory()->create();
                 $this->getResource()->loadLineItemRejectionReasonById($lineItemRejectionReason, $id);
                 if ($lineItemRejectionReason->getId() === null)
                 {
@@ -54,8 +70,8 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $lineItemRejectionReason;
-                    $this->_skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]  = $lineItemRejectionReason;
+                    $this->idCache[$id] = $lineItemRejectionReason;
+                    $this->skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]  = $lineItemRejectionReason;
                 }
             }
             return $lineItemRejectionReason;
@@ -66,10 +82,10 @@
          */
         public function getBySkroutzId(int $skroutzId) : LineItemRejectionReasonInterface
         {
-            $lineItemRejectionReason = $this->_skroutzIdCache[$skroutzId] ?? null;
+            $lineItemRejectionReason = $this->skroutzIdCache[$skroutzId] ?? null;
             if($lineItemRejectionReason === null)
             {
-                $lineItemRejectionReason = $this->getLineItemRejectionReasonFactory()->create();
+                $lineItemRejectionReason = $this->getFactory()->create();
                 $this->getResource()->loadLineItemRejectionReasonBySkroutzId($lineItemRejectionReason, $skroutzId);
                 $id = $lineItemRejectionReason->getId();
                 if ($id === null)
@@ -80,8 +96,8 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $lineItemRejectionReason;
-                    $this->_skroutzIdCache[$skroutzId] = $lineItemRejectionReason;
+                    $this->idCache[$id] = $lineItemRejectionReason;
+                    $this->skroutzIdCache[$skroutzId] = $lineItemRejectionReason;
                 }
             }
             return $lineItemRejectionReason;
@@ -92,8 +108,8 @@
          */
         public function save(LineItemRejectionReasonInterface $lineItemRejectionReason) : LineItemRejectionReasonInterface
         {
-            $this->_idCache[$lineItemRejectionReason->getId()] = $lineItemRejectionReason;
-            $this->_skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]  = $lineItemRejectionReason;
+            $this->idCache[$lineItemRejectionReason->getId()] = $lineItemRejectionReason;
+            $this->skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]  = $lineItemRejectionReason;
             $this->getResource()->saveLineItemRejectionReason($lineItemRejectionReason);
             return $lineItemRejectionReason;
         }
@@ -103,8 +119,8 @@
          */
         public function delete(LineItemRejectionReasonInterface $lineItemRejectionReason) : bool
         {
-            unset($this->_idCache[$lineItemRejectionReason->getId()]);
-            unset($this->_skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]);
+            unset($this->idCache[$lineItemRejectionReason->getId()]);
+            unset($this->skroutzIdCache[$lineItemRejectionReason->getSkroutzId()]);
             return $this->getResource()->deleteLineItemRejectionReason($lineItemRejectionReason);
         }
 
@@ -113,41 +129,42 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemRejectionReasonResourceInterface
          */
-        protected function getResource(): ResourceInterface
+        protected final function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
-         * Line Item Rejection Reason Factory property
+         * Factory property
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterfaceFactory $_lineItemRejectionReasonFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterfaceFactory $factory
          */
-        private $_lineItemRejectionReasonFactory;
+        private $factory;
 
         /**
-         * Gets Line Item Rejection Reason Factory
+         * Gets Factory
          *
          * @access protected
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterfaceFactory
          */
-        protected function getLineItemRejectionReasonFactory() : LineItemRejectionReasonInterfaceFactory
+        protected function getFactory() : LineItemRejectionReasonInterfaceFactory
         {
-            return $this->_lineItemRejectionReasonFactory;
+            return $this->factory;
         }
     }
 ?>

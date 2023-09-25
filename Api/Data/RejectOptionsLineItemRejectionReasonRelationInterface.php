@@ -37,7 +37,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface
          */
         function getRejectOptions(): RejectOptionsInterface;
 
@@ -59,7 +59,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface
          */
         function getLineItemRejectionReason(): LineItemRejectionReasonInterface;
 

@@ -23,7 +23,7 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory as InterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface;
 
@@ -52,7 +52,7 @@
          */
         public function __construct(
             ResourceInterface $resource,
-            InterfaceFactory $factory,
+            AcceptOptionsPickupLocationRelationInterfaceFactory $factory,
             CollectionProcessorInterface $collectionProcessor,
             SearchResultInterfaceFactory $searchResultFactory,
             SearchCriteriaBuilder $searchCriteriaBuilder
@@ -68,7 +68,7 @@
         /**
          * @inheritdoc
          */
-        public final function getById($id) : AcceptOptionsPickupLocationRelationInterface
+        public function getById($id) : AcceptOptionsPickupLocationRelationInterface
         {
             $acceptOptionsPickupLocationRelation = $this->idCache[$id] ?? null;
             if($acceptOptionsPickupLocationRelation === null)
@@ -91,9 +91,8 @@
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function getByAcceptOptionsAndPickupLocation(AcceptOptionsInterface $acceptOptions, PickupLocationInterface $pickupLocation) : AcceptOptionsPickupLocationRelationInterface
+        public function getByAcceptOptionsAndPickupLocation(AcceptOptionsInterface $acceptOptions, PickupLocationInterface $pickupLocation) : AcceptOptionsPickupLocationRelationInterface
         {
             $acceptOptionsId = $acceptOptions->getId();
             $pickupLocationId = $pickupLocation->getId();
@@ -124,9 +123,8 @@
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupLocationRelationSearchResultInterface
+        public function getList(SearchCriteriaInterface $searchCriteria): AcceptOptionsPickupLocationRelationSearchResultInterface
         {
             $searchResult = $this->getSearchResultFactory()->create();
             $searchResult->setSearchCriteria($searchCriteria);
@@ -136,9 +134,8 @@
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function save(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation) : AcceptOptionsPickupLocationRelationInterface
+        public function save(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation) : AcceptOptionsPickupLocationRelationInterface
         {
             $this->getResource()->saveAcceptOptionsPickupLocationRelation($acceptOptionsPickupLocationRelation);
             $this->idCache[$acceptOptionsPickupLocationRelation->getId()] = $acceptOptionsPickupLocationRelation;
@@ -147,9 +144,8 @@
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function delete(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation) : bool
+        public function delete(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation) : bool
         {
             return $this->getResource()->deleteAcceptOptionsPickupLocationRelation($acceptOptionsPickupLocationRelation);
         }
@@ -193,7 +189,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory
          */
-        protected final function getFactory() : InterfaceFactory
+        protected final function getFactory() : AcceptOptionsPickupLocationRelationInterfaceFactory
         {
             return $this->factory;
         }

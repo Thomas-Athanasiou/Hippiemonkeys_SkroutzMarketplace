@@ -14,7 +14,9 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Registry,
+use Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface;
+use Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface;
+use Magento\Framework\Registry,
         Magento\Framework\Model\Context,
         Magento\Framework\Api\SearchCriteriaBuilder,
         Hippiemonkeys\Core\Model\AbstractModel,
@@ -33,7 +35,7 @@
             FIELD_ORDER = 'order',
             FIELD_LINE_ITEM_REJECTION_REASON = 'line_item_rejection_reason',
 
-            REJECT_OPTIONS_LINE_ITEM_REJECTION_RESON_RELATION_FIELD_REJECT_OPTIONS_ID = 'reject_options_id';
+            REJECT_OPTIONS_LINE_ITEM_REJECTION_REASON_RELATION_FIELD_REJECT_OPTIONS_ID = 'reject_options_id';
 
         public function __construct(
             Context $context,
@@ -47,59 +49,80 @@
         {
             parent::__construct($context, $registry, $data);
 
-            $this->_rejectOptionsLineItemRejectionReasonRelationRepository  = $rejectOptionsLineItemRejectionReasonRelationRepository;
-            $this->_lineItemRejectionReasonRepository = $lineItemRejectionReasonRepository;
-            $this->_orderRepository = $orderRepository;
-            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+            $this->rejectOptionsLineItemRejectionReasonRelationRepository  = $rejectOptionsLineItemRejectionReasonRelationRepository;
+            $this->lineItemRejectionReasonRepository = $lineItemRejectionReasonRepository;
+            $this->orderRepository = $orderRepository;
+            $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+
+            $this->order = null;
         }
+
+        /**
+         * Line Item Rejection Reasons
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface[]|null $lineItemRejectionReasons
+         */
+        private $lineItemRejectionReasons;
 
         /**
          * @inheritdoc
          */
         public function getLineItemRejectionReasons(): array
         {
-            $lineItemRejectionReason = $this->getData(static::FIELD_LINE_ITEM_REJECTION_REASON);
-            if(!$lineItemRejectionReason === null)
+            $lineItemRejectionReasons = $this->getData(static::FIELD_LINE_ITEM_REJECTION_REASON);
+            if(!$lineItemRejectionReasons === null)
             {
-                $lineItemRejectionReason = [];
-                $rejectOptionsLineItemRejectionReasonRelations = $this->getRejectOptionsLineItemRejectionReasonRelationRepository()
-                    ->getList(
-                        $this->getSearchCriteriaBuilder()
-                            ->addFilter(static::REJECT_OPTIONS_LINE_ITEM_REJECTION_RESON_RELATION_FIELD_REJECT_OPTIONS_ID, $this->getId())
-                            ->create()
-                    )
-                    ->getItems();
+                $lineItemRejectionReasons = array_map(
+                    function(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): LineItemRejectionReasonInterface
+                    {
+                        return $rejectOptionsLineItemRejectionReasonRelation->getLineItemRejectionReason();
+                    },
+                    $this->getRejectOptionsLineItemRejectionReasonRelationRepository()
+                        ->getList(
+                            $this->getSearchCriteriaBuilder()
+                                ->addFilter(static::REJECT_OPTIONS_LINE_ITEM_REJECTION_REASON_RELATION_FIELD_REJECT_OPTIONS_ID, $this->getId())
+                                ->create()
+                        )
+                        ->getItems()
+                );
 
-                foreach($rejectOptionsLineItemRejectionReasonRelations as $rejectOptionsLineItemRejectionReasonRelation)
-                {
-                    $lineItemRejectionReason[] = $rejectOptionsLineItemRejectionReasonRelation->getLineItemRejectionReason();
-                }
-
-                $this->setLineItemRejectionReasons($lineItemRejectionReason);
+                $this->lineItemRejectionReasons = $lineItemRejectionReasons;
             }
-            return $lineItemRejectionReason;
+            return $lineItemRejectionReasons;
         }
 
         /**
          * @inheritdoc
          */
-        public function setLineItemRejectionReasons(array $lineItemRejectionReason): RejectOptions
+        public function setLineItemRejectionReasons(array $lineItemRejectionReason): self
         {
-            return $this->setData(static::FIELD_LINE_ITEM_REJECTION_REASON, $lineItemRejectionReason);
+            $this->lineItemRejectionReason = $lineItemRejectionReason;
+            return $this;
         }
+
+        /**
+         * Order property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
+         */
+        private $order;
 
         /**
          * @inheritdoc
          */
         public function getOrder(): OrderInterface
         {
-            $order = $this->getData(static::FIELD_ORDER);
+            $order = $this->order;
             if ($order === null)
             {
                 $order = $this->getOrderRepository()->getById(
                     $this->getData(ResourceInterface::FIELD_ORDER_ID)
                 );
-                $this->setData(ResourceInterface::FIELD_ORDER_ID, $order);
+                $this->order = $order;
             }
             return $order;
         }
@@ -109,8 +132,8 @@
          */
         public function setOrder(OrderInterface $order): RejectOptions
         {
-            $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
-            return $this->setData(static::FIELD_ORDER, $order);
+            $this->order = $order;
+            return $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
         }
 
         /**
@@ -120,7 +143,7 @@
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
          */
-        private $_rejectOptionsLineItemRejectionReasonRelationRepository;
+        private $rejectOptionsLineItemRejectionReasonRelationRepository;
 
 
         /**
@@ -132,7 +155,7 @@
          */
         protected function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
         {
-            return $this->_rejectOptionsLineItemRejectionReasonRelationRepository;
+            return $this->rejectOptionsLineItemRejectionReasonRelationRepository;
         }
 
         /**
@@ -140,9 +163,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $_orderRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
          */
-        private $_orderRepository;
+        private $orderRepository;
 
         /**
          * Gets Order Repository
@@ -153,7 +176,7 @@
          */
         protected function getOrderRepository(): OrderRepositoryInterface
         {
-            return $this->_orderRepository;
+            return $this->orderRepository;
         }
     }
 ?>

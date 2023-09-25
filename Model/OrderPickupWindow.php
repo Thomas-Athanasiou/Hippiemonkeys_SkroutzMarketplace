@@ -41,7 +41,7 @@
         /**
          * @inheritdoc
          */
-        public function setFrom(string $from): OrderPickupWindow
+        public function setFrom(string $from): self
         {
             return $this->setData(ResourceInterface::FIELD_FROM, $from);
         }
@@ -57,7 +57,7 @@
         /**
          * @inheritdoc
          */
-        public function setTo(string $to): OrderPickupWindow
+        public function setTo(string $to): self
         {
             return $this->setData(ResourceInterface::FIELD_TO, $to);
         }

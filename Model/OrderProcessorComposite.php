@@ -37,7 +37,7 @@
         )
         {
             parent::__construct($logger, $config);
-            $this->_orderProcessors = $orderProcessors;
+            $this->orderProcessors = $orderProcessors;
         }
 
         /**
@@ -64,9 +64,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderProcessorInterface[]
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderProcessorInterface[] $orderProcessors
          */
-        private $_orderProcessors;
+        private $orderProcessors;
 
         /**
          * Order Processors
@@ -77,7 +77,7 @@
          */
         protected function getOrderProcessors(): array
         {
-            return $this->_orderProcessors;
+            return $this->orderProcessors;
         }
     }
 ?>

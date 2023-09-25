@@ -7,7 +7,7 @@
      * @link https://github.com/Thomas-Athanasiou
      * @copyright Copyright (c) 2023 Hippiemonkeys Web Intelligence EE All Rights Reserved.
      * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
-     * @package Hippiemonkeys_SkroutzMarketplace
+     * @package HippiemonkeysskroutzMarketplace
      */
 
     declare(strict_types=1);
@@ -43,10 +43,10 @@
             SkroutzMarketplaceInterface $skroutzMarketplace
         )
         {
-            $this->_orderProcessor = $orderProcessor;
-            $this->_orderRepository = $orderRepository;
-            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
-            $this->_skroutzMarketplace = $skroutzMarketplace;
+            $this->orderProcessor = $orderProcessor;
+            $this->orderRepository = $orderRepository;
+            $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+            $this->skroutzMarketplace = $skroutzMarketplace;
         }
 
         /**
@@ -121,7 +121,7 @@
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderProcessorInterface
          */
-        private $_orderProcessor;
+        private $orderProcessor;
 
         /**
          * Order Processor
@@ -132,7 +132,7 @@
          */
         protected function getOrderProcessor(): OrderProcessorInterface
         {
-            return $this->_orderProcessor;
+            return $this->orderProcessor;
         }
 
         /**
@@ -142,7 +142,7 @@
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
          */
-        private $_orderRepository;
+        private $orderRepository;
 
         /**
          * Gets Order Repository
@@ -153,7 +153,7 @@
          */
         protected function getOrderRepository(): OrderRepositoryInterface
         {
-            return $this->_orderRepository;
+            return $this->orderRepository;
         }
 
         /**
@@ -161,9 +161,9 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
-        private $_searchCriteriaBuilder;
+        private $searchCriteriaBuilder;
 
         /**
          * Gets Search Criteria Builder
@@ -174,7 +174,7 @@
          */
         protected function getSearchCriteriaBuilder() : SearchCriteriaBuilder
         {
-            return $this->_searchCriteriaBuilder;
+            return $this->searchCriteriaBuilder;
         }
 
         /**
@@ -182,9 +182,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface $_searchCriteriaBuilder
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface $skroutzMarketplace
          */
-        private $_skroutzMarketplace;
+        private $skroutzMarketplace;
 
         /**
          * Gets Skroutz Marketplace
@@ -195,7 +195,7 @@
          */
         protected function getSkroutzMarketplace() : SkroutzMarketplaceInterface
         {
-            return $this->_skroutzMarketplace;
+            return $this->skroutzMarketplace;
         }
     }
 ?>

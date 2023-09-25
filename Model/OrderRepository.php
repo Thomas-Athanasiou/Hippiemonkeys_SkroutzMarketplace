@@ -22,7 +22,7 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface as SearchResultInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory as SearchsReultInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory as SearchResultInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface as ResourceInterface;
 
@@ -35,18 +35,18 @@
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $_idCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $idCache
              */
-            $_idCache = [],
+            $idCache = [],
 
             /**
              * Magento Order Cache property
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $_magentoOrderCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $magentoOrderCache
              */
-            $_magentoOrderCache = [];
+            $magentoOrderCache = [];
 
         /**
          * Constructor
@@ -54,24 +54,24 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface $resource
-         * @param \Hippiemonkeys\Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory $orderFactory
+         * @param \Hippiemonkeys\Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory $factory
          * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor,
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory $searchResultFactory,
          * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
         public function __construct(
             ResourceInterface $resource,
-            OrderInterfaceFactory $orderFactory,
+            OrderInterfaceFactory $factory,
             CollectionProcessorInterface $collectionProcessor,
-            SearchsReultInterfaceFactory $searchResultFactory,
+            SearchResultInterfaceFactory $searchResultFactory,
             SearchCriteriaBuilder $searchCriteriaBuilder
         )
         {
-            $this->_resource = $resource;
-            $this->_orderFactory = $orderFactory;
-            $this->_collectionProcessor = $collectionProcessor;
-            $this->_searchResultFactory = $searchResultFactory;
-            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+            $this->resource = $resource;
+            $this->factory = $factory;
+            $this->collectionProcessor = $collectionProcessor;
+            $this->searchResultFactory = $searchResultFactory;
+            $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         }
 
         /**
@@ -79,11 +79,11 @@
          */
         public function getByCode(string $code) : OrderInterface
         {
-            $order = $this->getOrderFactory()->create();
+            $order = $this->getFactory()->create();
             $this->getResource()->loadOrderByCode($order, $code);
 
             $id = $order->getId();
-            if (!$id)
+            if ($id === null)
             {
                 throw new NoSuchEntityException(
                     __('The order with code "%1" that was requested doesn\'t exist. Verify the order and try again.', $code)
@@ -94,10 +94,10 @@
                 $magentoOrder = $order->getMagentoOrder();
                 if($magentoOrder !== null)
                 {
-                    $this->_magentoOrderCache[$magentoOrder->getId()] = $order;
+                    $this->magentoOrderCache[$magentoOrder->getId()] = $order;
                 }
 
-                $this->_idCache[$id] = $order;
+                $this->idCache[$id] = $order;
             }
 
             return $order;
@@ -108,12 +108,12 @@
          */
         public function getById($id) : OrderInterface
         {
-            $order = $this->_idCache[$id] ?? null;
+            $order = $this->idCache[$id] ?? null;
             if($order === null)
             {
-                $order = $this->getOrderFactory()->create();
+                $order = $this->getFactory()->create();
                 $this->getResource()->loadOrderById($order, $id);
-                if (!$order->getId())
+                if ($order->getId() === null)
                 {
                     throw new NoSuchEntityException(
                         __('The order with id "%1" that was requested doesn\'t exist. Verify the order and try again.', $id)
@@ -124,10 +124,10 @@
                     $magentoOrder = $order->getMagentoOrder();
                     if($magentoOrder !== null)
                     {
-                        $this->_magentoOrderCache[$magentoOrder->getId()] = $magentoOrder;
+                        $this->magentoOrderCache[$magentoOrder->getId()] = $magentoOrder;
                     }
 
-                    $this->_idCache[$id] = $order;
+                    $this->idCache[$id] = $order;
                 }
             }
 
@@ -140,10 +140,10 @@
         public function getByMagentoOrder(MagentoOrderInterface $magentoOrder) : OrderInterface
         {
             $magentoOrderId = $magentoOrder->getEntityId();
-            $order = $this->_magentoOrderCache[$magentoOrderId] ?? null;
+            $order = $this->magentoOrderCache[$magentoOrderId] ?? null;
             if($order === null)
             {
-                $order = $this->getOrderFactory()->create();
+                $order = $this->getFactory()->create();
                 $this->getResource()->loadOrderByMagentoOrderId($order, $magentoOrderId);
                 $id = $order->getId();
 
@@ -155,8 +155,8 @@
                 }
                 else
                 {
-                    $this->_magentoOrderCache[$magentoOrderId]  = $magentoOrderId;
-                    $this->_idCache[$id] = $order;
+                    $this->magentoOrderCache[$magentoOrderId]  = $magentoOrderId;
+                    $this->idCache[$id] = $order;
                 }
             }
             return $order;
@@ -178,11 +178,11 @@
          */
         public function save(OrderInterface $order) : OrderInterface
         {
-            $this->_idCache[ $order->getId() ] = $order;
+            $this->idCache[$order->getId()] = $order;
             $magentoOrder = $order->getMagentoOrder();
             if($magentoOrder !== null)
             {
-                $this->_magentoOrderCache[$magentoOrder->getEntityId()] = $order;
+                $this->magentoOrderCache[$magentoOrder->getEntityId()] = $order;
             }
             $this->getResource()->saveOrder($order);
             return $order;
@@ -193,11 +193,11 @@
          */
         public function delete(OrderInterface $order) : bool
         {
-            unset( $this->_idCache[ $order->getId() ] );
+            unset($this->idCache[$order->getId()]);
             $magentoOrder = $order->getMagentoOrder();
             if($magentoOrder !== null)
             {
-                unset($this->_magentoOrderCache[$magentoOrder->getEntityId()]);
+                unset($this->magentoOrderCache[$magentoOrder->getEntityId()]);
             }
             return $this->getResource()->deleteOrder($order);
         }
@@ -207,9 +207,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
@@ -220,28 +220,28 @@
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
-         * Order Factory property
+         * Factory property
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory $_orderFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory $factory
          */
-        private $_orderFactory;
+        private $factory;
 
         /**
-         * Gets Order Factory
+         * Gets Factory
          *
          * @access protected
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory
          */
-        protected function getOrderFactory(): OrderInterfaceFactory
+        protected function getFactory(): OrderInterfaceFactory
         {
-            return $this->_orderFactory;
+            return $this->factory;
         }
 
         /**
@@ -249,9 +249,9 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          */
-        private $_collectionProcessor;
+        private $collectionProcessor;
 
         /**
          * Gets Collection Processor
@@ -262,7 +262,7 @@
          */
         protected function getCollectionProcessor() : CollectionProcessorInterface
         {
-            return $this->_collectionProcessor;
+            return $this->collectionProcessor;
         }
 
         /**
@@ -270,9 +270,9 @@
          *
          * @access protected
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory $_searchResultFactory
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory $searchResultFactory
          */
-        private $_searchResultFactory;
+        private $searchResultFactory;
 
         /**
          * Gets Search Result Factory
@@ -281,9 +281,9 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterfaceFactory
          */
-        protected function getSearchResultFactory()
+        protected function getSearchResultFactory(): SearchResultInterfaceFactory
         {
-            return $this->_searchResultFactory;
+            return $this->searchResultFactory;
         }
 
         /**
@@ -291,9 +291,9 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
-        private $_searchCriteriaBuilder;
+        private $searchCriteriaBuilder;
 
         /**
          * Gets Search Criteria Builder
@@ -304,7 +304,7 @@
          */
         protected function getSearchCriteriaBuilder() : SearchCriteriaBuilder
         {
-            return $this->_searchCriteriaBuilder;
+            return $this->searchCriteriaBuilder;
         }
     }
 ?>

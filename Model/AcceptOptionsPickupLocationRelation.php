@@ -61,7 +61,7 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface|null $acceptOptions
          */
         private $acceptOptions;
 
@@ -93,7 +93,7 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface|null $pickupLocation
          */
         private $pickupLocation;
 

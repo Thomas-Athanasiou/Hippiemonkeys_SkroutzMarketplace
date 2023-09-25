@@ -14,7 +14,8 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Magento\Framework\Webapi\ServiceInputProcessor,
+    use Exception,
+        Magento\Framework\Webapi\ServiceInputProcessor,
         Magento\Framework\HTTP\Client\Curl,
         Magento\Framework\Serialize\Serializer\Json as JsonSerializer,
         Hippiemonkeys\Core\Api\Helper\ConfigInterface,
@@ -47,6 +48,7 @@
          * @param \Hippiemonkeys\Core\Api\Helper\ConfigInterface $config
          * @param \Magento\Framework\HTTP\Client\Curl $httpClient
          * @param \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor
+         * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
          */
         public function __construct(
             ConfigInterface $config,
@@ -55,19 +57,19 @@
             JsonSerializer $jsonSerializer
         )
         {
-            $this->_config = $config;
-            $this->_httpClient = $httpClient;
-            $this->_serviceInputProcessor = $serviceInputProcessor;
-            $this->_jsonSerializer = $jsonSerializer;
+            $this->config = $config;
+            $this->httpClient = $httpClient;
+            $this->serviceInputProcessor = $serviceInputProcessor;
+            $this->jsonSerializer = $jsonSerializer;
 
-            $httpClient->setOption(CURLOPT_RETURNTRANSFER, true);
             $httpClient->addHeader('Accept', 'application/vnd.skroutz+json; version=3.0');
             $httpClient->addHeader('Content-Type', 'application/json; charset=utf-8');
-            $httpClient->addHeader('Authorization',  \sprintf(self::TOKEN_FORMAT, $this->getApiToken()));
+            $httpClient->addHeader('Authorization',  sprintf(self::TOKEN_FORMAT, $this->getApiToken()));
         }
 
         /**
          * @inheritdoc
+         * @todo Response
          */
         public function acceptOrder(OrderInterface $order, int $numberOfParcels, PickupLocationInterface $pickupLocation, PickupWindowInterface $pickupWindow): object
         {
@@ -80,11 +82,11 @@
             $response = \json_decode($httpClient->getBody(), false, 512, 0);
 
             $errors = $response->errors ?? [];
-            if(\count($errors) > 0)
+            if(count($errors) > 0)
             {
                 throw new ServiceException(
                     __(
-                        \implode(
+                        implode(
                             '. ',
                             array_map(
                                 function (object $error): string
@@ -98,7 +100,7 @@
                 );
             }
 
-            return \is_object($response) ? $response : new \stdClass();
+            return is_object($response) ? $response : new \stdClass();
         }
 
         /**
@@ -111,10 +113,7 @@
             try
             {
                 $httpClient = $this->getHttpClient();
-                $httpClient->get(
-                    \sprintf(self::GET_ORDER_PATH_FORMAT, $this->getApiHost(), $code),
-                    [],
-                );
+                $httpClient->get(sprintf(self::GET_ORDER_PATH_FORMAT, $this->getApiHost(), $code), []);
 
                 $orderData = $this->getServiceInputProcessor()->process(
                     OrderManagementInterface::class,
@@ -129,7 +128,7 @@
                     $order = $orderData;
                 }
             }
-            catch (\Exception)
+            catch (Exception)
             {
 
             }
@@ -141,10 +140,11 @@
          * Gets Api Host
          *
          * @access protected
+         * @final
          *
          * @return string
          */
-        protected function getApiHost(): string
+        protected final function getApiHost(): string
         {
             return rtrim($this->getConfig()->getData(self::CONF_PATH_API_HOST), '/');
         }
@@ -153,12 +153,13 @@
          * Gets Api Token
          *
          * @access protected
+         * @final
          *
          * @return string
          */
-        protected function getApiToken(): string
+        protected final function getApiToken(): string
         {
-            return rtrim($this->getConfig()->getData(self::CONF_PATH_API_TOKEN), '/');
+            return $this->getConfig()->getData(self::CONF_PATH_API_TOKEN);
         }
 
         /**
@@ -166,9 +167,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\Core\Api\Helper\ConfigInterface $_config
+         * @var \Hippiemonkeys\Core\Api\Helper\ConfigInterface $config
          */
-        private $_config;
+        private $config;
 
         /**
          * Gets Config
@@ -179,7 +180,7 @@
          */
         protected function getConfig(): ConfigInterface
         {
-            return $this->_config;
+            return $this->config;
         }
 
         /**
@@ -187,20 +188,21 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\HTTP\Client\Curl $_httpClient
+         * @var \Magento\Framework\HTTP\Client\Curl $httpClient
          */
-        private $_httpClient;
+        private $httpClient;
 
         /**
          * Gets Config
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Framework\HTTP\Client\Curl
          */
-        protected function getHttpClient(): Curl
+        protected final function getHttpClient(): Curl
         {
-            return $this->_httpClient;
+            return $this->httpClient;
         }
 
         /**
@@ -208,20 +210,21 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Webapi\ServiceInputProcessor $_serviceInputProcessor
+         * @var \Magento\Framework\Webapi\ServiceInputProcessor $serviceInputProcessor
          */
-        private $_serviceInputProcessor;
+        private $serviceInputProcessor;
 
         /**
          * Gets Service Payload Converter
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Framework\Webapi\ServiceInputProcessor
          */
-        protected function getServiceInputProcessor(): ServiceInputProcessor
+        protected final function getServiceInputProcessor(): ServiceInputProcessor
         {
-            return $this->_serviceInputProcessor;
+            return $this->serviceInputProcessor;
         }
 
         /**
@@ -229,20 +232,21 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Serialize\Serializer\Json $_jsonSerializer
+         * @var \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
          */
-        private $_jsonSerializer;
+        private $jsonSerializer;
 
         /**
          * Gets Json Serializer
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Framework\Serialize\Serializer\Json
          */
-        protected function getJsonSerializer(): JsonSerializer
+        protected final function getJsonSerializer(): JsonSerializer
         {
-            return $this->_jsonSerializer;
+            return $this->jsonSerializer;
         }
     }
 ?>

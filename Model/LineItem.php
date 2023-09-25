@@ -27,11 +27,6 @@
     extends AbstractModel
     implements LineItemInterface
     {
-        protected const
-            FIELD_ORDER = 'order',
-            FIELD_PRODUCT = 'product',
-            FIELD_SIZE = 'size';
-
         /**
          * Constructor
          *
@@ -52,8 +47,12 @@
         )
         {
             parent::__construct($context, $registry, $data);
-            $this->_productRepository = $productRepository;
-            $this->_orderRepository = $orderRepository;
+            $this->productRepository = $productRepository;
+            $this->orderRepository = $orderRepository;
+
+            $this->size = null;
+            $this->order = null;
+            $this->product = null;
         }
 
         /**
@@ -67,7 +66,7 @@
         /**
          * @inheritdoc
          */
-        public function setSkroutzId(string $skroutzId): LineItem
+        public function setSkroutzId(string $skroutzId): self
         {
             return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
@@ -83,7 +82,7 @@
         /**
          * @inheritdoc
          */
-        public function setShopUid($uid): LineItem
+        public function setShopUid($uid): self
         {
             return $this->setData(ResourceInterface::FIELD_SHOPUID, $uid);
         }
@@ -91,7 +90,7 @@
         /**
          * @inheritdoc
          */
-        public function getProductName() : string
+        public function getProductName(): string
         {
             return $this->getData(ResourceInterface::FIELD_PRODUCT_NAME);
         }
@@ -99,7 +98,7 @@
         /**
          * @inheritdoc
          */
-        public function setProductName(string $productName): LineItem
+        public function setProductName(string $productName): self
         {
             return $this->setData(ResourceInterface::FIELD_PRODUCT_NAME, $productName);
         }
@@ -107,7 +106,7 @@
         /**
          * @inheritdoc
          */
-        public function getQuantity() : int
+        public function getQuantity(): int
         {
             return (int) $this->getData(ResourceInterface::FIELD_QUANTITY);
         }
@@ -115,7 +114,7 @@
         /**
          * @inheritdoc
          */
-        public function setQuantity(int $quantity): LineItem
+        public function setQuantity(int $quantity): self
         {
             return $this->setData(ResourceInterface::FIELD_QUANTITY, $quantity);
         }
@@ -123,7 +122,7 @@
         /**
          * @inheritdoc
          */
-        public function getUnitPrice() : float
+        public function getUnitPrice(): float
         {
             return (float) $this->getData(ResourceInterface::FIELD_UNIT_PRICE);
         }
@@ -131,7 +130,7 @@
         /**
          * @inheritdoc
          */
-        public function setUnitPrice(float $unitPrice): LineItem
+        public function setUnitPrice(float $unitPrice): self
         {
             return $this->setData(ResourceInterface::FIELD_UNIT_PRICE, $unitPrice);
         }
@@ -139,7 +138,7 @@
         /**
          * @inheritdoc
          */
-        public function getTotalPrice() : float
+        public function getTotalPrice(): float
         {
             return (float) $this->getData(ResourceInterface::FIELD_TOTAL_PRICE);
         }
@@ -147,7 +146,7 @@
         /**
          * @inheritdoc
          */
-        public function setTotalPrice(float $totalPrice): LineItem
+        public function setTotalPrice(float $totalPrice): self
         {
             return $this->setData(ResourceInterface::FIELD_TOTAL_PRICE, $totalPrice);
         }
@@ -155,7 +154,7 @@
         /**
          * @inheritdoc
          */
-        public function getPriceIncludesVat() : bool
+        public function getPriceIncludesVat(): bool
         {
             return (int) $this->getData(ResourceInterface::FIELD_PRICE_INCLUDES_VAT);
         }
@@ -163,7 +162,7 @@
         /**
          * @inheritdoc
          */
-        public function setPriceIncludesVat(bool $priceIncludesVat): LineItem
+        public function setPriceIncludesVat(bool $priceIncludesVat): self
         {
             return $this->setData(ResourceInterface::FIELD_PRICE_INCLUDES_VAT, $priceIncludesVat);
         }
@@ -179,7 +178,7 @@
         /**
          * @inheritdoc
          */
-        public function setIslandVatDiscountApplied(?bool $islandVatDiscountApplied): LineItem
+        public function setIslandVatDiscountApplied(?bool $islandVatDiscountApplied): self
         {
             return $this->setData(ResourceInterface::FIELD_ISLAND_VAT_DISCOUNT_APPLIED, $islandVatDiscountApplied);
         }
@@ -195,7 +194,7 @@
         /**
          * @inheritdoc
          */
-        public function setEan(?string $ean): LineItem
+        public function setEan(?string $ean): self
         {
             return $this->setData(ResourceInterface::FIELD_EAN, $ean);
         }
@@ -207,41 +206,62 @@
         {
             return $this->getData(ResourceInterface::FIELD_EXTRA_INFO);
         }
+
         /**
          * @inheritdoc
          */
-        public function setExtraInfo(?string $extraInfo): LineItem
+        public function setExtraInfo(?string $extraInfo): self
         {
             return $this->setData(ResourceInterface::FIELD_EXTRA_INFO, $extraInfo);
         }
+
+        /**
+         * Size property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
+         */
+        private $size;
 
         /**
          * @inheritdoc
          */
         public function getSize(): ?SizeInterface
         {
-            return $this->getData(static::FIELD_SIZE);
-        }
-        /**
-         * @inheritdoc
-         */
-        public function setSize(?SizeInterface $size): LineItem
-        {
-            return $this->setData(static::FIELD_SIZE, $size);
+            return $this->size;
         }
 
         /**
          * @inheritdoc
          */
-        public function getOrder() : OrderInterface
+        public function setSize(?SizeInterface $size): self
         {
-            $order = $this->getData(static::FIELD_ORDER);
+            $this->size = $size;
+            return $this;
+        }
+
+        /**
+         * Order property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
+         */
+        private $order;
+
+        /**
+         * @inheritdoc
+         */
+        public function getOrder(): OrderInterface
+        {
+            $order = $this->order;
             if ($order === null)
             {
                 $order = $this->getOrderRepository()->getById(
                     $this->getData(ResourceInterface::FIELD_ORDER_ID)
                 );
-                $this->setData(static::FIELD_ORDER, $order);
+                $this->order = $order;
             }
             return $order;
         }
@@ -249,10 +269,10 @@
         /**
          * @inheritdoc
          */
-        public function setOrder(OrderInterface $order): LineItem
+        public function setOrder(OrderInterface $order): self
         {
-            $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
-            return $this->setData(static::FIELD_ORDER, $order);
+            $this->order = $order;
+            return $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
         }
 
         /**
@@ -266,7 +286,7 @@
         /**
          * @inheritdoc
          */
-        public function setRejectionReason(?string $rejectionReason): LineItem
+        public function setRejectionReason(?string $rejectionReason): self
         {
             return $this->setData(ResourceInterface::FIELD_REJECTION_REASON, $rejectionReason);
         }
@@ -282,7 +302,7 @@
         /**
          * @inheritdoc
          */
-        public function setReturnReason(?string $returnReason): LineItem
+        public function setReturnReason(?string $returnReason): self
         {
             return $this->setData(ResourceInterface::FIELD_RETURN_REASON, $returnReason);
         }
@@ -298,7 +318,7 @@
         /**
          * @inheritdoc
          */
-        public function setSerialNumbers(?string $serialNumbers): LineItem
+        public function setSerialNumbers(?string $serialNumbers): self
         {
             return $this->setData(ResourceInterface::FIELD_SERIAL_NUMBERS, $serialNumbers);
         }
@@ -314,24 +334,33 @@
         /**
          * @inheritdoc
          */
-        public function setShopVariationUid(?string $shopVariationUid): LineItem
+        public function setShopVariationUid(?string $shopVariationUid): self
         {
             return $this->setData(ResourceInterface::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
         }
 
         /**
+         * Product property
+         *
+         * @access private
+         *
+         * @var \Magento\Catalog\Api\Data\ProductInterface
+         */
+        private $product;
+
+        /**
          * @inheritdoc
          */
-        function getProduct(): ProductInterface
+        public function getProduct(): ProductInterface
         {
-            $product = $this->getData(static::FIELD_PRODUCT);
+            $product = $this->product;
             if ($product === null)
             {
                 /**TODO: More product ids */
                 $product = $this->getProductRepository()->getById(
                     $this->getShopUid()
                 );
-                $this->setData(static::FIELD_PRODUCT, $product);
+                $this->product = $product;
             }
             return $product;
         }
@@ -339,11 +368,11 @@
         /**
          * @inheritdoc
          */
-        function setProduct(ProductInterface $product): LineItem
+        public function setProduct(ProductInterface $product): self
         {
             /**TODO: More product ids */
-            $this->setShopUid((int) $product->getId());
-            return $this->setData(static::FIELD_PRODUCT, $product);
+            $this->product = $product;
+            return $this->setShopUid((int) $product->getId());
         }
 
         /**
@@ -351,20 +380,21 @@
          *
          * @access private
          *
-         * @var \Magento\Catalog\Api\ProductRepositoryInterface $_productRepository
+         * @var \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
          */
-        private $_productRepository;
+        private $productRepository;
 
         /**
          *  Gets Product Repository
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Catalog\Api\ProductRepositoryInterface
          */
-        protected function getProductRepository(): ProductRepositoryInterface
+        protected final function getProductRepository(): ProductRepositoryInterface
         {
-            return $this->_productRepository;
+            return $this->productRepository;
         }
 
         /**
@@ -372,20 +402,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $_orderRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
          */
-        private $_orderRepository;
+        private $orderRepository;
 
         /**
          * Gets Order Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
          */
-        protected function getOrderRepository(): OrderRepositoryInterface
+        protected final function getOrderRepository(): OrderRepositoryInterface
         {
-            return $this->_orderRepository;
+            return $this->orderRepository;
         }
     }
 ?>

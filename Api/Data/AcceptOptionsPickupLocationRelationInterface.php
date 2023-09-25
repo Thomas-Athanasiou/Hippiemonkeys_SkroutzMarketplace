@@ -37,7 +37,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
          */
         function getAcceptOptions(): AcceptOptionsInterface;
 
@@ -59,7 +59,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface
          */
         function getPickupLocation(): PickupLocationInterface;
 

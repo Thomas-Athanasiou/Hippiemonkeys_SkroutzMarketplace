@@ -35,9 +35,9 @@
          *
          * @access protected
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface $_idCache
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface $idCache
          */
-        protected $_idCache = [];
+        protected $idCache = [];
 
         /**
          * Constructor
@@ -47,22 +47,22 @@
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface  $resource
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory $acceptOptionsPickupWindowRelationFactory
          * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterfaceFactory $searchResulFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterfaceFactory $searchResultFactory
          * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
         public function __construct(
             ResourceInterface $resource,
             AcceptOptionsPickupWindowRelationInterfaceFactory $acceptOptionsPickupWindowRelationFactory,
             CollectionProcessorInterface $collectionProcessor,
-            SearchResultInterfaceFactory $searchResulFactory,
+            SearchResultInterfaceFactory $searchResultFactory,
             SearchCriteriaBuilder $searchCriteriaBuilder
         )
         {
-            $this->_resource = $resource;
-            $this->_acceptOptionsPickupWindowRelationFactory = $acceptOptionsPickupWindowRelationFactory;
-            $this->_collectionProcessor = $collectionProcessor;
-            $this->_searchResultFactory = $searchResulFactory;
-            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+            $this->resource = $resource;
+            $this->acceptOptionsPickupWindowRelationFactory = $acceptOptionsPickupWindowRelationFactory;
+            $this->collectionProcessor = $collectionProcessor;
+            $this->searchResultFactory = $searchResultFactory;
+            $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         }
 
         /**
@@ -70,7 +70,7 @@
          */
         public function getById($id): AcceptOptionsPickupWindowRelationInterface
         {
-            $acceptOptionsPickupWindowRelation = $this->_idCache[$id] ?? null;
+            $acceptOptionsPickupWindowRelation = $this->idCache[$id] ?? null;
             if(!$acceptOptionsPickupWindowRelation)
             {
                 $acceptOptionsPickupWindowRelation = $this->getAcceptOptionsPickupWindowRelationFactory()->create();
@@ -81,7 +81,7 @@
                         __('The relation with id "%1" that was requested doesn\'t exist. Verify the relation and try again.', $id)
                     );
                 }
-                $this->_idCache[$id] = $acceptOptionsPickupWindowRelation;
+                $this->idCache[$id] = $acceptOptionsPickupWindowRelation;
             }
             return $acceptOptionsPickupWindowRelation;
         }
@@ -117,7 +117,7 @@
             }
             else
             {
-                $this->_idCache[$acceptOptionsPickupWindowRelation->getId()] = $acceptOptionsPickupWindowRelation;
+                $this->idCache[$acceptOptionsPickupWindowRelation->getId()] = $acceptOptionsPickupWindowRelation;
             }
 
             return $acceptOptionsPickupWindowRelation;
@@ -140,7 +140,7 @@
         public function save(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation) : AcceptOptionsPickupWindowRelationInterface
         {
             $this->getResource()->saveAcceptOptionsPickupWindowRelation($acceptOptionsPickupWindowRelation);
-            $this->_idCache[ $acceptOptionsPickupWindowRelation->getId() ] = $acceptOptionsPickupWindowRelation;
+            $this->idCache[ $acceptOptionsPickupWindowRelation->getId() ] = $acceptOptionsPickupWindowRelation;
             return $acceptOptionsPickupWindowRelation;
         }
 
@@ -157,9 +157,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
@@ -170,7 +170,7 @@
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
@@ -178,9 +178,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory $_acceptOptionsPickupWindowRelationFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterfaceFactory $acceptOptionsPickupWindowRelationFactory
          */
-        private $_acceptOptionsPickupWindowRelationFactory;
+        private $acceptOptionsPickupWindowRelationFactory;
 
         /**
          * Gets Accept Options Pickup Window Relation Factory
@@ -191,7 +191,7 @@
          */
         protected function getAcceptOptionsPickupWindowRelationFactory() : AcceptOptionsPickupWindowRelationInterfaceFactory
         {
-            return $this->_acceptOptionsPickupWindowRelationFactory;
+            return $this->acceptOptionsPickupWindowRelationFactory;
         }
 
         /**
@@ -199,9 +199,9 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          */
-        private $_collectionProcessor;
+        private $collectionProcessor;
 
         /**
          * Gets Collection Processor
@@ -212,7 +212,7 @@
          */
         protected function getCollectionProcessor() : CollectionProcessorInterface
         {
-            return $this->_collectionProcessor;
+            return $this->collectionProcessor;
         }
 
         /**
@@ -220,9 +220,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterfaceFactory $_searchResultFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterfaceFactory $searchResultFactory
          */
-        private $_searchResultFactory;
+        private $searchResultFactory;
 
         /**
          * Gets Search Result Factory
@@ -233,7 +233,7 @@
          */
         protected function getSearchResultFactory(): SearchResultInterfaceFactory
         {
-            return $this->_searchResultFactory;
+            return $this->searchResultFactory;
         }
 
         /**
@@ -241,9 +241,9 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
-        private $_searchCriteriaBuilder;
+        private $searchCriteriaBuilder;
 
         /**
          * Gets Search Criteria Builder
@@ -254,7 +254,7 @@
          */
         protected function getSearchCriteriaBuilder() : SearchCriteriaBuilder
         {
-            return $this->_searchCriteriaBuilder;
+            return $this->searchCriteriaBuilder;
         }
     }
 ?>

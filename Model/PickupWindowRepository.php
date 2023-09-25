@@ -29,26 +29,26 @@
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $_idCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $idCache
              */
-            $_idCache = [],
+            $idCache = [],
 
             /**
              * Skroutz Id Cache property
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $_skroutzIdCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $skroutzIdCache
              */
-            $_skroutzIdCache = [];
+            $skroutzIdCache = [];
 
         public function __construct(
             ResourceInterface $resource,
-            PickupWindowInterfaceFactory $pickupWindowFactory
+            PickupWindowInterfaceFactory $factory
         )
         {
-            $this->_resource = $resource;
-            $this->_pickupWindowFactory = $pickupWindowFactory;
+            $this->resource = $resource;
+            $this->factory = $factory;
         }
 
         /**
@@ -56,10 +56,10 @@
          */
         public function getById(int $id) : PickupWindowInterface
         {
-            $pickupWindow = $this->_idCache[$id] ?? null;
+            $pickupWindow = $this->idCache[$id] ?? null;
             if($pickupWindow === null)
             {
-                $pickupWindow = $this->getPickupWindowFactory()->create();
+                $pickupWindow = $this->getFactory()->create();
                 $this->getResource()->loadPickupWindowById($pickupWindow, $id, ResourceInterface::FIELD_ID);
                 if ($pickupWindow->getId() === null)
                 {
@@ -69,8 +69,8 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $pickupWindow;
-                    $this->_skroutzIdCache[$pickupWindow->getBySkroutzId()] = $pickupWindow;
+                    $this->idCache[$id] = $pickupWindow;
+                    $this->skroutzIdCache[$pickupWindow->getBySkroutzId()] = $pickupWindow;
                 }
             }
 
@@ -82,10 +82,10 @@
          */
         public function getBySkroutzId(int $skroutzId) : PickupWindowInterface
         {
-            $pickupWindow = $this->_skroutzIdCache[$skroutzId] ?? null;
+            $pickupWindow = $this->skroutzIdCache[$skroutzId] ?? null;
             if($pickupWindow === null)
             {
-                $pickupWindow = $this->getPickupWindowFactory()->create();
+                $pickupWindow = $this->getFactory()->create();
                 $this->getResource()->loadPickupWindowBySkroutzId($pickupWindow, $skroutzId);
                 $id = $pickupWindow->getId();
                 if ($id === null)
@@ -96,8 +96,8 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $pickupWindow;
-                    $this->_skroutzIdCache[$skroutzId] = $pickupWindow;
+                    $this->idCache[$id] = $pickupWindow;
+                    $this->skroutzIdCache[$skroutzId] = $pickupWindow;
                 }
             }
             return $pickupWindow;
@@ -109,8 +109,8 @@
         public function save(PickupWindowInterface $pickupWindow) : PickupWindowInterface
         {
             $this->getResource()->savePickupWindow($pickupWindow);
-            $this->_skroutzIdCache[$pickupWindow->getSkroutzId()] = $pickupWindow;
-            $this->_idCache[$pickupWindow->getId()] = $pickupWindow;
+            $this->skroutzIdCache[$pickupWindow->getSkroutzId()] = $pickupWindow;
+            $this->idCache[$pickupWindow->getId()] = $pickupWindow;
             return $pickupWindow;
         }
 
@@ -119,8 +119,8 @@
          */
         public function delete(PickupWindowInterface $pickupWindow) : bool
         {
-            unset($this->_idCache[$pickupWindow->getId()]);
-            unset($this->_skroutzIdCache[$pickupWindow->getSkroutzId()]);
+            unset($this->idCache[$pickupWindow->getId()]);
+            unset($this->skroutzIdCache[$pickupWindow->getSkroutzId()]);
             return $this->getResource()->deletePickupWindow($pickupWindow);
         }
 
@@ -129,9 +129,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupWindowResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
@@ -142,7 +142,7 @@
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
@@ -150,9 +150,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterfaceFactory $_pickupWindowFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterfaceFactory $factory
          */
-        private $_pickupWindowFactory;
+        private $factory;
 
         /**
          * Gets Pickup Window Factory
@@ -161,9 +161,9 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterfaceFactory
          */
-        protected function getPickupWindowFactory() : PickupWindowInterfaceFactory
+        protected function getFactory() : PickupWindowInterfaceFactory
         {
-            return $this->_pickupWindowFactory;
+            return $this->factory;
         }
     }
 ?>

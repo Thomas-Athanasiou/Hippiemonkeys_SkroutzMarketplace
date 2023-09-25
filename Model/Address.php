@@ -33,7 +33,7 @@
         /**
          * @inheritdoc
          */
-        public function setStreetName(string $streetName): Address
+        public function setStreetName(string $streetName): self
         {
             return $this->setData(ResourceInterface::FIELD_STREET_NAME, $streetName);
         }
@@ -49,7 +49,7 @@
         /**
          * @inheritdoc
          */
-        public function setStreetNumber(string $streetNumber): Address
+        public function setStreetNumber(string $streetNumber): self
         {
             return $this->setData(ResourceInterface::FIELD_STREET_NUMBER, $streetNumber);
         }
@@ -65,7 +65,7 @@
         /**
          * @inheritdoc
          */
-        public function setZip(string $zip): Address
+        public function setZip(string $zip): self
         {
             return $this->setData(ResourceInterface::FIELD_ZIP, $zip);
         }
@@ -73,7 +73,7 @@
         /**
          * @inheritdoc
          */
-        function getCity() : string
+        public function getCity() : string
         {
             return $this->getData(ResourceInterface::FIELD_CITY);
         }
@@ -81,7 +81,7 @@
         /**
          * @inheritdoc
          */
-        function setCity(string $city): Address
+        public function setCity(string $city): self
         {
             return $this->setData(ResourceInterface::FIELD_CITY, $city);
         }
@@ -97,7 +97,7 @@
         /**
          * @inheritdoc
          */
-        public function setRegion(string $region): Address
+        public function setRegion(string $region): self
         {
             return $this->setData(ResourceInterface::FIELD_REGION, $region);
         }
@@ -113,7 +113,7 @@
         /**
          * @inheritdoc
          */
-        public function setCountryCode(string $countryCode): Address
+        public function setCountryCode(string $countryCode): self
         {
             return $this->setData(ResourceInterface::FIELD_COUNTRY_CODE, $countryCode);
         }
@@ -129,7 +129,7 @@
         /**
          * @inheritdoc
          */
-        public function setPickupFromCollectionPoint($pickupFromCollectionPoint): Address
+        public function setPickupFromCollectionPoint($pickupFromCollectionPoint): self
         {
             return $this->setData(ResourceInterface::FIELD_PICKUP_FROM_COLLECTION_POINT, $pickupFromCollectionPoint);
         }
@@ -145,7 +145,7 @@
         /**
          * @inheritdoc
          */
-        public function setCollectionPointAddress(?string $collectionPointAddress): Address
+        public function setCollectionPointAddress(?string $collectionPointAddress): self
         {
             return $this->setData(ResourceInterface::FIELD_COLLECTION_POINT_ADDRESS, $collectionPointAddress);
         }

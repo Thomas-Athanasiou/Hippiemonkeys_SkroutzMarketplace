@@ -39,16 +39,6 @@
     extends AbstractModel
     implements OrderInterface
     {
-        protected const
-            FIELD_CUSTOMER = 'customer',
-            FIELD_INVOICE_DETAILS = 'invoice_details',
-            FIELD_LINE_ITEMS = 'line_items',
-            FIELD_ACCEPT_OPTIONS = 'accept_options',
-            FIELD_REJECT_OPTIONS = 'reject_options',
-            FIELD_REJECTION_INFO = 'rejection_info',
-            FIELD_PICKUP_WINDOW = 'pickup_window',
-            FIELD_MAGENTO_ORDER = 'magento_order';
-
         /**
          * Constructor
          *
@@ -82,13 +72,20 @@
         {
             parent::__construct($context, $registry, $data);
 
-            $this->_customerRepository = $customerRepository;
-            $this->_invoiceDetailsRepository = $invoiceDetailsRepository;
-            $this->_lineItemRepository = $lineItemRepository;
-            $this->_acceptOptionsRepository = $acceptOptionsRepository;
-            $this->_rejectOptionsRepository = $rejectOptionsRepository;
-            $this->_magentoOrderRepository = $magentoOrderRepository;
-            $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+            $this->customerRepository = $customerRepository;
+            $this->invoiceDetailsRepository = $invoiceDetailsRepository;
+            $this->lineItemRepository = $lineItemRepository;
+            $this->acceptOptionsRepository = $acceptOptionsRepository;
+            $this->rejectOptionsRepository = $rejectOptionsRepository;
+            $this->magentoOrderRepository = $magentoOrderRepository;
+            $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+
+            $this->customer = null;
+            $this->invoiceDetails = null;
+            $this->lineItem = null;
+            $this->acceptOptions = null;
+            $this->rejectOptions = null;
+            $this->magentoOrder = null;
         }
 
         /**
@@ -102,7 +99,7 @@
         /**
          * @inheritdoc
          */
-        public function setCode(string $code): Order
+        public function setCode(string $code): self
         {
             return $this->setData(ResourceInterface::FIELD_CODE, $code);
         }
@@ -118,22 +115,34 @@
         /**
          * @inheritdoc
          */
-        public function setState(string $state): Order
+        public function setState(string $state): self
         {
             return $this->setData(ResourceInterface::FIELD_STATE, $state);
         }
+
+        /**
+         * Customer property
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface|null $customer
+         */
+        private $customer;
 
         /**
          * @inheritdoc
          */
         public function getCustomer(): ?CustomerInterface
         {
-            $customer   = $this->getData(static::FIELD_CUSTOMER);
-            $customerId = $this->getData(ResourceInterface::FIELD_CUSTOMER_ID);
-            if (!$customer && $customerId)
+            $customer = $this->customer;
+            if($customer === null)
             {
-                $customer = $this->getCustomerRepository()->getById($customerId);
-                $this->setCustomer($customer);
+                $customerId = $this->getData(ResourceInterface::FIELD_CUSTOMER_ID);
+                if ($customerId !== null)
+                {
+                    $customer = $this->getCustomerRepository()->getById($customerId);
+                    $this->customer = $customer;
+                }
             }
             return $customer;
         }
@@ -141,23 +150,36 @@
         /**
          * @inheritdoc
          */
-        public function setCustomer(?CustomerInterface $customer): Order
+        public function setCustomer(?CustomerInterface $customer): self
         {
-            $this->setData(ResourceInterface::FIELD_CUSTOMER_ID, $customer ? $customer->getId() : null);
-            return $this->setData(static::FIELD_CUSTOMER, $customer);
+            $this->customer = $customer;
+            return $this->setData(ResourceInterface::FIELD_CUSTOMER_ID, $customer ? $customer->getId() : null);
         }
+
+        /**
+         * Invoice Details property
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface|null $invoiceDetails
+         */
+        private $invoiceDetails;
 
         /**
          * @inheritdoc
          */
         public function getInvoiceDetails(): ?InvoiceDetailsInterface
         {
-            $invoiceDetails = $this->getData(static::FIELD_INVOICE_DETAILS);
-            $invoiceDetailsId = $this->getData(ResourceInterface::FIELD_INVOICE_DETAILS_ID);
-            if (!$invoiceDetails && $invoiceDetailsId)
+
+            $invoiceDetails = $this->invoiceDetails;
+            if($invoiceDetails === null)
             {
-                $invoiceDetails = $this->getInvoiceDetailsRepository()->getById($invoiceDetailsId);
-                $this->setInvoiceDetails($invoiceDetails);
+                $invoiceDetailsId = $this->getData(ResourceInterface::FIELD_INVOICE_DETAILS_ID);
+                if ($invoiceDetailsId !== null)
+                {
+                    $invoiceDetails = $this->getInvoiceDetailsRepository()->getById($invoiceDetailsId);
+                    $this->invoiceDetails = $invoiceDetails;
+                }
             }
             return $invoiceDetails;
         }
@@ -165,10 +187,10 @@
         /**
          * @inheritdoc
          */
-        public function setInvoiceDetails(?InvoiceDetailsInterface $invoiceDetails): Order
+        public function setInvoiceDetails(?InvoiceDetailsInterface $invoiceDetails): self
         {
-            $this->setData(ResourceInterface::FIELD_INVOICE_DETAILS_ID, $invoiceDetails ? $invoiceDetails->getId() : null);
-            return $this->setData(static::FIELD_INVOICE_DETAILS, $invoiceDetails);
+            $this->invoiceDetails = $invoiceDetails;
+            return $this->setData(ResourceInterface::FIELD_INVOICE_DETAILS_ID, $invoiceDetails ? $invoiceDetails->getId() : null);
         }
 
         /**
@@ -182,7 +204,7 @@
         /**
          * @inheritdoc
          */
-        public function setInvoice(bool $invoice): Order
+        public function setInvoice(bool $invoice): self
         {
             return $this->setData(ResourceInterface::FIELD_INVOICE, $invoice);
         }
@@ -198,7 +220,7 @@
         /**
          * @inheritdoc
          */
-        public function setComments(?string $comments): Order
+        public function setComments(?string $comments): self
         {
             return $this->setData(ResourceInterface::FIELD_COMMENTS, $comments);
         }
@@ -226,7 +248,7 @@
         /**
          * @inheritdoc
          */
-        public function setLineItems(array $lineItems): Order
+        public function setLineItems(array $lineItems): self
         {
             return $this->setData(static::FIELD_LINE_ITEMS, $lineItems);
         }
@@ -242,7 +264,7 @@
         /**
          * @inheritdoc
          */
-        public function setCourier(string $courier): Order
+        public function setCourier(string $courier): self
         {
             return $this->setData(ResourceInterface::FIELD_COURIER, $courier);
         }
@@ -258,7 +280,7 @@
         /**
          * @inheritdoc
          */
-        public function setCourierVoucher(?string $courierVoucher): Order
+        public function setCourierVoucher(?string $courierVoucher): self
         {
             return $this->setData(ResourceInterface::FIELD_COURIER_VOUCHER, $courierVoucher);
         }
@@ -274,7 +296,7 @@
         /**
          * @inheritdoc
          */
-        public function setCourierTrackingCodes(array $courierTrackingCodes): Order
+        public function setCourierTrackingCodes(array $courierTrackingCodes): self
         {
             return $this->setData(ResourceInterface::FIELD_COURIER_TRACKING_CODES, $courierTrackingCodes);
         }
@@ -290,7 +312,7 @@
         /**
          * @inheritdoc
          */
-        public function setCreatedAt(string $createdAt): Order
+        public function setCreatedAt(string $createdAt): self
         {
             return $this->setData(ResourceInterface::FIELD_CREATED_AT, $createdAt);
         }
@@ -306,7 +328,7 @@
         /**
          * @inheritdoc
          */
-        public function setExpiresAt(string $expiresAt): Order
+        public function setExpiresAt(string $expiresAt): self
         {
             return $this->setData(ResourceInterface::FIELD_EXPIRES_AT, $expiresAt);
         }
@@ -322,7 +344,7 @@
         /**
          * @inheritdoc
          */
-        public function setDispatchUntil(string $dispatchUntil): Order
+        public function setDispatchUntil(string $dispatchUntil): self
         {
             return $this->setData(ResourceInterface::FIELD_DISPATCH_UNTIL, $dispatchUntil);
         }
@@ -345,7 +367,7 @@
         /**
          * @inheritdoc
          */
-        public function setRejectionInfo(?RejectionInfoInterface $rejectionInfo): Order
+        public function setRejectionInfo(?RejectionInfoInterface $rejectionInfo): self
         {
             $this->setData(ResourceInterface::FIELD_REJECTION_INFO_ID, $rejectionInfo ? $rejectionInfo->getId() : null);
             return $this->setData(static::FIELD_REJECTION_INFO, $rejectionInfo);
@@ -369,7 +391,7 @@
         /**
          * @inheritdoc
          */
-        public function setAcceptOptions(?AcceptOptionsInterface $acceptOptions): Order
+        public function setAcceptOptions(?AcceptOptionsInterface $acceptOptions): self
         {
             $acceptOptions->setOrder($this);
             $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
@@ -394,7 +416,7 @@
         /**
          * @inheritdoc
          */
-        public function setRejectOptions(?RejectOptionsInterface $rejectOptions): Order
+        public function setRejectOptions(?RejectOptionsInterface $rejectOptions): self
         {
             $rejectOptions->setOrder($this);
             $this->setData(ResourceInterface::FIELD_REJECT_OPTIONS_ID, $rejectOptions->getId());
@@ -419,7 +441,7 @@
         /**
          * @inheritdoc
          */
-        public function setMagentoOrder(?MagentoOrderInterface $magentoOrder): Order
+        public function setMagentoOrder(?MagentoOrderInterface $magentoOrder): self
         {
             $this->setData(ResourceInterface::FIELD_MAGENTO_ORDER_ID, $magentoOrder ? $magentoOrder->getEntityId() : null);
             return $this->setData(static::FIELD_MAGENTO_ORDER, $magentoOrder);
@@ -436,7 +458,7 @@
         /**
          * @inheritdoc
          */
-        public function setExpress(bool $express): Order
+        public function setExpress(bool $express): self
         {
             return $this->setData(ResourceInterface::FIELD_EXPRESS, (string) $express);
         }
@@ -452,7 +474,7 @@
         /**
          * @inheritdoc
          */
-        public function setCustom(bool $custom): Order
+        public function setCustom(bool $custom): self
         {
             return $this->setData(ResourceInterface::FIELD_CUSTOM, (string) $custom);
         }
@@ -468,7 +490,7 @@
         /**
          * @inheritdoc
          */
-        public function setGiftWrap(bool $giftWrap): Order
+        public function setGiftWrap(bool $giftWrap): self
         {
             return $this->setData(ResourceInterface::FIELD_GIFT_WRAP, (string) $giftWrap);
         }
@@ -484,7 +506,7 @@
         /**
          * @inheritdoc
          */
-        public function setFulfilledBySkroutz(bool $fulfilledBySkroutz): Order
+        public function setFulfilledBySkroutz(bool $fulfilledBySkroutz): self
         {
             return $this->setData(ResourceInterface::FIELD_FULFILLED_BY_SKROUTZ, $fulfilledBySkroutz);
         }
@@ -500,7 +522,7 @@
         /**
          * @inheritdoc
          */
-        public function setFbsDeliveryNote(?string $fbsDeliveryNote): Order
+        public function setFbsDeliveryNote(?string $fbsDeliveryNote): self
         {
             return $this->setData(ResourceInterface::FIELD_FBS_DELIVERY_NOTE, $fbsDeliveryNote);
         }
@@ -516,7 +538,7 @@
         /**
          * @inheritdoc
          */
-        public function setStorePickup(bool $storePickup): Order
+        public function setStorePickup(bool $storePickup): self
         {
             return $this->setData(ResourceInterface::FIELD_STORE_PICKUP, $storePickup);
         }
@@ -539,7 +561,7 @@
         /**
          * @inheritdoc
          */
-        public function setPickupWindow(?OrderPickupWindowInterface $pickupWindow): Order
+        public function setPickupWindow(?OrderPickupWindowInterface $pickupWindow): self
         {
             $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindow ? $pickupWindow->getId() : null);
             return $this->setData(static::FIELD_PICKUP_WINDOW, $pickupWindow);
@@ -556,7 +578,7 @@
         /**
          * @inheritdoc
          */
-        public function setPickupAddress(?string $pickupAddress): Order
+        public function setPickupAddress(?string $pickupAddress): self
         {
             return $this->setData(ResourceInterface::FIELD_PICKUP_ADDRESS, $pickupAddress);
         }
@@ -572,7 +594,7 @@
         /**
          * @inheritdoc
          */
-        public function setNumberOfParcels(?int $numberOfParcels): Order
+        public function setNumberOfParcels(?int $numberOfParcels): self
         {
             return $this->setData(ResourceInterface::FIELD_NUMBER_OF_PARCELS, (string) $numberOfParcels);
         }
@@ -582,9 +604,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface $_customerRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface $customerRepository
          */
-        private $_customerRepository;
+        private $customerRepository;
 
         /**
          * Gets Customer Repository
@@ -595,7 +617,7 @@
          */
         protected function getCustomerRepository(): CustomerRepositoryInterface
         {
-            return $this->_customerRepository;
+            return $this->customerRepository;
         }
 
         /**
@@ -603,9 +625,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface $_invoiceDetailsRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface $invoiceDetailsRepository
          */
-        private $_invoiceDetailsRepository;
+        private $invoiceDetailsRepository;
 
         /**
          * Gets Invoice Details
@@ -616,7 +638,7 @@
          */
         protected function getInvoiceDetailsRepository(): InvoiceDetailsRepositoryInterface
         {
-            return $this->_invoiceDetailsRepository;
+            return $this->invoiceDetailsRepository;
         }
 
         /**
@@ -624,9 +646,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $_lineItemRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $lineItemRepository
          */
-        private $_lineItemRepository;
+        private $lineItemRepository;
 
         /**
          * Gets Line Item Repository
@@ -637,7 +659,7 @@
          */
         protected function getLineItemRepository(): LineItemRepositoryInterface
         {
-            return $this->_lineItemRepository;
+            return $this->lineItemRepository;
         }
 
         /**
@@ -645,9 +667,9 @@
          *
          * @access private
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $_acceptOptionsRepository
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
          */
-        private $_acceptOptionsRepository;
+        private $acceptOptionsRepository;
 
         /**
          * Gets Accept Options Repository
@@ -658,7 +680,7 @@
          */
         protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
-            return $this->_acceptOptionsRepository;
+            return $this->acceptOptionsRepository;
         }
 
         /**
@@ -666,9 +688,9 @@
          *
          * @access private
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface $_rejectOptionsRepository
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface $rejectOptionsRepository
          */
-        private $_rejectOptionsRepository;
+        private $rejectOptionsRepository;
 
         /**
          * Gets Reject Options Repository
@@ -679,7 +701,7 @@
          */
         protected function getRejectOptionsRepository(): RejectOptionsRepositoryInterface
         {
-            return $this->_rejectOptionsRepository;
+            return $this->rejectOptionsRepository;
         }
 
         /**
@@ -687,9 +709,9 @@
          *
          * @access private
          *
-         * @var \Magento\Sales\Api\OrderRepositoryInterface $_magentoOrderRepository
+         * @var \Magento\Sales\Api\OrderRepositoryInterface $magentoOrderRepository
          */
-        private $_magentoOrderRepository;
+        private $magentoOrderRepository;
 
         /**
          * Gets Magento Order Repository
@@ -700,7 +722,7 @@
          */
         protected function getMagentoOrderRepository(): MagentoOrderRepositoryInterface
         {
-            return $this->_magentoOrderRepository;
+            return $this->magentoOrderRepository;
         }
 
         /**
@@ -708,9 +730,9 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteriaBuilder $_searchCriteriaBuilder
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          */
-        private $_searchCriteriaBuilder;
+        private $searchCriteriaBuilder;
 
         /**
          * Gets Search Criteria Builder
@@ -721,7 +743,7 @@
          */
         protected function getSearchCriteriaBuilder(): SearchCriteriaBuilder
         {
-            return $this->_searchCriteriaBuilder;
+            return $this->searchCriteriaBuilder;
         }
     }
 ?>

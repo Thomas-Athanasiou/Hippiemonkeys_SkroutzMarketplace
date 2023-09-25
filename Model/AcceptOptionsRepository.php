@@ -30,18 +30,18 @@
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $_idCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $idCache
              */
-            $_idCache = [],
+            $idCache = [],
 
             /**
              * Order Id Cache property
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $_orderIdCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $orderIdCache
              */
-            $_orderIdCache  = [];
+            $orderIdCache  = [];
 
         /**
          * Constructor
@@ -49,15 +49,15 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface $resource
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory $acceptOptionsFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory $factory
          */
         public function __construct(
             ResourceInterface $resource,
-            AcceptOptionsInterfaceFactory $acceptOptionsFactory
+            AcceptOptionsInterfaceFactory $factory
         )
         {
-            $this->_resource = $resource;
-            $this->_acceptOptionsFactory = $acceptOptionsFactory;
+            $this->resource = $resource;
+            $this->factory = $factory;
         }
 
         /**
@@ -65,11 +65,11 @@
          */
         public function getById($id): AcceptOptionsInterface
         {
-            $acceptOptions = $this->_idCache[$id] ?? null;
+            $acceptOptions = $this->idCache[$id] ?? null;
 
             if($acceptOptions === null)
             {
-                $acceptOptions = $this->getAcceptOptionsFactory()->create();
+                $acceptOptions = $this->getFactory()->create();
                 $this->getResource()->loadAcceptOptionsById($acceptOptions, $id);
                 if ($acceptOptions->getId() === null)
                 {
@@ -79,8 +79,8 @@
                 }
                 else
                 {
-                    $this->_orderIdCache[$acceptOptions->getOrder()->getId()] = $acceptOptions;
-                    $this->_idCache[$id] = $acceptOptions;
+                    $this->orderIdCache[$acceptOptions->getOrder()->getId()] = $acceptOptions;
+                    $this->idCache[$id] = $acceptOptions;
                 }
             }
 
@@ -93,10 +93,10 @@
         public function getByOrder(OrderInterface $order): AcceptOptionsInterface
         {
             $orderId = $order->getId();
-            $acceptOptions = $this->_orderIdCache[$orderId] ?? null;
+            $acceptOptions = $this->orderIdCache[$orderId] ?? null;
             if($acceptOptions === null)
             {
-                $acceptOptions = $this->getAcceptOptionsFactory()->create();
+                $acceptOptions = $this->getFactory()->create();
                 $this->getResource()->loadAcceptOptionsByOrderId($acceptOptions, $orderId);
                 $id = $acceptOptions->getId();
                 if ($id === null)
@@ -107,8 +107,8 @@
                 }
                 else
                 {
-                    $this->_orderIdCache[$orderId] = $acceptOptions;
-                    $this->_idCache[$id] = $acceptOptions;
+                    $this->orderIdCache[$orderId] = $acceptOptions;
+                    $this->idCache[$id] = $acceptOptions;
                 }
             }
             return $acceptOptions;
@@ -120,7 +120,7 @@
         public function save(AcceptOptionsInterface $acceptOptions): AcceptOptionsInterface
         {
             $this->getResource()->saveAcceptOptions($acceptOptions);
-            $this->_idCache[$acceptOptions->getId()] = $acceptOptions;
+            $this->idCache[$acceptOptions->getId()] = $acceptOptions;
             return $acceptOptions;
         }
 
@@ -129,8 +129,8 @@
          */
         public function delete(AcceptOptionsInterface $acceptOptions): bool
         {
-            unset($this->_orderIdCache[$acceptOptions->getOrder()->getId()]);
-            unset($this->_idCache[$acceptOptions->getId()]);
+            unset($this->orderIdCache[$acceptOptions->getOrder()->getId()]);
+            unset($this->idCache[$acceptOptions->getId()]);
             return $this->getResource()->deleteAcceptOptions($acceptOptions);
         }
 
@@ -139,9 +139,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
@@ -150,30 +150,30 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface
          */
-        protected function getResource(): ResourceInterface
+        protected final function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
-         * Gets Accept Options Factory
+         * Factory property
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory $_acceptOptionsFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory $factory
          */
-        private $_acceptOptionsFactory;
+        private $factory;
 
         /**
-         * Accept Options Factory property
+         * Gets Factory
          *
          * @access protected
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory
          */
-        protected function getAcceptOptionsFactory() : AcceptOptionsInterfaceFactory
+        protected final function getFactory() : AcceptOptionsInterfaceFactory
         {
-            return $this->_acceptOptionsFactory;
+            return $this->factory;
         }
     }
 ?>

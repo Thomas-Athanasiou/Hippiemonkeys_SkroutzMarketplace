@@ -17,7 +17,7 @@
     use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory as Factory,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface as ResourceInterface;
 
     class CustomerRepository
@@ -29,15 +29,15 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface $resource
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory $customerFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory $factory
          */
         public function __construct(
             ResourceInterface $resource,
-            CustomerInterfaceFactory $customerFactory
+            CustomerInterfaceFactory $factory
         )
         {
-            $this->_resource = $resource;
-            $this->_customerFactory = $customerFactory;
+            $this->resource = $resource;
+            $this->factory = $factory;
         }
 
         /**
@@ -45,7 +45,7 @@
          */
         public function getById(int $id) : CustomerInterface
         {
-            $customer = $this->getCustomerFactory()->create();
+            $customer = $this->getFactory()->create();
             $this->getResource()->loadCustomerById($customer, $id);
             if ($customer->getId() === null)
             {
@@ -61,7 +61,7 @@
          */
         public function getBySkroutzId(string $skroutzId) : CustomerInterface
         {
-            $customer = $this->getCustomerFactory()->create();
+            $customer = $this->getFactory()->create();
             $this->getResource()->loadCustomerBySkroutzId($customer, $skroutzId);
             if ($customer->getId() === null)
             {
@@ -94,9 +94,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
@@ -107,28 +107,28 @@
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
-         * Customer Factory property
+         * Factory property
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory $_customerFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory $factory
          */
-        private $_customerFactory;
+        private $factory;
 
         /**
-         * Gets Customer Factory
+         * Gets Factory
          *
          * @access protected
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory
          */
-        protected function getCustomerFactory() : CustomerInterfaceFactory
+        protected function getFactory() : CustomerInterfaceFactory
         {
-            return $this->_customerFactory;
+            return $this->factory;
         }
     }
 ?>

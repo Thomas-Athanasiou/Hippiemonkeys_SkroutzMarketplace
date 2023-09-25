@@ -23,16 +23,18 @@
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface as ResourceInterface;
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface as ResourceInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupLocationRelationResourceInterface;
 
     class AcceptOptions
     extends AbstractModel
     implements AcceptOptionsInterface
     {
-        public const
-            ACCEPT_OPTIONS_PICKUP_LOCATION_RELATION_FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
-            ACCEPT_OPTIONS_PICKUP_WINDOW_RELATION_FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id';
-
         /**
          * Constructor
          *
@@ -64,41 +66,39 @@
             $this->searchCriteriaBuilder = $searchCriteriaBuilder;
 
             $this->order = null;
+            $this->pickupLocation = null;
+            $this->pickupWindow = null;
         }
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function getNumberOfParcels() : array
+        public function getNumberOfParcels() : array
         {
             return explode(';', $this->getData(ResourceInterface::FIELD_NUMBER_OF_PARCELS));
         }
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function setNumberOfParcels(array $numberOfParcels): AcceptOptions
+        public function setNumberOfParcels(array $numberOfParcels): self
         {
             return $this->setData(ResourceInterface::FIELD_NUMBER_OF_PARCELS, implode(';', $numberOfParcels));
         }
-
 
         /**
          * Order Property
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface|null $order
          */
         private $order;
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function getOrder(): OrderInterface
+        public function getOrder(): OrderInterface
         {
             $order = $this->order;
             if ($order === null)
@@ -111,84 +111,99 @@
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function setOrder(OrderInterface $order): AcceptOptions
+        public function setOrder(OrderInterface $order): self
         {
             $this->order = $order;
             return $this->setData(ResourceInterface::FIELD_ORDER_ID, $order->getId());
         }
 
         /**
-         * @inheritdoc
-         * @final
+         * Pickup Location property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] $pickupLocation
          */
-        public final function getPickupLocation(): array
+        private $pickupLocation;
+
+        /**
+         * @inheritdoc
+         */
+        public function getPickupLocation(): array
         {
-            $pickupLocation = $this->getData(ResourceInterface::FIELD_PICKUP_LOCATION);
+            $pickupLocation = $this->pickupLocation;
             if ($pickupLocation === null)
             {
-                $pickupLocation = [];
-                $acceptOptionsPickupLocationRelations = $this->getAcceptOptionsPickupLocationRelationRepository()
-                    ->getList(
-                        $this->getSearchCriteriaBuilder()
-                            ->addFilter(self::ACCEPT_OPTIONS_PICKUP_LOCATION_RELATION_FIELD_ACCEPT_OPTIONS_ID, $this->getId())
-                            ->create()
-                    )
-                    ->getItems();
-
-                foreach($acceptOptionsPickupLocationRelations as $acceptOptionsPickupLocationRelation)
-                {
-                    $pickupLocation[] = $acceptOptionsPickupLocationRelation->getPickupLocation();
-                }
-                $this->setPickupLocation($pickupLocation);
+                $pickupLocation = array_map(
+                    function(AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation): PickupLocationInterface
+                    {
+                        return $acceptOptionsPickupLocationRelation->getPickupLocation();
+                    },
+                    $this->getAcceptOptionsPickupLocationRelationRepository()
+                        ->getList(
+                            $this->getSearchCriteriaBuilder()
+                                ->addFilter(AcceptOptionsPickupLocationRelationResourceInterface::FIELD_ID, $this->getId())
+                                ->create()
+                        )
+                        ->getItems()
+                );
+                $this->pickupLocation = $pickupLocation;
             }
             return $pickupLocation;
         }
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function setPickupLocation(array $pickupLocation): AcceptOptions
+        public function setPickupLocation(array $pickupLocation): self
         {
-            return $this->setData(ResourceInterface::FIELD_PICKUP_LOCATION, $pickupLocation);
+            $this->pickupLocation = $pickupLocation;
+            return $this;
         }
 
         /**
-         * @inheritdoc
-         * @final
+         * Pickup Window property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $pickupWindow
          */
-        public final function getPickupWindow(): array
-        {
-            $pickupWindow = $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW);
-            if (!$pickupWindow)
-            {
-                $pickupWindow = [];
-                $acceptOptionsPickupWindowRelations = $this->getAcceptOptionsPickupWindowRelationRepository()
-                    ->getList(
-                        $this->getSearchCriteriaBuilder()
-                            ->addFilter(self::ACCEPT_OPTIONS_PICKUP_WINDOW_RELATION_FIELD_ACCEPT_OPTIONS_ID, $this->getId())
-                            ->create()
-                    )
-                    ->getItems();
+        private $pickupWindow;
 
-                foreach($acceptOptionsPickupWindowRelations as $acceptOptionsPickupWindowRelation)
-                {
-                    $pickupWindow[] = $acceptOptionsPickupWindowRelation->getPickupWindow();
-                }
-                $this->setPickupWindow($pickupWindow);
+        /**
+         * @inheritdoc
+         */
+        public function getPickupWindow(): array
+        {
+            $pickupWindow = $this->pickupWindow;
+            if ($pickupWindow === null)
+            {
+                $pickupWindow = array_map(
+                    function(AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation): PickupWindowInterface
+                    {
+                        return $acceptOptionsPickupWindowRelation->getPickupWindow();
+                    },
+                    $this->getAcceptOptionsPickupWindowRelationRepository()
+                        ->getList(
+                            $this->getSearchCriteriaBuilder()
+                                ->addFilter(AcceptOptionsPickupWindowRelationResourceInterface::FIELD_ID, $this->getId())
+                                ->create()
+                        )
+                        ->getItems()
+                );
+                $this->pickupWindow = $pickupWindow;
             }
             return $pickupWindow;
         }
 
         /**
          * @inheritdoc
-         * @final
          */
-        public final function setPickupWindow(array $pickupWindow): AcceptOptions
+        public function setPickupWindow(array $pickupWindow): self
         {
-            return $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW, $pickupWindow);
+            $this->pickupWindow = $pickupWindow;
+            return $this;
         }
 
         /**
@@ -252,7 +267,7 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
          */
-        protected function getOrderRepository(): OrderRepositoryInterface
+        protected final function getOrderRepository(): OrderRepositoryInterface
         {
             return $this->orderRepository;
         }

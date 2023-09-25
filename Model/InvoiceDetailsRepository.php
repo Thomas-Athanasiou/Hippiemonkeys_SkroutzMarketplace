@@ -25,11 +25,11 @@
     {
         public function __construct(
             ResourceInterface $resource,
-            InvoiceDetailsInterfaceFactory $invoiceDetailsFactory
+            InvoiceDetailsInterfaceFactory $factory
         )
         {
-            $this->_resource = $resource;
-            $this->_invoiceDetailsFactory = $invoiceDetailsFactory;
+            $this->resource = $resource;
+            $this->factory = $factory;
         }
 
         /**
@@ -70,9 +70,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
@@ -83,20 +83,20 @@
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
-         * Invoice Details Factory property
+         * Factory property
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterfaceFactory $_invoiceDetailsFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterfaceFactory $factory
          */
-        private $_invoiceDetailsFactory;
+        private $factory;
 
         /**
-         * Gets Invoice Details Factory
+         * Gets Factory
          *
          * @access protected
          *
@@ -104,7 +104,7 @@
          */
         protected function getInvoiceDetailsFactory() : InvoiceDetailsInterfaceFactory
         {
-            return $this->_invoiceDetailsFactory;
+            return $this->factory;
         }
     }
 ?>

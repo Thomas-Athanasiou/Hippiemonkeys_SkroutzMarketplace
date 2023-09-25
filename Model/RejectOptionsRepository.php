@@ -30,18 +30,18 @@
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] $_idCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] $idCache
              */
-            $_idCache = [],
+            $idCache = [],
 
             /**
              * OrderId Cache property
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] $_orderIdCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface[] $orderIdCache
              */
-            $_orderIdCache = [];
+            $orderIdCache = [];
 
         /**
          * Constructor
@@ -49,15 +49,15 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $resource
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory $rejectOptionsFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory $factory
          */
         public function __construct(
             ResourceInterface $resource,
-            RejectOptionsInterfaceFactory $rejectOptionsFactory
+            RejectOptionsInterfaceFactory $factory
         )
         {
-            $this->_resource = $resource;
-            $this->_rejectOptionsFactory = $rejectOptionsFactory;
+            $this->resource = $resource;
+            $this->factory = $factory;
         }
 
         /**
@@ -65,7 +65,7 @@
          */
         public function getById($id) : RejectOptionsInterface
         {
-            $rejectOptions = $this->_idCache[$id] ?? null;
+            $rejectOptions = $this->idCache[$id] ?? null;
             if($rejectOptions === null)
             {
                 $rejectOptions = $this->getRejectOptionsFactory()->create();
@@ -77,8 +77,8 @@
                     );
                 }
 
-                $this->_orderIdCache[$rejectOptions->getOrder()->getId()] = $rejectOptions;
-                $this->_idCache[$id] = $rejectOptions;
+                $this->orderIdCache[$rejectOptions->getOrder()->getId()] = $rejectOptions;
+                $this->idCache[$id] = $rejectOptions;
             }
             return $rejectOptions;
         }
@@ -89,7 +89,7 @@
         public function getByOrder(OrderInterface $order) : RejectOptionsInterface
         {
             $orderId = $order->getId();
-            $rejectOptions = $this->_orderIdCache[$orderId] ?? null;
+            $rejectOptions = $this->orderIdCache[$orderId] ?? null;
             if($rejectOptions === null)
             {
                 $rejectOptions = $this->getRejectOptionsFactory()->create();
@@ -102,8 +102,8 @@
                     );
                 }
 
-                $this->_orderIdCache[$orderId] = $rejectOptions;
-                $this->_idCache[$id] = $rejectOptions;
+                $this->orderIdCache[$orderId] = $rejectOptions;
+                $this->idCache[$id] = $rejectOptions;
             }
             return $rejectOptions;
         }
@@ -113,8 +113,8 @@
          */
         public function save(RejectOptionsInterface $rejectOptions) : RejectOptionsInterface
         {
-            $this->_idCache[$rejectOptions->getId()] = $rejectOptions;
-            $this->_orderIdCache[$rejectOptions->getOrder()->getId()] = $rejectOptions;
+            $this->idCache[$rejectOptions->getId()] = $rejectOptions;
+            $this->orderIdCache[$rejectOptions->getOrder()->getId()] = $rejectOptions;
             $this->getResource()->saveRejectOptions($rejectOptions);
             return $rejectOptions;
         }
@@ -124,8 +124,8 @@
          */
         public function delete(RejectOptionsInterface $rejectOptions) : bool
         {
-            unset($this->_idCache[$rejectOptions->getId()]);
-            unset($this->_orderIdCache[$rejectOptions->getOrder()->getId()]);
+            unset($this->idCache[$rejectOptions->getId()]);
+            unset($this->orderIdCache[$rejectOptions->getOrder()->getId()]);
             return $this->getResource()->deleteRejectOptions($rejectOptions);
         }
 
@@ -134,20 +134,20 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets resource
          *
          * @access protected
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $_resource
+         * @return \Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface $resource
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
@@ -155,9 +155,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory $_rejectOptionsFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterfaceFactory $factory
          */
-        private $_rejectOptionsFactory;
+        private $factory;
 
         /**
          * Gets Reject Options Factory
@@ -168,7 +168,7 @@
          */
         protected function getRejectOptionsFactory() : RejectOptionsInterfaceFactory
         {
-            return $this->_rejectOptionsFactory;
+            return $this->factory;
         }
     }
 ?>

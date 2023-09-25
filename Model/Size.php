@@ -33,7 +33,7 @@
         /**
          * @inheritdoc
          */
-        public function setLabel(string $label): Size
+        public function setLabel(string $label): self
         {
             return $this->setData(ResourceInterface::FIELD_LABEL, $label);
         }
@@ -49,7 +49,7 @@
         /**
          * @inheritdoc
          */
-        public function setValue(string $value): Size
+        public function setValue(string $value): self
         {
             return $this->setData(ResourceInterface::FIELD_VALUE, $value);
         }
@@ -65,7 +65,7 @@
         /**
          * @inheritdoc
          */
-        public function setShopValue(?string $shopValue): Size
+        public function setShopValue(?string $shopValue): self
         {
             return $this->setData(ResourceInterface::FIELD_SHOP_VALUE, $shopValue);
         }
@@ -81,7 +81,7 @@
         /**
          * @inheritdoc
          */
-        public function setShopVariationUid(?string $shopVariationUid): Size
+        public function setShopVariationUid(?string $shopVariationUid): self
         {
             return $this->setData(ResourceInterface::FIELD_SHOP_VARIATION_UID, $shopVariationUid);
         }
@@ -97,7 +97,7 @@
         /**
          * @inheritdoc
          */
-        public function setEan(?string $ean): SizeInterface
+        public function setEan(?string $ean): self
         {
             return $this->setData(ResourceInterface::FIELD_EAN, $ean);
         }

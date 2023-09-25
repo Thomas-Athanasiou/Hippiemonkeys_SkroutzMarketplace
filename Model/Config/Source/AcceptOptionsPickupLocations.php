@@ -35,8 +35,8 @@
             SearchCriteriaInterface $searchCriteria
         )
         {
-            $this->_pickupLocationRepository = $pickupLocationRepository;
-            $this->_searchCriteria = $searchCriteria;
+            $this->pickupLocationRepository = $pickupLocationRepository;
+            $this->searchCriteria = $searchCriteria;
         }
 
         /**
@@ -60,9 +60,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface $_pickupLocationRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface $pickupLocationRepository
          */
-        private $_pickupLocationRepository;
+        private $pickupLocationRepository;
 
         /**
          * Gets Pickup Location Repository
@@ -73,7 +73,7 @@
          */
         protected function getPickupLocationRepository(): PickupLocationRepositoryInterface
         {
-            return $this->_pickupLocationRepository;
+            return $this->pickupLocationRepository;
         }
 
         /**
@@ -81,9 +81,9 @@
          *
          * @access private
          *
-         * @var \Magento\Framework\Api\SearchCriteriaInterface $_searchCriteria
+         * @var \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
          */
-        private $_searchCriteria;
+        private $searchCriteria;
 
         /**
          * Gets Search Criteria
@@ -94,7 +94,7 @@
          */
         protected function getSearchCriteria(): SearchCriteriaInterface
         {
-            return $this->_searchCriteria;
+            return $this->searchCriteria;
         }
     }
 ?>

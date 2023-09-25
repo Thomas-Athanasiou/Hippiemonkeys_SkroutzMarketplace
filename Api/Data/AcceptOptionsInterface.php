@@ -71,9 +71,9 @@
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] $pickupLocation
          *
-         * @return \this
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
          */
-        function setPickupLocation(array $pickupLocation) : AcceptOptionsInterface;
+        function setPickupLocation(array $pickupLocation): AcceptOptionsInterface;
 
         /**
          * Get pickup windows

@@ -17,7 +17,7 @@
     use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory as Factory,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface as ResourceInterface;
 
     class AddressRepository
@@ -28,9 +28,9 @@
          *
          * @access protected
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[]
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[] $idCache
          */
-        protected $_idCache = [];
+        protected $idCache = [];
 
         /**
          * Constructor
@@ -42,11 +42,11 @@
          */
         public function __construct(
             ResourceInterface $resource,
-            AddressInterfaceFactory $addressFactory
+            Factory $addressFactory
         )
         {
-            $this->_resource = $resource;
-            $this->_addressFactory  = $addressFactory;
+            $this->resource = $resource;
+            $this->factory  = $addressFactory;
         }
 
         /**
@@ -54,7 +54,7 @@
          */
         public function getById($id) : AddressInterface
         {
-            $address = $this->_idCache[$id] ?? null;
+            $address = $this->idCache[$id] ?? null;
             if($address === null)
             {
                 $address = $this->getAddressFactory()->create();
@@ -67,7 +67,7 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $address;
+                    $this->idCache[$id] = $address;
                 }
             }
 
@@ -79,7 +79,7 @@
          */
         public function save(AddressInterface $address): AddressInterface
         {
-            $this->_idCache[$address->getId()] = $address;
+            $this->idCache[$address->getId()] = $address;
             $this->getResource()->saveAddress($address);
             return $address;
         }
@@ -99,7 +99,7 @@
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\AddressResourceInterface
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource Model
@@ -110,7 +110,7 @@
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
@@ -120,7 +120,7 @@
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory
          */
-        private $_addressFactory;
+        private $factory;
 
         /**
          * Gets Address Factory
@@ -129,9 +129,9 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterfaceFactory
          */
-        protected function getAddressFactory() : AddressInterfaceFactory
+        protected function getAddressFactory() : Factory
         {
-            return $this->_addressFactory;
+            return $this->factory;
         }
     }
 ?>

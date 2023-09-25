@@ -25,9 +25,7 @@
     {
         const
             FIELD_ORDER_ID = 'order_id',
-            FIELD_NUMBER_OF_PARCELS = 'number_of_parcels',
-            FIELD_PICKUP_LOCATION = 'pickup_location',
-            FIELD_PICKUP_WINDOW = 'pickup_window';
+            FIELD_NUMBER_OF_PARCELS = 'number_of_parcels';
 
         /**
          * Save Accept Options data

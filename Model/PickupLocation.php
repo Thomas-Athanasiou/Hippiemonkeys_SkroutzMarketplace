@@ -33,7 +33,7 @@
         /**
          * @inheritdoc
          */
-        public function setSkroutzId(string $skroutzId): PickupLocation
+        public function setSkroutzId(string $skroutzId): self
         {
             return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
@@ -49,7 +49,7 @@
         /**
          * @inheritdoc
          */
-        public function setLabel(string $label): PickupLocation
+        public function setLabel(string $label): self
         {
             return $this->setData(ResourceInterface::FIELD_LABEL, $label);
         }

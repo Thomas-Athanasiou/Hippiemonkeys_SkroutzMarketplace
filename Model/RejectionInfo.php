@@ -33,7 +33,7 @@
         /**
          * @inheritdoc
          */
-        public function setReason(string $reason): RejectionInfo
+        public function setReason(string $reason): self
         {
             return $this->setData(ResourceModel::FIELD_REASON, $reason);
         }
@@ -49,7 +49,7 @@
         /**
          * @inheritdoc
          */
-        public function setActor(string $actor): RejectionInfo
+        public function setActor(string $actor): self
         {
             return $this->setData(ResourceModel::FIELD_ACTOR, $actor);
         }

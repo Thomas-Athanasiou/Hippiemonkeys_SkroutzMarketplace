@@ -33,18 +33,18 @@
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $_idCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $idCache
              */
-            $_idCache = [],
+            $idCache = [],
 
             /**
              * Skroutz Id Cache property
              *
              * @access protected
              *
-             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $_skroutzIdCache
+             * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $skroutzIdCache
              */
-            $_skroutzIdCache = [];
+            $skroutzIdCache = [];
 
         /**
          * Constructor
@@ -52,21 +52,21 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface $resource
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory $pickupLocationFactory
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory $factory
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterfaceFactory $searchResultFactory
          * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          */
         public function __construct(
             ResourceInterface $resource,
-            PickupLocationInterfaceFactory $pickupLocationFactory,
+            PickupLocationInterfaceFactory $factory,
             SearchResultInterfaceFactory $searchResultFactory,
             CollectionProcessorInterface $collectionProcessor
         )
         {
-            $this->_resource = $resource;
-            $this->_pickupLocationFactory = $pickupLocationFactory;
-            $this->_searchResultFactory = $searchResultFactory;
-            $this->_collectionProcessor = $collectionProcessor;
+            $this->resource = $resource;
+            $this->factory = $factory;
+            $this->searchResultFactory = $searchResultFactory;
+            $this->collectionProcessor = $collectionProcessor;
         }
 
         /**
@@ -74,10 +74,10 @@
          */
         public function getById($id) : PickupLocationInterface
         {
-            $pickupLocation = $this->_idCache[$id] ?? null;
+            $pickupLocation = $this->idCache[$id] ?? null;
             if($pickupLocation === null)
             {
-                $pickupLocation = $this->getPickupLocationFactory()->create();
+                $pickupLocation = $this->getFactory()->create();
                 $this->getResource()->loadPickupLocationById($pickupLocation, $id);
                 if ($pickupLocation->getId() === null)
                 {
@@ -87,8 +87,8 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $pickupLocation;
-                    $this->_skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
+                    $this->idCache[$id] = $pickupLocation;
+                    $this->skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
                 }
             }
             return $pickupLocation;
@@ -99,10 +99,10 @@
          */
         public function getBySkroutzId(string $skroutzId) : PickupLocationInterface
         {
-            $pickupLocation = $this->_skroutzIdCache[$skroutzId] ?? null;
+            $pickupLocation = $this->skroutzIdCache[$skroutzId] ?? null;
             if($pickupLocation === null)
             {
-                $pickupLocation = $this->getPickupLocationFactory()->create();
+                $pickupLocation = $this->getFactory()->create();
                 $this->getResource()->loadPickupLocationBySkroutzId($pickupLocation, $skroutzId, ResourceInterface::FIELD_SKROUTZ_ID);
                 $id = $pickupLocation->getId();
                 if($id === null)
@@ -113,8 +113,8 @@
                 }
                 else
                 {
-                    $this->_idCache[$id] = $pickupLocation;
-                    $this->_skroutzIdCache[$skroutzId] = $pickupLocation;
+                    $this->idCache[$id] = $pickupLocation;
+                    $this->skroutzIdCache[$skroutzId] = $pickupLocation;
                 }
             }
             return $pickupLocation;
@@ -137,8 +137,8 @@
         public function save(PickupLocationInterface $pickupLocation) : PickupLocationInterface
         {
             $this->getResource()->savePickupLocation($pickupLocation);
-            $this->_skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
-            $this->_idCache[$pickupLocation->getId()] = $pickupLocation;
+            $this->skroutzIdCache[$pickupLocation->getSkroutzId()] = $pickupLocation;
+            $this->idCache[$pickupLocation->getId()] = $pickupLocation;
             return $pickupLocation;
         }
 
@@ -147,8 +147,8 @@
          */
         public function delete(PickupLocationInterface $pickupLocation) : bool
         {
-            unset($this->_idCache[$pickupLocation->getId()]);
-            unset($this->_skroutzIdCache[$pickupLocation->getSkroutzId()]);
+            unset($this->idCache[$pickupLocation->getId()]);
+            unset($this->skroutzIdCache[$pickupLocation->getSkroutzId()]);
             return $this->getResource()->deletePickupLocation($pickupLocation);
         }
 
@@ -157,9 +157,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface $_resource
+         * @var \Hippiemonkeys\SkroutzMarketplace\Model\Spi\PickupLocationResourceInterface $resource
          */
-        private $_resource;
+        private $resource;
 
         /**
          * Gets Resource
@@ -170,28 +170,28 @@
          */
         protected function getResource(): ResourceInterface
         {
-            return $this->_resource;
+            return $this->resource;
         }
 
         /**
-         * Pickup Location Factory property
+         * Factory property
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory $_pickupLocationFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory $factory
          */
-        private $_pickupLocationFactory;
+        private $factory;
 
         /**
-         * Gets Pickup Location Factory
+         * Gets Factory
          *
          * @access protected
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory
          */
-        protected function getPickupLocationFactory() : PickupLocationInterfaceFactory
+        protected function getFactory() : PickupLocationInterfaceFactory
         {
-            return $this->_pickupLocationFactory;
+            return $this->factory;
         }
 
         /**
@@ -199,9 +199,9 @@
          *
          * @access private
          *
-         * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $_collectionProcessor
+         * @return \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
          */
-        private $_collectionProcessor;
+        private $collectionProcessor;
 
         /**
          * Gets Collection Processor
@@ -212,7 +212,7 @@
          */
         protected function getCollectionProcessor() : CollectionProcessorInterface
         {
-            return $this->_collectionProcessor;
+            return $this->collectionProcessor;
         }
 
         /**
@@ -220,9 +220,9 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterfaceFactory $_searchResultFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationSearchResultInterfaceFactory $searchResultFactory
          */
-        private $_searchResultFactory;
+        private $searchResultFactory;
 
         /**
          * Gets Search Result Factory
@@ -233,7 +233,7 @@
          */
         protected function getSearchResultFactory(): SearchResultInterfaceFactory
         {
-            return $this->_searchResultFactory;
+            return $this->searchResultFactory;
         }
     }
 ?>

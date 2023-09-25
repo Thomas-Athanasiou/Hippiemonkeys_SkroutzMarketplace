@@ -33,7 +33,7 @@
         /**
          * @inheritdoc
          */
-        public function setSkroutzId(int $skroutzId): LineItemRejectionReason
+        public function setSkroutzId(int $skroutzId): self
         {
             return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
@@ -49,7 +49,7 @@
         /**
          * @inheritdoc
          */
-        public function setLabel(string $label): LineItemRejectionReason
+        public function setLabel(string $label): self
         {
             return $this->setData(ResourceInterface::FIELD_LABEL, $label);
         }
@@ -65,7 +65,7 @@
         /**
          * @inheritdoc
          */
-        public function setRequiresAvailableQuantity(bool $requiresAvailableQuantity): LineItemRejectionReason
+        public function setRequiresAvailableQuantity(bool $requiresAvailableQuantity): self
         {
             return $this->setData(ResourceInterface::FIELD_REQUIRES_AVAILABILITY_QUANTITY, $requiresAvailableQuantity);
         }

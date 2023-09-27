@@ -25,7 +25,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExlusionRepresentativeInterface[] Array of collection line items.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface[] Array of collection line items.
          */
         public function getItems();
 
@@ -35,9 +35,9 @@
          * @api
          * @access public
          *
-         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExlusionRepresentativeInterface[] $vatExlusionRepresentative
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface[] $vatExclusionRepresentative
          * @return $this
          */
-        public function setItems(array $vatExlusionRepresentative);
+        public function setItems(array $vatExclusionRepresentative);
     }
 ?>

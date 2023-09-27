@@ -87,6 +87,21 @@
             <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetails</argument>
         </arguments>
     </type>
+        <virtualType
+        name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\RelationComposite"
+        type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite"
+    >
+        <arguments>
+            <argument name="modelRelationProcessors" xsi:type="array">
+                <item name="vatexclusionrepresentative" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\VatExclusionRepresentativeRelation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails">
+        <arguments>
+            <argument name="modelRelationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RelationComposite</argument>
+        </arguments>
+    </type>
 
     <!-- Line Item -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItem" />

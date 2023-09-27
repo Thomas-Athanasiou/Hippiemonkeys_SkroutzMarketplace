@@ -19,7 +19,7 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsResourceInterface as ResourceInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
+        Magento\Framework\Exception\NoSuchEntityException;
 
     class AcceptOptionsRepository
     implements AcceptOptionsRepositoryInterface

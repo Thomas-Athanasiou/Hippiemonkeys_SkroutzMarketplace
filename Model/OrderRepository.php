@@ -18,7 +18,7 @@
         Magento\Framework\Api\SearchCriteriaBuilder,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
         Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface as SearchResultInterface,

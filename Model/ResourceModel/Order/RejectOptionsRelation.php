@@ -18,7 +18,7 @@
         Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
+        Magento\Framework\Exception\NoSuchEntityException;
 
     class RejectOptionsRelation
     implements ModelRelationProcessorInterface

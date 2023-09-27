@@ -14,7 +14,7 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+    use Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\PickupWindowRepositoryInterface,

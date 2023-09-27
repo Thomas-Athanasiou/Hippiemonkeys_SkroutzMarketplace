@@ -18,7 +18,6 @@
 
     interface VatExclusionRepresentativeRepositoryInterface
     {
-
         /**
          * Gets Vat Exclusion Representative by Id
          *
@@ -30,6 +29,19 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface
          */
         function getById($id): VatExclusionRepresentativeInterface;
+
+        /**
+         * Gets Vat Exclusion Representative by Id Type and Id Number
+         *
+         * @api
+         * @access public
+         *
+         * @param string $idType
+         * @param string $idNumber
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface
+         */
+        function getByIdTypeAndIdNumber(string $idType, string $idNumber): VatExclusionRepresentativeInterface;
 
         /**
          * Deletes Vat Exclusion Representative

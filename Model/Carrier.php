@@ -14,81 +14,112 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\Shipping\Model\AbstractCarrier;
-    use Magento\Backend\App\Area\FrontNameResolver;
-    use Magento\Framework\App\Config\ScopeConfigInterface;
-    use Magento\Framework\App\State;
-    use Magento\Framework\Exception\LocalizedException;
-    use Magento\Quote\Model\Quote\Address\RateRequest;
-    use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
-    use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
-    use Magento\Shipping\Model\Rate\ResultFactory;
-    use Psr\Log\LoggerInterface;
+    use Magento\CatalogInventory\Api\StockRegistryInterface,
+        Magento\Directory\Helper\Data as DirectoryData,
+        Psr\Log\LoggerInterface,
+        Magento\Framework\DataObject,
+        Magento\Framework\DataObjectFactory,
+        Magento\Framework\Exception\NoSuchEntityException,
+        Magento\Framework\App\State,
+        Magento\Backend\App\Area\FrontNameResolver,
+        Magento\Framework\App\Config\ScopeConfigInterface,
+        Magento\Framework\Exception\LocalizedException,
+        Magento\Quote\Model\Quote\Address\RateRequest,
+        Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory as RateErrorFactory,
+        Magento\Quote\Model\Quote\Address\RateResult\MethodFactory as RateMethodFactory,
+        Magento\Shipping\Model\Tracking\ResultFactory as TrackingResultFactory,
+        Magento\Shipping\Model\Tracking\Result\ErrorFactory as TrackingErrorFactory,
+        Magento\Shipping\Model\Tracking\Result\StatusFactory as TrackingStatusFactory,
+        Magento\Shipping\Model\Rate\ResultFactory as RateResultFactory,
+        Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface,
+        Hippiemonkeys\Shipping\Model\AbstractCarrierOnline,
+        Hippiemonkeys\SkroutzMarketplace\Api\CarrierInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface;
 
-    class Method
-    extends AbstractCarrier
+
+    class Carrier
+    extends AbstractCarrierOnline
+    implements CarrierInterface
     {
-        const CODE = "hippiemonkeysskroutzmarketplace";
-
-
-        protected $_isFixed = true;
-
-        protected $rateResultFactory;
-        protected $rateMethodFactory;
-        protected $appState;
+        protected const CODE = CarrierInterface::CARRIER_CODE;
 
         /**
-         * @param ScopeConfigInterface $scopeConfig
-         * @param ErrorFactory $rateErrorFactory
-         * @param LoggerInterface $logger
-         * @param ResultFactory $rateResultFactory
-         * @param MethodFactory $rateMethodFactory
-         * @param State $appState
+         * @inheritdoc
+         */
+        protected $_isFixed = true;
+
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+         * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
+         * @param \Psr\Log\LoggerInterface $logger
+         * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
+         * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
+         * @param \Magento\Framework\DataObjectFactory $dataOjectFactory
+         * @param \Magento\Shipping\Model\Tracking\ResultFactory $trackingResultFactory
+         * @param \Magento\Shipping\Model\Tracking\Result\ErrorFactory $trackingErrorFactory
+         * @param \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackingStatusFactory
+         * @param \Magento\Directory\Helper\Data $directoryData
+         * @param \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
+         * @param \Magento\Framework\App\State $appState
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
          * @param array $data
          */
-        public function __construct(
+
+         public function __construct(
             ScopeConfigInterface $scopeConfig,
-            ErrorFactory         $rateErrorFactory,
-            LoggerInterface      $logger,
-            ResultFactory        $rateResultFactory,
-            MethodFactory        $rateMethodFactory,
-            State                $appState,
-            array                $data = []
+            RateErrorFactory $rateErrorFactory,
+            LoggerInterface $logger,
+            RateResultFactory $rateResultFactory,
+            RateMethodFactory $rateMethodFactory,
+            DataObjectFactory $dataObjectFactory,
+            TrackingResultFactory $trackingResultFactory,
+            TrackingErrorFactory $trackingErrorFactory,
+            TrackingStatusFactory $trackingStatusFactory,
+            DirectoryData $directoryData,
+            StockRegistryInterface $stockRegistry,
+            State $appState,
+            OrderRepositoryInterface $orderRepository,
+            array $data = []
         )
         {
-            $this->rateResultFactory = $rateResultFactory;
-            $this->rateMethodFactory = $rateMethodFactory;
+            parent::__construct($scopeConfig, $rateErrorFactory, $logger, $rateResultFactory, $rateMethodFactory, $dataObjectFactory, $trackingResultFactory, $trackingErrorFactory, $trackingStatusFactory, $directoryData, $stockRegistry, $data);
             $this->appState = $appState;
-            parent::__construct(
-                $scopeConfig,
-                $rateErrorFactory,
-                $logger,
-                $data
-            );
+            $this->orderRepository = $orderRepository;
         }
 
         /**
-         * @throws LocalizedException
+         * @inheritdoc
          */
         public function collectRates(RateRequest $request)
         {
             $result = false;
+            $isAdminArea = false;
 
-            if ($this->getConfigFlag('active') && $this->isAdminArea())
+            try
             {
-                $result = $this->rateResultFactory->create();
+                $isAdminArea = $this->isAdminArea();
+            }
+            catch (LocalizedException $localizedException)
+            {
+                $this->getLogger()->error($localizedException->getMessage());
+            }
 
-                $method = $this->rateMethodFactory->create();
-
-                $method->setCarrier($this->_code);
-                $method->setCarrierTitle($this->getConfigData('title'));
-
-                $method->setMethod($this->_code);
-                $method->setMethodTitle($this->getConfigData('name'));
-
+            if ($this->getActive() && $isAdminArea)
+            {
+                $method = $this->getRateMethodFactory()->create();
+                $method->setCarrier($this->getCarrierCode());
+                $method->setCarrierTitle($this->getCarrierTitle());
+                $method->setMethod($this->getMethodCode());
+                $method->setMethodTitle($this->getMethodTitle());
                 $method->setPrice(0.00);
                 $method->setCost(0.00);
 
+                $result = $this->getRateFactory()->create();
                 $result->append($method);
             }
 
@@ -96,16 +127,21 @@
         }
 
         /**
-         * @throws LocalizedException
+         * @inheritdoc
+         *
+         * @throws \Magento\Framework\Exception\LocalizedException
          */
         private function isAdminArea(): bool
         {
-            return $this->appState->getAreaCode() === FrontNameResolver::AREA_CODE;
+            return $this->getAppState()->getAreaCode() === FrontNameResolver::AREA_CODE;
         }
 
+        /**
+         * @inheritdoc
+         */
         public function getAllowedMethods(): array
         {
-            return [$this->_code => $this->getConfigData('name')];
+            return [$this->getCarrierCode() => $this->getMethodTitle()];
         }
 
         /**
@@ -119,25 +155,140 @@
         /**
          * @inheritdoc
          */
-        public function isShippingLabelsAvailable()
+        public function processShipmentRequest(DataObject $rateRequest): DataObject
         {
-            return true;
-        }
+            $result = $this->getDataObjectFactory()->create();
 
-        /**
-         * {@inheritdoc}
-         */
-        public function requestToShipment($rateRequest)
-        {
+            try
+            {
+                $order = $this->getOrderByMagentoOrder($rateRequest->getOrderShipment()->getOrder());
+                $trackingCodes = $order->getCourierTrackingCodes();
+                $shippingLabelContent = $this->getSkroutzShippingLabelContentByOrder($order);
+                if($shippingLabelContent === null && count($trackingCodes) > 0)
+                {
+                    $result->setTrackingNumber($trackingCodes[0]);
+                    $result->setShippingLabelContent($shippingLabelContent);
+                }
+                else
+                {
+                    $result->setHasErrors(true);
+                    $result->setErrors(__('This Order isn\'t ready for shipment yet or applicable.'));
+
+                }
+            }
+            catch (NoSuchEntityException)
+            {
+                $result->setHasErrors(true);
+                $result->setErrors(__('This Order isn\'t linked to any Magento Order.'));
+            }
+
             return new DataObject();
         }
 
+
         /**
-         * {@inheritdoc}
+         * Gets Skroutz Shipping Label By Order
+         *
+         * @access protected
+         * @final
+         *
+         * @return string
          */
-        public function returnOfShipment($rateRequest)
+        public final function getSkroutzShippingLabelContentByOrder(OrderInterface $order): string
         {
-            return new DataObject();
+            $courierVoucher = $order->getCourierVoucher();
+            $shippingLabel = null;
+            if($courierVoucher !== null)
+            {
+                $shippingLabel = file_get_contents($courierVoucher, false, null, 0, null);
+            }
+
+            return $shippingLabel;
+        }
+
+
+        /**
+         * Gets Order By Magento Order
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
+         *
+         * @throws \Magento\Framework\Exception\NoSuchEntityException
+         */
+        public final function getOrderByMagentoOrder(MagentoOrderInterface $magentoOrder): OrderInterface
+        {
+            return $this->getOrderRepository()->getByMagentoOrder($magentoOrder);
+        }
+
+        /**
+         * Gets Method Title
+         *
+         * @access protected
+         * @final
+         *
+         * @return string
+         */
+        protected function getMethodTitle(): string
+        {
+            return $this->getData('method_title');
+        }
+
+        /**
+         * Gets Method Code
+         *
+         * @access protected
+         * @final
+         *
+         * @return string
+         */
+        protected final function getMethodCode(): string
+        {
+            return self::METHOD_CODE;
+        }
+
+        /**
+         * App State property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\App\State $appState
+         */
+        private $appState;
+
+        /**
+         * Gets App State
+         *
+         * @access protected
+         *
+         * @return \Magento\Framework\App\State
+         */
+        protected final function getAppState(): State
+        {
+            return $this->appState;
+        }
+
+        /**
+         * Order Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         */
+        private $orderRepository;
+
+        /**
+         * Gets Order Repository
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         */
+        protected final function getOrderRepository(): OrderRepositoryInterface
+        {
+            return $this->orderRepository;
         }
     }
 ?>

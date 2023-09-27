@@ -85,6 +85,7 @@
             $this->lineItem = null;
             $this->acceptOptions = null;
             $this->rejectOptions = null;
+            $this->rejectionInfo = null;
             $this->magentoOrder = null;
         }
 
@@ -226,11 +227,20 @@
         }
 
         /**
+         * Invoice Details property
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[]|null $lineItems
+         */
+        private $lineItems;
+
+        /**
          * @inheritdoc
          */
         public function getLineItems() : array
         {
-            $lineItems = $this->getData(static::FIELD_LINE_ITEMS);
+            $lineItems = $this->lineItems;
             if ($lineItems === null)
             {
                 $lineItems = $this->getLineItemRepository()
@@ -240,7 +250,7 @@
                             ->create()
                     )
                     ->getItems();
-                $this->setLineItems($lineItems);
+                $this->lineItems = $lineItems;
             }
             return $lineItems;
         }
@@ -250,7 +260,8 @@
          */
         public function setLineItems(array $lineItems): self
         {
-            return $this->setData(static::FIELD_LINE_ITEMS, $lineItems);
+            $this->lineItems = $lineItems;
+            return $this;
         }
 
         /**
@@ -350,11 +361,20 @@
         }
 
         /**
+         * Rejection Info
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface|null $rejectionInfo
+         */
+        private $rejectionInfo;
+
+        /**
          * @inheritdoc
          */
         public function getRejectionInfo(): ?RejectionInfoInterface
         {
-            $rejectionInfo = $this->getData(static::FIELD_REJECTION_INFO);
+            $rejectionInfo = $this->rejectionInfo;
             $rejectionInfoId = $this->getData(ResourceInterface::FIELD_REJECTION_INFO_ID);
             if (!$rejectionInfo && $rejectionInfoId)
             {
@@ -369,21 +389,33 @@
          */
         public function setRejectionInfo(?RejectionInfoInterface $rejectionInfo): self
         {
-            $this->setData(ResourceInterface::FIELD_REJECTION_INFO_ID, $rejectionInfo ? $rejectionInfo->getId() : null);
-            return $this->setData(static::FIELD_REJECTION_INFO, $rejectionInfo);
+            $this->rejectionInfo = $rejectionInfo;
+            return $this->setData(ResourceInterface::FIELD_REJECTION_INFO_ID, $rejectionInfo ? $rejectionInfo->getId() : null);
         }
+
+        /**
+         * Accept Options property
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
+         */
+        protected $acceptOptions;
 
         /**
          * @inheritdoc
          */
         public function getAcceptOptions(): ?AcceptOptionsInterface
         {
-            $acceptOptions = $this->getData(static::FIELD_ACCEPT_OPTIONS);
-            $acceptOptionsId = $this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID);
-            if ($acceptOptionsId && !$acceptOptions)
+            $acceptOptions = $this->acceptOptions;
+            if($acceptOptions === null)
             {
-                $acceptOptions = $this->getAcceptOptionsRepository()->getById($acceptOptionsId);
-                $this->setAcceptOptions($acceptOptions);
+                $acceptOptionsId = $this->getData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID);
+                if ($acceptOptionsId !== null)
+                {
+                    $acceptOptions = $this->getAcceptOptionsRepository()->getById($acceptOptionsId);
+                    $this->acceptOptions = $acceptOptions;
+                }
             }
             return $acceptOptions;
         }
@@ -394,21 +426,33 @@
         public function setAcceptOptions(?AcceptOptionsInterface $acceptOptions): self
         {
             $acceptOptions->setOrder($this);
-            $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
-            return $this->setData(static::FIELD_ACCEPT_OPTIONS, $acceptOptions);
+            $this->acceptOptions = $acceptOptions;
+            return $this->setData(ResourceInterface::FIELD_ACCEPT_OPTIONS_ID, $acceptOptions->getId());
         }
+
+        /**
+         * Reject Options property
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $rejectOptions
+         */
+        protected $rejectOptions;
 
         /**
          * @inheritdoc
          */
         public function getRejectOptions(): ?RejectOptionsInterface
         {
-            $rejectOptions = $this->getData(static::FIELD_REJECT_OPTIONS);
-            $rejectOptionsId = $this->getData(ResourceInterface::FIELD_REJECT_OPTIONS_ID);
-            if ($rejectOptionsId && !$rejectOptions)
+            $rejectOptions = $this->rejectOptions;
+            if($rejectOptions === null)
             {
-                $rejectOptions = $this->getRejectOptionsRepository()->getById($rejectOptionsId);
-                $this->setRejectOptions($rejectOptions);
+                $rejectOptionsId = $this->getData(ResourceInterface::FIELD_REJECT_OPTIONS_ID);
+                if ($rejectOptionsId !== null)
+                {
+                    $rejectOptions = $this->getRejectOptionsRepository()->getById($rejectOptionsId);
+                    $this->rejectOptions = $rejectOptions;
+                }
             }
             return $rejectOptions;
         }
@@ -419,21 +463,33 @@
         public function setRejectOptions(?RejectOptionsInterface $rejectOptions): self
         {
             $rejectOptions->setOrder($this);
-            $this->setData(ResourceInterface::FIELD_REJECT_OPTIONS_ID, $rejectOptions->getId());
-            return $this->setData(static::FIELD_REJECT_OPTIONS, $rejectOptions);
+            $this->rejectOptions = $rejectOptions;
+            return $this->setData(ResourceInterface::FIELD_REJECT_OPTIONS_ID, $rejectOptions->getId());
         }
+
+        /**
+         * Magento Order property
+         *
+         * @access public
+         *
+         * @var \Magento\Sales\Api\Data\OrderInterface $magentoOrder
+         */
+        private $magentoOrder;
 
         /**
          * @inheritdoc
          */
         public function getMagentoOrder(): ?MagentoOrderInterface
         {
-            $magentoOrder = $this->getData(static::FIELD_MAGENTO_ORDER);
-            $magentoOrderId = $this->getData(ResourceInterface::FIELD_MAGENTO_ORDER_ID);
-            if ($magentoOrderId !== null && $magentoOrder === null)
+            $magentoOrder = $this->magentoOrder;
+            if ($magentoOrder === null)
             {
-                $magentoOrder = $this->getMagentoOrderRepository()->get($magentoOrderId);
-                $this->setData(static::FIELD_MAGENTO_ORDER, $magentoOrder);
+                $magentoOrderId = $this->getData(ResourceInterface::FIELD_MAGENTO_ORDER_ID);
+                if($magentoOrderId !== null)
+                {
+                    $magentoOrder = $this->getMagentoOrderRepository()->get($magentoOrderId);
+                    $this->magentoOrder = $magentoOrder;
+                }
             }
             return $magentoOrder;
         }
@@ -443,8 +499,8 @@
          */
         public function setMagentoOrder(?MagentoOrderInterface $magentoOrder): self
         {
-            $this->setData(ResourceInterface::FIELD_MAGENTO_ORDER_ID, $magentoOrder ? $magentoOrder->getEntityId() : null);
-            return $this->setData(static::FIELD_MAGENTO_ORDER, $magentoOrder);
+            $this->magentoOrder = $magentoOrder;
+            return $this->setData(ResourceInterface::FIELD_MAGENTO_ORDER_ID, $magentoOrder ? $magentoOrder->getEntityId() : null);
         }
 
         /**
@@ -544,16 +600,28 @@
         }
 
         /**
+         * Pickup Window property
+         *
+         * @access private
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
+         */
+        protected $pickupWindow;
+
+        /**
          * @inheritdoc
          */
         public function getPickupWindow(): ?OrderPickupWindowInterface
         {
-            $pickupWindow = $this->getData(static::FIELD_PICKUP_WINDOW);
-            $pickupWindowId = $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW_ID);
-            if (!$pickupWindow && $pickupWindowId)
+            $pickupWindow = $this->pickupWindow;
+            if($pickupWindow === null)
             {
-                /* $pickupWindow = $this->getPickupWindowRepository()->getById($pickupWindowId); */
-                $this->setPickupWindow($pickupWindow);
+                $pickupWindowId = $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW_ID);
+                if ($pickupWindowId !== null)
+                {
+                    $pickupWindow = $this->getPickupWindowRepository()->getById($pickupWindowId);
+                    $this->pickupWindow = $pickupWindow;
+                }
             }
             return $pickupWindow;
         }
@@ -563,8 +631,8 @@
          */
         public function setPickupWindow(?OrderPickupWindowInterface $pickupWindow): self
         {
-            $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindow ? $pickupWindow->getId() : null);
-            return $this->setData(static::FIELD_PICKUP_WINDOW, $pickupWindow);
+            $this->pickupWindow = $pickupWindow;
+            return $this->setData(ResourceInterface::FIELD_PICKUP_WINDOW_ID, $pickupWindow ? $pickupWindow->getId() : null);
         }
 
         /**

@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface as SearchResultInterface,
+    use Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Order as Model,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order as ResourceModel;
 
     class Collection
     extends AbstractCollection

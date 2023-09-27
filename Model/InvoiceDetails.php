@@ -62,7 +62,7 @@
         /**
          * @inheritdoc
          */
-        public function setCompany(string $company): InvoiceDetails
+        public function setCompany(string $company): self
         {
             return $this->setData(ResourceInterface::FIELD_COMPANY, $company);
         }
@@ -77,7 +77,7 @@
         /**
          * @inheritdoc
          */
-        public function setProfession(string $profession): InvoiceDetails
+        public function setProfession(string $profession): self
         {
             return $this->setData(ResourceInterface::FIELD_PROFESSION, $profession);
         }
@@ -92,7 +92,7 @@
         /**
          * @inheritdoc
          */
-        public function setDoy(string $doy): InvoiceDetails
+        public function setDoy(string $doy): self
         {
             return $this->setData(ResourceInterface::FIELD_DOY, $doy);
         }
@@ -108,7 +108,7 @@
         /**
          * @inheritdoc
          */
-        public function setVatNumber(string $vatNumber): InvoiceDetails
+        public function setVatNumber(string $vatNumber): self
         {
             return $this->setData(ResourceInterface::FIELD_VAT_NUMBER, $vatNumber);
         }
@@ -144,7 +144,7 @@
         /**
          * @inheritdoc
          */
-        public function setAddress(?AddressInterface $address): InvoiceDetails
+        public function setAddress(?AddressInterface $address): self
         {
             $this->address = $address;
             return $this->setData(ResourceInterface::FIELD_ADDRESS_ID, $address ? $address->getId() : null);
@@ -161,7 +161,7 @@
         /**
          * @inheritdoc
          */
-        public function setVatExclusionRequested(bool $vatExclusionRequested): InvoiceDetails
+        public function setVatExclusionRequested(bool $vatExclusionRequested): self
         {
             return $this->setData(ResourceInterface::FIELD_VAT_EXCLUSION_REQUESTED, $vatExclusionRequested);
         }
@@ -177,7 +177,7 @@
         /**
          * @inheritdoc
          */
-        public function setVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative)
+        public function setVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative): self
         {
             return $this->setData(self::FIELD_VAT_EXCLUSION_REPRESENTATIVE, $vatExclusionRepresentative);
         }

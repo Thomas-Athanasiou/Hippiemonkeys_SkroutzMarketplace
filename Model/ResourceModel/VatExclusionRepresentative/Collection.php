@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\VatExclusionRepresentative;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeSearchResultInterface as SearchResultInterface,
+    use Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\VatExclusionRepresentative as Model,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\VatExclusionRepresentative as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\VatExclusionRepresentative as ResourceModel;
 
     class Collection
     extends AbstractCollection

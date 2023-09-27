@@ -67,7 +67,7 @@
         /**
          * @inheritdoc
          */
-        public function setSkroutzId(string $skroutzId): Customer
+        public function setSkroutzId(string $skroutzId): self
         {
             return $this->setData(ResourceInterface::FIELD_SKROUTZ_ID, $skroutzId);
         }
@@ -83,7 +83,7 @@
         /**
          * @inheritdoc
          */
-        public function setFirstName(string $firstName): Customer
+        public function setFirstName(string $firstName): self
         {
             return $this->setData(ResourceInterface::FIELD_FIRST_NAME, $firstName);
         }
@@ -99,7 +99,7 @@
         /**
          * @inheritdoc
          */
-        public function setLastName(string $lastName): Customer
+        public function setLastName(string $lastName): self
         {
             return $this->setData(ResourceInterface::FIELD_LAST_NAME, $lastName);
         }
@@ -134,7 +134,7 @@
         /**
          * @inheritdoc
          */
-        public function setAddress(?AddressInterface $address): Customer
+        public function setAddress(?AddressInterface $address): self
         {
             $this->address = $address;
             return $this->setData(ResourceInterface::FIELD_ADDRESS_ID, ($address === null ? $address : $address->getId()));

@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItemRejectionReason;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonSearchResultInterface as SearchResultInterface,
+    use Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\LineItemRejectionReason as Model,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItemRejectionReason as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItemRejectionReason as ResourceModel;
 
     class Collection
     extends AbstractCollection

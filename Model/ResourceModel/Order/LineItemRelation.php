@@ -18,7 +18,7 @@
         Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
+        Magento\Framework\Exception\NoSuchEntityException;
 
     class LineItemRelation
     implements ModelRelationProcessorInterface

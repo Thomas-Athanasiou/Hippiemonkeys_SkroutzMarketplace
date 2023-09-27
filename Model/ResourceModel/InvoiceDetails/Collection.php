@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsSearchResultInterface as SearchResultInterface,
+    use Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\InvoiceDetails as Model,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails as ResourceModel;
 
     class Collection
     extends AbstractCollection

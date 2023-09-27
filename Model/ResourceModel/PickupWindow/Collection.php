@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowSearchResultInterface as SearchResultInterface,
+    use Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\PickupWindow as Model,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\PickupWindow as ResourceModel;
 
     class Collection
     extends AbstractCollection

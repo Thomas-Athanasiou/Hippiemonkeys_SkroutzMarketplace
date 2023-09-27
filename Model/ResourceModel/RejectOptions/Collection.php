@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions;
 
-    use Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsSearchResultInterface as SearchResultInterface,
+    use Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\RejectOptions as Model,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectOptions as ResourceModel;
 
     class Collection
     extends AbstractCollection

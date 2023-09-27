@@ -14,10 +14,10 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+    use Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface,
-        Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory as Factory,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface as ResourceInterface;
 
     class CustomerRepository
@@ -77,7 +77,16 @@
          */
         public function save(CustomerInterface $customer) : CustomerInterface
         {
-            $this->getResource()->saveCustomer($customer);
+            $resource = $this->getResource();
+
+            if($customer->getId() === null)
+            {
+                $persistentCustomer = $this->getFactory()->create();
+                $resource->loadCustomerBySkroutzId($persistentCustomer, $customer->getSkroutzId());
+                $customer->setId($persistentCustomer->getId());
+            }
+
+            $resource->saveCustomer($customer);
             return $customer;
         }
 

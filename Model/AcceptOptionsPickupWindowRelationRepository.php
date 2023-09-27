@@ -18,7 +18,7 @@
         Magento\Framework\Api\SearchCriteriaBuilder,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\AcceptOptionsPickupWindowRelationResourceInterface as ResourceInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface,

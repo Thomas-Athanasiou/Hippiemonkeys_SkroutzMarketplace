@@ -17,7 +17,7 @@
     use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteriaBuilder,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterfaceFactory as SearchResultInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,

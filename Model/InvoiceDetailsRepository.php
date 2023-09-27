@@ -14,7 +14,7 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+    use Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterfaceFactory,

@@ -21,14 +21,14 @@
         Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException;
+        Magento\Framework\Exception\NoSuchEntityException;
 
     class PickupLocationRelation
     implements ModelRelationProcessorInterface
     {
         protected const
-            FIELD_ACCEPT_OPTIONS_ID     = 'accept_options_id',
-            FIELD_PICKUP_LOCATION_ID    = 'pickup_location_id';
+            FIELD_ACCEPT_OPTIONS_ID = 'accept_options_id',
+            FIELD_PICKUP_LOCATION_ID = 'pickup_location_id';
 
         /**
          * Constructor
@@ -45,9 +45,9 @@
             AcceptOptionsPickupLocationRelationRepositoryInterface $acceptOptionsPickupLocationRelationRepository
         )
         {
-            $this->_pickupLocationRepository = $pickupLocationRepository;
-            $this->_acceptOptionsPickupLocationRelationFactory = $acceptOptionsPickupLocationRelationFactory;
-            $this->_acceptOptionsPickupLocationRelationRepository = $acceptOptionsPickupLocationRelationRepository;
+            $this->pickupLocationRepository = $pickupLocationRepository;
+            $this->acceptOptionsPickupLocationRelationFactory = $acceptOptionsPickupLocationRelationFactory;
+            $this->acceptOptionsPickupLocationRelationRepository = $acceptOptionsPickupLocationRelationRepository;
         }
 
         /**
@@ -100,20 +100,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface $pickupLocationRepository
          */
-        private $_pickupLocationRepository;
+        private $pickupLocationRepository;
 
         /**
          * Gets Pickup Location Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface
          */
-        protected function getPickupLocationRepository(): PickupLocationRepositoryInterface
+        protected final function getPickupLocationRepository(): PickupLocationRepositoryInterface
         {
-            return $this->_pickupLocationRepository;
+            return $this->pickupLocationRepository;
         }
 
         /**
@@ -121,20 +122,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory $_acceptOptionsPickupLocationRelationFactory
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory $acceptOptionsPickupLocationRelationFactory
          */
-        private $_acceptOptionsPickupLocationRelationFactory;
+        private $acceptOptionsPickupLocationRelationFactory;
 
         /**
          * Gets Accept Options Pickup Location Relation Factory
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterfaceFactory
          */
-        protected function getAcceptOptionsPickupLocationRelationFactory(): AcceptOptionsPickupLocationRelationInterfaceFactory
+        protected final function getAcceptOptionsPickupLocationRelationFactory(): AcceptOptionsPickupLocationRelationInterfaceFactory
         {
-            return $this->_acceptOptionsPickupLocationRelationFactory;
+            return $this->acceptOptionsPickupLocationRelationFactory;
         }
 
         /**
@@ -142,20 +144,21 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $_acceptOptionsPickupLocationRelationRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface $acceptOptionsPickupLocationRelationRepository
          */
-        private $_acceptOptionsPickupLocationRelationRepository;
+        private $acceptOptionsPickupLocationRelationRepository;
 
         /**
          * Gets Accept Options Pickup Location Relation Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsPickupLocationRelationRepositoryInterface
          */
-        protected function getAcceptOptionsPickupLocationRelationRepository(): AcceptOptionsPickupLocationRelationRepositoryInterface
+        protected final function getAcceptOptionsPickupLocationRelationRepository(): AcceptOptionsPickupLocationRelationRepositoryInterface
         {
-            return $this->_acceptOptionsPickupLocationRelationRepository;
+            return $this->acceptOptionsPickupLocationRelationRepository;
         }
     }
 ?>

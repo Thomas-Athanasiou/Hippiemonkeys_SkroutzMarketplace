@@ -16,5 +16,20 @@
                 <stock_id>1</stock_id>
             </marketplace>
         </hippiemonkeys_skroutz>
+        <carriers>
+            <hippiemonkeysskroutzmarketplace>
+                <active>1</active>
+                <title>Skroutz Marketplace</title>
+                <method_title>Base</method_title>
+                <zip_code_check>1</zip_code_check>
+                <sallowspecific>0</sallowspecific>
+                <specificcountry></specificcountry>
+                <showmethod>1</showmethod>
+                <sort_order>1000</sort_order>
+                <model>Hippiemonkeys\SkroutzMarketplace\Model\Carrier</model>
+                <use_store_shipper_data>0</use_store_shipper_data>
+                <max_package_weight>50000</max_package_weight>
+            </hippiemonkeysskroutzmarketplace>
+        </carriers>
     </default>
 </config>

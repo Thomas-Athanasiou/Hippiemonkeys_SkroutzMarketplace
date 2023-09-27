@@ -16,7 +16,7 @@
 
     use Magento\Framework\Api\SearchCriteriaInterface,
         Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface,
-        Hippiemonkeys\SkroutzMarketplace\Exception\NoSuchEntityException,
+        Magento\Framework\Exception\NoSuchEntityException,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterfaceFactory,
         Hippiemonkeys\SkroutzMarketplace\Api\PickupLocationRepositoryInterface,

@@ -17,7 +17,7 @@
     use Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptionsPickupLocationRelation as Model,
         Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptionsPickupLocationRelation as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection;
 
     class Collection
     extends AbstractCollection

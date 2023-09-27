@@ -17,7 +17,7 @@
     use Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsSearchResultInterface as SearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\AcceptOptions as Model,
         Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\AcceptOptions as ResourceModel,
-        Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Collection\AbstractCollection;
+        Hippiemonkeys\Core\Model\ResourceModel\Collection\AbstractCollection;
 
     class Collection
     extends AbstractCollection

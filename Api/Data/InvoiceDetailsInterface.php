@@ -167,7 +167,7 @@
          * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface
          */
         function getVatExclusionRepresentative(): VatExclusionRepresentativeInterface;
 
@@ -181,6 +181,6 @@
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface
          */
-        function setVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative);
+        function setVatExclusionRepresentative(VatExclusionRepresentativeInterface $vatExclusionRepresentative): InvoiceDetailsInterface;
     }
 ?>

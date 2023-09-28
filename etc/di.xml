@@ -6,7 +6,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\SkroutzMarketplace" />
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
+    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Skroutz\Marketplace" type="Hippiemonkeys\SkroutzMarketplace\Helper\Config\Skroutz\Marketplace">
         <arguments>
             <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
             <argument name="group" xsi:type="string">marketplace</argument>
@@ -16,7 +16,7 @@
     </virtualType>
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\SkroutzMarketplace">
         <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Skroutz\Marketplace</argument>
             <argument name="servicePayloadConverter" xsi:type="object">Magento\Framework\Webapi\ServiceInputProcessor</argument>
         </arguments>
     </type>
@@ -62,6 +62,7 @@
     <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\CustomerResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Customer\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\CustomerRepository" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\CustomerManagementInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\CustomerManagement" />
 
     <!-- Rejection Info -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectionInfo" />
@@ -74,23 +75,8 @@
     <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\InvoiceDetailsResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\InvoiceDetailsRepository" />
-    <virtualType name="Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetails" type="Hippiemonkeys\Core\Helper\Config\Section\Group\Sub">
-        <arguments>
-            <argument name="section" xsi:type="string">hippiemonkeys_skroutz</argument>
-            <argument name="group" xsi:type="string">marketplace</argument>
-            <argument name="activeField" xsi:type="string">active_save_invoice_details</argument>
-            <argument name="parentConfig" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-        </arguments>
-    </virtualType>
-    <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderInvoiceDetailsProcessor">
-        <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\MarketplaceInvoiceDetails</argument>
-        </arguments>
-    </type>
-        <virtualType
-        name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\RelationComposite"
-        type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite"
-    >
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsManagementInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\InvoiceDetailsManagement" />
+    <virtualType name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\RelationComposite" type="Hippiemonkeys\Core\Model\ResourceModel\ModelRelationComposite">
         <arguments>
             <argument name="modelRelationProcessors" xsi:type="array">
                 <item name="vatexclusionrepresentative" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\VatExclusionRepresentativeRelation</item>
@@ -99,7 +85,7 @@
     </virtualType>
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails">
         <arguments>
-            <argument name="modelRelationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RelationComposite</argument>
+            <argument name="modelRelationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\InvoiceDetails\RelationComposite</argument>
         </arguments>
     </type>
 
@@ -108,6 +94,11 @@
     <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItem" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\LineItem\Collection" />
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItemRepository" />
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\LineItem">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Skroutz\Marketplace</argument>
+        </arguments>
+    </type>
 
     <!-- Line Item Rejection Reason -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\LineItemRejectionReason" />
@@ -120,6 +111,10 @@
 
     <!-- Vat Exclusion Representative -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\VatExclusionRepresentative" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\VatExclusionRepresentativeResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\VatExclusionRepresentative" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\VatExclusionRepresentative\Collection" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\VatExclusionRepresentativeRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\VatExclusionRepresentativeRepository" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\VatExclusionRepresentativeManagementInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\VatExclusionRepresentativeManagement" />
 
     <!-- Order -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\Order" />
@@ -144,11 +139,9 @@
             <argument name="modelRelationProcessor" xsi:type="object">Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Order\RelationComposite</argument>
         </arguments>
     </type>
-
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderProcessorComposite">
         <arguments>
-            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Section\Group\Marketplace</argument>
-            <argument name="orderProcessors" xsi:type="array"></argument>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Skroutz\Marketplace</argument>
         </arguments>
     </type>
     <type name="Hippiemonkeys\SkroutzMarketplace\Model\OrderManagement">

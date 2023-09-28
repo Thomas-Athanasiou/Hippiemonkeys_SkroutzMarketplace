@@ -14,16 +14,16 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel;
 
-    use Hippiemonkeys\Core\Model\ResourceModel\AbstractRelationResource,
+    use Hippiemonkeys\Core\Model\ResourceModel\AbstractResource,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\VatExclusionRepresentativeResourceInterface;
 
     class VatExclusionRepresentative
-    extends AbstractRelationResource
+    extends AbstractResource
     implements VatExclusionRepresentativeResourceInterface
     {
         protected const
-            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_vatexlusionrepresentative';
+            TABLE_MAIN  = 'hippiemonkeys_skroutzmarketplace_vatexclusionrepresentative';
 
         /**
          * @inheritdoc

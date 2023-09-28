@@ -66,5 +66,27 @@
          * @return void
          */
         function updateAndProcessOrdersWithStateAndLimit(string $state, int $limit): void;
+
+        /**
+         * Saves an order and its dependencies
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
+         *
+         * @return void
+         */
+        function saveOrder(OrderInterface $order): void;
+
+        /**
+         * Synchronizes an order with the persistent storage data
+         *
+         * @access public
+         *
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
+         *
+         * @return void
+         */
+        function syncOrder(OrderInterface $order): void;
     }
 ?>

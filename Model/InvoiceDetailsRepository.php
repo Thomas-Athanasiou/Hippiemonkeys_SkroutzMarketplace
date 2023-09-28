@@ -42,7 +42,7 @@
             if (!$invoiceDetails->getId())
             {
                 throw new NoSuchEntityException(
-                    __('The InvoiceDetails with id "%1" that was requested doesn\'t exist. Verify the invoiceDetails and try again.', $id)
+                    __('The Invoice Details with id "%1" that was requested doesn\'t exist. Verify the invoiceDetails and try again.', $id)
                 );
             }
             return $invoiceDetails;

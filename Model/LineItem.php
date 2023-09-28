@@ -15,13 +15,13 @@
     use Magento\Framework\Model\Context,
         Magento\Framework\Registry,
         Magento\Catalog\Api\Data\ProductInterface,
-        Magento\Catalog\Api\ProductRepositoryInterface,
         Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface as ResourceInterface;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\LineItemResourceInterface as ResourceInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface as ConfigInterface;
 
     class LineItem
     extends AbstractModel
@@ -34,20 +34,20 @@
          *
          * @param \Magento\Framework\Model\Context $context
          * @param \Magento\Framework\Registry $registry
-         * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface $config
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
          * @param array $data
          */
         public function __construct(
             Context $context,
             Registry $registry,
-            ProductRepositoryInterface $productRepository,
+            ConfigInterface $config,
             OrderRepositoryInterface $orderRepository,
             array $data = []
         )
         {
             parent::__construct($context, $registry, $data);
-            $this->productRepository = $productRepository;
+            $this->config = $config;
             $this->orderRepository = $orderRepository;
 
             $this->size = null;
@@ -356,10 +356,7 @@
             $product = $this->product;
             if ($product === null)
             {
-                /**TODO: More product ids */
-                $product = $this->getProductRepository()->getById(
-                    $this->getShopUid()
-                );
+                $product = $this->getConfig()->getMagentoProductFromIdentity($this->getShopUid());
                 $this->product = $product;
             }
             return $product;
@@ -370,31 +367,30 @@
          */
         public function setProduct(ProductInterface $product): self
         {
-            /**TODO: More product ids */
             $this->product = $product;
-            return $this->setShopUid((int) $product->getId());
+            return $this->setShopUid($this->getConfig()->getMagentoProductIdentity($product));
         }
 
         /**
-         * Product Repository property
+         * Config property
          *
          * @access private
          *
-         * @var \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface $config
          */
-        private $productRepository;
+        private $config;
 
         /**
-         *  Gets Product Repository
+         *  Gets Config
          *
          * @access protected
          * @final
          *
-         * @return \Magento\Catalog\Api\ProductRepositoryInterface
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface
          */
-        protected final function getProductRepository(): ProductRepositoryInterface
+        protected final function getConfig(): ConfigInterface
         {
-            return $this->productRepository;
+            return $this->config;
         }
 
         /**

@@ -29,6 +29,7 @@
                 <model>Hippiemonkeys\SkroutzMarketplace\Model\Carrier</model>
                 <use_store_shipper_data>0</use_store_shipper_data>
                 <max_package_weight>50000</max_package_weight>
+                <magento_product_identity_field>entity_id</magento_product_identity_field>
             </hippiemonkeysskroutzmarketplace>
         </carriers>
     </default>

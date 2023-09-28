@@ -32,7 +32,7 @@
          */
         public function __construct(AcceptOptionsRepositoryInterface $acceptOptionsRepository)
         {
-            $this->_acceptOptionsRepository = $acceptOptionsRepository;
+            $this->acceptOptionsRepository = $acceptOptionsRepository;
         }
 
         /**
@@ -77,7 +77,7 @@
          *
          * @var \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
-        private $_acceptOptionsRepository;
+        private $acceptOptionsRepository;
 
         /**
          * Gets Accept Options Repository
@@ -88,7 +88,7 @@
          */
         protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
-            return $this->_acceptOptionsRepository;
+            return $this->acceptOptionsRepository;
         }
     }
 ?>

@@ -65,7 +65,6 @@
             return $this->loadModel($order, $magentoOrderId, static::FIELD_MAGENTO_ORDER_ID);
         }
 
-
         /**
          * @inheritdoc
          */

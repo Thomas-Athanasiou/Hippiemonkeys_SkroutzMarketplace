@@ -54,7 +54,7 @@
                         try
                         {
                             $vatExclusionRepresentative->setId(
-                                $this->getVatExclusionRepresentativeRepository()->getByIdTypeAndIdNumber(
+                                $vatExclusionRepresentativeRepository->getByIdTypeAndIdNumber(
                                     $vatExclusionRepresentative->getIdType(),
                                     $vatExclusionRepresentative->getIdNumber()
                                 )

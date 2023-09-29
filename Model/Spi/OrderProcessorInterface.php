@@ -21,7 +21,6 @@
         /**
          * Process order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order

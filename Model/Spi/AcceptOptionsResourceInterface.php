@@ -30,7 +30,6 @@
         /**
          * Save Accept Options data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
@@ -42,7 +41,6 @@
         /**
          * Load a Accept Options by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
@@ -55,7 +53,6 @@
         /**
          * Load a Accept Options by Order Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions
@@ -68,7 +65,6 @@
         /**
          * Delete the Accept Options
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $acceptOptions

@@ -31,7 +31,6 @@
         /**
          * Save Line Item Rejection Reason data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface $lineItemRejectionReason
@@ -43,7 +42,6 @@
         /**
          * Load a Line Item Rejection Reason by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface $lineItemRejectionReason
@@ -56,7 +54,6 @@
         /**
          * Load a Line Item Rejection Reason by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface $lineItemRejectionReason
@@ -69,7 +66,6 @@
         /**
          * Deletes Line Item Rejection Reason
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface $lineItemRejectionReason

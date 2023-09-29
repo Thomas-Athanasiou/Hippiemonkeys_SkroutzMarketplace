@@ -17,6 +17,7 @@
         Magento\Catalog\Api\Data\ProductInterface,
         Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface,
@@ -36,6 +37,7 @@
          * @param \Magento\Framework\Registry $registry
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface $config
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface $sizeRepository
          * @param array $data
          */
         public function __construct(
@@ -43,12 +45,14 @@
             Registry $registry,
             ConfigInterface $config,
             OrderRepositoryInterface $orderRepository,
+            SizeRepositoryInterface $sizeRepository,
             array $data = []
         )
         {
             parent::__construct($context, $registry, $data);
             $this->config = $config;
             $this->orderRepository = $orderRepository;
+            $this->sizeRepository = $sizeRepository;
 
             $this->size = null;
             $this->order = null;
@@ -229,7 +233,19 @@
          */
         public function getSize(): ?SizeInterface
         {
-            return $this->size;
+            $size = $this->size;
+
+            if($size === null)
+            {
+                $sizeId = $this->getData(ResourceInterface::FIELD_SIZE_ID);
+                if($sizeId !== null)
+                {
+                    $size = $this->getSizeRepository()->getById($sizeId);
+                    $this->size = $size;
+                }
+            }
+
+            return $size;
         }
 
         /**
@@ -238,7 +254,7 @@
         public function setSize(?SizeInterface $size): self
         {
             $this->size = $size;
-            return $this;
+            return $this->setData(ResourceInterface::FIELD_SIZE_ID, $size === null ? null : $size->getId());
         }
 
         /**
@@ -413,6 +429,28 @@
         protected final function getOrderRepository(): OrderRepositoryInterface
         {
             return $this->orderRepository;
+        }
+
+        /**
+         * Size Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface $sizeRepository
+         */
+        private $sizeRepository;
+
+        /**
+         * Gets Size Repository
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface
+         */
+        protected final function getSizeRepository(): SizeRepositoryInterface
+        {
+            return $this->sizeRepository;
         }
     }
 ?>

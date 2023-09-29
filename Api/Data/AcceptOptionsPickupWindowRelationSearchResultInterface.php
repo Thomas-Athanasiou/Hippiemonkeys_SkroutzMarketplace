@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface AcceptOptionsPickupWindowRelationSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection  Accept Options Pickup Window Relation items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface[]
@@ -32,7 +34,6 @@
         /**
          * Sets collection Accept Options Pickup Window Relation items.
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface[] $acceptOptionsPickupWindowRelation

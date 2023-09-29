@@ -23,7 +23,6 @@
         /**
          * Gets Pickup Location by Id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -35,7 +34,6 @@
         /**
          * Gets Pickup Location by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param string $skroutzId
@@ -47,7 +45,6 @@
         /**
          * Gets list by Search Criteria
          *
-         * @api
          * @access public
          *
          * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
@@ -59,7 +56,6 @@
         /**
          * Deletes the Pickup Location instance from the repository
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
@@ -71,7 +67,6 @@
         /**
          * Saves the Pickup Location instance to the repository
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation

@@ -14,33 +14,41 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-use Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface;
-use Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface;
-use Magento\Framework\Registry,
+    use Magento\Framework\Registry,
         Magento\Framework\Model\Context,
         Magento\Framework\Api\SearchCriteriaBuilder,
         Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsLineItemRejectionReasonRelationResourceInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectOptionsResourceInterface as ResourceInterface;
 
     class RejectOptions
     extends AbstractModel
     implements RejectOptionsInterface
     {
-        public const
-            FIELD_ORDER = 'order',
-            FIELD_LINE_ITEM_REJECTION_REASON = 'line_item_rejection_reason',
-
-            REJECT_OPTIONS_LINE_ITEM_REJECTION_REASON_RELATION_FIELD_REJECT_OPTIONS_ID = 'reject_options_id';
-
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Magento\Framework\Model\Context $context
+         * @param \Magento\Framework\Registry $registry
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
+         * @param array $data
+         */
         public function __construct(
             Context $context,
             Registry $registry,
-            RejectOptionslineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository,
+            RejectOptionsLineItemRejectionReasonRelationRepositoryInterface $rejectOptionsLineItemRejectionReasonRelationRepository,
             LineItemRejectionReasonRepositoryInterface $lineItemRejectionReasonRepository,
             OrderRepositoryInterface $orderRepository,
             SearchCriteriaBuilder $searchCriteriaBuilder,
@@ -54,6 +62,7 @@ use Magento\Framework\Registry,
             $this->orderRepository = $orderRepository;
             $this->searchCriteriaBuilder = $searchCriteriaBuilder;
 
+            $this->lineItemRejectionReasons = null;
             $this->order = null;
         }
 
@@ -71,8 +80,9 @@ use Magento\Framework\Registry,
          */
         public function getLineItemRejectionReasons(): array
         {
-            $lineItemRejectionReasons = $this->getData(static::FIELD_LINE_ITEM_REJECTION_REASON);
-            if(!$lineItemRejectionReasons === null)
+            $lineItemRejectionReasons = $this->lineItemRejectionReasons;
+
+            if($lineItemRejectionReasons === null)
             {
                 $lineItemRejectionReasons = array_map(
                     function(RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation): LineItemRejectionReasonInterface
@@ -82,7 +92,7 @@ use Magento\Framework\Registry,
                     $this->getRejectOptionsLineItemRejectionReasonRelationRepository()
                         ->getList(
                             $this->getSearchCriteriaBuilder()
-                                ->addFilter(static::REJECT_OPTIONS_LINE_ITEM_REJECTION_REASON_RELATION_FIELD_REJECT_OPTIONS_ID, $this->getId())
+                                ->addFilter(RejectOptionsLineItemRejectionReasonRelationResourceInterface::FIELD_REJECT_OPTIONS_ID, $this->getId())
                                 ->create()
                         )
                         ->getItems()
@@ -90,6 +100,7 @@ use Magento\Framework\Registry,
 
                 $this->lineItemRejectionReasons = $lineItemRejectionReasons;
             }
+
             return $lineItemRejectionReasons;
         }
 
@@ -117,6 +128,7 @@ use Magento\Framework\Registry,
         public function getOrder(): OrderInterface
         {
             $order = $this->order;
+
             if ($order === null)
             {
                 $order = $this->getOrderRepository()->getById(
@@ -124,6 +136,7 @@ use Magento\Framework\Registry,
                 );
                 $this->order = $order;
             }
+
             return $order;
         }
 
@@ -150,10 +163,11 @@ use Magento\Framework\Registry,
          * Gets Reject Options Line Item Rejection Reason Relation Repository property
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
          */
-        protected function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
+        protected final function getRejectOptionsLineItemRejectionReasonRelationRepository(): RejectOptionsLineItemRejectionReasonRelationRepositoryInterface
         {
             return $this->rejectOptionsLineItemRejectionReasonRelationRepository;
         }
@@ -171,12 +185,35 @@ use Magento\Framework\Registry,
          * Gets Order Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface
          */
-        protected function getOrderRepository(): OrderRepositoryInterface
+        protected final function getOrderRepository(): OrderRepositoryInterface
         {
             return $this->orderRepository;
+        }
+
+        /**
+         * Search Criteria Builder property
+         *
+         * @access private
+         *
+         * @var \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
+         */
+        private $searchCriteriaBuilder;
+
+        /**
+         * Gets Search Criteria Builder
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Magento\Framework\Api\SearchCriteriaBuilder
+         */
+        protected final function getSearchCriteriaBuilder(): SearchCriteriaBuilder
+        {
+            return $this->searchCriteriaBuilder;
         }
     }
 ?>

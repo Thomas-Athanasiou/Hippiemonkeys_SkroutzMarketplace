@@ -31,7 +31,6 @@
         /**
          * Saves Vat Exclusion Representative data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface $vatExclusionRepresentative
@@ -43,7 +42,6 @@
         /**
          * Loads a Vat Exclusion Representative by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface $vatExclusionRepresentative
@@ -56,7 +54,6 @@
         /**
          * Deletes the Vat Exclusion Representative
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface $vatExclusionRepresentative

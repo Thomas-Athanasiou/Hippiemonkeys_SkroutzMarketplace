@@ -16,23 +16,24 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface AcceptOptionsPickupLocationRelationSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection Accept Options Pickup Location Relation items
          *
-         * @api
          * @access public
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface[] Array of collection line items.
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface[] Array of collection line items
          */
         public function getItems();
 
         /**
-         * Sets collection Accept Options Pickup Location Relation items.
+         * Sets collection Accept Options Pickup Location Relation items
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface[] $acceptOptionsPickupLocationRelation

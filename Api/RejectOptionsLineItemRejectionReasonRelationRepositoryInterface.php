@@ -14,7 +14,7 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Api;
 
-    use Magento\Framework\Api\Search\SearchCriteriaInterface,
+    use Magento\Framework\Api\SearchCriteriaInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface,
@@ -25,7 +25,6 @@
         /**
          * Gets Reject Options - Line Item Rejection Reason relation by id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -37,10 +36,9 @@
         /**
          * Gets List of Reject Options Items
          *
-         * @api
          * @access public
          *
-         * @param \Magento\Framework\Api\Search\SearchCriteriaInterface $searchCriteria
+         * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationSearchResultInterface,
          */
@@ -49,7 +47,6 @@
         /**
          * Gets Reject Options - Line Item Rejection Reason relation by Reject Options and Line Item Rejection Reason
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -61,7 +58,6 @@
         /**
          * Deletes Reject Options - Line Item Rejection Reason relation
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
@@ -73,7 +69,6 @@
         /**
          * Saves Reject Options - Line Item Rejection Reason relation
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation

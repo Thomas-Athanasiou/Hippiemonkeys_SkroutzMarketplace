@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface AddressSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[]
@@ -32,7 +34,6 @@
         /**
          * Sets collection address items
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface[] $address

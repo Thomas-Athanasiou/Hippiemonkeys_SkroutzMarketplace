@@ -14,15 +14,18 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Api\Data;
 
-    use Hippiemonkeys\Core\Api\Data\ModelInterface;
+    use Magento\Catalog\Api\Data\ProductInterface,
+        Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface SizeInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $value
@@ -34,7 +37,6 @@
         /**
          * Gets Label
          *
-         * @api
          * @access public
          *
          * @return string.
@@ -44,7 +46,6 @@
         /**
          * Sets Label
          *
-         * @api
          * @access public
          *
          * @param string $label
@@ -56,7 +57,6 @@
         /**
          * Gets Value
          *
-         * @api
          * @access public
          *
          * @return string.
@@ -66,7 +66,6 @@
         /**
          * Sets Value
          *
-         * @api
          * @access public
          *
          * @param string|null $value
@@ -77,7 +76,6 @@
         /**
          * Gets shop value
          *
-         * @api
          * @access public
          *
          * @return string|null.
@@ -87,7 +85,6 @@
         /**
          * Sets shop value
          *
-         * @api
          * @access public
          *
          * @param string|null $shopValue
@@ -99,7 +96,6 @@
         /**
          * Gets shop variation uid
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -109,7 +105,6 @@
         /**
          * Sets shop variation uid
          *
-         * @api
          * @access public
          *
          * @param string|null $shopVariationUid
@@ -121,7 +116,6 @@
         /**
          * Gets Ean
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -131,7 +125,6 @@
         /**
          * Sets Ean
          *
-         * @api
          * @access public
          *
          * @param string|null $ean
@@ -139,5 +132,25 @@
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
          */
         function setEan(?string $ean): SizeInterface;
+
+        /**
+         * Gets Ean
+         *
+         * @access public
+         *
+         * @return \Magento\Catalog\Api\Data\ProductInterface
+         */
+        function getProduct(): ProductInterface;
+
+        /**
+         * Sets Ean
+         *
+         * @access public
+         *
+         * @param \Magento\Catalog\Api\Data\ProductInterface $product
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface
+         */
+        function setProduct(ProductInterface $product): SizeInterface;
     }
 ?>

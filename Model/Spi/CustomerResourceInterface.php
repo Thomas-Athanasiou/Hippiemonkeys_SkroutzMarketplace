@@ -32,7 +32,6 @@
         /**
          * Saves Customer data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer
@@ -44,7 +43,6 @@
         /**
          * Loads a Customer by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer
@@ -57,7 +55,6 @@
         /**
          * Loads a Customer by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer
@@ -70,7 +67,6 @@
         /**
          * Deletes the Customer
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer

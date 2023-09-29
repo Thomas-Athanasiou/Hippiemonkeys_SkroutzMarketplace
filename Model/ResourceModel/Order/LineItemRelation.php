@@ -18,6 +18,7 @@
         Hippiemonkeys\Core\Model\Spi\ModelRelationProcessorInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface,
         Magento\Framework\Exception\NoSuchEntityException;
 
     class LineItemRelation
@@ -29,10 +30,15 @@
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $lineItemRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface $sizeRepository
          */
-        public function __construct(LineItemRepositoryInterface $lineItemRepository)
+        public function __construct(
+            LineItemRepositoryInterface $lineItemRepository,
+            SizeRepositoryInterface $sizeRepository
+        )
         {
-            $this->_lineItemRepository = $lineItemRepository;
+            $this->lineItemRepository = $lineItemRepository;
+            $this->sizeRepository = $sizeRepository;
         }
 
         /**
@@ -41,23 +47,39 @@
         public function processModelRelation(ModelInterface $model): void
         {
             /** @var \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $model */
-            $lineItemRepository = $this->getLineItemRepository();
             if($model instanceof OrderInterface)
             {
+                $lineItemRepository = $this->getLineItemRepository();
+                $sizeRepository = $this->getSizeRepository();
                 foreach($model->getLineItems() as $lineItem)
                 {
+                    $size = $lineItem->getSize();
                     if($lineItem->getId() === null)
                     {
                         try
                         {
-                            $lineItem->setId(
-                                $lineItemRepository->getBySkroutzId($lineItem->getSkroutzId())->getId()
-                            );
+                            $persistentLineItem = $lineItemRepository->getBySkroutzId($lineItem->getSkroutzId());
+                            $lineItem->setId($persistentLineItem->getId());
+                            $persistentSize = $persistentLineItem->getSize();
+                            if($size === null)
+                            {
+                                $size = $persistentLineItem->getSize();
+                            }
+                            else if($persistentSize !== null)
+                            {
+                                $size->setId($persistentSize->getId());
+                            }
                         }
                         catch(NoSuchEntityException)
                         {
                             /** Line Item doesn't exist in the first place */
                         }
+                    }
+
+                    if($size !== null)
+                    {
+                        $sizeRepository->save($size);
+                        $lineItem->setSize($size);
                     }
 
                     $lineItem->setOrder($model);
@@ -71,20 +93,43 @@
          *
          * @access private
          *
-         * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $lineItemRepository
          */
-        private $_lineItemRepository;
+        private $lineItemRepository;
 
         /**
          * Gets Line Item Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface
          */
-        protected function getLineItemRepository(): LineItemRepositoryInterface
+        protected final function getLineItemRepository(): LineItemRepositoryInterface
         {
-            return $this->_lineItemRepository;
+            return $this->lineItemRepository;
+        }
+
+        /**
+         * Size Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface $sizeRepository
+         */
+        private $sizeRepository;
+
+        /**
+         * Gets Size Repository
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface
+         */
+        protected final function getSizeRepository(): SizeRepositoryInterface
+        {
+            return $this->sizeRepository;
         }
     }
 ?>

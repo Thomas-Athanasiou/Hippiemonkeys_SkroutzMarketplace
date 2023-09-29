@@ -25,7 +25,7 @@
     {
         const
             FIELD_SKROUTZ_ID = 'skroutz_id',
-            FIELD_SIZE = 'size',
+            FIELD_SIZE_ID = 'size_id',
             FIELD_SHOPUID = 'shopuid',
             FIELD_PRODUCT_NAME = 'product_name',
             FIELD_QUANTITY = 'quantity',
@@ -44,7 +44,6 @@
         /**
          * Saves Line Item data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem
@@ -56,7 +55,6 @@
         /**
          * Load a Line Item by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem
@@ -69,7 +67,6 @@
         /**
          * Load a Line Item by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem
@@ -82,7 +79,6 @@
         /**
          * Deletes the Line Item
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem

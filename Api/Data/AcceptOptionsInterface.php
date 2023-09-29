@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface AcceptOptionsInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $value
@@ -34,7 +36,6 @@
         /**
          * Get number of parcels
          *
-         * @api
          * @access public
          *
          * @return int[]
@@ -44,7 +45,6 @@
         /**
          * Set number of parcels
          *
-         * @api
          * @access public
          *
          * @param int[] $numberOfParcels
@@ -56,7 +56,6 @@
         /**
          * Get pickup locations
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[]
@@ -66,7 +65,6 @@
         /**
          * Set pickup locations
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] $pickupLocation
@@ -78,7 +76,6 @@
         /**
          * Get pickup windows
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[]
@@ -88,7 +85,6 @@
         /**
          * Set pickup windows
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $pickupLocation
@@ -100,7 +96,6 @@
         /**
          * Get Order
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
@@ -110,7 +105,6 @@
         /**
          * Set Order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order

@@ -21,7 +21,6 @@
         /**
          * Get Address by id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -33,7 +32,6 @@
         /**
          * Delete Address
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address
@@ -45,7 +43,6 @@
         /**
          * Save Address
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address

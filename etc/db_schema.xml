@@ -135,7 +135,7 @@
         <constraint
             xsi:type="foreign"
             referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_INVOICEDETALS_ADDRESS_ID_FK"
-            table="hippiemonkeys_skroutzmarketplace_customer"
+            table="hippiemonkeys_skroutzmarketplace_invoicedetails"
             column="address_id"
             referenceTable="hippiemonkeys_skroutzmarketplace_address"
             referenceColumn="id"
@@ -161,12 +161,22 @@
         <column xsi:type="varchar" name="return_reason" length="32" nullable="true" comment="Return Reason" />
         <column xsi:type="varchar" name="serial_numbers" length="128" nullable="true" comment="Serial Numbers" />
         <column xsi:type="varchar" name="shop_variation_uid" length="64" nullable="true" comment="Shop Variation Uid" />
+        <column xsi:type="int" name="size_id" unsigned="true" nullable="true" comment="ID" />
         <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_LINEITEM_SKROUTZ_ID_UN">
             <column name="skroutz_id"/>
         </constraint>
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_LINEITEM_ID_PK">
             <column name="id" />
         </constraint>
+        <constraint
+            xsi:type="foreign"
+            referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_LINEITEM_SIZE_ID_FK"
+            table="hippiemonkeys_skroutzmarketplace_size"
+            column="size_id"
+            referenceTable="hippiemonkeys_skroutzmarketplace_size"
+            referenceColumn="id"
+            onDelete="SET NULL"
+        />
     </table>
     <table name="hippiemonkeys_skroutzmarketplace_lineitemrejectionreason" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Marketplace - Line Item Rejection Reason">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
@@ -198,6 +208,7 @@
         <column xsi:type="varchar" length="256" name="fbs_delivery_note" nullable="true" comment="Fbs Delivery Note" />
         <column xsi:type="varchar" length="256" name="pickup_address" nullable="true" comment="Pickup Address" />
         <column xsi:type="int" unsigned="true" name="number_of_parcels" nullable="true" comment="Number Of Parcels" />
+        <column xsi:type="int" name="rejection_info_id" unsigned="true" nullable="true" comment="Rejection Info ID" />
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_ORDER_ID_PK">
             <column name="id" />
         </constraint>
@@ -206,10 +217,37 @@
         </constraint>
         <constraint
             xsi:type="foreign"
-            referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_ACCEPTOPTIONSPICKUPLOCATIONRELATION_PICKUPLOCATION_ID_FK"
+            referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_ORDER_CUSTOMER_ID_FK"
             table="hippiemonkeys_skroutzmarketplace_order"
             column="customer_id"
             referenceTable="hippiemonkeys_skroutzmarketplace_customer"
+            referenceColumn="id"
+            onDelete="SET NULL"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_ORDER_INVOICEDETAILS_ID_FK"
+            table="hippiemonkeys_skroutzmarketplace_order"
+            column="invoice_details_id"
+            referenceTable="hippiemonkeys_skroutzmarketplace_invoicedetails"
+            referenceColumn="id"
+            onDelete="SET NULL"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_ORDER_MAGENTO_ORDER_ID_FK"
+            table="hippiemonkeys_skroutzmarketplace_order"
+            column="magento_order_id"
+            referenceTable="sales_order"
+            referenceColumn="entity_id"
+            onDelete="SET NULL"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_ORDER_REJECTION_INFO_ID_FK"
+            table="hippiemonkeys_skroutzmarketplace_order"
+            column="rejection_info_id"
+            referenceTable="hippiemonkeys_skroutzmarketplace_rejectioninfo"
             referenceColumn="id"
             onDelete="SET NULL"
         />
@@ -298,7 +336,19 @@
         <column xsi:type="varchar" name="id_type" length="64" nullable="false" comment="ID Type" />
         <column xsi:type="varchar" name="id_number" length="64" nullable="false" comment="ID Number" />
         <column xsi:type="varchar" name="otp" length="64" nullable="false" comment="Otp" />
+        <constraint xsi:type="unique" referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_VATEXCLUSIONREPRESENTATIVE_ID_TYPE_ID_NUMBER_UN">
+            <column name="id_type"/>
+            <column name="id_number"/>
+        </constraint>
         <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_VATEXCLUSIONREPRESENTATIVE_ID_PK">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="hippiemonkeys_skroutzmarketplace_rejectioninfo" resource="default" engine="innodb" comment="Hippiemonkeys Skroutz Marketplace - Rejection Info">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Rejection Info ID" />
+        <column xsi:type="varchar" name="actor" length="64" nullable="false" comment="Rejection Info Actor" />
+        <column xsi:type="varchar" name="reason" length="64" nullable="false" comment="Rejection Info Reason" />
+        <constraint xsi:type="primary" referenceId="HIPPIEMONKEYS_SKROUTZMARKETPLACE_REJECTIONINFO_ID_PK">
             <column name="id" />
         </constraint>
     </table>

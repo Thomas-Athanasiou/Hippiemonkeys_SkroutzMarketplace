@@ -24,7 +24,6 @@
         /**
          * Get Reject Options by Order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order

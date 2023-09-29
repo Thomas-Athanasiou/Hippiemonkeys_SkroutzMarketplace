@@ -30,7 +30,6 @@
         /**
          * Save Order Pickup Window data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface $orderPickupWindow
@@ -42,7 +41,6 @@
         /**
          * Load a OrderPickupWindow by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface $orderPickupWindow
@@ -55,7 +53,6 @@
         /**
          * Delete the OrderPickupWindow
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface $orderPickupWindow

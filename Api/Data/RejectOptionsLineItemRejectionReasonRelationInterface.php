@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface RejectOptionsLineItemRejectionReasonRelationInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $value
@@ -34,7 +36,6 @@
         /**
          * Gets Reject Options
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface
@@ -44,7 +45,6 @@
         /**
          * Sets Reject Options
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $value
@@ -56,7 +56,6 @@
         /**
          * Gets Line Item Rejection Reason
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface
@@ -66,7 +65,6 @@
         /**
          * Sets Line Item Rejection Reason
          *
-         * @api
          * @access public
          *
          * @param Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface $value

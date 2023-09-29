@@ -24,7 +24,6 @@
         /**
          * Gets Order by Id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -36,7 +35,6 @@
         /**
          * Gets Order by Code
          *
-         * @api
          * @access public
          *
          * @param string $code
@@ -48,7 +46,6 @@
         /**
          * Gets Order by Magento Order
          *
-         * @api
          * @access public
          *
          * @param \Magento\Sales\Api\Data\OrderInterface $magentoOrder
@@ -60,7 +57,6 @@
         /**
          * Gets list by Search Criteria
          *
-         * @api
          * @access public
          *
          * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
@@ -72,7 +68,6 @@
         /**
          * Deletes Order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
@@ -84,7 +79,6 @@
         /**
          * Saves Order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order

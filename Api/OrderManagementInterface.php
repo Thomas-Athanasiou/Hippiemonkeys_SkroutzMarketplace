@@ -21,7 +21,6 @@
         /**
          * Process order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -33,7 +32,6 @@
         /**
          * Update and Process order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -45,7 +43,6 @@
         /**
          * Updates and Processes orders with given state
          *
-         * @api
          * @access public
          *
          * @param string $state
@@ -57,7 +54,6 @@
         /**
          * Updates and Processes orders with given state and limit
          *
-         * @api
          * @access public
          *
          * @param string $state

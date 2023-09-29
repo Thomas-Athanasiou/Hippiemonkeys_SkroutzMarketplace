@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface OrderPickupWindowInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -34,7 +36,6 @@
         /**
          * Gets From
          *
-         * @api
          * @access public
          *
          * @return string
@@ -44,7 +45,6 @@
         /**
          * Sets From
          *
-         * @api
          * @access public
          *
          * @param string $from
@@ -56,7 +56,6 @@
         /**
          * Gets To
          *
-         * @api
          * @access public
          *
          * @return string
@@ -66,7 +65,6 @@
         /**
          * Sets To
          *
-         * @api
          * @access public
          *
          * @param string $to

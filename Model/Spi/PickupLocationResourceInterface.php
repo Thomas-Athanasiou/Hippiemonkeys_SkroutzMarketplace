@@ -30,7 +30,6 @@
         /**
          * Saves Pickup Location data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
@@ -42,7 +41,6 @@
         /**
          * Loads a Pickup Location by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
@@ -55,7 +53,6 @@
         /**
          * Loads a Pickup Location by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation
@@ -68,7 +65,6 @@
         /**
          * Deletes the Pickup Location
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $pickupLocation

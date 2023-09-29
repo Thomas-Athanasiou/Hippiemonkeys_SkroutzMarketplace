@@ -30,7 +30,6 @@
         /**
          * Saves RejectOptionsLineItemRejectionReasonRelation data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation
@@ -42,7 +41,6 @@
         /**
          * Load a RejectOptionsLineItemRejectionReasonRelation by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation
@@ -55,7 +53,6 @@
         /**
          * Delete the RejectOptionsLineItemRejectionReasonRelation
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsLineItemRejectionReasonRelationInterface $rejectOptionsLineItemRejectionReasonRelation

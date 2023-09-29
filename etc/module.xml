@@ -9,6 +9,7 @@
         <sequence>
             <module name="Hippiemonkeys_Core"/>
             <module name="Hippiemonkeys_Skroutz" />
+            <module name="Hippiemonkeys_Shipping" />
             <module name="Magento_Catalog" />
         </sequence>
     </module>

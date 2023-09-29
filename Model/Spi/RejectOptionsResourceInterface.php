@@ -29,7 +29,6 @@
         /**
          * Save RejectOptions data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $rejectOptions
@@ -41,7 +40,6 @@
         /**
          * Load a RejectOptions by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $rejectOptions
@@ -54,7 +52,6 @@
         /**
          * Load a RejectOptions by Order Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $rejectOptions
@@ -67,7 +64,6 @@
         /**
          * Delete the RejectOptions
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface $rejectOptions

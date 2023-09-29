@@ -22,7 +22,6 @@
         /**
          * Gets collection Accept Options items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface[]
@@ -32,7 +31,6 @@
         /**
          * Sets collection Accept Options items
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface[] $acceptOptions

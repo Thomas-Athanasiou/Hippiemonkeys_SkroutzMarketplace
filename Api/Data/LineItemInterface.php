@@ -18,13 +18,15 @@
         Hippiemonkeys\Core\Api\Data\ModelInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface;
 
+    /**
+     * @api
+     */
     interface LineItemInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -36,7 +38,6 @@
         /**
          * Gets Skroutz ID
          *
-         * @api
          * @access public
          *
          * @return string
@@ -46,7 +47,6 @@
         /**
          * Sets Skroutz ID
          *
-         * @api
          * @access public
          *
          * @param string $value
@@ -58,7 +58,6 @@
         /**
          * Gets Shop Uid
          *
-         * @api
          * @access public
          *
          * @return mixed
@@ -68,7 +67,6 @@
         /**
          * Sets Shop Uid
          *
-         * @api
          * @access public
          *
          * @param mixed $shopUid
@@ -80,7 +78,6 @@
         /**
          * Gets size
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface|null
@@ -90,7 +87,6 @@
         /**
          * Sets size
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface|null $size
@@ -102,7 +98,6 @@
         /**
          * Gets product name
          *
-         * @api
          * @access public
          *
          * @return string
@@ -112,7 +107,6 @@
         /**
          * Sets product name
          *
-         * @api
          * @access public
          *
          * @param string $productName
@@ -124,7 +118,6 @@
         /**
          * Gets Quantity
          *
-         * @api
          * @access public
          *
          * @return int
@@ -134,7 +127,6 @@
         /**
          * Sets Quantity
          *
-         * @api
          * @access public
          *
          * @param int $quantity
@@ -146,7 +138,6 @@
         /**
          * Gets Unit Price
          *
-         * @api
          * @access public
          *
          * @return float
@@ -156,7 +147,6 @@
         /**
          * Sets Unit Price
          *
-         * @api
          * @access public
          *
          * @param float $unitPrice
@@ -168,7 +158,6 @@
         /**
          * Gets Total Price
          *
-         * @api
          * @access public
          *
          * @return float
@@ -178,7 +167,6 @@
         /**
          * Sets Total Price
          *
-         * @api
          * @access public
          *
          * @param float $totalPrice
@@ -190,7 +178,6 @@
         /**
          * Gets Price Includes Vat
          *
-         * @api
          * @access public
          *
          * @return bool
@@ -200,7 +187,6 @@
         /**
          * Sets Price Includes Vat
          *
-         * @api
          * @access public
          *
          * @param bool $priceIncludesVat
@@ -212,7 +198,6 @@
         /**
          * Gets Ean
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -222,7 +207,6 @@
         /**
          * Sets Ean
          *
-         * @api
          * @access public
          *
          * @param string|null $ean
@@ -234,7 +218,6 @@
         /**
          * Gets Island Vat Discount Applied
          *
-         * @api
          * @access public
          *
          * @return bool|null
@@ -244,7 +227,6 @@
         /**
          * Sets Island Vat Discount Applied
          *
-         * @api
          * @access public
          *
          * @param bool|null $ean
@@ -256,7 +238,6 @@
         /**
          * Gets extra info
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -266,7 +247,6 @@
         /**
          * Sets extra info
          *
-         * @api
          * @access public
          *
          * @param string|null $extraInfo
@@ -278,7 +258,6 @@
         /**
          * Gets Order
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface
@@ -288,7 +267,6 @@
         /**
          * Sets order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -300,7 +278,6 @@
         /**
          * Gets Rejection Reason
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -310,7 +287,6 @@
         /**
          * Sets Rejection Reason
          *
-         * @api
          * @access public
          *
          * @param string|null $rejectionReason
@@ -322,7 +298,6 @@
         /**
          * Gets Return Reason
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -332,7 +307,6 @@
         /**
          * Sets Return Reason
          *
-         * @api
          * @access public
          *
          * @param string|null $returnReason
@@ -344,7 +318,6 @@
         /**
          * Gets Serial Number
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -354,7 +327,6 @@
         /**
          * Sets Serial Number
          *
-         * @api
          * @access public
          *
          * @param string|null $serialNumbers
@@ -366,7 +338,6 @@
         /**
          * Gets Ean
          *
-         * @api
          * @access public
          *
          * @return \Magento\Catalog\Api\Data\ProductInterface
@@ -376,19 +347,17 @@
         /**
          * Sets Ean
          *
-         * @api
          * @access public
          *
          * @param \Magento\Catalog\Api\Data\ProductInterface $product
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface
          */
-        function setProduct(ProductInterface $product);
+        function setProduct(ProductInterface $product): LineItemInterface;
 
         /**
          * Gets shop variation uid
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -398,7 +367,6 @@
         /**
          * Sets shop variation uid
          *
-         * @api
          * @access public
          *
          * @param string|null $shop_variation_uid

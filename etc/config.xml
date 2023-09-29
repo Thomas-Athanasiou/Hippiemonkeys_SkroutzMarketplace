@@ -2,7 +2,7 @@
 <!--
     Thomas Athanasiou at Hippiemonkeys
     Copyright (c) 2023 Hippiemonkeys (https://hippiemonkeys.com)
-    Hippiemonkeys_Skroutz
+    Hippiemonkeys_SkroutzMarketplace
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
@@ -14,6 +14,7 @@
                 <preferred_accept_options_pickup_location_skroutz_id></preferred_accept_options_pickup_location_skroutz_id>
                 <preferred_number_of_parcels>1</preferred_number_of_parcels>
                 <stock_id>1</stock_id>
+                <magento_product_identity_field>entity_id</magento_product_identity_field>
             </marketplace>
         </hippiemonkeys_skroutz>
         <carriers>
@@ -29,7 +30,6 @@
                 <model>Hippiemonkeys\SkroutzMarketplace\Model\Carrier</model>
                 <use_store_shipper_data>0</use_store_shipper_data>
                 <max_package_weight>50000</max_package_weight>
-                <magento_product_identity_field>entity_id</magento_product_identity_field>
             </hippiemonkeysskroutzmarketplace>
         </carriers>
     </default>

@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface LineItemSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection of Line Item items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[]
@@ -32,7 +34,6 @@
         /**
          * Sets collection of Line Item items
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $lineItems

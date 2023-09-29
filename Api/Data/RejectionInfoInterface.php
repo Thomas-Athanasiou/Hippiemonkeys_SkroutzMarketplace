@@ -16,6 +16,9 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface RejectionInfoInterface
     extends ModelInterface
     {
@@ -31,7 +34,6 @@
         /**
          * Gets Reason
          *
-         * @api
          * @access public
          *
          * @return string.
@@ -41,7 +43,6 @@
         /**
          * Sets Reason
          *
-         * @api
          * @access public
          *
          * @param string $reason
@@ -53,7 +54,6 @@
         /**
          * Gets Actor
          *
-         * @api
          * @access public
          *
          * @return string.
@@ -63,7 +63,6 @@
         /**
          * Sets Actor
          *
-         * @api
          * @access public
          *
          * @param string $actor

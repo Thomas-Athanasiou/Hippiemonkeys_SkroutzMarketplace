@@ -14,14 +14,42 @@
 
     namespace Hippiemonkeys\SkroutzMarketplace\Model;
 
-    use Hippiemonkeys\Core\Model\AbstractModel,
+    use Magento\Framework\Model\Context,
+        Magento\Framework\Registry,
+        Magento\Catalog\Api\Data\ProductInterface,
+        Hippiemonkeys\Core\Model\AbstractModel,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\Spi\SizeResourceInterface as ResourceInterface;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\SizeResourceInterface as ResourceInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface as ConfigInterface;
 
     class Size
     extends AbstractModel
     implements SizeInterface
     {
+        /**
+         * Constructor
+         *
+         * @access public
+         *
+         * @param \Magento\Framework\Model\Context $context
+         * @param \Magento\Framework\Registry $registry
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface $config
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface $orderRepository
+         * @param array $data
+         */
+        public function __construct(
+            Context $context,
+            Registry $registry,
+            ConfigInterface $config,
+            array $data = []
+        )
+        {
+            parent::__construct($context, $registry, $data);
+            $this->config = $config;
+
+            $this->product = null;
+        }
+
         /**
          * @inheritdoc
          */
@@ -100,6 +128,60 @@
         public function setEan(?string $ean): self
         {
             return $this->setData(ResourceInterface::FIELD_EAN, $ean);
+        }
+
+        /**
+         * Product property
+         *
+         * @access private
+         *
+         * @var \Magento\Catalog\Api\Data\ProductInterface
+         */
+        private $product;
+
+        /**
+         * @inheritdoc
+         */
+        public function getProduct(): ProductInterface
+        {
+            $product = $this->product;
+            if ($product === null)
+            {
+                $product = $this->getConfig()->getMagentoProductFromIdentity($this->getShopUid());
+                $this->product = $product;
+            }
+            return $product;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function setProduct(ProductInterface $product): self
+        {
+            $this->product = $product;
+            return $this->setShopUid($this->getConfig()->getMagentoProductIdentity($product));
+        }
+
+        /**
+         * Config property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface $config
+         */
+        private $config;
+
+        /**
+         *  Gets Config
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Helper\Config\Skroutz\MarketplaceInterface
+         */
+        protected final function getConfig(): ConfigInterface
+        {
+            return $this->config;
         }
     }
 ?>

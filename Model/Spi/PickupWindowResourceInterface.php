@@ -30,7 +30,6 @@
         /**
          * Save PickupWindow data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
@@ -42,7 +41,6 @@
         /**
          * Load a PickupWindow by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
@@ -55,7 +53,6 @@
         /**
          * Load a Pickup Window by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
@@ -68,7 +65,6 @@
         /**
          * Delete the PickupWindow
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow

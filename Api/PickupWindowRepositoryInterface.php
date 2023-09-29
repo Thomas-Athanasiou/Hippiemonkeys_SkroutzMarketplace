@@ -21,19 +21,17 @@
         /**
          * Gets Pickup Window instance by ID
          *
-         * @api
          * @access public
          *
          * @param mixed $id
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface
          */
-        function getById(int $id): PickupWindowInterface;
+        function getById($id): PickupWindowInterface;
 
         /**
          * Gets Pickup Window instance by Skroutz ID
          *
-         * @api
          * @access public
          *
          * @param int $skroutzId
@@ -45,7 +43,6 @@
         /**
          * Deletes the Pickup Window instance from the repository
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
@@ -57,7 +54,6 @@
         /**
          * Saves the Pickup Window instance to the repository
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow

@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface LineItemRejectionReasonSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection of Line Item Rejection Reason items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface[]
@@ -32,7 +34,6 @@
         /**
          * Sets collection Line Item Rejection Reason  items.
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemRejectionReasonInterface[] $lineItemRejectionReasons

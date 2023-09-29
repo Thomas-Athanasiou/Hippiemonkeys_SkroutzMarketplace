@@ -23,7 +23,6 @@
         /**
          * Accepts an order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -38,7 +37,6 @@
         /**
          * Gets Order by its code
          *
-         * @api
          * @access public
          *
          * @param string $code

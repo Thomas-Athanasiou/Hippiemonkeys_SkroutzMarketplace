@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface CustomerInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $value
@@ -34,7 +36,6 @@
         /**
          * Gets Skroutz ID
          *
-         * @api
          * @access public
          *
          * @return string
@@ -44,7 +45,6 @@
         /**
          * Sets Skroutz ID
          *
-         * @api
          * @access public
          *
          * @param string $skroutzId
@@ -56,7 +56,6 @@
         /**
          * Gets the first name for the customer
          *
-         * @api
          * @access public
          *
          * @return string
@@ -66,7 +65,6 @@
         /**
          * Sets the first name for the customer
          *
-         * @api
          * @access public
          *
          * @param string $firstname
@@ -78,7 +76,6 @@
         /**
          * Gets the last name for the customer
          *
-         * @api
          * @access public
          *
          * @return string
@@ -88,7 +85,6 @@
         /**
          * Sets the last name for the customer
          *
-         * @api
          * @access public
          *
          * @param string $lastName
@@ -100,7 +96,6 @@
         /**
          * Get Customer's Address
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface|null
@@ -110,7 +105,6 @@
         /**
          * Set Customer's Address
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface|null $address

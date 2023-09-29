@@ -36,7 +36,6 @@
         /**
          * Save Address data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address
@@ -48,7 +47,6 @@
         /**
          * Load a Address by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address
@@ -61,7 +59,6 @@
         /**
          * Delete the Address
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AddressInterface $address

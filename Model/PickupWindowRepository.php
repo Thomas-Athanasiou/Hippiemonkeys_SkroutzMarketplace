@@ -54,7 +54,7 @@
         /**
          * @inheritdoc
          */
-        public function getById(int $id) : PickupWindowInterface
+        public function getById($id) : PickupWindowInterface
         {
             $pickupWindow = $this->idCache[$id] ?? null;
             if($pickupWindow === null)

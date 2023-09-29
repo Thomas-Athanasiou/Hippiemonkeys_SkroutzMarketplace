@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface InvoiceDetailsSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection items.
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface[] Array of collection line items.
@@ -32,7 +34,6 @@
         /**
          * Sets collection line items.
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface[] $invoicedetails

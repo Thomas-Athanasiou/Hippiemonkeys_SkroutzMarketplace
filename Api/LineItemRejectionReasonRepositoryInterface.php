@@ -21,7 +21,6 @@
         /**
          * Get Line Item Rejection Reason by id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -33,7 +32,6 @@
         /**
          * Get Line Item Rejection Reason by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param int $skroutzId
@@ -45,7 +43,6 @@
         /**
          * Deletes Line Item Rejection Reason
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface $invoicedetails
@@ -57,7 +54,6 @@
         /**
          * Saves Line Item Rejection Reason
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface $invoicedetails

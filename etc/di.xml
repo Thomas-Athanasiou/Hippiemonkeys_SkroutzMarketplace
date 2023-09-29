@@ -66,9 +66,15 @@
 
     <!-- Rejection Info -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectionInfo" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\RejectionInfoResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectionInfo" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\RejectionInfo\Collection" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\RejectionInfoRepository" />
 
     <!-- Order Pickup Window -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\OrderPickupWindow" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderPickupWindowResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\OrderPickupWindow" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\OrderPickupWindow\Collection" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\OrderPickupWindowRepository" />
 
     <!-- Invoice Details -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\InvoiceDetails" />
@@ -108,6 +114,14 @@
 
     <!-- Size -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\Size" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Model\Spi\SizeResourceInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Size" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeSearchResultInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\ResourceModel\Size\Collection" />
+    <preference for="Hippiemonkeys\SkroutzMarketplace\Api\SizeRepositoryInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\SizeRepository" />
+    <type name="Hippiemonkeys\SkroutzMarketplace\Model\Size">
+        <arguments>
+            <argument name="config" xsi:type="object">Hippiemonkeys\Skroutz\Helper\Config\Skroutz\Marketplace</argument>
+        </arguments>
+    </type>
 
     <!-- Vat Exclusion Representative -->
     <preference for="Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface" type="Hippiemonkeys\SkroutzMarketplace\Model\VatExclusionRepresentative" />

@@ -54,7 +54,6 @@
         /**
          * Saves Order data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -66,7 +65,6 @@
         /**
          * Loads an Order by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -79,7 +77,6 @@
         /**
          * Loads an Order by Code
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -92,7 +89,6 @@
         /**
          * Loads an Order by Magento Order Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order
@@ -105,7 +101,6 @@
         /**
          * Deletes the Order
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface $order

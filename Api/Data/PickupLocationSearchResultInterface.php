@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface PickupLocationSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection of Pickup Location items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] Array of collection line items.
@@ -32,7 +34,6 @@
         /**
          * Sets collection of Pickup Location items.
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface[] $pickupLocations

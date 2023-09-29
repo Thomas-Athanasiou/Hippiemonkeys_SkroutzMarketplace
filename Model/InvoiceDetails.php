@@ -131,12 +131,8 @@
             $address = $this->address;
             if($address === null)
             {
-                $addressId = $this->getData(ResourceInterface::FIELD_ADDRESS_ID);
-                if($addressId !== null)
-                {
-                    $address = $this->getAddressRepository()->getById($addressId);
-                    $this->address = $address;
-                }
+                $address = $this->getAddressRepository()->getById($this->getData(ResourceInterface::FIELD_ADDRESS_ID));
+                $this->address = $address;
             }
             return $address;
         }
@@ -144,10 +140,10 @@
         /**
          * @inheritdoc
          */
-        public function setAddress(?AddressInterface $address): self
+        public function setAddress(AddressInterface $address): self
         {
             $this->address = $address;
-            return $this->setData(ResourceInterface::FIELD_ADDRESS_ID, $address ? $address->getId() : null);
+            return $this->setData(ResourceInterface::FIELD_ADDRESS_ID, $address->getId());
         }
 
         /**

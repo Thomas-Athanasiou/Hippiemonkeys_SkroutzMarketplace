@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface PickupWindowSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection of Pickup Window items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[]
@@ -32,7 +34,6 @@
         /**
          * Sets collection of Pickup Window items
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface[] $pickupWindows

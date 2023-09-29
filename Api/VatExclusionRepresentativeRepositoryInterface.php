@@ -21,7 +21,6 @@
         /**
          * Gets Vat Exclusion Representative by Id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -33,7 +32,6 @@
         /**
          * Gets Vat Exclusion Representative by Id Type and Id Number
          *
-         * @api
          * @access public
          *
          * @param string $idType
@@ -46,7 +44,6 @@
         /**
          * Deletes Vat Exclusion Representative
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface $vatExclusionRepresentative
@@ -58,7 +55,6 @@
         /**
          * Saves Vat Exclusion Representative
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\VatExclusionRepresentativeInterface $vatExclusionRepresentative

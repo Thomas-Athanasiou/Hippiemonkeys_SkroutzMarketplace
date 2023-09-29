@@ -17,6 +17,9 @@
     use Hippiemonkeys\Core\Api\Data\ModelInterface,
         Magento\Sales\Api\Data\OrderInterface as MagentoOrderInterface;
 
+    /**
+     * @api
+     */
     interface OrderInterface
     extends ModelInterface
     {
@@ -35,7 +38,6 @@
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -47,7 +49,6 @@
         /**
          * Gets code
          *
-         * @api
          * @access public
          *
          * @return string
@@ -57,7 +58,6 @@
         /**
          * Sets code
          *
-         * @api
          * @access public
          *
          * @param string $code
@@ -69,7 +69,6 @@
         /**
          * Gets state
          *
-         * @api
          * @access public
          *
          * @return string
@@ -79,7 +78,6 @@
         /**
          * Sets state
          *
-         * @api
          * @access public
          *
          * @param string $state
@@ -91,7 +89,6 @@
         /**
          * Gets invoice
          *
-         * @api
          * @access public
          *
          * @return bool
@@ -101,7 +98,6 @@
         /**
          * Sets Invoice
          *
-         * @api
          * @access public
          *
          * @param bool $invoice
@@ -113,7 +109,6 @@
         /**
          * Gets created at
          *
-         * @api
          * @access public
          *
          * @return string
@@ -123,7 +118,6 @@
         /**
          * Gets created at
          *
-         * @api
          * @access public
          *
          * @param string $createdAt
@@ -135,7 +129,6 @@
         /**
          * Gets expires at
          *
-         * @api
          * @access public
          *
          * @return string
@@ -145,7 +138,6 @@
         /**
          * Gets expires at
          *
-         * @api
          * @access public
          *
          * @param string $expiresAt
@@ -157,7 +149,6 @@
         /**
          * Gets dispatch untill
          *
-         * @api
          * @access public
          *
          * @return string
@@ -167,7 +158,6 @@
         /**
          * Sets dispatch untill
          *
-         * @api
          * @access public
          *
          * @param string $dispatch_untill
@@ -179,7 +169,6 @@
         /**
          * Gets courier tracking codes
          *
-         * @api
          * @access public
          *
          * @return string[]
@@ -189,7 +178,6 @@
         /**
          * Sets courier tracking codes
          *
-         * @api
          * @access public
          *
          * @param string[] $courierTrackingCodes
@@ -201,7 +189,6 @@
         /**
          * Sets line items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[]
@@ -211,7 +198,6 @@
         /**
          * Sets courier
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface[] $lineItems
@@ -223,7 +209,6 @@
         /**
          * Gets comments
          *
-         * @api
          * @access public
          *
          * @return string
@@ -233,7 +218,6 @@
         /**
          * Sets comments
          *
-         * @api
          * @access public
          *
          * @param string $comment
@@ -245,7 +229,6 @@
         /**
          * Gets customer
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface|null
@@ -255,7 +238,6 @@
         /**
          * Sets customer
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface|null
@@ -267,7 +249,6 @@
         /**
          * Gets invoice details
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface|null
@@ -277,7 +258,6 @@
         /**
          * Sets invoice details
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface|null $invoiceDetails
@@ -290,7 +270,6 @@
          * Sets courier
          *
          *
-         * @api
          * @access public
          *
          * @return string
@@ -300,7 +279,6 @@
         /**
          * Sets courier
          *
-         * @api
          * @access public
          *
          * @param string $courier
@@ -312,7 +290,6 @@
         /**
          * Gets courier voucher
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -322,7 +299,6 @@
         /**
          * Sets courier voucher
          *
-         * @api
          * @access public
          *
          * @param string|null $courierVoucher
@@ -341,7 +317,6 @@
         /**
          * Sets Rejection Info
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface|null $rejectionInfo
@@ -353,7 +328,6 @@
         /**
          * Gets accept options
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface|null
@@ -363,7 +337,6 @@
         /**
          * Sets accept options
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface|null $acceptOptions
@@ -375,7 +348,6 @@
         /**
          * Gets reject options
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface|null
@@ -385,7 +357,6 @@
         /**
          * Sets reject options
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectOptionsInterface|null $rejectOptions
@@ -397,7 +368,6 @@
         /**
          * Gets Magento Order
          *
-         * @api
          * @access public
          *
          * @return \Magento\Sales\Api\Data\OrderInterface|null
@@ -407,7 +377,6 @@
         /**
          * Sets Magento Order
          *
-         * @api
          * @access public
          *
          * @param \Magento\Sales\Api\Data\OrderInterface|null $magentoOrder
@@ -419,7 +388,6 @@
         /**
          * Gets Express
          *
-         * @api
          * @access public
          *
          * @return bool
@@ -429,7 +397,6 @@
         /**
          * Sets Express
          *
-         * @api
          * @access public
          *
          * @param bool $express
@@ -441,7 +408,6 @@
         /**
          * Gets Custom
          *
-         * @api
          * @access public
          *
          * @return bool
@@ -451,7 +417,6 @@
         /**
          * Sets Custom
          *
-         * @api
          * @access public
          *
          * @param bool $custom
@@ -463,7 +428,6 @@
         /**
          * Gets Gift Wrap
          *
-         * @api
          * @access public
          *
          * @return bool
@@ -473,7 +437,6 @@
         /**
          * Sets Gift Wrap
          *
-         * @api
          * @access public
          *
          * @param bool $giftWrap
@@ -484,7 +447,6 @@
         /**
          * Gets Fulfilled By Skroutz
          *
-         * @api
          * @access public
          *
          * @return bool
@@ -494,7 +456,6 @@
         /**
          * Sets Fulfilled By Skroutz
          *
-         * @api
          * @access public
          *
          * @param bool $fulfilledBySkroutz
@@ -506,7 +467,6 @@
         /**
          * Gets Fbs Delivery Note
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -516,7 +476,6 @@
         /**
          * Sets Fbs Delivery Note
          *
-         * @api
          * @access public
          *
          * @param string|null $fbsDeliveryNote
@@ -528,7 +487,6 @@
         /**
          * Gets Store Pickup
          *
-         * @api
          * @access public
          *
          * @return bool
@@ -538,7 +496,6 @@
         /**
          * Sets Fulfilled By Skroutz
          *
-         * @api
          * @access public
          *
          * @param bool $storePickup
@@ -550,7 +507,6 @@
         /**
          * Gets Pickup Window
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface|null
@@ -560,7 +516,6 @@
         /**
          * Sets Pickup Window
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface|null $pickupWindow
@@ -572,7 +527,6 @@
         /**
          * Gets Pickup Address
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -582,7 +536,6 @@
         /**
          * Sets Pickup Address
          *
-         * @api
          * @access public
          *
          * @param string|null $pickupAddress
@@ -594,7 +547,6 @@
         /**
          * Gets Number Of Parcels
          *
-         * @api
          * @access public
          *
          * @return int|null
@@ -604,7 +556,6 @@
         /**
          * Sets Number Of Parcels
          *
-         * @api
          * @access public
          *
          * @param int|null $numberOfParcels

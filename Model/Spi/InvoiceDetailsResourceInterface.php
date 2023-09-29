@@ -35,7 +35,6 @@
         /**
          * Saves Invoice Details data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface $invoiceDetails
@@ -47,7 +46,6 @@
         /**
          * Loads a Invoice Details by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface $invoiceDetails
@@ -60,7 +58,6 @@
         /**
          * Deletes the Invoice Details
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface $invoiceDetails

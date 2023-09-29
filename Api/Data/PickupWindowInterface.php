@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface PickupWindowInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -34,7 +36,6 @@
         /**
          * Gets Skroutz ID
          *
-         * @api
          * @access public
          *
          * @return int
@@ -44,7 +45,6 @@
         /**
          * Sets Skroutz ID
          *
-         * @api
          * @access public
          *
          * @param int $skroutzId
@@ -56,7 +56,6 @@
         /**
          * Get Label
          *
-         * @api
          * @access public
          *
          * @return string
@@ -66,7 +65,6 @@
         /**
          * Get label
          *
-         * @api
          * @access public
          *
          * @param string $label

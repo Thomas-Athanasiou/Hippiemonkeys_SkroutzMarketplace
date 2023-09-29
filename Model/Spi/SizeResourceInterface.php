@@ -33,7 +33,6 @@
         /**
          * Save Size data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface $size
@@ -45,7 +44,6 @@
         /**
          * Load a Size by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface $size
@@ -58,7 +56,6 @@
         /**
          * Delete the Size
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\SizeInterface $size

@@ -30,7 +30,6 @@
         /**
          * Save Accept Options Pickup Window Relation to the resource storage
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation
@@ -42,7 +41,6 @@
         /**
          * Load a Accept Options Pickup Window Relation by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation
@@ -55,7 +53,6 @@
         /**
          * Delete the AcceptOptionsPickupWindowRelation
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupWindowRelationInterface $acceptOptionsPickupWindowRelation

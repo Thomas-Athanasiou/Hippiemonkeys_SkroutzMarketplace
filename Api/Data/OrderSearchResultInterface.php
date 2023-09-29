@@ -16,13 +16,15 @@
 
     use Magento\Framework\Api\SearchResultsInterface;
 
+    /**
+     * @api
+     */
     interface OrderSearchResultInterface
     extends SearchResultsInterface
     {
         /**
          * Gets collection of Order items
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface[]
@@ -32,7 +34,6 @@
         /**
          * Sets collection Order items
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface[] $orders

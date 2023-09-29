@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface VatExclusionRepresentativeInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $value
@@ -34,7 +36,6 @@
         /**
          * Gets ID Type
          *
-         * @api
          * @access public
          *
          * @return string
@@ -44,7 +45,6 @@
         /**
          * Sets ID Type
          *
-         * @api
          * @access public
          *
          * @param string $idType
@@ -55,7 +55,6 @@
         /**
          * Get ID Number
          *
-         * @api
          * @access public
          *
          * @return string
@@ -65,7 +64,6 @@
         /**
          * Set ID Number
          *
-         * @api
          * @access public
          *
          * @param string $idNumber
@@ -77,7 +75,6 @@
         /**
          * Gets Otp
          *
-         * @api
          * @access public
          *
          * @return string
@@ -87,7 +84,6 @@
         /**
          * Sets Otp
          *
-         * @api
          * @access public
          *
          * @param string $otp

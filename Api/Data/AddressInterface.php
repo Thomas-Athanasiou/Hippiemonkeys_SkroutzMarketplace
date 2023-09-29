@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface AddressInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $value
@@ -34,7 +36,6 @@
         /**
          * Gets street name
          *
-         * @api
          * @access public
          *
          * @return string
@@ -44,7 +45,6 @@
         /**
          * Sets street name
          *
-         * @api
          * @access public
          *
          * @param string $streetName
@@ -56,7 +56,6 @@
         /**
          * Get street number
          *
-         * @api
          * @access public
          *
          * @return string
@@ -66,7 +65,6 @@
         /**
          * Set street number
          *
-         * @api
          * @access public
          *
          * @param string $streetNumber
@@ -78,7 +76,6 @@
         /**
          * Gets zip
          *
-         * @api
          * @access public
          *
          * @return string
@@ -88,7 +85,6 @@
         /**
          * Sets zip
          *
-         * @api
          * @access public
          *
          * @param string $zip
@@ -100,7 +96,6 @@
         /**
          * Gets city
          *
-         * @api
          * @access public
          *
          * @return string
@@ -110,7 +105,6 @@
         /**
          * Sets city
          *
-         * @api
          * @access public
          *
          * @param string $city
@@ -122,7 +116,6 @@
         /**
          * Gets region
          *
-         * @api
          * @access public
          *
          * @return string
@@ -132,7 +125,6 @@
         /**
          * Sets region
          *
-         * @api
          * @access public
          *
          * @param string $region
@@ -144,7 +136,6 @@
         /**
          * Gets Country Code
          *
-         * @api
          * @access public
          *
          * @return string
@@ -154,7 +145,6 @@
         /**
          * Sets Country Code
          *
-         * @api
          * @access public
          *
          * @param string $countryCode
@@ -166,7 +156,6 @@
         /**
          * Gets pickup from collection point
          *
-         * @api
          * @access public
          *
          * @return bool|null
@@ -176,7 +165,6 @@
         /**
          * Sets pickup from collection point
          *
-         * @api
          * @access public
          *
          * @param bool|null $pickupFromCollectionPoint
@@ -188,7 +176,6 @@
         /**
          * Gets collection point address
          *
-         * @api
          * @access public
          *
          * @return string|null
@@ -198,7 +185,6 @@
         /**
          * Sets collection point address
          *
-         * @api
          * @access public
          *
          * @param string|null $collectionPointAddress

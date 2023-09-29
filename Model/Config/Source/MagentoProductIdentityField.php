@@ -24,7 +24,7 @@
             FIELD_SKU = 'sku';
 
         /**
-         * {@inheritdoc}
+         * @inheritdoc
          */
         public function toOptionArray()
         {

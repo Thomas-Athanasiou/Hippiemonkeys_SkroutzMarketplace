@@ -30,7 +30,6 @@
         /**
          * Save Accept Options Pickup Location Relation to the resource storage
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
@@ -42,7 +41,6 @@
         /**
          * Loads a Accept Options Pickup Location Relation by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation
@@ -55,7 +53,6 @@
         /**
          * Deletes the Accept Options Pickup Location Relation from the resource storage
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsPickupLocationRelationInterface $acceptOptionsPickupLocationRelation

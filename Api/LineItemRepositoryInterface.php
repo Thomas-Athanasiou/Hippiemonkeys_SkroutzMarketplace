@@ -23,7 +23,6 @@
         /**
          * Gets Line Item by Id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -35,7 +34,6 @@
         /**
          * Gets Line Item by Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param string $skroutzId
@@ -47,7 +45,6 @@
         /**
          * Gets list by Search Criteria
          *
-         * @api
          * @access public
          *
          * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
@@ -59,7 +56,6 @@
         /**
          * Deletes a Line Iitem
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem
@@ -71,7 +67,6 @@
         /**
          * Saves Line Item
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\LineItemInterface $lineItem

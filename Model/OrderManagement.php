@@ -19,12 +19,15 @@
         Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface,
         Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderResourceInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\OrderManagementInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsManagementInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\CustomerManagementInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderSearchResultInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
-        Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderProcessorInterface;
+        Hippiemonkeys\SkroutzMarketplace\Model\Spi\OrderProcessorInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface;
 
     class OrderManagement
     implements OrderManagementInterface
@@ -40,6 +43,9 @@
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\SkroutzMarketplaceInterface $skroutzMarketplace
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsManagementInterface $invoiceDetailsManagement
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\CustomerManagementInterface $customerManagement
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface $rejectionInfoRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $addressRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface $orderPickupWindowRepository
          */
         public function __construct(
             OrderProcessorInterface $orderProcessor,
@@ -47,7 +53,10 @@
             SearchCriteriaBuilder $searchCriteriaBuilder,
             SkroutzMarketplaceInterface $skroutzMarketplace,
             InvoiceDetailsManagementInterface $invoiceDetailsManagement,
-            CustomerManagementInterface $customerManagement
+            CustomerManagementInterface $customerManagement,
+            RejectionInfoRepositoryInterface $rejectionInfoRepository,
+            AddressRepositoryInterface $addressRepository,
+            OrderPickupWindowRepositoryInterface $orderPickupWindowRepository
         )
         {
             $this->orderProcessor = $orderProcessor;
@@ -56,6 +65,9 @@
             $this->skroutzMarketplace = $skroutzMarketplace;
             $this->invoiceDetailsManagement = $invoiceDetailsManagement;
             $this->customerManagement = $customerManagement;
+            $this->rejectionInfoRepository = $rejectionInfoRepository;
+            $this->addressRepository = $addressRepository;
+            $this->orderPickupWindowRepository = $orderPickupWindowRepository;
         }
 
         /**
@@ -125,6 +137,9 @@
         public function syncOrder(OrderInterface $order): void
         {
             $invoiceDetails = $order->getInvoiceDetails();
+            $rejectionInfo = $order->getRejectionInfo();
+            $invoiceDetailsAddress = null;
+            $orderPickupWindow = $order->getPickupWindow();
 
             try
             {
@@ -136,16 +151,25 @@
                 $persistentInvoiceDetails = $persistentOrder->getInvoiceDetails();
                 if($persistentInvoiceDetails !== null && $invoiceDetails !== null)
                 {
+                    $invoiceDetailsAddress = $invoiceDetails->getAddress();
                     $invoiceDetails->setId($persistentInvoiceDetails->getId());
-
-                    $address = $invoiceDetails->getAddress();
-                    $persistentAddress = $persistentInvoiceDetails->getAddress();
-                    if($persistentAddress !== null && $address !== null)
+                    $persistentInvoiceDetailsAddress = $persistentInvoiceDetails->getAddress();
+                    if($persistentInvoiceDetailsAddress !== null)
                     {
-                        $address->setId($persistentAddress->getId());
+                        $invoiceDetailsAddress->setId($persistentInvoiceDetailsAddress->getId());
                     }
+                }
 
-                    $invoiceDetails->setAddress($address);
+                $persistentRejectionInfo = $persistentOrder->getRejectionInfo();
+                if($persistentRejectionInfo !== null && $rejectionInfo !== null)
+                {
+                    $rejectionInfo->setId($persistentRejectionInfo->getId());
+                }
+
+                $persistentOrderPickupWindow = $persistentOrder->getPickupWindow();
+                if($persistentOrderPickupWindow !== null && $orderPickupWindow !== null)
+                {
+                    $orderPickupWindow->setId($persistentOrderPickupWindow->getId());
                 }
             }
             catch(NoSuchEntityException)
@@ -155,8 +179,33 @@
 
             if($invoiceDetails !== null)
             {
+                if($invoiceDetailsAddress !== null)
+                {
+                    $this->getAddressRepository()->save($invoiceDetailsAddress);
+                    $invoiceDetails->setAddress($invoiceDetailsAddress);
+                }
+
                 $this->getInvoiceDetailsManagement()->saveInvoiceDetails($invoiceDetails);
                 $order->setInvoiceDetails($invoiceDetails);
+            }
+
+            if($rejectionInfo !== null)
+            {
+                $this->getRejectionInfoRepository()->save($rejectionInfo);
+                $order->setRejectionInfo($rejectionInfo);
+            }
+
+            if($orderPickupWindow !== null)
+            {
+                $this->getRejectionInfoRepository()->save($rejectionInfo);
+                $order->setRejectionInfo($rejectionInfo);
+            }
+
+            $customer = $order->getCustomer();
+            if($customer !== null)
+            {
+                $this->getCustomerManagement()->saveCustomer($customer);
+                $order->setCustomer($customer);
             }
 
             $customer = $order->getCustomer();
@@ -313,6 +362,71 @@
         protected final function getCustomerManagement() : CustomerManagementInterface
         {
             return $this->customerManagement;
+        }
+
+        /**
+         * Rejection Info Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface $rejectionInfoRepository
+         */
+        private $rejectionInfoRepository;
+
+        /**
+         * Gets Rejection Info Repository
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface
+         */
+        protected final function getRejectionInfoRepository(): RejectionInfoRepositoryInterface
+        {
+            return $this->rejectionInfoRepository;
+        }
+
+        /**
+         * Address Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface $addressRepository
+         */
+        private $addressRepository;
+
+        /**
+         * Gets Address Repository
+         *
+         * @access protected
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\AddressRepositoryInterface
+         */
+        protected function getAddressRepository(): AddressRepositoryInterface
+        {
+            return $this->addressRepository;
+        }
+
+        /**
+         * Order Pickup Window Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface $orderPickupWindowRepository
+         */
+        private $orderPickupWindowRepository;
+
+        /**
+         * Gets Order Pickup Window Repository
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface
+         */
+        protected final function getOrderPickupWindowRepository(): OrderPickupWindowRepositoryInterface
+        {
+            return $this->orderPickupWindowRepository;
         }
     }
 ?>

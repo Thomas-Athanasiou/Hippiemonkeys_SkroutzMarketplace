@@ -30,7 +30,6 @@
         /**
          * Save RejectionInfo data
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface $rejectionInfo
@@ -42,7 +41,6 @@
         /**
          * Load a RejectionInfo by Id
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface $rejectionInfo
@@ -55,7 +53,6 @@
         /**
          * Delete the RejectionInfo
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface $rejectionInfo

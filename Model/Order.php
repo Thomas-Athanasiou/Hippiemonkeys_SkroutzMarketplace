@@ -25,7 +25,9 @@
         Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface,
+        Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\RejectionInfoInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface,
         Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface,
@@ -51,6 +53,7 @@
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface $lineItemRepository
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface $acceptOptionsRepository
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface $rejectOptionsRepository
+         * @param \Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface $rejectionInfoRepository
          * @param \Magento\Sales\Api\OrderRepositoryInterface $magentoOrderRepository
          * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
          * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
@@ -65,6 +68,8 @@
             LineItemRepositoryInterface $lineItemRepository,
             AcceptOptionsRepositoryInterface $acceptOptionsRepository,
             RejectOptionsRepositoryInterface $rejectOptionsRepository,
+            RejectionInfoRepositoryInterface $rejectionInfoRepository,
+            OrderPickupWindowRepositoryInterface $orderPickupWindowRepository,
             MagentoOrderRepositoryInterface $magentoOrderRepository,
             SearchCriteriaBuilder $searchCriteriaBuilder,
             array $data = []
@@ -77,6 +82,8 @@
             $this->lineItemRepository = $lineItemRepository;
             $this->acceptOptionsRepository = $acceptOptionsRepository;
             $this->rejectOptionsRepository = $rejectOptionsRepository;
+            $this->rejectionInfoRepository = $rejectionInfoRepository;
+            $this->orderPickupWindowRepository = $orderPickupWindowRepository;
             $this->magentoOrderRepository = $magentoOrderRepository;
             $this->searchCriteriaBuilder = $searchCriteriaBuilder;
 
@@ -375,11 +382,14 @@
         public function getRejectionInfo(): ?RejectionInfoInterface
         {
             $rejectionInfo = $this->rejectionInfo;
-            $rejectionInfoId = $this->getData(ResourceInterface::FIELD_REJECTION_INFO_ID);
-            if (!$rejectionInfo && $rejectionInfoId)
+            if ($rejectionInfo === null)
             {
-                /* $rejectionInfo = $this->getRejectionInfoRepository()->getById($rejectionInfoId); */
-                $this->setRejectionInfo($rejectionInfo);
+                $rejectionInfoId = $this->getData(ResourceInterface::FIELD_REJECTION_INFO_ID);
+                if($rejectionInfoId !== null)
+                {
+                    $rejectionInfo = $this->getRejectionInfoRepository()->getById($rejectionInfoId);
+                    $this->rejectionInfo = $rejectionInfo;
+                }
             }
             return $rejectionInfo;
         }
@@ -390,7 +400,7 @@
         public function setRejectionInfo(?RejectionInfoInterface $rejectionInfo): self
         {
             $this->rejectionInfo = $rejectionInfo;
-            return $this->setData(ResourceInterface::FIELD_REJECTION_INFO_ID, $rejectionInfo ? $rejectionInfo->getId() : null);
+            return $this->setData(ResourceInterface::FIELD_REJECTION_INFO_ID, $rejectionInfo === null ? null : $rejectionInfo->getId());
         }
 
         /**
@@ -604,7 +614,7 @@
          *
          * @access private
          *
-         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupWindowInterface $pickupWindow
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\OrderPickupWindowInterface|null $pickupWindow
          */
         protected $pickupWindow;
 
@@ -619,7 +629,7 @@
                 $pickupWindowId = $this->getData(ResourceInterface::FIELD_PICKUP_WINDOW_ID);
                 if ($pickupWindowId !== null)
                 {
-                    $pickupWindow = $this->getPickupWindowRepository()->getById($pickupWindowId);
+                    $pickupWindow = $this->getOrderPickupWindowRepository()->getById($pickupWindowId);
                     $this->pickupWindow = $pickupWindow;
                 }
             }
@@ -680,10 +690,11 @@
          * Gets Customer Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\CustomerRepositoryInterface
          */
-        protected function getCustomerRepository(): CustomerRepositoryInterface
+        protected final function getCustomerRepository(): CustomerRepositoryInterface
         {
             return $this->customerRepository;
         }
@@ -701,10 +712,11 @@
          * Gets Invoice Details
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\InvoiceDetailsRepositoryInterface
          */
-        protected function getInvoiceDetailsRepository(): InvoiceDetailsRepositoryInterface
+        protected final function getInvoiceDetailsRepository(): InvoiceDetailsRepositoryInterface
         {
             return $this->invoiceDetailsRepository;
         }
@@ -722,10 +734,11 @@
          * Gets Line Item Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\LineItemRepositoryInterface
          */
-        protected function getLineItemRepository(): LineItemRepositoryInterface
+        protected final function getLineItemRepository(): LineItemRepositoryInterface
         {
             return $this->lineItemRepository;
         }
@@ -743,10 +756,11 @@
          * Gets Accept Options Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\AcceptOptionsRepositoryInterface
          */
-        protected function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
+        protected final function getAcceptOptionsRepository(): AcceptOptionsRepositoryInterface
         {
             return $this->acceptOptionsRepository;
         }
@@ -764,12 +778,57 @@
          * Gets Reject Options Repository
          *
          * @access protected
+         * @final
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectOptionsRepositoryInterface
          */
-        protected function getRejectOptionsRepository(): RejectOptionsRepositoryInterface
+        protected final function getRejectOptionsRepository(): RejectOptionsRepositoryInterface
         {
             return $this->rejectOptionsRepository;
+        }
+
+        /**
+         * Rejection Info Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface $rejectionInfoRepository
+         */
+        private $rejectionInfoRepository;
+
+        /**
+         * Gets Rejection Info Repository
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\RejectionInfoRepositoryInterface
+         */
+        protected final function getRejectionInfoRepository(): RejectionInfoRepositoryInterface
+        {
+            return $this->rejectionInfoRepository;
+        }
+
+        /**
+         * Order Pickup Window Repository property
+         *
+         * @access private
+         *
+         * @var \Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface $orderPickupWindowRepository
+         */
+        private $orderPickupWindowRepository;
+
+        /**
+         * Gets Order Pickup Window Repository
+         *
+         * @access protected
+         * @final
+         *
+         * @return \Hippiemonkeys\SkroutzMarketplace\Api\OrderPickupWindowRepositoryInterface
+         */
+        protected final function getOrderPickupWindowRepository(): OrderPickupWindowRepositoryInterface
+        {
+            return $this->orderPickupWindowRepository;
         }
 
         /**
@@ -785,10 +844,11 @@
          * Gets Magento Order Repository
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Sales\Api\OrderRepositoryInterface
          */
-        protected function getMagentoOrderRepository(): MagentoOrderRepositoryInterface
+        protected final function getMagentoOrderRepository(): MagentoOrderRepositoryInterface
         {
             return $this->magentoOrderRepository;
         }
@@ -806,10 +866,11 @@
          * Gets Search Criteria Builder
          *
          * @access protected
+         * @final
          *
          * @return \Magento\Framework\Api\SearchCriteriaBuilder
          */
-        protected function getSearchCriteriaBuilder(): SearchCriteriaBuilder
+        protected final function getSearchCriteriaBuilder(): SearchCriteriaBuilder
         {
             return $this->searchCriteriaBuilder;
         }

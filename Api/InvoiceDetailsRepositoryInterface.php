@@ -21,7 +21,6 @@
         /**
          * Get Invoice Details by id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -33,7 +32,6 @@
         /**
          * Delete Invoice Details
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface $invoicedetails
@@ -45,7 +43,6 @@
         /**
          * Saves Invoice Details
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\InvoiceDetailsInterface $invoicedetails

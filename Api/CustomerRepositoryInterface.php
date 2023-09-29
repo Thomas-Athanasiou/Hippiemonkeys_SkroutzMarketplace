@@ -21,7 +21,6 @@
         /**
          * Gets Customer by Id
          *
-         * @api
          * @access public
          *
          * @param mixed $id
@@ -33,7 +32,6 @@
         /**
          * Gets Customer Skroutz Id
          *
-         * @api
          * @access public
          *
          * @param string $skroutzId
@@ -45,7 +43,6 @@
         /**
          * Deletes Customer
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer
@@ -57,7 +54,6 @@
         /**
          * Saves Customer
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\CustomerInterface $customer

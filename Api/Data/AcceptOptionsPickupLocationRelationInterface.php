@@ -16,13 +16,15 @@
 
     use Hippiemonkeys\Core\Api\Data\ModelInterface;
 
+    /**
+     * @api
+     */
     interface AcceptOptionsPickupLocationRelationInterface
     extends ModelInterface
     {
         /**
          * Sets ID
          *
-         * @api
          * @access public
          *
          * @param mixed $value
@@ -34,7 +36,6 @@
         /**
          * Gets Accept Options
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface
@@ -44,7 +45,6 @@
         /**
          * Sets Accept Options
          *
-         * @api
          * @access public
          *
          * @param \Hippiemonkeys\SkroutzMarketplace\Api\Data\AcceptOptionsInterface $value
@@ -56,7 +56,6 @@
         /**
          * Gets Pickup Location
          *
-         * @api
          * @access public
          *
          * @return \Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface
@@ -66,7 +65,6 @@
         /**
          * Sets Pickup Location
          *
-         * @api
          * @access public
          *
          * @param Hippiemonkeys\SkroutzMarketplace\Api\Data\PickupLocationInterface $value
